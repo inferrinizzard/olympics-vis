@@ -4,6 +4,7 @@ import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 import axios from 'axios';
 
 import { GamesMain } from '../types';
+import Link from 'next/link';
 
 export interface GamesProps {
 	games: GamesMain;
@@ -19,10 +20,14 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 		<>
 			<div>Games</div>
 			{games.summer.map(game => (
-				<div key={game}>{game}</div>
+				<div key={game}>
+					<Link href={`/games/${parseInt(game)}/summer`}>{game}</Link>
+				</div>
 			))}
 			{games.winter.map(game => (
-				<div key={game}>{game}</div>
+				<div key={game}>
+					<Link href={`/games/${parseInt(game)}/winter`}>{game}</Link>
+				</div>
 			))}
 		</>
 	);
