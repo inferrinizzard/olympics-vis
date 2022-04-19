@@ -3,6 +3,7 @@ import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths 
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
+import { getRoute } from '../../api/_endpoint';
 
 import { GamesMain, YearSeasonDetail } from '../../types';
 
@@ -12,15 +13,11 @@ export interface OlympicGameSeasonProps {
 
 export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = ({ params }) =>
 	axios
-		.get(
-			`https://olympicsapi.herokuapp.com/games/?year=${params!.year}-${
-				params!.season === 'summer' ? 'S' : 'W'
-			}`
-		)
+		.get(getRoute(['games', params!.year as string, 'season', params!.season as string]))
 		.then(res => ({ props: { game: res.data } }));
 
 export const getStaticPaths: GetStaticPaths = () =>
-	axios.get('https://olympicsapi.herokuapp.com/games/').then(({ data }) => ({
+	axios.get(getRoute(['games'])).then(({ data }) => ({
 		paths: Object.entries(data as GamesMain).reduce(
 			(routes, [season, games]) => [
 				...routes,
