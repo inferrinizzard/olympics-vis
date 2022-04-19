@@ -8,3 +8,15 @@ export interface YearSeasonDetail {
 	host: string;
 	cities: string[];
 }
+
+export interface CountryDetail {
+	code: string;
+	name: string;
+	flag: string;
+}
+
+export interface SportDetail {
+	code: string;
+	name: string;
+	icon: string;
+}
