@@ -3,9 +3,9 @@ import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths 
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
-import { getRoute } from '../../api/_endpoint';
+import { getRoute } from 'pages/api/_endpoint';
 
-import { GamesMain, YearSeasonDetail } from '../../types';
+import { GamesMain, YearSeasonDetail } from 'pages/types';
 
 export interface OlympicGameSeasonProps {
 	game: YearSeasonDetail;

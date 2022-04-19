@@ -3,7 +3,7 @@ import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
 import axios from 'axios';
-import { getRoute } from '../api/_endpoint';
+import { getRoute } from 'pages/api/_endpoint';
 
 export interface SportsProps {
 	sports: string[];
