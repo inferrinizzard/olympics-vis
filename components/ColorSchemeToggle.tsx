@@ -1,7 +1,7 @@
 import { ActionIcon, Group, useMantineColorScheme } from '@mantine/core';
 // import { SunIcon, MoonIcon } from '@modulz/radix-icons';
 
-export function ColorSchemeToggle() {
+const ColorSchemeToggle = () => {
 	const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
 	return (
@@ -24,4 +24,6 @@ export function ColorSchemeToggle() {
 			</ActionIcon>
 		</Group>
 	);
-}
+};
+
+export default ColorSchemeToggle;
