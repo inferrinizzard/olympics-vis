@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import { AppShell, ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
 
 import '../styles/globals.css';
-import Header from 'components/Header';
+import Header from 'components/layouts/Header';
 
 const OlympicsVis = ({
 	Component,

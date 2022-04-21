@@ -8,7 +8,7 @@ import axios from 'axios';
 import { getRoute } from 'pages/api/_endpoint';
 
 import { GamesMain, YearSeasonDetail } from 'pages/types';
-import GridCell from 'components/GridCell';
+import GridCell from 'components/grid/GridCell';
 
 export interface OlympicGameSeasonProps {
 	game: YearSeasonDetail;
