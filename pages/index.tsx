@@ -2,9 +2,9 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import ColorSchemeToggle from '../components/ColorSchemeToggle';
+import ColorSchemeToggle from 'components/ColorSchemeToggle';
 
-import styles from '../styles/Home.module.css';
+import styles from 'styles/Home.module.css';
 
 const Home: NextPage = () => {
 	return (

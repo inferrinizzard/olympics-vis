@@ -3,9 +3,9 @@ import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths 
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
-import { getRoute } from '../api/_endpoint';
+import { getRoute } from 'pages/api/_endpoint';
 
-import { CountryDetail } from '../types';
+import { CountryDetail } from 'pages/types';
 
 export interface OlympicNOCProps {
 	country: CountryDetail;

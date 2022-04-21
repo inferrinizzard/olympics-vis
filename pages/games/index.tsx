@@ -3,9 +3,9 @@ import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
 import axios from 'axios';
-import { getRoute } from '../api/_endpoint';
+import { getRoute } from 'pages/api/_endpoint';
 
-import { GamesMain } from '../types';
+import { GamesMain } from 'pages/types';
 
 export interface GamesProps {
 	games: GamesMain;

@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import { Container, Grid } from '@mantine/core';
 
 import axios from 'axios';
-import { getRoute } from '../../api/_endpoint';
+import { getRoute } from 'pages/api/_endpoint';
 
-import { GamesMain, YearSeasonDetail } from '../../types';
-import GridCell from '../../../components/GridCell';
+import { GamesMain, YearSeasonDetail } from 'pages/types';
+import GridCell from 'components/GridCell';
 
 export interface OlympicGameSeasonProps {
 	game: YearSeasonDetail;
