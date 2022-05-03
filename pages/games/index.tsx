@@ -5,7 +5,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { getRoute } from 'pages/api/_endpoint';
 
-import { GamesMain } from 'pages/types';
+import { GamesMain } from 'types/api';
 
 export interface GamesProps {
 	games: GamesMain;

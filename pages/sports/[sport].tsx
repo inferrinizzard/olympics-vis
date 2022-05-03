@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { getRoute } from 'pages/api/_endpoint';
 
-import { SportDetail } from 'pages/types';
+import { SportDetail } from 'types/api';
 
 export interface OlympicSportProps {
 	sport: SportDetail;

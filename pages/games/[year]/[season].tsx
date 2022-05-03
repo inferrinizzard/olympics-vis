@@ -7,7 +7,7 @@ import { Container, Grid } from '@mantine/core';
 import axios from 'axios';
 import { getRoute } from 'pages/api/_endpoint';
 
-import { GamesMain, YearSeasonDetail } from 'pages/types';
+import { GamesMain, YearSeasonDetail } from 'types/api';
 import GridCell from 'components/grid/GridCell';
 
 export interface OlympicGameSeasonProps {
