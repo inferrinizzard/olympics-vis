@@ -2,12 +2,14 @@ import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 
-import { Container, Grid, Image } from '@mantine/core';
+import { Box, Container, Grid, Image, Title } from '@mantine/core';
+
+import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
 
 import axios from 'axios';
 import { getRoute } from 'pages/api/_endpoint';
 
-import { GameDetail } from 'types/api';
+import { type GameDetail } from 'types/api';
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 
@@ -38,33 +40,37 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 					borderRadius: '1rem',
 				})}>
 				<GridCell span={8} boxStyle={{ display: 'flex', justifyContent: 'space-between' }}>
-					<div>
-						<h1>{`${game.year} ${
+					<Box sx={{ width: '75%' }}>
+						<Title order={1} m="sm">{`${game.year} ${
 							game.season[0].toUpperCase() + game.season.slice(1)
-						} Olympics`}</h1>
-						<h3>{game.title}</h3>
-						<p>{`Host: ${game.host}`}</p>
-						<p>{`Start: ${game.start}`}</p>
-						<p>{`End: ${game.end}`}</p>
-						<p>{`Number of countries: ${game.countries.length}`}</p>
-						<p>{`Number of athletes: ${game.numAthletes}`}</p>
-					</div>
-					<div>
-						<Image
-							src={game.emblem}
-							alt={'Olympic emblem for ' + gameKey}
-							sx={{ width: '10rem' }}
-						/>
-					</div>
+						} Olympics`}</Title>
+						<Title order={3} m="xs">
+							{game.title}
+						</Title>
+						<StatCard icon={<BuildingSkyscraper />} title={'Host'} text={game.host} />
+						<StatCard icon={<Calendar />} title={'Start Date'} text={game.start} />
+						<StatCard icon={<CalendarEvent />} title={'End Date'} text={game.end} />
+						<StatCard icon={<Run />} title={'Total Athletes'} text={game.numAthletes} />
+						<StatCard icon={<Hash />} title={'Total Countries'} text={game.countries.length} />
+					</Box>
+					<Box p="sm" sx={{ width: '25%' }}>
+						<Image src={game.emblem} alt={'Olympic emblem for ' + gameKey} sx={{ width: '100%' }} />
+					</Box>
 				</GridCell>
 				<GridCell span={4}>
-					<h2>{'Medals Table here'}</h2>
+					<Title order={2} m="sm">
+						{'Medals Table here'}
+					</Title>
 				</GridCell>
 				<GridCell span={4}>
-					<h2>{'Sports Table here'}</h2>
+					<Title order={2} m="sm">
+						{'Sports Table here'}
+					</Title>
 				</GridCell>
 				<GridCell span={8}>
-					<h2>{'Choropleth here'}</h2>
+					<Title order={2} m="sm">
+						{'Choropleth here'}
+					</Title>
 				</GridCell>
 			</Grid>
 		</Container>
