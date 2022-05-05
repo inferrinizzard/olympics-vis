@@ -5,29 +5,29 @@ import Link from 'next/link';
 import axios from 'axios';
 import { getRoute } from 'pages/api/_endpoint';
 
-import { GamesMain } from 'pages/types';
+import { GamesMain } from 'types/api';
 
 export interface GamesProps {
-	games: GamesMain;
+	games: string[];
 }
 
 export const getStaticProps: GetStaticProps<GamesProps> = () =>
-	axios.get(getRoute(['games'])).then(res => ({ props: { games: res.data as GamesMain } }));
+	axios.get(getRoute(['games'])).then(res => ({ props: { games: res.data } }));
 
 const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games }) => {
 	return (
 		<>
 			<div>Games</div>
-			{games.summer.map(game => (
+			{games.map(game => (
 				<div key={game}>
-					<Link href={`/games/${parseInt(game)}/summer`}>{game}</Link>
+					<Link href={`/games/${game}`}>{game}</Link>
 				</div>
 			))}
-			{games.winter.map(game => (
+			{/* {games.winter.map(game => (
 				<div key={game}>
 					<Link href={`/games/${parseInt(game)}/winter`}>{game}</Link>
 				</div>
-			))}
+			))} */}
 		</>
 	);
 };

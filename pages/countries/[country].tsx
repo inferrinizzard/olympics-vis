@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { getRoute } from 'pages/api/_endpoint';
 
-import { CountryDetail } from 'pages/types';
+import { CountryDetail } from 'types/api';
 
 export interface OlympicNOCProps {
 	country: CountryDetail;

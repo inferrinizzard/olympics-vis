@@ -1,12 +1,20 @@
+export type GamesKey = string;
+
 export interface GamesMain {
 	summer: string[];
 	winter: string[];
 }
 
-export interface YearSeasonDetail {
-	countries: string[];
+export interface GameDetail {
+	year: number;
+	season: string;
+	title: string;
 	host: string;
-	cities: string[];
+	countries: string[];
+	start: string;
+	end: string;
+	numAthletes: number;
+	emblem: string;
 }
 
 export interface CountryDetail {
