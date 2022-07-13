@@ -2,7 +2,7 @@ import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 
-import { Box, Container, Grid, Image, Title } from '@mantine/core';
+import { Box, Container, Grid, Image, Title, Text } from '@mantine/core';
 
 import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
 
@@ -40,18 +40,19 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 					borderRadius: '1rem',
 				})}>
 				<GridCell span={8} boxStyle={{ display: 'flex', justifyContent: 'space-between' }}>
-					<Box sx={{ width: '75%' }}>
-						<Title order={1} m="sm">{`${game.year} ${
+					<Box sx={{ width: '75%', display: 'flex', flexDirection: 'column' }} m="xs">
+						<Title order={1}>{`${game.year} ${
 							game.season[0].toUpperCase() + game.season.slice(1)
 						} Olympics`}</Title>
-						<Title order={3} m="xs">
-							{game.title}
-						</Title>
-						<StatCard icon={<BuildingSkyscraper />} title={'Host'} text={game.host} />
-						<StatCard icon={<Calendar />} title={'Start Date'} text={game.start} />
-						<StatCard icon={<CalendarEvent />} title={'End Date'} text={game.end} />
-						<StatCard icon={<Run />} title={'Total Athletes'} text={game.numAthletes} />
-						<StatCard icon={<Hash />} title={'Total Countries'} text={game.countries.length} />
+						<Title order={3}>{game.title}</Title>
+						<Text sx={{ flexGrow: 1 }}>Description goes here</Text>
+						<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
+							<StatCard icon={<BuildingSkyscraper />} title={'Host'} text={game.host} />
+							<StatCard icon={<Calendar />} title={'Start Date'} text={game.start} />
+							<StatCard icon={<CalendarEvent />} title={'End Date'} text={game.end} />
+							<StatCard icon={<Run />} title={'Total Athletes'} text={game.numAthletes} />
+							<StatCard icon={<Hash />} title={'Total Countries'} text={100} />
+						</Box>
 					</Box>
 					<Box p="sm" sx={{ width: '25%' }}>
 						<Image src={game.emblem} alt={'Olympic emblem for ' + gameKey} sx={{ width: '100%' }} />

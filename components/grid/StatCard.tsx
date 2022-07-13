@@ -8,7 +8,13 @@ export interface StatCardProps {
 
 const StatCard: React.FC<StatCardProps> = ({ icon, title, text }) => {
 	return (
-		<Paper shadow="sm" p="sm" m="xs" sx={{ display: 'inline-block', width: 'fit-content' }}>
+		<Paper
+			shadow="sm"
+			p="sm"
+			sx={{
+				maxHeight: '100%',
+				aspectRatio: '1 / 1',
+			}}>
 			{icon}
 			<Text>{title}</Text>
 			<Text>{text}</Text>
