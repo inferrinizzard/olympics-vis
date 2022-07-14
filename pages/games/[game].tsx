@@ -2,25 +2,29 @@ import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 
-import { Box, Container, Grid, Image, Title, Text } from '@mantine/core';
+import { Box, Container, Grid, Image, Title, Text, Table } from '@mantine/core';
 
 import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
 
 import axios from 'axios';
 import { getRoute } from 'pages/api/_endpoint';
 
-import { type GameDetail } from 'types/api';
+import type { CountryMedalsMap, GamesDetailRow } from 'types/api';
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 
 export interface OlympicGameSeasonProps {
-	game: GameDetail;
+	game: GamesDetailRow;
+	countryMedals: CountryMedalsMap;
 }
 
 export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = ({ params }) =>
-	axios
-		.get(getRoute(['games', params!.game as string]))
-		.then(res => ({ props: { game: res.data } }));
+	Promise.all([
+		axios.get(getRoute(['games', params!.game as string])),
+		axios.get(getRoute(['medals', 'games', params!.game as string])),
+	]).then(([gameRes, countryMedalsRes]) => ({
+		props: { game: gameRes.data, countryMedals: countryMedalsRes.data },
+	}));
 
 export const getStaticPaths: GetStaticPaths = () =>
 	axios.get(getRoute(['games'])).then(({ data }) => ({
@@ -28,7 +32,10 @@ export const getStaticPaths: GetStaticPaths = () =>
 		fallback: false,
 	}));
 
-const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ game }) => {
+const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+	game,
+	countryMedals,
+}) => {
 	const { game: gameKey } = useRouter().query;
 
 	return (
@@ -59,9 +66,31 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 					</Box>
 				</GridCell>
 				<GridCell span={4}>
-					<Title order={2} m="sm">
-						{'Medals Table here'}
+					<Title order={2} p="xs">
+						{'Medals Top 10'}
 					</Title>
+					<Table p="xs">
+						<tbody>
+							<tr>
+								<td>Country</td>
+								<td>Gold</td>
+								<td>Silver</td>
+								<td>Bronze</td>
+								<td>Total</td>
+							</tr>
+							{Object.entries(countryMedals)
+								.slice(0, 10)
+								.map(([country, medals]) => (
+									<tr key={country}>
+										<td>{country}</td>
+										<td>{medals.gold}</td>
+										<td>{medals.silver}</td>
+										<td>{medals.bronze}</td>
+										<td>{medals.total}</td>
+									</tr>
+								))}
+						</tbody>
+					</Table>
 				</GridCell>
 				<GridCell span={4}>
 					<Title order={2} m="sm">
