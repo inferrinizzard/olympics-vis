@@ -9,9 +9,9 @@ model Games {
   start_date   String //#@db.VarChar(20)
   end_date     String //#@db.VarChar(20)
 
-  country_attendance CountryAttendance[]
-  country_medals     CountryMedals[]
-  sports_events      SportsEvent[]
+  //#country_attendance CountryAttendance[]
+  //#country_medals     CountryMedals[]
+  //#sports_events      SportsEvent[]
 
   @@map("games_detail")
 }
