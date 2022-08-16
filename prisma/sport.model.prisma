@@ -2,4 +2,6 @@ model Sport {
   sport String @id //#@db.VarChar(3)
   name  String //#@db.VarChar(50)
   icon  String
+
+  @@map("sports_detail")
 }

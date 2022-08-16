@@ -8,4 +8,6 @@ model Games {
   num_athletes Int
   start_date   String //#@db.VarChar(20)
   end_date     String //#@db.VarChar(20)
+
+  @@map("games_detail")
 }
