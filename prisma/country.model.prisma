@@ -1,0 +1,5 @@
+model Country {
+  country String @id //\@db.VarChar(3)
+  name    String //\@db.VarChar(50)
+  flag    String
+}
