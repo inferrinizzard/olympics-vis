@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"prisma:append": "cat prisma/*.model.prisma | tr -d '//\\\\' >> prisma/schema.prisma"
+		"prisma:append": "cat prisma/*.model.prisma | tr -d '//#' >> prisma/schema.prisma"
 	},
 	"dependencies": {
 		"@mantine/core": "^4.1.4",
