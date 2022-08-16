@@ -1,0 +1,17 @@
+model Games {
+  game         String @id //#@db.VarChar(30)
+  year         Int
+  season       String //#@db.VarChar(6)
+  title        String //#@db.VarChar(30)
+  emblem       String
+  host         String //#@db.VarChar(100)
+  num_athletes Int
+  start_date   String //#@db.VarChar(20)
+  end_date     String //#@db.VarChar(20)
+
+  //#country_attendance CountryAttendance[]
+  //#country_medals     CountryMedals[]
+  //#sports_events      SportsEvent[]
+
+  @@map("games_detail")
+}
