@@ -6,22 +6,27 @@ import { Box, Container, Grid, Image, Title, Text, Table } from '@mantine/core';
 
 import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
 
-import { PrismaClient, Games, CountryMedals } from '@prisma/client';
+import { PrismaClient, Games, CountryMedals, Country } from '@prisma/client';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 
 export interface OlympicGameSeasonProps {
 	game: Games;
-	countryMedals: CountryMedals[];
+	countryMedals: (CountryMedals & { country_detail: Country })[];
 }
 
 export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ params }) => {
 	const prisma = new PrismaClient();
 
 	const gamesTable = prisma.games.findFirst({ where: { game: params!.game as string } });
-	const countryMedals = await gamesTable.country_medals(); // build with flags
 	const game = (await gamesTable)!;
+
+	const countryMedals = await prisma.countryMedals.findMany({
+		where: { game: params!.game as string },
+		take: 10,
+		include: { country_detail: true },
+	});
 
 	return {
 		props: { game, countryMedals },
@@ -80,15 +85,23 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 								<td>Bronze</td>
 								<td>Total</td>
 							</tr>
-							{Object.entries(countryMedals)
+							{Object.values(countryMedals)
 								.slice(0, 10)
-								.map(([country, medals]) => (
-									<tr key={medals.country}>
-										<td>{medals.country}</td>
-										<td>{medals.gold}</td>
-										<td>{medals.silver}</td>
-										<td>{medals.bronze}</td>
-										<td>{medals.total}</td>
+								.map(({ country, gold, silver, bronze, total, country_detail }) => (
+									<tr key={country}>
+										<td>
+											<Image
+												src={country_detail.flag}
+												alt={country}
+												width={30}
+												sx={{ display: 'inline-block' }}
+											/>
+											<span>{country}</span>
+										</td>
+										<td>{gold}</td>
+										<td>{silver}</td>
+										<td>{bronze}</td>
+										<td>{total}</td>
 									</tr>
 								))}
 						</tbody>
