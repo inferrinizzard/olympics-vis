@@ -6,12 +6,14 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model Country {
-  country        String          @id @db.VarChar(3)
-  name           String @db.VarChar(50)
-  flag           String
+  country String @id @db.VarChar(3)
+  name    String @db.VarChar(50)
+  flag    String
+
   country_medals CountryMedals[]
-   medal_totals   MedalTotals?
+  medal_totals   MedalTotals?
 
   @@map("country_detail")
 }
@@ -19,25 +21,28 @@ model Country {
 model CountryAttendance {
   id               Int    @id @default(autoincrement())
   game             String @db.VarChar(30)
-  country_athletes Json @db.Json
-  games_detail     Games  @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_game")
+  country_athletes Json   @db.Json
+
+  games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_game")
 
   @@map("country_attendance")
 }
 
 model CountryMedals {
-  id             Int     @id @default(autoincrement())
-  country        String @db.VarChar(3)
-  game           String @db.VarChar(30)
-  gold           Int     @default(0)
-  silver         Int     @default(0)
-  bronze         Int     @default(0)
-  total          Int     @default(0)
+  id      Int    @id @default(autoincrement())
+  country String @db.VarChar(3)
+  game    String @db.VarChar(30)
+  gold    Int    @default(0)
+  silver  Int    @default(0)
+  bronze  Int    @default(0)
+  total   Int    @default(0)
+
   country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_country")
   games_detail   Games   @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_game")
 
   @@map("country_medals")
 }
+
 model Games {
   game         String @id @db.VarChar(30)
   year         Int
@@ -55,6 +60,7 @@ model Games {
 
   @@map("games_detail")
 }
+
 model MedalTotals {
   country String @id @db.VarChar(3)
   season  String @db.VarChar(6)
@@ -67,6 +73,7 @@ model MedalTotals {
 
   @@map("medals_totals")
 }
+
 model Sport {
   sport String @id @db.VarChar(3)
   name  String @db.VarChar(50)
