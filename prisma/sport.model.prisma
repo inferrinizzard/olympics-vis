@@ -5,3 +5,14 @@ model Sport {
 
   @@map("sports_detail")
 }
+
+model SportsEvent {
+  id     Int    @id @default(autoincrement())
+  game   String @db.VarChar(30)
+  sport  String @db.VarChar(3)
+  events Json   @db.Json
+
+  games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_sports_events_game")
+
+  @@map("sports_events")
+}
