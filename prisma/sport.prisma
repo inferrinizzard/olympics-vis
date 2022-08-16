@@ -1,0 +1,5 @@
+model Sport {
+  sport String @id
+  name  String
+  icon  String
+}

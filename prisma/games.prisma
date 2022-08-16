@@ -1,0 +1,11 @@
+model Games {
+  game         String @id
+  year         Int
+  season       String
+  title        String
+  emblem       String
+  host         String
+  num_athletes Int
+  start_date   String
+  end_date     String
+}

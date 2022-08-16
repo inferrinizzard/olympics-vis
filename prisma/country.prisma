@@ -1,0 +1,5 @@
+model Country {
+  country String @id
+  name    String
+  flag    String
+}
