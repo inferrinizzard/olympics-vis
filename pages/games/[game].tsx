@@ -6,29 +6,31 @@ import { Box, Container, Grid, Image, Title, Text, Table } from '@mantine/core';
 
 import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
 
-import axios from 'axios';
-import { getRoute } from 'pages/api/_endpoint';
+import { PrismaClient, Games, CountryMedals } from '@prisma/client';
 
-import type { CountryMedalsMap, GamesDetailRow } from 'types/api';
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 
 export interface OlympicGameSeasonProps {
-	game: GamesDetailRow;
-	countryMedals: CountryMedalsMap;
+	game: Games;
+	countryMedals: CountryMedals[];
 }
 
-export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = ({ params }) =>
-	Promise.all([
-		axios.get(getRoute(['games', params!.game as string])),
-		axios.get(getRoute(['medals', 'games', params!.game as string])),
-	]).then(([gameRes, countryMedalsRes]) => ({
-		props: { game: gameRes.data, countryMedals: countryMedalsRes.data },
-	}));
+export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ params }) => {
+	const prisma = new PrismaClient();
+
+	const gamesTable = prisma.games.findFirst({ where: { game: params!.game as string } });
+	const countryMedals = await gamesTable.country_medals(); // build with flags
+	const game = (await gamesTable)!;
+
+	return {
+		props: { game, countryMedals },
+	};
+};
 
 export const getStaticPaths: GetStaticPaths = () =>
-	axios.get(getRoute(['games'])).then(({ data }) => ({
-		paths: (data as string[]).map(game => ({ params: { game } })),
+	new PrismaClient().games.findMany({ select: { game: true } }).then(gameRows => ({
+		paths: gameRows.map(({ game }) => ({ params: { game } })),
 		fallback: false,
 	}));
 
@@ -55,9 +57,9 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 						<Text sx={{ flexGrow: 1 }}>Description goes here</Text>
 						<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
 							<StatCard icon={<BuildingSkyscraper />} title={'Host'} text={game.host} />
-							<StatCard icon={<Calendar />} title={'Start Date'} text={game.start} />
-							<StatCard icon={<CalendarEvent />} title={'End Date'} text={game.end} />
-							<StatCard icon={<Run />} title={'Total Athletes'} text={game.numAthletes} />
+							<StatCard icon={<Calendar />} title={'Start Date'} text={game.start_date} />
+							<StatCard icon={<CalendarEvent />} title={'End Date'} text={game.end_date} />
+							<StatCard icon={<Run />} title={'Total Athletes'} text={game.num_athletes} />
 							<StatCard icon={<Hash />} title={'Total Countries'} text={100} />
 						</Box>
 					</Box>
@@ -81,8 +83,8 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 							{Object.entries(countryMedals)
 								.slice(0, 10)
 								.map(([country, medals]) => (
-									<tr key={country}>
-										<td>{country}</td>
+									<tr key={medals.country}>
+										<td>{medals.country}</td>
 										<td>{medals.gold}</td>
 										<td>{medals.silver}</td>
 										<td>{medals.bronze}</td>
