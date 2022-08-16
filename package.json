@@ -6,7 +6,8 @@
 		"dev": "next dev -p 8000",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"prisma": "cat prisma/*.prisma | tr -d '//\\' >> prisma/schema.prisma"
 	},
 	"dependencies": {
 		"@mantine/core": "^4.1.4",
