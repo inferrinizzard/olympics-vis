@@ -6,7 +6,15 @@ import { Box, Container, Grid, Image, Title, Text, Table } from '@mantine/core';
 
 import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
 
-import { PrismaClient, Games, CountryMedals, Country, SportsEvent } from '@prisma/client';
+import {
+	PrismaClient,
+	Games,
+	CountryMedals,
+	Country,
+	SportsEvent,
+	CountryAttendance,
+} from '@prisma/client';
+import type { CountryAttendance_CountryAthletes } from 'types/prisma';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
@@ -15,6 +23,7 @@ export interface OlympicGameSeasonProps {
 	game: Games;
 	countryMedals: (CountryMedals & { country_detail: Country })[];
 	sportEvents: SportsEvent[];
+	countryAttendance: CountryAttendance_CountryAthletes;
 }
 
 export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ params }) => {
@@ -34,8 +43,13 @@ export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ p
 		// include: { sport_detail: true },
 	});
 
+	const countryAttendance = (await prisma.countryAttendance.findFirst({
+		select: { country_athletes: true },
+		where: { game: params!.game as string },
+	}))!.country_athletes as CountryAttendance_CountryAthletes;
+
 	return {
-		props: { game, countryMedals, sportEvents },
+		props: { game, countryMedals, sportEvents, countryAttendance },
 	};
 };
 
@@ -49,6 +63,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	game,
 	countryMedals,
 	sportEvents,
+	countryAttendance,
 }) => {
 	const { game: gameKey } = useRouter().query;
 
@@ -133,8 +148,17 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 				</GridCell>
 				<GridCell span={8}>
 					<Title order={2} m="sm">
-						{'Choropleth here'}
+						{'Choropleth'}
 					</Title>
+					<div>
+						{Object.entries(countryAttendance)
+							.slice(0, 3)
+							.map(([country, attendance]) => (
+								<div key={country}>
+									{country} {JSON.stringify(attendance)}
+								</div>
+							))}
+					</div>
 				</GridCell>
 			</Grid>
 		</Container>
