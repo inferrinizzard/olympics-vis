@@ -6,7 +6,7 @@ import { Box, Container, Grid, Image, Title, Text, Table } from '@mantine/core';
 
 import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
 
-import { PrismaClient, Games, CountryMedals, Country } from '@prisma/client';
+import { PrismaClient, Games, CountryMedals, Country, SportsEvent } from '@prisma/client';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
@@ -14,6 +14,7 @@ import StatCard from 'components/grid/StatCard';
 export interface OlympicGameSeasonProps {
 	game: Games;
 	countryMedals: (CountryMedals & { country_detail: Country })[];
+	sportEvents: SportsEvent[];
 }
 
 export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ params }) => {
@@ -28,8 +29,13 @@ export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ p
 		include: { country_detail: true },
 	});
 
+	const sportEvents = await prisma.sportsEvent.findMany({
+		where: { game: params!.game as string },
+		// include: { sport_detail: true },
+	});
+
 	return {
-		props: { game, countryMedals },
+		props: { game, countryMedals, sportEvents },
 	};
 };
 
@@ -42,6 +48,7 @@ export const getStaticPaths: GetStaticPaths = () =>
 const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	game,
 	countryMedals,
+	sportEvents,
 }) => {
 	const { game: gameKey } = useRouter().query;
 
@@ -109,8 +116,20 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 				</GridCell>
 				<GridCell span={4}>
 					<Title order={2} m="sm">
-						{'Sports Table here'}
+						{'Sports'}
 					</Title>
+					<Container
+						sx={{
+							display: 'grid',
+							gridTemplateColumns: '1fr 1fr 1fr',
+							gridTemplateRows: '1fr 1fr 1fr',
+						}}>
+						{sportEvents.slice(0, 8).map(sport => (
+							<div key={sport.sport}>
+								<h5>{sport.sport}</h5>
+							</div>
+						))}
+					</Container>
 				</GridCell>
 				<GridCell span={8}>
 					<Title order={2} m="sm">
