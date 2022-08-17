@@ -16,6 +16,9 @@ import {
 } from '@prisma/client';
 import type { CountryAttendance_CountryAthletes } from 'types/prisma';
 
+import { ResponsiveChoropleth, ChoroplethCanvas } from '@nivo/geo';
+import worldCountries from 'resources/world_countries.json';
+
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 
@@ -150,15 +153,50 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 					<Title order={2} m="sm">
 						{'Choropleth'}
 					</Title>
-					<div>
-						{Object.entries(countryAttendance)
-							.slice(0, 3)
-							.map(([country, attendance]) => (
-								<div key={country}>
-									{country} {JSON.stringify(attendance)}
-								</div>
-							))}
-					</div>
+					{/* <ResponsiveChoropleth */}
+					<ChoroplethCanvas
+						width={700}
+						height={400}
+						data={Object.entries(countryAttendance).map(([id, value]) => ({ id, value }))}
+						features={worldCountries.features}
+						margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+						colors="nivo"
+						domain={[0, Math.max(...Object.values(countryAttendance))]}
+						unknownColor="#666666"
+						label="properties.name"
+						valueFormat=".2s"
+						projectionTranslation={[0.5, 0.5]}
+						projectionRotation={[0, 0, 0]}
+						enableGraticule={true}
+						graticuleLineColor="#dddddd"
+						borderWidth={0.5}
+						borderColor="#152538"
+						legends={[
+							{
+								anchor: 'bottom-left',
+								direction: 'column',
+								justify: true,
+								translateX: 20,
+								translateY: -100,
+								itemsSpacing: 0,
+								itemWidth: 94,
+								itemHeight: 18,
+								itemDirection: 'left-to-right',
+								itemTextColor: '#444444',
+								itemOpacity: 0.85,
+								symbolSize: 18,
+								effects: [
+									{
+										on: 'hover',
+										style: {
+											itemTextColor: '#000000',
+											itemOpacity: 1,
+										},
+									},
+								],
+							},
+						]}
+					/>
 				</GridCell>
 			</Grid>
 		</Container>
