@@ -18,6 +18,7 @@ import type { CountryAttendance_CountryAthletes } from 'types/prisma';
 
 import { ResponsiveChoropleth, ChoroplethCanvas } from '@nivo/geo';
 import worldCountries from 'resources/countries.min.geo.json';
+import nocIsoLookup from 'resources/geo_noc_map.json';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
@@ -69,6 +70,12 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	countryAttendance,
 }) => {
 	const { game: gameKey } = useRouter().query;
+
+	const countryData = Object.entries(countryAttendance).map(([id, value]) => ({
+		id:
+			(nocIsoLookup[id as keyof typeof nocIsoLookup] as { name: string; iso?: string })?.iso ?? id,
+		value,
+	}));
 
 	return (
 		<Container fluid>
@@ -157,7 +164,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 					<ChoroplethCanvas
 						width={700}
 						height={400}
-						data={Object.entries(countryAttendance).map(([id, value]) => ({ id, value }))}
+						data={countryData}
 						features={worldCountries.features}
 						margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 						colors="nivo"
