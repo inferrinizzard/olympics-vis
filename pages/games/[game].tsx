@@ -17,7 +17,7 @@ import {
 import type { CountryAttendance_CountryAthletes } from 'types/prisma';
 
 import { ResponsiveChoropleth, ChoroplethCanvas } from '@nivo/geo';
-import worldCountries from 'resources/world_countries.json';
+import worldCountries from 'resources/countries.min.geo.json';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
