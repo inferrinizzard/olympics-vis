@@ -203,5 +203,33 @@
 	"VIN": { "name": "Saint Vincent and the Grenadines", "iso": "VCT" },
 	"YEM": { "name": "Yemen", "iso": "YEM" },
 	"ZAM": { "name": "Zambia", "iso": "ZMB" },
-	"ZIM": { "name": "Zimbabwe", "iso": "ZWE" }
+	"ZIM": { "name": "Zimbabwe", "iso": "ZWE" },
+
+	"HKG": { "name": "Hong Kong" },
+
+	"AHO": { "name": "Netherlands Antilles" },
+	"ANZ": { "name": "Australasia" },
+	"BOH": { "name": "Bohemia" },
+	"BWI": { "name": "British West Indies" },
+	"EUA": { "name": "United Team of Germany", "iso": "DEU" },
+	"EUN": { "name": "Unified Team" },
+	"FRG": { "name": "West Germany" },
+	"GDR": { "name": "East Germany" },
+	"RU1": { "name": "Russian Empire", "ios": "RUS" },
+	"SCG": { "name": "Serbia and Montenegro" },
+	"TCH": { "name": "Czechoslovakia" },
+	"URS": { "name": "Soviet Union", "ios": "RUS" },
+	"VNM": { "name": "South Vietnam" },
+	"YUG": { "name": "Yugoslavia" },
+	"ZZX": { "name": "Mixed team" },
+
+	"COR": { "name": "Korea" },
+	"EOR": { "name": "Refugee Olympic Team" },
+	"IOP": { "name": "Independent Olympic Participants" },
+	"IOA": { "name": "Independent Olympic Athletes" },
+	"IOC": { "name": "Athletes from Kuwait", "iso": "KWT" },
+	"MIX": { "name": "Mixed-NOCs" },
+	"OAR": { "name": "Olympic Athletes from Russia", "iso": "RUS" },
+	"ROC": { "name": "Russian Olympic Committee", "iso": "RUS" },
+	"ROT": { "name": "Refugee Olympic Team" }
 }
