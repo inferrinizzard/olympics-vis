@@ -2,10 +2,6 @@ import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 
-import { Box, Container, Grid, Image, Title, Text, Table } from '@mantine/core';
-
-import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
-
 import {
 	PrismaClient,
 	Games,
@@ -16,9 +12,13 @@ import {
 } from '@prisma/client';
 import type { CountryAttendance_CountryAthletes } from 'types/prisma';
 
-import { ResponsiveChoropleth } from '@nivo/geo';
 import worldCountries from 'resources/countries.min.geo.json';
 import nocIsoLookup from 'resources/geo_noc_map.json';
+import { ResponsiveChoropleth } from '@nivo/geo';
+
+import { Box, Container, Grid, Image, Title, Text, Table } from '@mantine/core';
+
+import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
