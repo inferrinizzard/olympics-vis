@@ -23,11 +23,6 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 					<Link href={`/games/${game}`}>{game}</Link>
 				</div>
 			))}
-			{/* {games.winter.map(game => (
-				<div key={game}>
-					<Link href={`/games/${parseInt(game)}/winter`}>{game}</Link>
-				</div>
-			))} */}
 		</>
 	);
 };

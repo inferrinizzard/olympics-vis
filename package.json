@@ -15,11 +15,15 @@
 		"@mantine/core": "^4.1.4",
 		"@mantine/hooks": "^4.1.4",
 		"@mantine/next": "^4.1.4",
+		"@nivo/core": "0.78.0",
+		"@nivo/geo": "^0.79.1",
+		"@prisma/client": "^4.2.1",
 		"axios": "^0.26.1",
 		"next": "12.1.4",
-		"@prisma/client": "^4.2.1",
+		"olympics-api": "git+https://github.com/inferrinizzard/olympics-api.git#api-types",
 		"react": "18.0.0",
-		"react-dom": "18.0.0"
+		"react-dom": "18.0.0",
+		"tabler-icons-react": "^1.47.0"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.23",
