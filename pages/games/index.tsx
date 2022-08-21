@@ -2,25 +2,26 @@ import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
-import axios from 'axios';
-import { getRoute } from 'pages/api/_endpoint';
-
-import { GamesMain } from 'types/api';
+import { Games, PrismaClient } from '@prisma/client';
 
 export interface GamesProps {
-	games: string[];
+	games: Games[];
 }
 
-export const getStaticProps: GetStaticProps<GamesProps> = () =>
-	axios.get(getRoute(['games'])).then(res => ({ props: { games: res.data } }));
+export const getStaticProps: GetStaticProps<GamesProps> = async () => {
+	const prisma = new PrismaClient();
+
+	const games = await prisma.games.findMany();
+	return { props: { games } };
+};
 
 const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games }) => {
 	return (
 		<>
 			<div>Games</div>
 			{games.map(game => (
-				<div key={game}>
-					<Link href={`/games/${game}`}>{game}</Link>
+				<div key={game.game}>
+					<Link href={`/games/${game}`}>{game.game}</Link>
 				</div>
 			))}
 		</>
