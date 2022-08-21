@@ -100,7 +100,7 @@
 	"KGZ": { "name": "Kyrgyzstan", "iso": "KGZ" },
 	"KIR": { "name": "Kiribati", "iso": "KIR" },
 	"KOR": { "name": "South Korea", "iso": "KOR" },
-	"KOS": { "name": "Kosovo", "iso": "-99" },
+	"KOS": { "name": "Kosovo", "iso": "KOS" },
 	"KSA": { "name": "Saudi Arabia", "iso": "SAU" },
 	"KUW": { "name": "Kuwait", "iso": "KWT" },
 	"LAO": { "name": "Laos", "iso": "LAO" },

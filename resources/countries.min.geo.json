@@ -3380,8 +3380,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Bajo Nuevo Bank (Petrel Is.)", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Bajo Nuevo Bank (Petrel Is.)", "ISO_A3": "-98" },
+			"id": "-98"
 		},
 		{
 			"type": "Feature",
@@ -7722,8 +7722,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Clipperton Island", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Clipperton Island", "ISO_A3": "-97" },
+			"id": "-97"
 		},
 		{
 			"type": "Feature",
@@ -7858,8 +7858,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Cyprus No Mans Area", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Cyprus No Mans Area", "ISO_A3": "-96" },
+			"id": "-96"
 		},
 		{
 			"type": "Feature",
@@ -8352,8 +8352,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Coral Sea Islands", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Coral Sea Islands", "ISO_A3": "-95" },
+			"id": "-95"
 		},
 		{
 			"type": "Feature",
@@ -8486,8 +8486,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Northern Cyprus", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Northern Cyprus", "ISO_A3": "-94" },
+			"id": "-94"
 		},
 		{
 			"type": "Feature",
@@ -9162,8 +9162,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Dhekelia Sovereign Base Area", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Dhekelia Sovereign Base Area", "ISO_A3": "-93" },
+			"id": "-93"
 		},
 		{
 			"type": "Feature",
@@ -12688,8 +12688,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Indian Ocean Territories", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Indian Ocean Territories", "ISO_A3": "-92" },
+			"id": "-92"
 		},
 		{
 			"type": "Feature",
@@ -13546,8 +13546,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Baykonur Cosmodrome", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Baykonur Cosmodrome", "ISO_A3": "-91" },
+			"id": "-91"
 		},
 		{
 			"type": "Feature",
@@ -13563,8 +13563,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Siachen Glacier", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Siachen Glacier", "ISO_A3": "-90" },
+			"id": "-90"
 		},
 		{
 			"type": "Feature",
@@ -14123,8 +14123,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Kosovo", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Kosovo", "ISO_A3": "KOS" },
+			"id": "KOS"
 		},
 		{
 			"type": "Feature",
@@ -17430,8 +17430,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Spratly Islands", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Spratly Islands", "ISO_A3": "-89" },
+			"id": "-89"
 		},
 		{
 			"type": "Feature",
@@ -20429,8 +20429,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Scarborough Reef", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Scarborough Reef", "ISO_A3": "-88" },
+			"id": "-88"
 		},
 		{
 			"type": "Feature",
@@ -20692,8 +20692,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Serranilla Bank", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Serranilla Bank", "ISO_A3": "-87" },
+			"id": "-87"
 		},
 		{
 			"type": "Feature",
@@ -20925,8 +20925,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Somaliland", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Somaliland", "ISO_A3": "-86" },
+			"id": "-86"
 		},
 		{
 			"type": "Feature",
@@ -23390,8 +23390,8 @@
 					]
 				]
 			},
-			"properties": { "name": "US Naval Base Guantanamo Bay", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "US Naval Base Guantanamo Bay", "ISO_A3": "-85" },
+			"id": "-85"
 		},
 		{
 			"type": "Feature",
@@ -23880,8 +23880,8 @@
 					]
 				]
 			},
-			"properties": { "name": "Akrotiri Sovereign Base Area", "ISO_A3": "-99" },
-			"id": "-99"
+			"properties": { "name": "Akrotiri Sovereign Base Area", "ISO_A3": "-84" },
+			"id": "-84"
 		},
 		{
 			"type": "Feature",
