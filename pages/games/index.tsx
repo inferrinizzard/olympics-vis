@@ -2,27 +2,54 @@ import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
-import axios from 'axios';
-import { getRoute } from 'pages/api/_endpoint';
+import { Games, PrismaClient } from '@prisma/client';
 
-import { GamesMain } from 'types/api';
+import { Card, Title, Image } from '@mantine/core';
 
 export interface GamesProps {
-	games: string[];
+	games: Games[];
 }
 
-export const getStaticProps: GetStaticProps<GamesProps> = () =>
-	axios.get(getRoute(['games'])).then(res => ({ props: { games: res.data } }));
+export const getStaticProps: GetStaticProps<GamesProps> = async () => {
+	const prisma = new PrismaClient();
+
+	const games = await prisma.games.findMany();
+	return { props: { games: games.sort((a, b) => (a.year < b.year ? 1 : -1)) } };
+};
 
 const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games }) => {
+	const gameName = (gamesId: string) => {
+		const slugs = gamesId.split('-');
+		if (/^\d{4}/.test(gamesId)) {
+			let [year, season] = slugs;
+			season = season[0].toUpperCase() + season.slice(1);
+			return `${season} ${year}`;
+		}
+		const year = slugs.pop();
+		const city = slugs.map(slug => slug[0].toUpperCase() + slug.slice(1)).join(' ');
+
+		return `${city} ${year}`;
+	};
+
 	return (
 		<>
 			<div>Games</div>
-			{games.map(game => (
-				<div key={game}>
-					<Link href={`/games/${game}`}>{game}</Link>
-				</div>
-			))}
+			<main style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr', gap: '1rem' }}>
+				{games.map(game => (
+					<div key={game.game}>
+						<Link passHref href={`/games/${game.game}`}>
+							<Card sx={{ cursor: 'pointer' }}>
+								<Title order={2}>{`${gameName(game.game)}`}</Title>
+								<Image
+									src={game.emblem}
+									alt={'Olympic emblem for ' + game.game}
+									sx={{ maxHeight: '20vh', margin: 'auto' }}
+								/>
+							</Card>
+						</Link>
+					</div>
+				))}
+			</main>
 		</>
 	);
 };
