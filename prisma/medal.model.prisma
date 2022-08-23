@@ -1,5 +1,6 @@
 model MedalTotals {
-  country String @id //#@db.VarChar(3)
+  id      Int    @id @default(autoincrement())
+  country String //#@db.VarChar(3)
   season  String //#@db.VarChar(6)
   gold    Int    @default(0)
   silver  Int    @default(0)
@@ -8,5 +9,5 @@ model MedalTotals {
 
   //#country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
 
-  @@map("medals_totals")
+  @@map("medal_totals")
 }

@@ -4,7 +4,7 @@ model Country {
   flag    String
 
   //#country_medals CountryMedals[]
-  //#medal_totals   MedalTotals?
+  //#medal_totals   MedalTotals[]
 
   @@map("country_detail")
 }
