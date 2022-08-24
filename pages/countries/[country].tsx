@@ -1,7 +1,7 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
 
-import { Country, PrismaClient } from '@prisma/client';
+import { Country, MedalTotals, PrismaClient } from '@prisma/client';
 
 import { Box, Container, Grid, Title } from '@mantine/core';
 
@@ -12,6 +12,7 @@ import StatCard from 'components/grid/StatCard';
 
 export interface OlympicNOCProps {
 	country: Country;
+	medals: { summer: MedalTotals; winter: MedalTotals; total: MedalTotals };
 }
 
 export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }) => {
@@ -21,7 +22,16 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 		where: { country: params!.country as string },
 	}))!;
 
-	return { props: { country } };
+	const medalsRows = (await prisma.medalTotals.findMany({
+		where: { country: params!.country as string },
+	}))!;
+
+	const medals = medalsRows.reduce(
+		(acc, cur) => ({ ...acc, [cur.season]: cur }),
+		{} as OlympicNOCProps['medals']
+	);
+
+	return { props: { country, medals } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -32,7 +42,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	return { paths: countries.map(({ country }) => ({ params: { country } })), fallback: false };
 };
 
-const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ country }) => {
+const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+	country,
+	medals,
+}) => {
 	return (
 		<Container fluid>
 			<Grid>
@@ -44,7 +57,44 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
 						<StatCard icon={<Hash />} title={'Games Hosted'} text={''} />
 					</Box>
 				</GridCell>
-				<GridCell span={4}></GridCell>
+				<GridCell span={4}>
+					<Title order={2}>{'Medals'}</Title>
+					<Title order={4}>{'Total'}</Title>
+					<div style={{ display: 'flex', columnGap: '1rem' }}>
+						<Title order={6}>{'Total'}</Title>
+						<div>{medals.total.total}</div>
+					</div>
+					<div style={{ display: 'flex', columnGap: '1rem' }}>
+						<Title order={6}>{'Split'}</Title>
+						<div>{medals.total.gold}</div>
+						<div>{medals.total.silver}</div>
+						<div>{medals.total.bronze}</div>
+					</div>
+
+					<Title order={4}>{'Summer'}</Title>
+					<div style={{ display: 'flex', columnGap: '1rem' }}>
+						<Title order={6}>{'Total'}</Title>
+						<div>{medals.summer.total}</div>
+					</div>
+					<div style={{ display: 'flex', columnGap: '1rem' }}>
+						<Title order={6}>{'Split'}</Title>
+						<div>{medals.summer.gold}</div>
+						<div>{medals.summer.silver}</div>
+						<div>{medals.summer.bronze}</div>
+					</div>
+
+					<Title order={4}>{'Winter'}</Title>
+					<div style={{ display: 'flex', columnGap: '1rem' }}>
+						<Title order={6}>{'Total'}</Title>
+						<div>{medals.winter?.total}</div>
+					</div>
+					<div style={{ display: 'flex', columnGap: '1rem' }}>
+						<Title order={6}>{'Split'}</Title>
+						<div>{medals.winter?.gold}</div>
+						<div>{medals.winter?.silver}</div>
+						<div>{medals.winter?.bronze}</div>
+					</div>
+				</GridCell>
 			</Grid>
 		</Container>
 	);
