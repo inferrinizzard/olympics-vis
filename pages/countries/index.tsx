@@ -19,24 +19,38 @@ export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
 };
 
 const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ countries }) => {
+	const activeNOCs = countries.filter(({ status }) => status === 'active');
+	const specialNOCs = countries.filter(({ status }) => status === 'special');
+	const historicNOCs = countries.filter(({ status }) => status === 'historic');
+
+	const NOCs = { Active: activeNOCs, Special: specialNOCs, Historic: historicNOCs };
+
 	return (
 		<>
 			<div>Countries</div>
-			<main style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: '1rem' }}>
-				{countries.map(country => (
-					<div key={country.country}>
-						<Link passHref href={`/countries/${country.country}`}>
-							<Card sx={{ cursor: 'pointer' }}>
-								<Title order={2} sx={{ display: 'inline-block' }}>{`${country.country}`}</Title>
-								<Image
-									src={country.flag}
-									alt={'NOC Flag for ' + country.country}
-									sx={{ maxHeight: '20vh', margin: 'auto', display: 'inline-block' }}
-								/>
-								<Title order={5}>{`${country.name}`}</Title>
-							</Card>
-						</Link>
-					</div>
+			<main>
+				{Object.entries(NOCs).map(([nocType, nocs]) => (
+					<>
+						<Title key={nocType} order={1}>{`${nocType} NOCs`}</Title>
+						<section
+							style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: '1rem' }}>
+							{nocs.map(country => (
+								<div key={country.country}>
+									<Link passHref href={`/countries/${country.country}`}>
+										<Card sx={{ cursor: 'pointer' }}>
+											<Image
+												src={country.flag}
+												alt={'NOC Flag for ' + country.country}
+												sx={{ maxHeight: '20vh', margin: 'auto' }}
+											/>
+											<Title order={2}>{`${country.country}`}</Title>
+											<Title order={5}>{`${country.name}`}</Title>
+										</Card>
+									</Link>
+								</div>
+							))}
+						</section>
+					</>
 				))}
 			</main>
 		</>
