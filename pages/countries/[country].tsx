@@ -22,14 +22,16 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 		where: { country: params!.country as string },
 	}))!;
 
-	const medalsRows = (await prisma.medalTotals.findMany({
+	const medalsRows = await prisma.medalTotals.findMany({
 		where: { country: params!.country as string },
-	}))!;
+	});
 
-	const medals = medalsRows.reduce(
-		(acc, cur) => ({ ...acc, [cur.season]: cur }),
-		{} as OlympicNOCProps['medals']
-	);
+	const zeroMedals = { gold: 0, silver: 0, bronze: 0, total: 0 };
+	const medals = medalsRows.reduce((acc, cur) => ({ ...acc, [cur.season]: cur }), {
+		summer: zeroMedals,
+		winter: zeroMedals,
+		total: zeroMedals,
+	} as OlympicNOCProps['medals']);
 
 	return { props: { country, medals } };
 };
@@ -86,13 +88,13 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					<Title order={4}>{'Winter'}</Title>
 					<div style={{ display: 'flex', columnGap: '1rem' }}>
 						<Title order={6}>{'Total'}</Title>
-						<div>{medals.winter?.total}</div>
+						<div>{medals.winter.total}</div>
 					</div>
 					<div style={{ display: 'flex', columnGap: '1rem' }}>
 						<Title order={6}>{'Split'}</Title>
-						<div>{medals.winter?.gold}</div>
-						<div>{medals.winter?.silver}</div>
-						<div>{medals.winter?.bronze}</div>
+						<div>{medals.winter.gold}</div>
+						<div>{medals.winter.silver}</div>
+						<div>{medals.winter.bronze}</div>
 					</div>
 				</GridCell>
 			</Grid>
