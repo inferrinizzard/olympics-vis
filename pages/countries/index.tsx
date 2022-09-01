@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
@@ -30,8 +31,8 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ c
 			<div>Countries</div>
 			<main>
 				{Object.entries(NOCs).map(([nocType, nocs]) => (
-					<>
-						<Title key={nocType} order={1}>{`${nocType} NOCs`}</Title>
+					<Fragment key={nocType}>
+						<Title order={1}>{`${nocType} NOCs`}</Title>
 						<section
 							style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: '1rem' }}>
 							{nocs.map(country => (
@@ -41,7 +42,12 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ c
 											<Image
 												src={country.flag}
 												alt={'NOC Flag for ' + country.country}
-												sx={{ maxHeight: '20vh', margin: 'auto' }}
+												styles={{
+													figure: { height: '100%', aspectRatio: '3 / 2' },
+													imageWrapper: { height: '100%' },
+												}}
+												sx={{ height: '100%' }}
+												imageProps={{ style: { height: '100%', objectFit: 'scale-down' } }}
 											/>
 											<Title order={2}>{`${country.country}`}</Title>
 											<Title order={5}>{`${country.name}`}</Title>
@@ -50,7 +56,7 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ c
 								</div>
 							))}
 						</section>
-					</>
+					</Fragment>
 				))}
 			</main>
 		</>
