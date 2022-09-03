@@ -3,7 +3,7 @@ import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths 
 
 import { Country, MedalTotals, PrismaClient } from '@prisma/client';
 
-import { Box, Container, Grid, Title } from '@mantine/core';
+import { Box, Container, Grid, Image, Title } from '@mantine/core';
 
 import { Calendar, Hash } from 'tabler-icons-react';
 
@@ -51,52 +51,63 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	return (
 		<Container fluid>
 			<Grid>
-				<GridCell span={8}>
-					<Title order={1}>{`${country.name} (${country.country})`}</Title>
-					<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
-						<StatCard icon={<Calendar />} title={'First Games'} text={''} />
-						<StatCard icon={<Hash />} title={'Total Medals'} text={''} />
-						<StatCard icon={<Hash />} title={'Games Hosted'} text={''} />
-					</Box>
-				</GridCell>
-				<GridCell span={4}>
-					<Title order={2}>{'Medals'}</Title>
-					<Title order={4}>{'Total'}</Title>
-					<div style={{ display: 'flex', columnGap: '1rem' }}>
-						<Title order={6}>{'Total'}</Title>
-						<div>{medals.total.total}</div>
-					</div>
-					<div style={{ display: 'flex', columnGap: '1rem' }}>
-						<Title order={6}>{'Split'}</Title>
-						<div>{medals.total.gold}</div>
-						<div>{medals.total.silver}</div>
-						<div>{medals.total.bronze}</div>
-					</div>
+				<Grid.Col span={4} sx={{ height: '100%' }}>
+					<GridCell>
+						<Title order={1}>{`${country.name} (${country.country})`}</Title>
+						<div style={{ height: '50%' }}>
+							<Image
+								src={country.flag}
+								alt={'NOC Flag for ' + country.country}
+								fit={'scale-down' as 'contain'}
+							/>
+						</div>
+						<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
+							<StatCard icon={<Calendar />} title={'First Games'} text={''} />
+							<StatCard icon={<Hash />} title={'Total Medals'} text={''} />
+							<StatCard icon={<Hash />} title={'Games Hosted'} text={''} />
+						</Box>
+					</GridCell>
+				</Grid.Col>
+				<Grid.Col span={8}>
+					<GridCell>
+						<Title order={2}>{'Medals'}</Title>
+						<Title order={4}>{'Total'}</Title>
+						<div style={{ display: 'flex', columnGap: '1rem' }}>
+							<Title order={6}>{'Total'}</Title>
+							<div>{medals.total.total}</div>
+						</div>
+						<div style={{ display: 'flex', columnGap: '1rem' }}>
+							<Title order={6}>{'Split'}</Title>
+							<div>{medals.total.gold}</div>
+							<div>{medals.total.silver}</div>
+							<div>{medals.total.bronze}</div>
+						</div>
 
-					<Title order={4}>{'Summer'}</Title>
-					<div style={{ display: 'flex', columnGap: '1rem' }}>
-						<Title order={6}>{'Total'}</Title>
-						<div>{medals.summer.total}</div>
-					</div>
-					<div style={{ display: 'flex', columnGap: '1rem' }}>
-						<Title order={6}>{'Split'}</Title>
-						<div>{medals.summer.gold}</div>
-						<div>{medals.summer.silver}</div>
-						<div>{medals.summer.bronze}</div>
-					</div>
+						<Title order={4}>{'Summer'}</Title>
+						<div style={{ display: 'flex', columnGap: '1rem' }}>
+							<Title order={6}>{'Total'}</Title>
+							<div>{medals.summer.total}</div>
+						</div>
+						<div style={{ display: 'flex', columnGap: '1rem' }}>
+							<Title order={6}>{'Split'}</Title>
+							<div>{medals.summer.gold}</div>
+							<div>{medals.summer.silver}</div>
+							<div>{medals.summer.bronze}</div>
+						</div>
 
-					<Title order={4}>{'Winter'}</Title>
-					<div style={{ display: 'flex', columnGap: '1rem' }}>
-						<Title order={6}>{'Total'}</Title>
-						<div>{medals.winter.total}</div>
-					</div>
-					<div style={{ display: 'flex', columnGap: '1rem' }}>
-						<Title order={6}>{'Split'}</Title>
-						<div>{medals.winter.gold}</div>
-						<div>{medals.winter.silver}</div>
-						<div>{medals.winter.bronze}</div>
-					</div>
-				</GridCell>
+						<Title order={4}>{'Winter'}</Title>
+						<div style={{ display: 'flex', columnGap: '1rem' }}>
+							<Title order={6}>{'Total'}</Title>
+							<div>{medals.winter.total}</div>
+						</div>
+						<div style={{ display: 'flex', columnGap: '1rem' }}>
+							<Title order={6}>{'Split'}</Title>
+							<div>{medals.winter.gold}</div>
+							<div>{medals.winter.silver}</div>
+							<div>{medals.winter.bronze}</div>
+						</div>
+					</GridCell>
+				</Grid.Col>
 			</Grid>
 		</Container>
 	);
