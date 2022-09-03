@@ -7,9 +7,12 @@ import { Country, Games, MedalTotals, PrismaClient } from '@prisma/client';
 
 import { Card, Title, Image } from '@mantine/core';
 
+import { AreaBump, Bump, ResponsiveBump } from '@nivo/bump';
+
 export interface CountriesProps {
 	countries: Country[];
-	medalTotals: (Pick<MedalTotals, 'country' | 'total'> & Pick<Games, 'game'>)[];
+	medalTotals: (Pick<MedalTotals, 'country' | 'total'> &
+		Pick<Games, 'game' | 'year'> & { rank: number })[];
 }
 
 export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
@@ -18,12 +21,13 @@ export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
 	const countries = await prisma.country.findMany();
 
 	const medalTotals = (await prisma.$queryRaw`
-		SELECT game, country, total
+		SELECT game, country, total, CAST(num AS INT) AS "rank", year
 		FROM (
 			SELECT
 				last10games.game AS game,
 				country,
 				total,
+				year,
 				RANK() OVER (PARTITION BY last10games.game ORDER BY total DESC) AS num
 			FROM country_medals
 			JOIN (
@@ -33,9 +37,9 @@ export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
 				LIMIT 10
 			) last10games
 			ON country_medals.game = last10games.game
-			ORDER BY last10games.year DESC
 		) ranked
-		WHERE num <= 5;
+		WHERE num <= 5
+		ORDER BY year ASC, num DESC;
 		`) as CountriesProps['medalTotals'];
 
 	return { props: { countries, medalTotals } };
@@ -51,13 +55,48 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
 	const NOCs = { Active: activeNOCs, Special: specialNOCs, Historic: historicNOCs };
 
+	const countryMedalsMap = medalTotals.reduce((countryMap, { game, country, total }) => {
+		return { ...countryMap, [country]: [...(countryMap[country] ?? []), { x: game, y: total }] };
+	}, {} as Record<string, { x: string; y: number }[]>);
+	const countryMedals = Object.entries(countryMedalsMap)
+		.map(([id, data]) => ({ id, data }))
+		.sort((a, b) => b.data.length - a.data.length);
+
 	return (
 		<>
 			<div>Countries</div>
 			<main>
+				<AreaBump
+					data={countryMedals}
+					width={1200}
+					height={500}
+					margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
+					spacing={20}
+					colors={{ scheme: 'nivo' }}
+					blendMode="multiply"
+					startLabel={true}
+					// endLabel="id"
+					axisTop={{
+						tickSize: 5,
+						tickPadding: 5,
+						tickRotation: 0,
+						legend: '',
+						legendPosition: 'middle',
+						legendOffset: -36,
+					}}
+					axisBottom={{
+						tickSize: 5,
+						tickPadding: 5,
+						tickRotation: 0,
+						legend: '',
+						legendPosition: 'middle',
+						legendOffset: 32,
+					}}
+				/>
+
 				{Object.entries(NOCs).map(([nocType, nocs]) => (
 					<Fragment key={nocType}>
-						<Title order={1}>{`${nocType} NOCs`}</Title>
+						<Title order={2}>{`${nocType} NOCs`}</Title>
 						<section
 							style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: '1rem' }}>
 							{nocs.map(country => (
