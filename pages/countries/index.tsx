@@ -7,7 +7,7 @@ import { Country, Games, MedalTotals, PrismaClient } from '@prisma/client';
 
 import { Card, Title, Image } from '@mantine/core';
 
-import { AreaBump, Bump, ResponsiveBump } from '@nivo/bump';
+import { Bar } from '@nivo/bar';
 
 export interface CountriesProps {
 	countries: Country[];
@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
 	const countries = await prisma.country.findMany();
 
 	const medalTotals = (await prisma.$queryRaw`
-		SELECT game, country, total, CAST(num AS INT) AS "rank", year
+		SELECT game, country, total
 		FROM (
 			SELECT
 				last10games.game AS game,
@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
 			ON country_medals.game = last10games.game
 		) ranked
 		WHERE num <= 5
-		ORDER BY year ASC, num DESC;
+		ORDER BY year, total;
 		`) as CountriesProps['medalTotals'];
 
 	return { props: { countries, medalTotals } };
@@ -55,27 +55,24 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
 	const NOCs = { Active: activeNOCs, Special: specialNOCs, Historic: historicNOCs };
 
-	const countryMedalsMap = medalTotals.reduce((countryMap, { game, country, total }) => {
-		return { ...countryMap, [country]: [...(countryMap[country] ?? []), { x: game, y: total }] };
-	}, {} as Record<string, { x: string; y: number }[]>);
-	const countryMedals = Object.entries(countryMedalsMap)
-		.map(([id, data]) => ({ id, data }))
-		.sort((a, b) => b.data.length - a.data.length);
+	const countryMedals = medalTotals.reduce((gameMap, { game, country, total }) => {
+		return { ...gameMap, [game]: { game, ...(gameMap[game] ?? {}), [country]: total } };
+	}, {} as Record<string, Record<string, string | number>>);
 
 	return (
 		<>
 			<div>Countries</div>
 			<main>
-				<AreaBump
-					data={countryMedals}
+				<Bar
+					data={Object.values(countryMedals)}
+					keys={[...new Set(medalTotals.map(({ country }) => country))]}
+					indexBy="game"
 					width={1200}
 					height={500}
 					margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
-					spacing={20}
+					valueScale={{ type: 'linear' }}
+					indexScale={{ type: 'band' }}
 					colors={{ scheme: 'nivo' }}
-					blendMode="multiply"
-					startLabel={true}
-					// endLabel="id"
 					axisTop={{
 						tickSize: 5,
 						tickPadding: 5,
