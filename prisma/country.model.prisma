@@ -18,17 +18,3 @@ model CountryAttendance {
 
   @@map("country_attendance")
 }
-
-model CountryMedals {
-  id      Int    @id @default(autoincrement())
-  game    String //#@db.VarChar(30)
-  country String //#@db.VarChar(3)
-  gold    Int    @default(0)
-  silver  Int    @default(0)
-  bronze  Int    @default(0)
-
-  //#country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_country")
-  //#games_detail   Games   @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_game")
-
-  @@map("country_game_medals")
-}
