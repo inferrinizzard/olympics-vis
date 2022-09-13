@@ -22,6 +22,7 @@ import { BuildingSkyscraper, Calendar, CalendarEvent, Hash, Run } from 'tabler-i
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
+import BackButton from 'components/layouts/BackButton';
 
 export interface OlympicGameSeasonProps {
 	game: Games;
@@ -79,6 +80,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 
 	return (
 		<Container fluid>
+			<BackButton />
 			<Grid
 				p="xs"
 				sx={theme => ({

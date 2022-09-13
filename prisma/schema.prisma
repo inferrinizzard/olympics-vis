@@ -14,35 +14,30 @@ model Country {
   flag    String
   status  String
 
-  country_medals CountryMedals[]
-  medal_totals   MedalTotals[]
+  country_medals     CountryMedals[]
+  country_attendance CountryAttendance?
+  medal_totals       MedalTotals[]
 
   @@map("country_detail")
 }
 
-model CountryAttendance {
+model CountryAthletes {
   id               Int    @id @default(autoincrement())
   game             String @db.VarChar(30)
   country_athletes Json   @db.Json
 
   games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_game")
 
-  @@map("country_attendance")
+  @@map("country_athletes")
 }
 
-model CountryMedals {
-  id      Int    @id @default(autoincrement())
-  country String @db.VarChar(3)
-  game    String @db.VarChar(30)
-  gold    Int    @default(0)
-  silver  Int    @default(0)
-  bronze  Int    @default(0)
-  total   Int    @default(0)
+model CountryAttendance {
+  country String   @id @db.VarChar(3)
+  games   String[]
 
-  country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_country")
-  games_detail   Games   @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_game")
+  country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
 
-  @@map("country_medals")
+  @@map("country_attendance")
 }
 
 model Games {
@@ -56,25 +51,38 @@ model Games {
   start_date   String @db.VarChar(20)
   end_date     String @db.VarChar(20)
 
-  country_attendance CountryAttendance[]
-  country_medals     CountryMedals[]
-  sports_events      SportsEvent[]
+  country_athletes CountryAthletes[]
+  country_medals   CountryMedals[]
+  sports_events    SportsEvent[]
 
   @@map("games_detail")
 }
 
+model CountryMedals {
+  game    String @db.VarChar(30)
+  country String @db.VarChar(3)
+  gold    Int    @default(0)
+  silver  Int    @default(0)
+  bronze  Int    @default(0)
+
+  country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_country")
+  games_detail   Games   @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_game")
+
+  @@id([game, country])
+  @@map("country_game_medals")
+}
+
 model MedalTotals {
-  id      Int    @id @default(autoincrement())
   country String @db.VarChar(3)
   season  String @db.VarChar(6)
   gold    Int    @default(0)
   silver  Int    @default(0)
   bronze  Int    @default(0)
-  total   Int    @default(0)
 
   country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
 
-  @@map("medal_totals")
+  @@id([country, season])
+  @@map("country_medal_totals")
 }
 
 model Sport {
@@ -86,10 +94,13 @@ model Sport {
 }
 
 model SportsEvent {
-  id     Int    @id @default(autoincrement())
-  game   String @db.VarChar(30)
-  sport  String @db.VarChar(3)
-  events Json   @db.Json
+  id     Int      @id @default(autoincrement())
+  game   String   @db.VarChar(30)
+  sport  String   @db.VarChar(3)
+  event  String
+  gold   String[]
+  silver String[]
+  bronze String[]
 
   games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_sports_events_game")
 

@@ -1,13 +1,26 @@
+model CountryMedals {
+  game    String //#@db.VarChar(30)
+  country String //#@db.VarChar(3)
+  gold    Int    @default(0)
+  silver  Int    @default(0)
+  bronze  Int    @default(0)
+
+  //#country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_country")
+  //#games_detail   Games   @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_game")
+
+  @@id([game, country])
+  @@map("country_game_medals")
+}
+
 model MedalTotals {
-  id      Int    @id @default(autoincrement())
   country String //#@db.VarChar(3)
   season  String //#@db.VarChar(6)
   gold    Int    @default(0)
   silver  Int    @default(0)
   bronze  Int    @default(0)
-  total   Int    @default(0)
 
   //#country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
 
-  @@map("medal_totals")
+  @@id([country, season])
+  @@map("country_medal_totals")
 }
