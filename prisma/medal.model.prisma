@@ -7,7 +7,7 @@ model MedalTotals {
 
   //#country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
 
-  @@map("country_medals_totals")
+  @@map("country_medal_totals")
 }
 
 model CountryMedals {

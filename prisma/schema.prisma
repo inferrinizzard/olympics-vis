@@ -6,7 +6,6 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model Country {
   country String @id @db.VarChar(3)
   name    String @db.VarChar(50)
@@ -21,7 +20,7 @@ model Country {
 model CountryAthletes {
   id               Int    @id @default(autoincrement())
   game             String @db.VarChar(30)
-  country_athletes Json   @db.Json
+  country_athletes Json @db.Json
 
   games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_game")
 
@@ -34,7 +33,6 @@ model CountryAttendance {
 
   @@map("country_attendance")
 }
-
 model Games {
   game         String @id @db.VarChar(30)
   year         Int
@@ -46,13 +44,12 @@ model Games {
   start_date   String @db.VarChar(20)
   end_date     String @db.VarChar(20)
 
-  country_athletes CountryAthletes[]
-  country_medals   CountryMedals[]
-  sports_events    SportsEvent[]
+  country_athletes   CountryAthletes[]
+  country_medals     CountryMedals[]
+  sports_events      SportsEvent[]
 
   @@map("games_detail")
 }
-
 model MedalTotals {
   country String @id @db.VarChar(3)
   season  String @db.VarChar(6)
@@ -62,7 +59,7 @@ model MedalTotals {
 
   country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
 
-  @@map("country_medals_totals")
+  @@map("country_medal_totals")
 }
 
 model CountryMedals {
@@ -78,7 +75,6 @@ model CountryMedals {
 
   @@map("country_game_medals")
 }
-
 model Sport {
   sport String @id @db.VarChar(3)
   name  String @db.VarChar(50)
@@ -89,8 +85,8 @@ model Sport {
 
 model SportsEvent {
   id     Int      @id @default(autoincrement())
-  game   String   @db.VarChar(30)
-  sport  String   @db.VarChar(3)
+  game   String @db.VarChar(30)
+  sport  String @db.VarChar(3)
   event  String
   gold   String[]
   silver String[]
