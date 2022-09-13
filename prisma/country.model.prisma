@@ -9,12 +9,19 @@ model Country {
   @@map("country_detail")
 }
 
-model CountryAttendance {
+model CountryAthletes {
   id               Int    @id @default(autoincrement())
   game             String //#@db.VarChar(30)
   country_athletes Json //#@db.Json
 
   //#games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_game")
+
+  @@map("country_athletes")
+}
+
+model CountryAttendance {
+  country String   @id //#@db.VarChar(3)
+  games   String[]
 
   @@map("country_attendance")
 }
