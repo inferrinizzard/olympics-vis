@@ -12,8 +12,9 @@ model Country {
   name    String @db.VarChar(50)
   flag    String
 
-  country_medals CountryMedals[]
-  medal_totals   MedalTotals?
+  country_medals     CountryMedals[]
+  country_attendance CountryAttendance?
+  medal_totals       MedalTotals[]
 
   @@map("country_detail")
 }
@@ -31,6 +32,8 @@ model CountryAthletes {
 model CountryAttendance {
   country String   @id @db.VarChar(3)
   games   String[]
+
+  country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
 
   @@map("country_attendance")
 }
