@@ -49,12 +49,12 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	medals,
 }) => {
 	return (
-		<Container fluid>
-			<Grid>
+		<Container fluid sx={{ height: '100%' }}>
+			<Grid sx={{ height: '100%' }}>
 				<Grid.Col span={4} sx={{ height: '100%' }}>
-					<GridCell>
+					<GridCell sx={{ height: '100%' }}>
 						<Title order={1}>{`${country.name} (${country.country})`}</Title>
-						<div style={{ height: '50%' }}>
+						<div style={{ maxHeight: '50%' }}>
 							<Image
 								src={country.flag}
 								alt={'NOC Flag for ' + country.country}
