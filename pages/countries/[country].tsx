@@ -12,7 +12,7 @@ import StatCard from 'components/grid/StatCard';
 
 export interface OlympicNOCProps {
 	country: Country;
-	medals: { summer: MedalTotals; winter: MedalTotals; total: MedalTotals };
+	medals: { summer: MedalTotals; winter: MedalTotals };
 }
 
 export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }) => {
@@ -30,8 +30,7 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 	const medals = medalsRows.reduce((acc, cur) => ({ ...acc, [cur.season]: cur }), {
 		summer: zeroMedals,
 		winter: zeroMedals,
-		total: zeroMedals,
-	} as OlympicNOCProps['medals']);
+	} as any);
 
 	return { props: { country, medals } };
 };
@@ -48,6 +47,11 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	country,
 	medals,
 }) => {
+	const { summer, winter } = medals;
+	const allGoldMedals = summer.gold + winter.gold;
+	const allSilverMedals = summer.silver + winter.silver;
+	const allBronzeMedals = summer.bronze + winter.bronze;
+
 	return (
 		<Container fluid sx={{ height: '100%' }}>
 			<Grid sx={{ height: '100%' }}>
@@ -74,37 +78,37 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 						<Title order={4}>{'Total'}</Title>
 						<div style={{ display: 'flex', columnGap: '1rem' }}>
 							<Title order={6}>{'Total'}</Title>
-							<div>{medals.total.total}</div>
+							<div>{allGoldMedals + allSilverMedals + allBronzeMedals}</div>
 						</div>
 						<div style={{ display: 'flex', columnGap: '1rem' }}>
 							<Title order={6}>{'Split'}</Title>
-							<div>{medals.total.gold}</div>
-							<div>{medals.total.silver}</div>
-							<div>{medals.total.bronze}</div>
+							<div>{allGoldMedals}</div>
+							<div>{allSilverMedals}</div>
+							<div>{allBronzeMedals}</div>
 						</div>
 
 						<Title order={4}>{'Summer'}</Title>
 						<div style={{ display: 'flex', columnGap: '1rem' }}>
 							<Title order={6}>{'Total'}</Title>
-							<div>{medals.summer.total}</div>
+							<div>{summer.gold + summer.silver + summer.bronze}</div>
 						</div>
 						<div style={{ display: 'flex', columnGap: '1rem' }}>
 							<Title order={6}>{'Split'}</Title>
-							<div>{medals.summer.gold}</div>
-							<div>{medals.summer.silver}</div>
-							<div>{medals.summer.bronze}</div>
+							<div>{summer.gold}</div>
+							<div>{summer.silver}</div>
+							<div>{summer.bronze}</div>
 						</div>
 
 						<Title order={4}>{'Winter'}</Title>
 						<div style={{ display: 'flex', columnGap: '1rem' }}>
 							<Title order={6}>{'Total'}</Title>
-							<div>{medals.winter.total}</div>
+							<div>{winter.gold + winter.silver + winter.bronze}</div>
 						</div>
 						<div style={{ display: 'flex', columnGap: '1rem' }}>
 							<Title order={6}>{'Split'}</Title>
-							<div>{medals.winter.gold}</div>
-							<div>{medals.winter.silver}</div>
-							<div>{medals.winter.bronze}</div>
+							<div>{winter.gold}</div>
+							<div>{winter.silver}</div>
+							<div>{winter.bronze}</div>
 						</div>
 					</GridCell>
 				</Grid.Col>
