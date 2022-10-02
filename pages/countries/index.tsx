@@ -11,8 +11,7 @@ import { Bar } from '@nivo/bar';
 
 export interface CountriesProps {
 	countries: Country[];
-	medalTotals: (Pick<MedalTotals, 'country' | 'total'> &
-		Pick<Games, 'game' | 'year'> & { rank: number })[];
+	medalTotals: (Pick<MedalTotals, 'country'> & Pick<Games, 'game' | 'year'> & { total: number })[];
 }
 
 export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
@@ -26,17 +25,17 @@ export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
 			SELECT
 				last10games.game AS game,
 				country,
-				total,
+				CAST(gold + silver + bronze AS SMALLINT) AS total,
 				year,
-				RANK() OVER (PARTITION BY last10games.game ORDER BY total DESC) AS num
-			FROM country_medals
+				RANK() OVER (PARTITION BY last10games.game ORDER BY gold + silver + bronze DESC) AS num
+			FROM country_game_medals
 			JOIN (
 				SELECT game, year
 				FROM games_detail
 				ORDER BY year DESC, season ASC
 				LIMIT 10
 			) last10games
-			ON country_medals.game = last10games.game
+			ON country_game_medals.game = last10games.game
 		) ranked
 		WHERE num <= 5
 		ORDER BY year, total;
