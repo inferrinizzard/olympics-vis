@@ -111,6 +111,14 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 							<div>{winter.bronze}</div>
 						</div>
 					</GridCell>
+					<GridCell>
+						<Title order={2}>{'Sports'}</Title>
+						{'num medals per sport, ranked desc'}
+					</GridCell>
+					<GridCell>
+						<Title order={2}>{'Attendance'}</Title>
+						{'num athletes per games, chronologically'}
+					</GridCell>
 				</Grid.Col>
 			</Grid>
 		</Container>
