@@ -20,7 +20,7 @@ const Header = () => {
 		).crumbs;
 
 	return (
-		<MantineHeader height={60} p="xs">
+		<MantineHeader height="5vh" p="xs">
 			<Breadcrumbs>
 				<NextLink href="/">
 					<Home style={{ cursor: 'pointer' }} />
