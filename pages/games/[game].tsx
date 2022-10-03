@@ -8,9 +8,8 @@ import {
 	CountryMedals,
 	Country,
 	SportsEvent,
-	CountryAttendance,
+	CountryAthletes,
 } from '@prisma/client';
-import type { CountryAttendance_CountryAthletes } from 'types/prisma';
 
 import worldCountries from 'resources/countries.min.geo.json';
 import nocIsoLookup from 'resources/geo_noc_map.json';
@@ -28,7 +27,9 @@ export interface OlympicGameSeasonProps {
 	game: Games;
 	countryMedals: (CountryMedals & { country_detail: Country })[];
 	sportEvents: SportsEvent[];
-	countryAttendance: CountryAttendance_CountryAthletes;
+	countryAthletes: Omit<CountryAthletes, 'country_athletes'> & {
+		country_athletes: Record<string, number>;
+	};
 }
 
 export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ params }) => {
@@ -41,20 +42,21 @@ export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ p
 		where: { game: params!.game as string },
 		take: 10,
 		include: { country_detail: true },
+		orderBy: [{ gold: 'desc' }, { silver: 'desc' }, { bronze: 'desc' }],
 	});
 
 	const sportEvents = await prisma.sportsEvent.findMany({
 		where: { game: params!.game as string },
+		distinct: 'sport',
 		// include: { sport_detail: true },
 	});
 
-	const countryAttendance = (await prisma.countryAttendance.findFirst({
-		select: { country_athletes: true },
+	const countryAthletes = (await prisma.countryAthletes.findFirst({
 		where: { game: params!.game as string },
-	}))!.country_athletes as CountryAttendance_CountryAthletes;
+	})) as OlympicGameSeasonProps['countryAthletes'];
 
 	return {
-		props: { game, countryMedals, sportEvents, countryAttendance },
+		props: { game, countryMedals, sportEvents, countryAthletes },
 	};
 };
 
@@ -68,11 +70,11 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	game,
 	countryMedals,
 	sportEvents,
-	countryAttendance,
+	countryAthletes: { country_athletes: countryAthletes },
 }) => {
 	const { game: gameKey } = useRouter().query;
 
-	const countryData = Object.entries(countryAttendance).map(([id, value]) => ({
+	const countryData = Object.entries(countryAthletes).map(([id, value]) => ({
 		id:
 			(nocIsoLookup[id as keyof typeof nocIsoLookup] as { name: string; iso?: string })?.iso ?? id,
 		value,
@@ -121,7 +123,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 							</tr>
 							{Object.values(countryMedals)
 								.slice(0, 10)
-								.map(({ country, gold, silver, bronze, total, country_detail }) => (
+								.map(({ country, gold, silver, bronze, country_detail }) => (
 									<tr key={country}>
 										<td>
 											<Image
@@ -135,7 +137,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 										<td>{gold}</td>
 										<td>{silver}</td>
 										<td>{bronze}</td>
-										<td>{total}</td>
+										<td>{gold + silver + bronze}</td>
 									</tr>
 								))}
 						</tbody>
@@ -168,7 +170,14 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 							features={worldCountries.features}
 							margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 							colors="nivo"
-							domain={[0, Math.max(...Object.values(countryAttendance))]}
+							domain={[
+								0,
+								Math.max(
+									...Object.values(
+										countryAthletes as OlympicGameSeasonProps['countryAthletes']['country_athletes']
+									)
+								),
+							]}
 							unknownColor="#666666"
 							label="properties.name"
 							valueFormat=".2s"
