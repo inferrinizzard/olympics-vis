@@ -54,7 +54,12 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
 	return (
 		<Container fluid sx={{ height: '100%' }}>
-			<Grid sx={{ height: '100%' }}>
+			<Grid
+				sx={theme => ({
+					height: '100%',
+					backgroundColor: theme.colors.blue[3],
+					borderRadius: '1rem',
+				})}>
 				<Grid.Col span={4} sx={{ height: '100%' }}>
 					<GridCell sx={{ height: '100%' }}>
 						<Title order={1}>{`${country.name} (${country.country})`}</Title>
