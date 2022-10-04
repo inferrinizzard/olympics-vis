@@ -1,36 +1,52 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
-import { useRouter } from 'next/router';
 
-import axios from 'axios';
-import { getRoute } from 'pages/api/_endpoint';
-
-import { SportDetail } from 'types/api';
+import { PrismaClient, Sport } from '@prisma/client';
+import { Container, Grid, Image, Title } from '@mantine/core';
+import GridCell from 'components/grid/GridCell';
 
 export interface OlympicSportProps {
-	sport: SportDetail;
+	sport: Sport;
 }
 
-export const getStaticProps: GetStaticProps<OlympicSportProps> = ({ params }) =>
-	axios
-		.get(getRoute(['sports', params!.sport as string]))
-		.then(res => ({ props: { sport: res.data } }));
+export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({ params }) => {
+	const prisma = new PrismaClient();
 
-export const getStaticPaths: GetStaticPaths = () =>
-	axios.get(getRoute(['sports'])).then(({ data }) => ({
-		paths: data.map((sport: string) => ({ params: { sport } })),
-		fallback: false,
-	}));
+	const sport = (await prisma.sport.findFirst({ where: { sport: params!.sport as string } }))!;
+
+	return { props: { sport } };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const prisma = new PrismaClient();
+
+	const sports = await prisma.sport.findMany({ select: { sport: true } });
+
+	return { paths: sports.map(params => ({ params })), fallback: false };
+};
 
 const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ sport }) => {
-	const { year, season } = useRouter().query;
-
 	return (
-		<>
-			<h1>{year}</h1>
-			<h1>{season}</h1>
-			<p>{JSON.stringify(sport)}</p>
-		</>
+		<Container fluid sx={{ height: '100%' }}>
+			<Grid
+				sx={theme => ({
+					height: '100%',
+					backgroundColor: theme.colors.blue[3],
+					borderRadius: '1rem',
+				})}>
+				<Grid.Col>
+					<GridCell>
+						<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
+						<Image
+							src={sport.icon}
+							width={100}
+							alt={sport.sport + ' sport icon'}
+							// fit={'scale-down' as 'contain'}
+						/>
+					</GridCell>
+				</Grid.Col>
+			</Grid>
+		</Container>
 	);
 };
 
