@@ -1,9 +1,14 @@
 import { type NextPage } from 'next';
-import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
+import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
 
 import { PrismaClient, Sport } from '@prisma/client';
-import { Container, Grid, Image, Title } from '@mantine/core';
+
+import { Box, Container, Grid, Image, Title } from '@mantine/core';
+
+import { Calendar, Hash, MapPin } from 'tabler-icons-react';
+
 import GridCell from 'components/grid/GridCell';
+import StatCard from 'components/grid/StatCard';
 
 export interface OlympicSportProps {
 	sport: Sport;
@@ -43,6 +48,11 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 							alt={sport.sport + ' sport icon'}
 							// fit={'scale-down' as 'contain'}
 						/>
+						<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
+							<StatCard icon={<MapPin />} title={'Best Country'} text={'Country'} />
+							<StatCard icon={<Calendar />} title={'First Games'} text={'games'} />
+							<StatCard icon={<Hash />} title={'Number of Events'} text={100} />
+						</Box>
 					</GridCell>
 				</Grid.Col>
 			</Grid>
