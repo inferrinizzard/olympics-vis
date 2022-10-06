@@ -13,6 +13,8 @@ import { Box, Container, Grid, Image, Title } from '@mantine/core';
 
 import { Calendar, Hash } from 'tabler-icons-react';
 
+import { ResponsiveBar } from '@nivo/bar';
+
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 
@@ -149,8 +151,26 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 						{'num medals per sport, ranked desc'}
 					</GridCell>
 					<GridCell>
-						<Title order={2}>{'Attendance'}</Title>
-						{'num athletes per games, chronologically'}
+						<Title order={2}>{'Medals per Game'}</Title>
+						<div style={{ width: '100%', height: '30vh' }}>
+							<ResponsiveBar
+								data={countryMedals}
+								keys={['bronze', 'silver', 'gold']}
+								indexBy="game"
+								margin={{ top: 20, bottom: 50, left: 30 }}
+								valueScale={{ type: 'linear' }}
+								indexScale={{ type: 'band' }}
+								colors={{ scheme: 'nivo' }}
+								axisBottom={{
+									tickSize: 5,
+									tickPadding: 5,
+									tickRotation: 45,
+									legend: '',
+									legendPosition: 'middle',
+									legendOffset: 32,
+								}}
+							/>
+						</div>
 					</GridCell>
 				</Grid.Col>
 			</Grid>
