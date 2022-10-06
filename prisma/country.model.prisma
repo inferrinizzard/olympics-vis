@@ -6,6 +6,7 @@ model Country {
   status  String
 
   //#country_medals CountryMedals[]
+  //#country_sports_medals CountrySportsMedals[]
   //#country_attendance CountryAttendance?
   //#medal_totals   MedalTotals[]
 
