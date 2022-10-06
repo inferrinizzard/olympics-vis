@@ -1,7 +1,7 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
 
-import { Country, MedalTotals, PrismaClient } from '@prisma/client';
+import { PrismaClient, type Country, type CountryMedals, type MedalTotals } from '@prisma/client';
 
 import { Box, Container, Grid, Image, Title } from '@mantine/core';
 
@@ -12,27 +12,36 @@ import StatCard from 'components/grid/StatCard';
 
 export interface OlympicNOCProps {
 	country: Country;
-	medals: { summer: MedalTotals; winter: MedalTotals };
+	medalTotals: { summer: MedalTotals; winter: MedalTotals };
+	countryMedals: CountryMedals[];
 }
 
 export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }) => {
+	const countryId = params!.country as string;
 	const prisma = new PrismaClient();
 
 	const country = (await prisma.country.findFirst({
-		where: { country: params!.country as string },
+		where: { country: countryId },
 	}))!;
 
 	const medalsRows = await prisma.medalTotals.findMany({
-		where: { country: params!.country as string },
+		where: { country: countryId },
 	});
 
-	const zeroMedals = { gold: 0, silver: 0, bronze: 0, total: 0 };
-	const medals = medalsRows.reduce((acc, cur) => ({ ...acc, [cur.season]: cur }), {
-		summer: zeroMedals,
-		winter: zeroMedals,
-	} as any);
+	const zeroMedals = { gold: 0, silver: 0, bronze: 0, total: 0, country: countryId } as Omit<
+		MedalTotals,
+		'season'
+	>;
+	const medalTotals = medalsRows.reduce((acc, cur) => ({ ...acc, [cur.season]: cur }), {
+		summer: { ...zeroMedals, season: 'summer' },
+		winter: { ...zeroMedals, season: 'winter' },
+	});
 
-	return { props: { country, medals } };
+	const countryMedals = await prisma.countryMedals.findMany({
+		where: { country: countryId },
+	});
+
+	return { props: { country, medalTotals, countryMedals } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -45,9 +54,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	country,
-	medals,
+	medalTotals,
+	countryMedals,
 }) => {
-	const { summer, winter } = medals;
+	const { summer, winter } = medalTotals;
 	const allGoldMedals = summer.gold + winter.gold;
 	const allSilverMedals = summer.silver + winter.silver;
 	const allBronzeMedals = summer.bronze + winter.bronze;
