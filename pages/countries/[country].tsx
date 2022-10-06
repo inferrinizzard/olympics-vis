@@ -1,7 +1,13 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
 
-import { PrismaClient, type Country, type CountryMedals, type MedalTotals } from '@prisma/client';
+import {
+	PrismaClient,
+	type Country,
+	type CountryAthletes,
+	type CountryMedals,
+	type MedalTotals,
+} from '@prisma/client';
 
 import { Box, Container, Grid, Image, Title } from '@mantine/core';
 
@@ -14,6 +20,7 @@ export interface OlympicNOCProps {
 	country: Country;
 	medalTotals: { summer: MedalTotals; winter: MedalTotals };
 	countryMedals: CountryMedals[];
+	countryAthletes: Pick<CountryAthletes, 'game'> & Record<'athletes', number>;
 }
 
 export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }) => {
@@ -37,11 +44,21 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 		winter: { ...zeroMedals, season: 'winter' },
 	});
 
-	const countryMedals = await prisma.countryMedals.findMany({
-		where: { country: countryId },
-	});
+	const countryMedals = (
+		await prisma.countryMedals.findMany({
+			where: { country: countryId },
+		})
+	).reverse();
 
-	return { props: { country, medalTotals, countryMedals } };
+	const countryAthletes = (await prisma.$queryRaw`
+		SELECT
+			game,
+			CAST(country_athletes->>${countryId} AS SMALLINT) AS athletes
+		FROM country_athletes
+		WHERE country_athletes.country_athletes ? ${countryId};
+	`) as OlympicNOCProps['countryAthletes'];
+
+	return { props: { country, medalTotals, countryMedals, countryAthletes } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -56,6 +73,7 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	country,
 	medalTotals,
 	countryMedals,
+	countryAthletes,
 }) => {
 	const { summer, winter } = medalTotals;
 	const allGoldMedals = summer.gold + winter.gold;
