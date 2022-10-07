@@ -7,10 +7,12 @@ import { Box, Container, Grid, Image, Title } from '@mantine/core';
 
 import { Calendar, Hash, MapPin } from 'tabler-icons-react';
 
+import { ResponsiveBar } from '@nivo/bar';
 import { ResponsiveLine } from '@nivo/line';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
+import { sortByMedals } from 'pages/utils';
 
 export interface OlympicSportProps {
 	sport: Sport;
@@ -62,6 +64,8 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 			data: Object.entries(numEvents).map(([game, count]) => ({ x: game, y: count })),
 		},
 	];
+
+	const leadingCountries = countrySportsMedals.sort(sortByMedals).reverse().slice(0, 10);
 
 	return (
 		<Container fluid sx={{ height: '100%' }}>
@@ -154,7 +158,25 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 					</GridCell>
 					<GridCell>
 						<Title order={2}>{'Leading Countries'}</Title>
-						<div style={{ width: '100%', height: '40vh' }}></div>
+						<div style={{ width: '100%', height: '40vh' }}>
+							<ResponsiveBar
+								data={leadingCountries}
+								keys={['bronze', 'silver', 'gold']}
+								indexBy="country"
+								margin={{ top: 20, bottom: 50, left: 30 }}
+								valueScale={{ type: 'linear' }}
+								indexScale={{ type: 'band' }}
+								colors={{ scheme: 'nivo' }}
+								axisBottom={{
+									tickSize: 5,
+									tickPadding: 5,
+									tickRotation: 45,
+									legend: '',
+									legendPosition: 'middle',
+									legendOffset: 32,
+								}}
+							/>
+						</div>
 					</GridCell>
 				</Grid.Col>
 			</Grid>
