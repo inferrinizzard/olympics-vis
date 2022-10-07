@@ -35,15 +35,21 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 		<>
 			<div>Games</div>
 			<main style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr', gap: '1rem' }}>
-				{games.map(game => (
-					<div key={game.game}>
-						<Link passHref href={`/games/${game.game}`}>
-							<Card sx={{ cursor: 'pointer' }}>
-								<Title order={2}>{`${gameName(game.game)}`}</Title>
+				{games.map(({ game, emblem }) => (
+					<div key={game}>
+						<Link passHref href={`/games/${game}`}>
+							<Card sx={{ cursor: 'pointer', height: '20vh' }}>
+								<Title order={2}>{`${gameName(game)}`}</Title>
 								<Image
-									src={game.emblem}
-									alt={'Olympic emblem for ' + game.game}
-									sx={{ maxHeight: '20vh', margin: 'auto' }}
+									src={emblem}
+									alt={'Olympic emblem for ' + game}
+									fit={'contain'}
+									height={'100%'}
+									styles={() => ({
+										root: { height: '100%' },
+										figure: { height: '100%' },
+										imageWrapper: { height: '100%' },
+									})}
 								/>
 							</Card>
 						</Link>
