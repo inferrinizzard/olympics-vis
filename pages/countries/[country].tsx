@@ -48,9 +48,11 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 		winter: { ...zeroMedals, season: 'winter' },
 	});
 
-	const countrySportsMedals = await prisma.countrySportsMedals.findMany({
-		where: { country: countryId },
-	});
+	const countrySportsMedals = (
+		await prisma.countrySportsMedals.findMany({
+			where: { country: countryId },
+		})
+	).sort((a, b) => (a.gold + a.silver + a.bronze > b.gold + b.silver + b.bronze ? -1 : 1));
 
 	const countryMedals = (
 		await prisma.countryMedals.findMany({
@@ -154,8 +156,26 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 						</div>
 					</GridCell>
 					<GridCell>
-						<Title order={2}>{'Sports'}</Title>
-						{'num medals per sport, ranked desc'}
+						<Title order={2}>{'Medals per Sport'}</Title>
+						<div style={{ width: '100%', height: '30vh' }}>
+							<ResponsiveBar
+								data={countrySportsMedals}
+								keys={['bronze', 'silver', 'gold']}
+								indexBy="sport"
+								margin={{ top: 20, bottom: 50, left: 30 }}
+								valueScale={{ type: 'linear' }}
+								indexScale={{ type: 'band' }}
+								colors={{ scheme: 'nivo' }}
+								axisBottom={{
+									tickSize: 5,
+									tickPadding: 5,
+									tickRotation: 45,
+									legend: '',
+									legendPosition: 'middle',
+									legendOffset: 32,
+								}}
+							/>
+						</div>
 					</GridCell>
 					<GridCell>
 						<Title order={2}>{'Medals per Game'}</Title>
