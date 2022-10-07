@@ -1,38 +1,74 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
 
-import { Country, MedalTotals, PrismaClient } from '@prisma/client';
+import {
+	PrismaClient,
+	type Country,
+	type CountryAthletes,
+	type CountryMedals,
+	type CountrySportsMedals,
+	type MedalTotals,
+} from '@prisma/client';
 
 import { Box, Container, Grid, Image, Title } from '@mantine/core';
 
 import { Calendar, Hash } from 'tabler-icons-react';
+
+import { ResponsiveBar } from '@nivo/bar';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 
 export interface OlympicNOCProps {
 	country: Country;
-	medals: { summer: MedalTotals; winter: MedalTotals };
+	medalTotals: { summer: MedalTotals; winter: MedalTotals };
+	countrySportsMedals: CountrySportsMedals[];
+	countryMedals: CountryMedals[];
+	countryAthletes: Pick<CountryAthletes, 'game'> & Record<'athletes', number>;
 }
 
 export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }) => {
+	const countryId = params!.country as string;
 	const prisma = new PrismaClient();
 
 	const country = (await prisma.country.findFirst({
-		where: { country: params!.country as string },
+		where: { country: countryId },
 	}))!;
 
 	const medalsRows = await prisma.medalTotals.findMany({
-		where: { country: params!.country as string },
+		where: { country: countryId },
 	});
 
-	const zeroMedals = { gold: 0, silver: 0, bronze: 0, total: 0 };
-	const medals = medalsRows.reduce((acc, cur) => ({ ...acc, [cur.season]: cur }), {
-		summer: zeroMedals,
-		winter: zeroMedals,
-	} as any);
+	const zeroMedals = { gold: 0, silver: 0, bronze: 0, total: 0, country: countryId } as Omit<
+		MedalTotals,
+		'season'
+	>;
+	const medalTotals = medalsRows.reduce((acc, cur) => ({ ...acc, [cur.season]: cur }), {
+		summer: { ...zeroMedals, season: 'summer' },
+		winter: { ...zeroMedals, season: 'winter' },
+	});
 
-	return { props: { country, medals } };
+	const countrySportsMedals = (
+		await prisma.countrySportsMedals.findMany({
+			where: { country: countryId },
+		})
+	).sort((a, b) => (a.gold + a.silver + a.bronze > b.gold + b.silver + b.bronze ? -1 : 1));
+
+	const countryMedals = (
+		await prisma.countryMedals.findMany({
+			where: { country: countryId },
+		})
+	).reverse();
+
+	const countryAthletes = (await prisma.$queryRaw`
+		SELECT
+			game,
+			CAST(country_athletes->>${countryId} AS SMALLINT) AS athletes
+		FROM country_athletes
+		WHERE country_athletes.country_athletes ? ${countryId};
+	`) as OlympicNOCProps['countryAthletes'];
+
+	return { props: { country, medalTotals, countrySportsMedals, countryMedals, countryAthletes } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -45,9 +81,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	country,
-	medals,
+	medalTotals,
+	countrySportsMedals,
+	countryMedals,
+	countryAthletes,
 }) => {
-	const { summer, winter } = medals;
+	const { summer, winter } = medalTotals;
 	const allGoldMedals = summer.gold + winter.gold;
 	const allSilverMedals = summer.silver + winter.silver;
 	const allBronzeMedals = summer.bronze + winter.bronze;
@@ -117,12 +156,48 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 						</div>
 					</GridCell>
 					<GridCell>
-						<Title order={2}>{'Sports'}</Title>
-						{'num medals per sport, ranked desc'}
+						<Title order={2}>{'Medals per Sport'}</Title>
+						<div style={{ width: '100%', height: '30vh' }}>
+							<ResponsiveBar
+								data={countrySportsMedals}
+								keys={['bronze', 'silver', 'gold']}
+								indexBy="sport"
+								margin={{ top: 20, bottom: 50, left: 30 }}
+								valueScale={{ type: 'linear' }}
+								indexScale={{ type: 'band' }}
+								colors={{ scheme: 'nivo' }}
+								axisBottom={{
+									tickSize: 5,
+									tickPadding: 5,
+									tickRotation: 45,
+									legend: '',
+									legendPosition: 'middle',
+									legendOffset: 32,
+								}}
+							/>
+						</div>
 					</GridCell>
 					<GridCell>
-						<Title order={2}>{'Attendance'}</Title>
-						{'num athletes per games, chronologically'}
+						<Title order={2}>{'Medals per Game'}</Title>
+						<div style={{ width: '100%', height: '30vh' }}>
+							<ResponsiveBar
+								data={countryMedals}
+								keys={['bronze', 'silver', 'gold']}
+								indexBy="game"
+								margin={{ top: 20, bottom: 50, left: 30 }}
+								valueScale={{ type: 'linear' }}
+								indexScale={{ type: 'band' }}
+								colors={{ scheme: 'nivo' }}
+								axisBottom={{
+									tickSize: 5,
+									tickPadding: 5,
+									tickRotation: 45,
+									legend: '',
+									legendPosition: 'middle',
+									legendOffset: 32,
+								}}
+							/>
+						</div>
 					</GridCell>
 				</Grid.Col>
 			</Grid>
