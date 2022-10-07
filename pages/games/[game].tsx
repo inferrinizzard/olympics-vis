@@ -1,6 +1,5 @@
 import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
-import { useRouter } from 'next/router';
 
 import {
 	PrismaClient,
@@ -72,8 +71,6 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	sportEvents,
 	countryAthletes: { country_athletes: countryAthletes },
 }) => {
-	const { game: gameKey } = useRouter().query;
-
 	const countryData = Object.entries(countryAthletes).map(([id, value]) => ({
 		id:
 			(nocIsoLookup[id as keyof typeof nocIsoLookup] as { name: string; iso?: string })?.iso ?? id,
@@ -105,7 +102,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 						</Box>
 					</Box>
 					<Box p="sm" sx={{ width: '25%' }}>
-						<Image src={game.emblem} alt={'Olympic emblem for ' + gameKey} sx={{ width: '100%' }} />
+						<Image src={game.emblem} alt={'Olympic emblem for ' + game} sx={{ width: '100%' }} />
 					</Box>
 				</GridCell>
 				<GridCell span={4}>
