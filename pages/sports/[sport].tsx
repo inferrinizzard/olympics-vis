@@ -1,7 +1,7 @@
 import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
 
-import { Games, PrismaClient, Sport } from '@prisma/client';
+import { PrismaClient, type CountrySportsMedals, type Games, type Sport } from '@prisma/client';
 
 import { Box, Container, Grid, Image, Title } from '@mantine/core';
 
@@ -15,17 +15,19 @@ import StatCard from 'components/grid/StatCard';
 export interface OlympicSportProps {
 	sport: Sport;
 	numEvents: Record<Games['game'], number>;
+	countrySportsMedals: CountrySportsMedals[];
 }
 
 export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({ params }) => {
+	const sportId = params!.sport as string;
 	const prisma = new PrismaClient();
 
-	const sport = (await prisma.sport.findFirst({ where: { sport: params!.sport as string } }))!;
+	const sport = (await prisma.sport.findFirst({ where: { sport: sportId } }))!;
 
 	const countEvents = await prisma.sportsEvent.groupBy({
 		by: ['game'],
 		_count: { sport: true },
-		where: { sport: params!.sport as string },
+		where: { sport: sportId },
 	});
 	const numEvents = countEvents
 		.reverse()
@@ -34,7 +36,11 @@ export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({ params
 			{}
 		);
 
-	return { props: { sport, numEvents } };
+	const countrySportsMedals = await prisma.countrySportsMedals.findMany({
+		where: { sport: sportId },
+	});
+
+	return { props: { sport, numEvents, countrySportsMedals } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -48,6 +54,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	sport,
 	numEvents,
+	countrySportsMedals,
 }) => {
 	const eventCountData = [
 		{
@@ -144,6 +151,10 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 								]}
 							/>
 						</div>
+					</GridCell>
+					<GridCell>
+						<Title order={2}>{'Leading Countries'}</Title>
+						<div style={{ width: '100%', height: '40vh' }}></div>
 					</GridCell>
 				</Grid.Col>
 			</Grid>
