@@ -6,6 +6,7 @@ model Country {
   status  String
 
   //#country_medals CountryMedals[]
+  //#country_sports_medals CountrySportsMedals[]
   //#country_attendance CountryAttendance?
   //#medal_totals   MedalTotals[]
 
@@ -17,7 +18,7 @@ model CountryAthletes {
   game             String //#@db.VarChar(30)
   country_athletes Json //#@db.Json
 
-  //#games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_game")
+  //#games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_athletes_game")
 
   @@map("country_athletes")
 }
@@ -26,7 +27,7 @@ model CountryAttendance {
   country String   @id //#@db.VarChar(3)
   games   String[]
 
-  //#country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
+  //#country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_country")
 
   @@map("country_attendance")
 }
