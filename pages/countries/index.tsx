@@ -94,7 +94,11 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					<Fragment key={nocType}>
 						<Title order={2}>{`${nocType} NOCs`}</Title>
 						<section
-							style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: '1rem' }}>
+							style={{
+								display: 'grid',
+								gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+								gap: '1rem',
+							}}>
 							{nocs.map(country => (
 								<div key={country.country}>
 									<Link passHref href={`/countries/${country.country}`}>
