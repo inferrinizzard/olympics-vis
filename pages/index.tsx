@@ -32,6 +32,8 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	countries,
 }) => {
 	const gamesRef = useRef<HTMLDivElement>(null);
+	const sportsRef = useRef<HTMLDivElement>(null);
+	const countriesRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const gamesInterval = setInterval(
@@ -41,7 +43,24 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				}),
 			100
 		);
-		return () => clearInterval(gamesInterval);
+		sportsRef?.current?.scrollTo({ left: sportsRef?.current?.scrollWidth });
+		const sportsInterval = setInterval(
+			() =>
+				sportsRef?.current?.scrollTo({
+					left: sportsRef?.current?.scrollLeft - 1,
+				}),
+			100
+		);
+		const countriesInterval = setInterval(
+			() =>
+				countriesRef?.current?.scrollTo({
+					left: countriesRef?.current?.scrollLeft + 1,
+				}),
+			100
+		);
+		return () => (
+			clearInterval(gamesInterval), clearInterval(sportsInterval), clearInterval(countriesInterval)
+		);
 	}, []);
 
 	return (
@@ -71,43 +90,47 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				</div>
 				<Link href="/games">{'See all →'}</Link>
 			</section>
-			<section style={{ overflowX: 'hidden' }}>
-				<div style={{ display: 'inline-flex', flexDirection: 'row-reverse' }}>
-					{sports.map(sport => (
-						<span key={sport.sport} style={{ width: '13rem', height: '13rem' }}>
-							<Link href={`/sports/${sport.sport}`} passHref>
-								<Image
-									src={sport.icon}
-									alt={sport.sport}
-									fit={'contain'}
-									height={'100%'}
-									sx={{ cursor: 'pointer' }}
-									style={{ height: '100%' }}
-									styles={{ imageWrapper: { height: '100%' }, figure: { height: '100%' } }}
-								/>
-							</Link>
-						</span>
-					))}
+			<section>
+				<div ref={sportsRef} style={{ width: '100%', overflowX: 'scroll' }}>
+					<div style={{ display: 'inline-flex', flexDirection: 'row-reverse' }}>
+						{sports.map(sport => (
+							<span key={sport.sport} style={{ width: '13rem', height: '13rem' }}>
+								<Link href={`/sports/${sport.sport}`} passHref>
+									<Image
+										src={sport.icon}
+										alt={sport.sport}
+										fit={'contain'}
+										height={'100%'}
+										sx={{ cursor: 'pointer' }}
+										style={{ height: '100%' }}
+										styles={{ imageWrapper: { height: '100%' }, figure: { height: '100%' } }}
+									/>
+								</Link>
+							</span>
+						))}
+					</div>
 				</div>
 				<Link href="/sports">{'See all →'}</Link>
 			</section>
-			<section style={{ overflowX: 'hidden' }}>
-				<div style={{ display: 'inline-flex' }}>
-					{countries.map(country => (
-						<span key={country.country} style={{ width: '13rem', height: '13rem' }}>
-							<Link href={`/countries/${country.country}`} passHref>
-								<Image
-									src={country.flag}
-									alt={country.country}
-									fit={'contain'}
-									height={'100%'}
-									sx={{ cursor: 'pointer' }}
-									style={{ height: '100%' }}
-									styles={{ imageWrapper: { height: '100%' }, figure: { height: '100%' } }}
-								/>
-							</Link>
-						</span>
-					))}
+			<section>
+				<div ref={countriesRef} style={{ width: '100%', overflowX: 'scroll' }}>
+					<div style={{ display: 'inline-flex' }}>
+						{countries.map(country => (
+							<span key={country.country} style={{ width: '13rem', height: '13rem' }}>
+								<Link href={`/countries/${country.country}`} passHref>
+									<Image
+										src={country.flag}
+										alt={country.country}
+										fit={'contain'}
+										height={'100%'}
+										sx={{ cursor: 'pointer' }}
+										style={{ height: '100%' }}
+										styles={{ imageWrapper: { height: '100%' }, figure: { height: '100%' } }}
+									/>
+								</Link>
+							</span>
+						))}
+					</div>
 				</div>
 				<Link href="/countries">{'See all →'}</Link>
 			</section>
