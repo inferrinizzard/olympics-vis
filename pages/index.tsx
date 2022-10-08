@@ -38,7 +38,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				<div style={{ display: 'inline-flex' }}>
 					{games.map(game => (
 						<span key={game.game} style={{ width: '13rem', height: '13rem' }}>
-							<Link href={`games/${game.game}`} passHref>
+							<Link href={`/games/${game.game}`} passHref>
 								<Image
 									src={game.emblem}
 									alt={game.game}
@@ -52,13 +52,13 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 						</span>
 					))}
 				</div>
-				<Link href="games">{'See all →'}</Link>
+				<Link href="/games">{'See all →'}</Link>
 			</section>
 			<section style={{ overflowX: 'hidden' }}>
 				<div style={{ display: 'inline-flex', flexDirection: 'row-reverse' }}>
 					{sports.map(sport => (
 						<span key={sport.sport} style={{ width: '13rem', height: '13rem' }}>
-							<Link href={`sports/${sport.sport}`} passHref>
+							<Link href={`/sports/${sport.sport}`} passHref>
 								<Image
 									src={sport.icon}
 									alt={sport.sport}
@@ -72,13 +72,13 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 						</span>
 					))}
 				</div>
-				<Link href="sports">{'See all →'}</Link>
+				<Link href="/sports">{'See all →'}</Link>
 			</section>
 			<section style={{ overflowX: 'hidden' }}>
 				<div style={{ display: 'inline-flex' }}>
 					{countries.map(country => (
 						<span key={country.country} style={{ width: '13rem', height: '13rem' }}>
-							<Link href={`countries/${country.country}`} passHref>
+							<Link href={`/countries/${country.country}`} passHref>
 								<Image
 									src={country.flag}
 									alt={country.country}
@@ -92,7 +92,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 						</span>
 					))}
 				</div>
-				<Link href="countries">{'See all →'}</Link>
+				<Link href="/countries">{'See all →'}</Link>
 			</section>
 		</main>
 	);
