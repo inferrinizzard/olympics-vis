@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { useEffect, useRef, type RefObject } from 'react';
 
 import type { NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -39,6 +39,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 		const scrollElement = ref?.current;
 		const flexWrapper = scrollElement?.firstElementChild;
 		const targetElement = step > 0 ? flexWrapper?.firstElementChild : flexWrapper?.lastElementChild;
+		const secondElement = flexWrapper?.children[step > 0 ? 1 : flexWrapper.childElementCount - 2];
 		const childWidth = flexWrapper?.firstElementChild?.clientWidth ?? 0;
 
 		const headObserverOptions = {
@@ -69,21 +70,22 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 		const headObserver = new IntersectionObserver(positiveLoop, headObserverOptions);
 		targetElement && headObserver.observe(targetElement);
 
-		return setInterval(() => {
-			scrollElement?.scrollTo({
-				left: scrollElement.scrollLeft + step,
-			});
-		}, 100);
+		return setInterval(
+			() =>
+				window.requestAnimationFrame(() =>
+					scrollElement?.scrollTo({ left: scrollElement.scrollLeft + step })
+				),
+			100
+		);
 	};
 
 	useEffect(() => {
-		const gamesInterval = autoscroll(gamesRef, 1);
+		const gamesInterval = autoscroll(gamesRef, 1 + Math.random());
 		sportsRef?.current?.scrollTo({ left: sportsRef.current.scrollWidth });
-		// const sportsInterval = autoscroll(sportsRef, -1);
-		// const countriesInterval = autoscroll(countriesRef, 1);
+		const sportsInterval = autoscroll(sportsRef, -1 - Math.random());
+		const countriesInterval = autoscroll(countriesRef, 1 + Math.random());
 
-		// return () => [gamesInterval, sportsInterval, countriesInterval].forEach(clearInterval);
-		return () => [gamesInterval].forEach(clearInterval);
+		return () => [gamesInterval, sportsInterval, countriesInterval].forEach(clearInterval);
 	}, []);
 
 	return (
@@ -97,7 +99,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					className={'disable-scrollbar'}
 					style={{ width: '100%', overflowX: 'scroll' }}>
 					<div style={{ display: 'inline-flex' }}>
-						{games.slice(0, 11).map(game => (
+						{games.map(game => (
 							<span key={game.game} style={{ width: '13rem', height: '13rem' }}>
 								<Link href={`/games/${game.game}`} passHref>
 									<Image
