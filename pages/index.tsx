@@ -61,7 +61,10 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				<Title order={1}>{'Olympics Vis'}</Title>
 			</section>
 			<section>
-				<div ref={gamesRef} style={{ width: '100%', overflowX: 'scroll' }}>
+				<div
+					ref={gamesRef}
+					className={'disable-scrollbar'}
+					style={{ width: '100%', overflowX: 'scroll' }}>
 					<div style={{ display: 'inline-flex' }}>
 						{games.map(game => (
 							<span key={game.game} style={{ width: '13rem', height: '13rem' }}>
@@ -83,7 +86,10 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				<Link href="/games">{'See all →'}</Link>
 			</section>
 			<section>
-				<div ref={sportsRef} style={{ width: '100%', overflowX: 'scroll' }}>
+				<div
+					ref={sportsRef}
+					className={'disable-scrollbar'}
+					style={{ width: '100%', overflowX: 'scroll' }}>
 					<div style={{ display: 'inline-flex', flexDirection: 'row-reverse' }}>
 						{sports.map(sport => (
 							<span key={sport.sport} style={{ width: '13rem', height: '13rem' }}>
@@ -105,7 +111,10 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				<Link href="/sports">{'See all →'}</Link>
 			</section>
 			<section>
-				<div ref={countriesRef} style={{ width: '100%', overflowX: 'scroll' }}>
+				<div
+					ref={countriesRef}
+					className={'disable-scrollbar'}
+					style={{ width: '100%', overflowX: 'scroll' }}>
 					<div style={{ display: 'inline-flex' }}>
 						{countries.map(country => (
 							<span key={country.country} style={{ width: '13rem', height: '13rem' }}>
