@@ -38,29 +38,40 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
 		const scrollElement = ref?.current;
 		const flexWrapper = scrollElement?.firstElementChild;
+		const targetElement = step > 0 ? flexWrapper?.firstElementChild : flexWrapper?.lastElementChild;
 		const childWidth = flexWrapper?.firstElementChild?.clientWidth ?? 0;
 
-		let x = 0;
-		return setInterval(() => {
-			if (
-				(step > 0 && x > childWidth * 2) ||
-				(step < 1 &&
-					scrollElement &&
-					scrollElement?.scrollLeft < scrollElement?.scrollWidth - childWidth * 2)
-			) {
-				if (step > 0) {
-					flexWrapper?.firstChild && flexWrapper?.appendChild(flexWrapper?.firstChild);
-					x -= childWidth;
-				} else if (step < 0) {
-					flexWrapper?.firstChild &&
-						flexWrapper.insertBefore(flexWrapper?.firstChild, flexWrapper?.lastChild);
-					x += childWidth;
+		const observerOptions = {
+			root: scrollElement,
+			rootMargin: '0px',
+			threshold: 0.0,
+		};
+
+		const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) =>
+			entries.forEach(entry => {
+				if (!entry.isIntersecting) {
+					if (step > 0) {
+						flexWrapper?.appendChild(entry.target);
+						scrollElement?.scrollTo({
+							left: scrollElement.scrollLeft - childWidth,
+						});
+						observer.unobserve(entry.target);
+						flexWrapper?.firstElementChild && observer.observe(flexWrapper?.firstElementChild);
+					} else if (step < 0) {
+						flexWrapper?.firstChild &&
+							flexWrapper.insertBefore(flexWrapper?.firstChild, entry.target);
+						scrollElement?.scrollTo({
+							left: scrollElement.scrollLeft + childWidth,
+						});
+						flexWrapper?.lastElementChild && observer.observe(flexWrapper?.lastElementChild);
+					}
 				}
-				scrollElement?.scrollTo({
-					left: x,
-				});
-			}
-			x += step;
+			});
+
+		const observer = new IntersectionObserver(callback, observerOptions);
+		targetElement && observer.observe(targetElement);
+
+		return setInterval(() => {
 			scrollElement?.scrollTo({
 				left: scrollElement.scrollLeft + step,
 			});
