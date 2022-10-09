@@ -36,23 +36,45 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	const countriesRef = useRef<HTMLDivElement>(null);
 
 	const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
-		const element = ref?.current;
-		return setInterval(
-			() =>
-				element?.scrollTo({
-					left: element?.scrollLeft + step,
-				}),
-			100
-		);
+		const scrollElement = ref?.current;
+		const flexWrapper = scrollElement?.firstElementChild;
+		const childWidth = flexWrapper?.firstElementChild?.clientWidth ?? 0;
+
+		let x = 0;
+		return setInterval(() => {
+			if (
+				(step > 0 && x > childWidth * 2) ||
+				(step < 1 &&
+					scrollElement &&
+					scrollElement?.scrollLeft < scrollElement?.scrollWidth - childWidth * 2)
+			) {
+				if (step > 0) {
+					flexWrapper?.firstChild && flexWrapper?.appendChild(flexWrapper?.firstChild);
+					x -= childWidth;
+				} else if (step < 0) {
+					flexWrapper?.firstChild &&
+						flexWrapper.insertBefore(flexWrapper?.firstChild, flexWrapper?.lastChild);
+					x += childWidth;
+				}
+				scrollElement?.scrollTo({
+					left: x,
+				});
+			}
+			x += step;
+			scrollElement?.scrollTo({
+				left: scrollElement.scrollLeft + step,
+			});
+		}, 100);
 	};
 
 	useEffect(() => {
 		const gamesInterval = autoscroll(gamesRef, 1);
 		sportsRef?.current?.scrollTo({ left: sportsRef?.current?.scrollWidth });
-		const sportsInterval = autoscroll(sportsRef, -1);
-		const countriesInterval = autoscroll(countriesRef, 1);
+		// const sportsInterval = autoscroll(sportsRef, -1);
+		// const countriesInterval = autoscroll(countriesRef, 1);
 
-		return () => [gamesInterval, sportsInterval, countriesInterval].forEach(clearInterval);
+		// return () => [gamesInterval, sportsInterval, countriesInterval].forEach(clearInterval);
+		return () => [gamesInterval].forEach(clearInterval);
 	}, []);
 
 	return (
@@ -66,7 +88,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					className={'disable-scrollbar'}
 					style={{ width: '100%', overflowX: 'scroll' }}>
 					<div style={{ display: 'inline-flex' }}>
-						{games.map(game => (
+						{games.slice(0, 10).map(game => (
 							<span key={game.game} style={{ width: '13rem', height: '13rem' }}>
 								<Link href={`/games/${game.game}`} passHref>
 									<Image
