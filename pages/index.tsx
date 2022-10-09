@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
 import type { NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -35,32 +35,24 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	const sportsRef = useRef<HTMLDivElement>(null);
 	const countriesRef = useRef<HTMLDivElement>(null);
 
+	const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
+		const element = ref?.current;
+		return setInterval(
+			() =>
+				element?.scrollTo({
+					left: element?.scrollLeft + step,
+				}),
+			100
+		);
+	};
+
 	useEffect(() => {
-		const gamesInterval = setInterval(
-			() =>
-				gamesRef?.current?.scrollTo({
-					left: gamesRef?.current?.scrollLeft + 1,
-				}),
-			100
-		);
+		const gamesInterval = autoscroll(gamesRef, 1);
 		sportsRef?.current?.scrollTo({ left: sportsRef?.current?.scrollWidth });
-		const sportsInterval = setInterval(
-			() =>
-				sportsRef?.current?.scrollTo({
-					left: sportsRef?.current?.scrollLeft - 1,
-				}),
-			100
-		);
-		const countriesInterval = setInterval(
-			() =>
-				countriesRef?.current?.scrollTo({
-					left: countriesRef?.current?.scrollLeft + 1,
-				}),
-			100
-		);
-		return () => (
-			clearInterval(gamesInterval), clearInterval(sportsInterval), clearInterval(countriesInterval)
-		);
+		const sportsInterval = autoscroll(sportsRef, -1);
+		const countriesInterval = autoscroll(countriesRef, 1);
+
+		return () => [gamesInterval, sportsInterval, countriesInterval].forEach(clearInterval);
 	}, []);
 
 	return (
