@@ -41,35 +41,33 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 		const targetElement = step > 0 ? flexWrapper?.firstElementChild : flexWrapper?.lastElementChild;
 		const childWidth = flexWrapper?.firstElementChild?.clientWidth ?? 0;
 
-		const observerOptions = {
+		const headObserverOptions = {
 			root: scrollElement,
-			rootMargin: '0px',
+			rootMargin: `${childWidth}px`,
 			threshold: 0.0,
 		};
 
-		const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) =>
-			entries.forEach(entry => {
-				if (!entry.isIntersecting) {
-					if (step > 0) {
-						flexWrapper?.appendChild(entry.target);
-						scrollElement?.scrollTo({
-							left: scrollElement.scrollLeft - childWidth,
-						});
-						observer.unobserve(entry.target);
-						flexWrapper?.firstElementChild && observer.observe(flexWrapper?.firstElementChild);
-					} else if (step < 0) {
-						flexWrapper?.firstChild &&
-							flexWrapper.insertBefore(flexWrapper?.firstChild, entry.target);
-						scrollElement?.scrollTo({
-							left: scrollElement.scrollLeft + childWidth,
-						});
-						flexWrapper?.lastElementChild && observer.observe(flexWrapper?.lastElementChild);
-					}
-				}
-			});
+		const positiveLoop = (
+			entries: IntersectionObserverEntry[],
+			headObserver: IntersectionObserver
+		) => {
+			const targetEntry = entries.find(entry => !entry.isIntersecting);
+			if (!targetEntry) return;
+			if (step > 0) {
+				flexWrapper?.appendChild(targetEntry.target);
+				scrollElement?.scrollTo({ left: childWidth });
+				flexWrapper?.firstElementChild && headObserver.observe(flexWrapper.firstElementChild);
+			} else if (step < 0) {
+				flexWrapper?.firstChild &&
+					flexWrapper.insertBefore(flexWrapper.firstChild, targetEntry.target);
+				scrollElement?.scrollTo({ left: scrollElement.scrollWidth - childWidth });
+				flexWrapper?.lastElementChild && headObserver.observe(flexWrapper.lastElementChild);
+			}
+			headObserver.unobserve(targetEntry.target);
+		};
 
-		const observer = new IntersectionObserver(callback, observerOptions);
-		targetElement && observer.observe(targetElement);
+		const headObserver = new IntersectionObserver(positiveLoop, headObserverOptions);
+		targetElement && headObserver.observe(targetElement);
 
 		return setInterval(() => {
 			scrollElement?.scrollTo({
@@ -80,7 +78,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
 	useEffect(() => {
 		const gamesInterval = autoscroll(gamesRef, 1);
-		sportsRef?.current?.scrollTo({ left: sportsRef?.current?.scrollWidth });
+		sportsRef?.current?.scrollTo({ left: sportsRef.current.scrollWidth });
 		// const sportsInterval = autoscroll(sportsRef, -1);
 		// const countriesInterval = autoscroll(countriesRef, 1);
 
@@ -99,7 +97,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					className={'disable-scrollbar'}
 					style={{ width: '100%', overflowX: 'scroll' }}>
 					<div style={{ display: 'inline-flex' }}>
-						{games.slice(0, 10).map(game => (
+						{games.slice(0, 11).map(game => (
 							<span key={game.game} style={{ width: '13rem', height: '13rem' }}>
 								<Link href={`/games/${game.game}`} passHref>
 									<Image
