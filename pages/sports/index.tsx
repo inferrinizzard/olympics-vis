@@ -21,7 +21,12 @@ export const getStaticProps: GetStaticProps<SportsProps> = async () => {
 const Sports: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ sports }) => {
 	return (
 		<>
-			<main style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr', gap: '1rem' }}>
+			<main
+				style={{
+					display: 'grid',
+					gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+					gap: '1rem',
+				}}>
 				{sports.map(({ sport, icon, name }) => (
 					<div key={sport}>
 						<Link passHref href={`/sports/${sport}`}>

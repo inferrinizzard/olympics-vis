@@ -34,7 +34,12 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 	return (
 		<>
 			<div>Games</div>
-			<main style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr', gap: '1rem' }}>
+			<main
+				style={{
+					display: 'grid',
+					gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+					gap: '1rem',
+				}}>
 				{games.map(({ game, emblem }) => (
 					<div key={game}>
 						<Link passHref href={`/games/${game}`}>
