@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 
 import { NextLink } from '@mantine/next';
-import { Breadcrumbs, Header as MantineHeader } from '@mantine/core';
+import { Breadcrumbs, Header as MantineHeader, TextInput } from '@mantine/core';
 
-import { Home } from 'tabler-icons-react';
+import { Home, Search } from 'tabler-icons-react';
 
 const Header = () => {
 	const router = useRouter();
@@ -20,17 +20,21 @@ const Header = () => {
 		).crumbs;
 
 	return (
-		<MantineHeader height="5vh" p="xs">
-			<Breadcrumbs>
-				<NextLink href="/">
-					<Home style={{ cursor: 'pointer' }} />
-				</NextLink>
-				{pathBreadCrumbs.map(({ title, href }) => (
-					<NextLink key={href} href={href}>
-						{title.replace(/^[/]/, '')}
+		<MantineHeader height="5vh" p="xs" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+			<span>
+				<Breadcrumbs>
+					<NextLink href="/">
+						<Home style={{ cursor: 'pointer' }} />
 					</NextLink>
-				))}
-			</Breadcrumbs>
+					{pathBreadCrumbs.map(({ title, href }) => (
+						<NextLink key={href} href={href}>
+							{title.replace(/^[/]/, '')}
+						</NextLink>
+					))}
+				</Breadcrumbs>
+			</span>
+
+				<TextInput variant="filled" placeholder="Search" icon={<Search />} radius="md" />
 		</MantineHeader>
 	);
 };
