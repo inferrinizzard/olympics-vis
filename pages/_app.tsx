@@ -1,9 +1,18 @@
 import { useState } from 'react';
 import type { AppProps } from 'next/app';
-import { AppShell, ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
+
+import {
+	AppShell,
+	ColorSchemeProvider,
+	MantineProvider,
+	type ColorScheme,
+	type Tuple,
+} from '@mantine/core';
+
+import Header from 'components/layouts/Header';
 
 import '../styles/globals.css';
-import Header from 'components/layouts/Header';
+import { colours } from 'src/constants/colours';
 
 const OlympicsVis = ({
 	Component,
@@ -21,7 +30,14 @@ const OlympicsVis = ({
 	return (
 		<>
 			<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-				<MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+				<MantineProvider
+					theme={{
+						colorScheme,
+						colors: colours as Record<keyof typeof colours, Tuple<string, 10>>,
+						primaryShade: 6,
+					}}
+					withGlobalStyles
+					withNormalizeCSS>
 					<AppShell
 						padding="md"
 						// navbar={<Navbar width={{ base: 300 }} height={500} p="xs">{/* Navbar content */}</Navbar>}
