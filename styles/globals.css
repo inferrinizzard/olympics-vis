@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.disable-scrollbar::-webkit-scrollbar {
+	display: none;
+}
