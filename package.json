@@ -12,9 +12,9 @@
 		"prisma": "yarn prisma:rebuild && yarn prisma:append && prisma generate"
 	},
 	"dependencies": {
-		"@mantine/core": "^4.1.4",
-		"@mantine/hooks": "^4.1.4",
-		"@mantine/next": "^4.1.4",
+		"@mantine/core": "^5.5.5",
+		"@mantine/hooks": "^5.5.5",
+		"@mantine/next": "^5.5.5",
 		"@nivo/bar": "^0.79.1",
 		"@nivo/bump": "^0.79.1",
 		"@nivo/core": "0.78.0",
