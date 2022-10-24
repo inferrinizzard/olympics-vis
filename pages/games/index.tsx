@@ -1,10 +1,9 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
 
 import { Games, PrismaClient } from '@prisma/client';
 
-import { Card, Title, Image } from '@mantine/core';
+import CardLink from 'components/layouts/CardLink';
 
 export interface GamesProps {
 	games: Games[];
@@ -34,33 +33,22 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 	return (
 		<>
 			<div>Games</div>
-			<main
+			<section
 				style={{
 					display: 'grid',
 					gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
 					gap: '1rem',
 				}}>
 				{games.map(({ game, emblem }) => (
-					<div key={game}>
-						<Link passHref href={`/games/${game}`}>
-							<Card sx={{ cursor: 'pointer', height: '20vh' }}>
-								<Title order={2}>{`${gameName(game)}`}</Title>
-								<Image
-									src={emblem}
-									alt={'Olympic emblem for ' + game}
-									fit={'contain'}
-									height={'100%'}
-									styles={() => ({
-										root: { height: '100%' },
-										figure: { height: '100%' },
-										imageWrapper: { height: '100%' },
-									})}
-								/>
-							</Card>
-						</Link>
-					</div>
+					<CardLink
+						key={game}
+						img={emblem}
+						alt={'Olympic emblem for ' + game}
+						href={`/games/${game}`}
+						caption={gameName(game)}
+					/>
 				))}
-			</main>
+			</section>
 		</>
 	);
 };
