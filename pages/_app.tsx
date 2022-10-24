@@ -46,7 +46,8 @@ const OlympicsVis = ({
 							main: {
 								backgroundColor:
 									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-								height: '95vh',
+								marginTop: '5vh',
+								minHeight: '95vh',
 							},
 						})}>
 						<Component {...pageProps} />

@@ -3,6 +3,8 @@ import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 
 import { Games, PrismaClient } from '@prisma/client';
 
+import { Title } from '@mantine/core';
+
 import CardLink from 'components/layouts/CardLink';
 
 export interface GamesProps {
@@ -32,7 +34,7 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 
 	return (
 		<>
-			<div>Games</div>
+			<Title order={1}>{'Games'}</Title>
 			<section
 				style={{
 					display: 'grid',

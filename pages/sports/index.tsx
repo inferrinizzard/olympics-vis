@@ -3,6 +3,8 @@ import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 
 import { PrismaClient, Sport } from '@prisma/client';
 
+import { Title } from '@mantine/core';
+
 import CardLink from 'components/layouts/CardLink';
 
 export interface SportsProps {
@@ -20,6 +22,7 @@ export const getStaticProps: GetStaticProps<SportsProps> = async () => {
 const Sports: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ sports }) => {
 	return (
 		<>
+			<Title order={1}>{'Sports'}</Title>
 			<section
 				style={{
 					display: 'grid',

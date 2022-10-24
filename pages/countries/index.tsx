@@ -60,7 +60,7 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
 	return (
 		<>
-			<div>Countries</div>
+			<Title order={1}>{'Countries'}</Title>
 			<section>
 				<Bar
 					data={Object.values(countryMedals)}
