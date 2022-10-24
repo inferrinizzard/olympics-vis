@@ -66,7 +66,7 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					data={Object.values(countryMedals)}
 					keys={[...new Set(medalTotals.map(({ country }) => country))]}
 					indexBy="game"
-					width={1200}
+					width={1150}
 					height={500}
 					margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
 					valueScale={{ type: 'linear' }}
