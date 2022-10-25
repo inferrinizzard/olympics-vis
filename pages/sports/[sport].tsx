@@ -70,12 +70,13 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 	return (
 		<Container fluid sx={{ height: '100%' }}>
 			<Grid
+				p="xs"
 				sx={theme => ({
-					height: '100%',
+					marginTop: 0,
 					backgroundColor: theme.colors.blue[3],
 					borderRadius: '1rem',
 				})}>
-				<Grid.Col>
+				<Grid.Col p={0}>
 					<GridCell>
 						<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
 						<Image

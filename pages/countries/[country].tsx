@@ -94,12 +94,14 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	return (
 		<Container fluid sx={{ height: '100%' }}>
 			<Grid
+				p="xs"
 				sx={theme => ({
+					marginTop: 0,
 					height: '100%',
 					backgroundColor: theme.colors.blue[3],
 					borderRadius: '1rem',
 				})}>
-				<Grid.Col span={4} sx={{ height: '100%' }}>
+				<Grid.Col p={0} span={4} sx={{ height: '100%' }}>
 					<GridCell sx={{ height: '100%' }}>
 						<Title order={1}>{`${country.name} (${country.country})`}</Title>
 						<div style={{ maxHeight: '50%' }}>
@@ -116,7 +118,7 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 						</Box>
 					</GridCell>
 				</Grid.Col>
-				<Grid.Col span={8}>
+				<Grid.Col p={0} span={8}>
 					<GridCell>
 						<Title order={2}>{'Medals'}</Title>
 						<Title order={4}>{'Total'}</Title>

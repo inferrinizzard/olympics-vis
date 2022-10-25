@@ -83,6 +83,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 			<Grid
 				p="xs"
 				sx={theme => ({
+					marginTop: 0,
 					backgroundColor: theme.colors.blue[3],
 					borderRadius: '1rem',
 				})}>
