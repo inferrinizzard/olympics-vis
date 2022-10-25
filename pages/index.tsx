@@ -38,9 +38,10 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
 		const scrollElement = ref?.current;
 		const flexWrapper = scrollElement?.firstElementChild;
-		const targetElement = step > 0 ? flexWrapper?.firstElementChild : flexWrapper?.lastElementChild;
-		const secondElement = flexWrapper?.children[step > 0 ? 1 : flexWrapper.childElementCount - 2];
+		const targetElement = flexWrapper?.firstElementChild;
+		const secondElement = flexWrapper?.children[1];
 		const childWidth = flexWrapper?.firstElementChild?.clientWidth ?? 0;
+		const visibleWrapperWidth = scrollElement?.clientWidth;
 
 		const headObserverOptions = {
 			root: scrollElement,
@@ -54,16 +55,18 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 		) => {
 			const targetEntry = entries.find(entry => !entry.isIntersecting);
 			if (!targetEntry) return;
-			if (step > 0) {
-				flexWrapper?.appendChild(targetEntry.target);
-				scrollElement?.scrollTo({ left: childWidth });
-				flexWrapper?.firstElementChild && headObserver.observe(flexWrapper.firstElementChild);
-			} else if (step < 0) {
-				flexWrapper?.firstChild &&
-					flexWrapper.insertBefore(flexWrapper.firstChild, targetEntry.target);
-				scrollElement?.scrollTo({ left: scrollElement.scrollWidth - childWidth });
-				flexWrapper?.lastElementChild && headObserver.observe(flexWrapper.lastElementChild);
-			}
+
+			// move target to end, fix scroll pos
+			flexWrapper?.appendChild(targetEntry.target);
+			scrollElement?.scrollTo({
+				left:
+					step > 0
+						? childWidth
+						: scrollElement.scrollWidth - childWidth - (visibleWrapperWidth ?? 0),
+			});
+
+			// update observers
+			flexWrapper?.firstElementChild && headObserver.observe(flexWrapper.firstElementChild);
 			headObserver.unobserve(targetEntry.target);
 		};
 
