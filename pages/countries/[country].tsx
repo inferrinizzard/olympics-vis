@@ -17,6 +17,8 @@ import { ResponsiveBar } from '@nivo/bar';
 import GridCell from 'components/grid/GridCell';
 import CountryOverview from 'components/pages/countries/CountryOverview';
 import CountryMedalTotals from 'components/pages/countries/CountryMedalTotals';
+import CountryGamesMedalsChart from 'components/pages/countries/CountryGamesMedalsChart';
+import CountrySportsMedalsChart from 'components/pages/countries/CountrySportsMedalsChart';
 
 export interface OlympicNOCProps {
 	country: Country;
@@ -98,50 +100,11 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				</Grid.Col>
 				<Grid.Col span={8}>
 					<CountryMedalTotals {...medalTotals} />
-					<GridCell>
-						<Title order={2}>{'Medals per Sport'}</Title>
-						<div style={{ width: '100%', height: '30vh' }}>
-							<ResponsiveBar
-								data={countrySportsMedals}
-								keys={['bronze', 'silver', 'gold']}
-								indexBy="sport"
-								margin={{ top: 20, bottom: 50, left: 30 }}
-								valueScale={{ type: 'linear' }}
-								indexScale={{ type: 'band' }}
-								colors={{ scheme: 'nivo' }}
-								axisBottom={{
-									tickSize: 5,
-									tickPadding: 5,
-									tickRotation: 45,
-									legend: '',
-									legendPosition: 'middle',
-									legendOffset: 32,
-								}}
-							/>
-						</div>
-					</GridCell>
-					<GridCell>
-						<Title order={2}>{'Medals per Game'}</Title>
-						<div style={{ width: '100%', height: '30vh' }}>
-							<ResponsiveBar
-								data={countryMedals}
-								keys={['bronze', 'silver', 'gold']}
-								indexBy="game"
-								margin={{ top: 20, bottom: 50, left: 30 }}
-								valueScale={{ type: 'linear' }}
-								indexScale={{ type: 'band' }}
-								colors={{ scheme: 'nivo' }}
-								axisBottom={{
-									tickSize: 5,
-									tickPadding: 5,
-									tickRotation: 45,
-									legend: '',
-									legendPosition: 'middle',
-									legendOffset: 32,
-								}}
-							/>
-						</div>
-					</GridCell>
+					<CountrySportsMedalsChart
+						data={countrySportsMedals}
+						keys={['bronze', 'silver', 'gold']}
+					/>
+					<CountryGamesMedalsChart data={countryMedals} keys={['bronze', 'silver', 'gold']} />
 				</Grid.Col>
 			</Grid>
 		</Container>
