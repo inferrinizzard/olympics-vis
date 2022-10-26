@@ -21,10 +21,10 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({ country }) => {
 					fit={'scale-down' as 'contain'}
 				/>
 			</div>
-			<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
-				<StatCard icon={<Calendar />} title={'First Games'} text={''} />
-				<StatCard icon={<Hash />} title={'Total Medals'} text={''} />
-				<StatCard icon={<Hash />} title={'Games Hosted'} text={''} />
+			<Box p="xs" sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
+				<StatCard Icon={Calendar} title={'First Games'} text={''} />
+				<StatCard Icon={Hash} title={'Total Medals'} text={''} />
+				<StatCard Icon={Hash} title={'Games Hosted'} text={''} />
 			</Box>
 		</GridCell>
 	);
