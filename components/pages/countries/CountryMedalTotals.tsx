@@ -12,7 +12,7 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({ summer, winter 
 	const allBronzeMedals = summer.bronze + winter.bronze;
 
 	return (
-		<GridCell>
+		<GridCell colour="olympic-blue">
 			<Title order={2}>{'Medals'}</Title>
 			<Title order={4}>{'Total'}</Title>
 			<div style={{ display: 'flex', columnGap: '1rem' }}>

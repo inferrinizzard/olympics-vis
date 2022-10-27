@@ -90,17 +90,22 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	return (
 		<Container fluid sx={{ height: '100%' }}>
 			<Grid
-				p="xs"
 				sx={theme => ({
 					marginTop: 0,
 					height: '100%',
-					backgroundColor: theme.colors.blue[3],
 					borderRadius: '1rem',
 				})}>
-				<Grid.Col p={0} span={4} sx={{ height: '100%' }}>
+				<Grid.Col p={'0.25rem'} span={4} sx={{ height: '100%' }}>
 					<CountryOverview country={country} />
 				</Grid.Col>
-				<Grid.Col p={0} span={8}>
+				<Grid.Col
+					span={8}
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						rowGap: '1rem',
+						padding: '0.25rem 0.25rem 0.25rem 0.75rem',
+					}}>
 					<CountryMedalTotals {...medalTotals} />
 					<CountrySportsMedalsChart
 						data={countrySportsMedals}

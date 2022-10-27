@@ -12,7 +12,7 @@ interface CountryOverviewProps {
 
 const CountryOverview: React.FC<CountryOverviewProps> = ({ country }) => {
 	return (
-		<GridCell sx={{ height: '100%' }}>
+		<GridCell colour="olympic-blue" sx={{ height: '100%' }}>
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
 			<div style={{ maxHeight: '50%' }}>
 				<Image

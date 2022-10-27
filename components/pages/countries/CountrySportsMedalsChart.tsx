@@ -11,7 +11,7 @@ interface CountrySportsMedalsChartProps {
 
 const CountrySportsMedalsChart: React.FC<CountrySportsMedalsChartProps> = ({ data, keys }) => {
 	return (
-		<GridCell>
+		<GridCell colour="olympic-blue">
 			<Title order={2}>{'Medals per Sport'}</Title>
 			<div style={{ width: '100%', height: '30vh' }}>
 				<ResponsiveBar
