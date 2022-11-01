@@ -1,7 +1,7 @@
 import { Country } from '@prisma/client';
 
 import { Box, Image, Title } from '@mantine/core';
-import { Calendar, Hash } from 'tabler-icons-react';
+import { Calendar, Hash, Run } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
@@ -25,6 +25,8 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({ country }) => {
 				<StatCard Icon={Calendar} title={'First Games'} text={''} />
 				<StatCard Icon={Hash} title={'Total Medals'} text={''} />
 				<StatCard Icon={Hash} title={'Games Hosted'} text={''} />
+				<StatCard Icon={Calendar} title={'Best Games'} text={''} />
+				<StatCard Icon={Run} title={'Best Sport'} text={''} />
 			</Box>
 		</GridCell>
 	);
