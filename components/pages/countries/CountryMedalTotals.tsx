@@ -1,4 +1,4 @@
-import { Title } from '@mantine/core';
+import { Box, Image, Title, Text } from '@mantine/core';
 
 import { OlympicNOCProps } from 'pages/countries/[country]';
 import GridCell from 'components/grid/GridCell';
@@ -12,43 +12,103 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({ summer, winter 
 	const allBronzeMedals = summer.bronze + winter.bronze;
 
 	return (
-		<GridCell colour="olympic-blue">
+		<GridCell colour="olympic-blue" variant="outline">
 			<Title order={2}>{'Medals'}</Title>
-			<Title order={4}>{'Total'}</Title>
-			<div style={{ display: 'flex', columnGap: '1rem' }}>
-				<Title order={6}>{'Total'}</Title>
-				<div>{allGoldMedals + allSilverMedals + allBronzeMedals}</div>
-			</div>
-			<div style={{ display: 'flex', columnGap: '1rem' }}>
-				<Title order={6}>{'Split'}</Title>
-				<div>{allGoldMedals}</div>
-				<div>{allSilverMedals}</div>
-				<div>{allBronzeMedals}</div>
-			</div>
-
-			<Title order={4}>{'Summer'}</Title>
-			<div style={{ display: 'flex', columnGap: '1rem' }}>
-				<Title order={6}>{'Total'}</Title>
-				<div>{summer.gold + summer.silver + summer.bronze}</div>
-			</div>
-			<div style={{ display: 'flex', columnGap: '1rem' }}>
-				<Title order={6}>{'Split'}</Title>
-				<div>{summer.gold}</div>
-				<div>{summer.silver}</div>
-				<div>{summer.bronze}</div>
-			</div>
-
-			<Title order={4}>{'Winter'}</Title>
-			<div style={{ display: 'flex', columnGap: '1rem' }}>
-				<Title order={6}>{'Total'}</Title>
-				<div>{winter.gold + winter.silver + winter.bronze}</div>
-			</div>
-			<div style={{ display: 'flex', columnGap: '1rem' }}>
-				<Title order={6}>{'Split'}</Title>
-				<div>{winter.gold}</div>
-				<div>{winter.silver}</div>
-				<div>{winter.bronze}</div>
-			</div>
+			<Box sx={{ display: 'flex', columnGap: '1rem', justifyContent: 'space-evenly' }}>
+				<Box sx={{ flexGrow: 1 }}>
+					<Title order={4}>{'Summer'}</Title>
+					<Box
+						sx={{
+							display: 'grid',
+							gridTemplateColumns: '[gold] 1fr [silver] 1fr [bronze] 1fr',
+							gridTemplateRows: '[medals] 1fr [counts] 1fr',
+						}}>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg"
+							alt="gold medal icon"
+						/>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg"
+							alt="silver medal icon"
+						/>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg"
+							alt="bronze medal icon"
+						/>
+						<Title order={5}>{summer.gold}</Title>
+						<Text>{summer.silver}</Text>
+						<Text>{summer.bronze}</Text>
+					</Box>
+				</Box>
+				<Box sx={{ flexGrow: 1 }}>
+					<Title order={4}>{'Winter'}</Title>
+					<Box
+						sx={{
+							display: 'grid',
+							gridTemplateColumns: '[gold] 1fr [silver] 1fr [bronze] 1fr',
+							gridTemplateRows: '[medals] 1fr [counts] 1fr',
+						}}>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg"
+							alt="gold medal icon"
+						/>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg"
+							alt="silver medal icon"
+						/>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg"
+							alt="bronze medal icon"
+						/>
+						<Text>{winter.gold}</Text>
+						<Text>{winter.silver}</Text>
+						<Text>{winter.bronze}</Text>
+					</Box>
+				</Box>
+				<Box sx={{ flexGrow: 1 }}>
+					<Title order={4}>{'Total'}</Title>
+					<Box
+						sx={{
+							display: 'grid',
+							gridTemplateColumns: '[gold] 1fr [silver] 1fr [bronze] 1fr',
+							gridTemplateRows: '[medals] 1fr [counts] 1fr',
+						}}>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg"
+							alt="gold medal icon"
+						/>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg"
+							alt="silver medal icon"
+						/>
+						<Image
+							height={'3rem'}
+							width={'3rem'}
+							src="https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg"
+							alt="bronze medal icon"
+						/>
+						<Text>{allGoldMedals}</Text>
+						<Text>{allSilverMedals}</Text>
+						<Text>{allBronzeMedals}</Text>
+					</Box>
+				</Box>
+			</Box>
 		</GridCell>
 	);
 };
