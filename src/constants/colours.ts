@@ -7,6 +7,22 @@ const c1 = {
 	bronze: ['#AE9456'],
 };
 
+export const rawColours = Object.freeze({
+	blue: '#016EB7',
+	red: '#E52323',
+	yellow: '#F4AB01',
+	green: '#00973F',
+} as const);
+
+export const mappedColours: Readonly<Record<string, keyof typeof rawColours>> = Object.freeze({
+	countries: 'blue',
+	sports: 'red',
+	yellow: 'yellow',
+	games: 'green',
+} as const);
+
+const colourKeys = ['olympic-blue', 'olympic-red', 'olympic-yellow', 'olympic-green'] as const;
+
 export const colours = {
 	'olympic-blue': [
 		'#95B0C1',
@@ -69,5 +85,3 @@ export const colours = {
 		'#1E3326',
 	],
 };
-
-export {};

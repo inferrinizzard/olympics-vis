@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 
 import {
 	AppShell,
@@ -12,7 +13,7 @@ import {
 import Header from 'components/layouts/Header';
 
 import '../styles/globals.css';
-import { colours } from 'src/constants/colours';
+import { colours, mappedColours, rawColours } from 'src/constants/colours';
 
 const OlympicsVis = ({
 	Component,
@@ -26,6 +27,9 @@ const OlympicsVis = ({
 		setColorScheme(nextColorScheme);
 		// setCookies('mantine-color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
 	};
+
+	const { route } = useRouter();
+	const colourKey = route.split('/')[1];
 
 	return (
 		<>
@@ -44,7 +48,11 @@ const OlympicsVis = ({
 						styles={theme => ({
 							main: {
 								backgroundColor:
-									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+									colourKey in mappedColours
+										? rawColours[mappedColours[colourKey]]
+										: theme.colorScheme === 'dark'
+										? theme.colors.dark[8]
+										: theme.colors.gray[0],
 								minHeight: '95vh',
 							},
 						})}>

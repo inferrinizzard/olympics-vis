@@ -12,7 +12,7 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({ summer, winter 
 	const allBronzeMedals = summer.bronze + winter.bronze;
 
 	return (
-		<GridCell colour="olympic-blue" variant="outline">
+		<GridCell colour="olympic-blue">
 			<Title order={2}>{'Medals'}</Title>
 			<Box sx={{ display: 'flex', columnGap: '1rem', justifyContent: 'space-evenly' }}>
 				<MedalSet title="Summer" {...summer} />
