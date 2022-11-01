@@ -44,15 +44,22 @@ const OlympicsVis = ({
 					withNormalizeCSS>
 					<AppShell
 						padding="md"
-						header={<Header />}
+						header={
+							<Header
+								sx={theme => ({
+									backgroundColor:
+										colourKey in mappedColours
+											? rawColours[mappedColours[colourKey]]
+											: theme.colorScheme === 'dark'
+											? theme.colors.dark[8]
+											: theme.colors.gray[0],
+								})}
+							/>
+						}
 						styles={theme => ({
 							main: {
 								backgroundColor:
-									colourKey in mappedColours
-										? rawColours[mappedColours[colourKey]]
-										: theme.colorScheme === 'dark'
-										? theme.colors.dark[8]
-										: theme.colors.gray[0],
+									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[2],
 								minHeight: '95vh',
 							},
 						})}>
