@@ -15,101 +15,46 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({ summer, winter 
 		<GridCell colour="olympic-blue" variant="outline">
 			<Title order={2}>{'Medals'}</Title>
 			<Box sx={{ display: 'flex', columnGap: '1rem', justifyContent: 'space-evenly' }}>
-				<Box sx={{ flexGrow: 1 }}>
-					<Title order={4}>{'Summer'}</Title>
-					<Box
-						sx={{
-							display: 'grid',
-							gridTemplateColumns: '[gold] 1fr [silver] 1fr [bronze] 1fr',
-							gridTemplateRows: '[medals] 1fr [counts] 1fr',
-						}}>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg"
-							alt="gold medal icon"
-						/>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg"
-							alt="silver medal icon"
-						/>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg"
-							alt="bronze medal icon"
-						/>
-						<Title order={5}>{summer.gold}</Title>
-						<Text>{summer.silver}</Text>
-						<Text>{summer.bronze}</Text>
-					</Box>
-				</Box>
-				<Box sx={{ flexGrow: 1 }}>
-					<Title order={4}>{'Winter'}</Title>
-					<Box
-						sx={{
-							display: 'grid',
-							gridTemplateColumns: '[gold] 1fr [silver] 1fr [bronze] 1fr',
-							gridTemplateRows: '[medals] 1fr [counts] 1fr',
-						}}>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg"
-							alt="gold medal icon"
-						/>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg"
-							alt="silver medal icon"
-						/>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg"
-							alt="bronze medal icon"
-						/>
-						<Text>{winter.gold}</Text>
-						<Text>{winter.silver}</Text>
-						<Text>{winter.bronze}</Text>
-					</Box>
-				</Box>
-				<Box sx={{ flexGrow: 1 }}>
-					<Title order={4}>{'Total'}</Title>
-					<Box
-						sx={{
-							display: 'grid',
-							gridTemplateColumns: '[gold] 1fr [silver] 1fr [bronze] 1fr',
-							gridTemplateRows: '[medals] 1fr [counts] 1fr',
-						}}>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg"
-							alt="gold medal icon"
-						/>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg"
-							alt="silver medal icon"
-						/>
-						<Image
-							height={'3rem'}
-							width={'3rem'}
-							src="https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg"
-							alt="bronze medal icon"
-						/>
-						<Text>{allGoldMedals}</Text>
-						<Text>{allSilverMedals}</Text>
-						<Text>{allBronzeMedals}</Text>
-					</Box>
-				</Box>
+				<MedalSet title="Summer" {...summer} />
+				<MedalSet title="Winter" {...winter} />
+				<MedalSet
+					title="Total"
+					{...{ gold: allGoldMedals, silver: allSilverMedals, bronze: allBronzeMedals }}
+				/>
 			</Box>
 		</GridCell>
+	);
+};
+
+interface MedalSetProps extends Pick<MedalTotals[keyof MedalTotals], 'gold' | 'silver' | 'bronze'> {
+	title: string;
+}
+
+const MedalSet: React.FC<MedalSetProps> = ({ title, gold, silver, bronze }) => {
+	return (
+		<Box sx={{ flexGrow: 1 }}>
+			<Title order={4}>{title}</Title>
+			<Box
+				sx={{
+					display: 'grid',
+					gridTemplateColumns: '[gold] 1fr [silver] 1fr [bronze] 1fr',
+					gridTemplateRows: '[medals] 1fr [counts] 1fr',
+				}}>
+				{[
+					'https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg',
+					'https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg',
+					'https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg',
+				].map(url => {
+					const medalType = url.replace(/^.+[/]/, '');
+					return <Image key={medalType} height="3rem" width="3rem" src={url} alt={medalType} />;
+				})}
+				{[gold, silver, bronze].map(medal => (
+					<Title order={5} key={`${title} ${medal}`}>
+						{medal}
+					</Title>
+				))}
+			</Box>
+		</Box>
 	);
 };
 
