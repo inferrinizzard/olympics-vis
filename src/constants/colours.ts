@@ -1,3 +1,5 @@
+import { type Tuple } from '@mantine/core';
+
 const c1 = {
 	blue: ['#016EB7', '#0175C0', '#0186DF'],
 	red: ['#DB1A1A', '#E52323', '#E73636'],
@@ -7,67 +9,52 @@ const c1 = {
 	bronze: ['#AE9456'],
 };
 
-export const colours = {
-	'olympic-blue': [
-		'#95B0C1',
-		'#7BA2BC',
-		'#5F97BB',
-		'#408EC1',
-		'#2B85BF',
-		'#167CBE',
-		'#0175C0',
-		'#12669C',
-		'#1D5980',
-		'#234E6A',
-		'#264559',
-		'#273D4B',
-		'#263641',
-	],
-	'olympic-red': [
-		'#EEE5E5',
-		'#E0CACA',
-		'#D5ADAD',
-		'#D09090',
-		'#D07070',
-		'#D64C4C',
-		'#E52323',
-		'#C22C2C',
-		'#A13535',
-		'#873939',
-		'#733B3B',
-		'#623A3A',
-		'#553838',
-	],
-	'olympic-yellow': [
-		'#E7E2D6',
-		'#DBD1B9',
-		'#D5C39B',
-		'#D4B97A',
-		'#D9B256',
-		'#E7B02D',
-		'#FAB001',
-		'#CB9517',
-		'#A68025',
-		'#8A6E2D',
-		'#746031',
-		'#625432',
-		'#544A31',
-	],
-	'olympic-green': [
-		'#66A680',
-		'#52A173',
-		'#419C67',
-		'#31985C',
-		'#219652',
-		'#119548',
-		'#00973F',
-		'#0E7A3B',
-		'#166437',
-		'#1B5332',
-		'#1D462E',
-		'#1E3B2A',
-		'#1E3326',
-	],
-};
+const colourKeys = ['blue', 'red', 'yellow', 'green', 'black'] as const;
 
-export {};
+interface ColourSet {
+	light: string;
+	primary: string;
+	dark: string;
+}
+
+const adobe: Record<typeof colourKeys[number], ColourSet> = Object.freeze({
+	blue: {
+		light: '#3D8EC3',
+		primary: '#016EB7',
+		dark: '#012238',
+	},
+	yellow: {
+		light: '#fff',
+		primary: '#ffd801',
+		dark: '#403600',
+	},
+	green: {
+		light: '#fff',
+		primary: '#00993f',
+		dark: '#005925',
+	},
+	red: {
+		light: '#fff',
+		primary: '#ca2e2f',
+		dark: '#4A1111',
+	},
+	black: {
+		light: '#fff',
+		primary: '#353535',
+		dark: '#000000',
+	},
+} as const);
+
+export const colours = Object.entries(adobe).reduce(
+	(acc, [key, colours]) => ({
+		...acc,
+		[key]: [...Object.values(colours), ...new Array(10).fill('#fff')].slice(0, 10),
+	}),
+	{} as Record<typeof colourKeys[number], Tuple<string, 10>>
+);
+
+export const accentColourMapping: Record<string, string> = {
+	countries: 'blue',
+	sports: 'red',
+	games: 'green',
+};

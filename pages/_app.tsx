@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 
-import {
-	AppShell,
-	ColorSchemeProvider,
-	MantineProvider,
-	type ColorScheme,
-	type Tuple,
-} from '@mantine/core';
+import { AppShell, ColorSchemeProvider, MantineProvider, type ColorScheme } from '@mantine/core';
 
 import Header from 'components/layouts/Header';
 
 import '../styles/globals.css';
-import { colours } from 'src/constants/colours';
+import { colours as colors, accentColourMapping } from 'src/constants/colours';
 
 const OlympicsVis = ({
 	Component,
@@ -27,24 +22,29 @@ const OlympicsVis = ({
 		// setCookies('mantine-color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
 	};
 
+	const { route } = useRouter();
+	const colourKey = route.split('/')[1];
+
 	return (
 		<>
 			<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
 				<MantineProvider
-					theme={{
-						colorScheme,
-						colors: colours as Record<keyof typeof colours, Tuple<string, 10>>,
-						primaryShade: 6,
-					}}
+					theme={{ colorScheme, colors, primaryShade: 1 }}
 					withGlobalStyles
 					withNormalizeCSS>
 					<AppShell
 						padding="md"
-						header={<Header />}
+						header={
+							<Header
+								sx={theme => ({
+									backgroundColor: theme.colors[accentColourMapping[colourKey]][1],
+								})}
+							/>
+						}
 						styles={theme => ({
 							main: {
 								backgroundColor:
-									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[2],
 								minHeight: '95vh',
 							},
 						})}>
