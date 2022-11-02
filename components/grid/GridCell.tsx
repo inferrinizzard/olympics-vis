@@ -1,10 +1,11 @@
 import { Paper, type ButtonProps, type PaperProps, type Sx } from '@mantine/core';
 
-interface GridCellProps {
+interface GridCellProps extends PaperProps {
 	colour: string;
+	sx?: Sx;
 }
 
-const GridCell: React.FC<GridCellProps & PaperProps & Pick<ButtonProps, 'variant'>> = ({
+const GridCell: React.FC<GridCellProps & Pick<ButtonProps, 'variant'>> = ({
 	children,
 	variant = 'filled',
 	colour,
@@ -14,6 +15,7 @@ const GridCell: React.FC<GridCellProps & PaperProps & Pick<ButtonProps, 'variant
 	return (
 		<Paper
 			p="sm"
+			shadow="md"
 			sx={theme => ({
 				accentColor: 'white',
 				borderRadius: '1rem',
@@ -25,7 +27,7 @@ const GridCell: React.FC<GridCellProps & PaperProps & Pick<ButtonProps, 'variant
 					: {
 							backgroundColor: colour in theme.colors ? theme.colors[colour][5] : colour,
 					  }),
-				...(sx as Sx),
+				...(sx instanceof Function ? sx(theme) : sx),
 			})}
 			{...props}>
 			{children}
