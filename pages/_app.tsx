@@ -2,18 +2,12 @@ import { useState } from 'react';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 
-import {
-	AppShell,
-	ColorSchemeProvider,
-	MantineProvider,
-	type ColorScheme,
-	type Tuple,
-} from '@mantine/core';
+import { AppShell, ColorSchemeProvider, MantineProvider, type ColorScheme } from '@mantine/core';
 
 import Header from 'components/layouts/Header';
 
 import '../styles/globals.css';
-import { colours, mappedColours, rawColours } from 'src/constants/colours';
+import { colours as colors, accentColourMapping } from 'src/constants/colours';
 
 const OlympicsVis = ({
 	Component,
@@ -35,11 +29,7 @@ const OlympicsVis = ({
 		<>
 			<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
 				<MantineProvider
-					theme={{
-						colorScheme,
-						colors: colours as Record<keyof typeof colours, Tuple<string, 10>>,
-						primaryShade: 6,
-					}}
+					theme={{ colorScheme, colors, primaryShade: 1 }}
 					withGlobalStyles
 					withNormalizeCSS>
 					<AppShell
@@ -47,12 +37,7 @@ const OlympicsVis = ({
 						header={
 							<Header
 								sx={theme => ({
-									backgroundColor:
-										colourKey in mappedColours
-											? rawColours[mappedColours[colourKey]]
-											: theme.colorScheme === 'dark'
-											? theme.colors.dark[8]
-											: theme.colors.gray[0],
+									backgroundColor: theme.colors[accentColourMapping[colourKey]][1],
 								})}
 							/>
 						}

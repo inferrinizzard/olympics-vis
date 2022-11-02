@@ -13,11 +13,11 @@ interface CountryOverviewProps {
 const CountryOverview: React.FC<CountryOverviewProps> = ({ country }) => {
 	return (
 		<GridCell
-			colour="olympic-blue"
+			colour="blue"
 			sx={theme => ({
 				height: '100%',
-				backgroundColor: theme.colors['olympic-blue'][1],
-				color: theme.colors['olympic-blue'][2],
+				backgroundColor: theme.colors.blue[1],
+				color: theme.colors.blue[2],
 			})}>
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
 			<div style={{ maxHeight: '50%' }}>
