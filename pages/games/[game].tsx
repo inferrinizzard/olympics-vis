@@ -20,6 +20,7 @@ import GamesOverview from 'components/pages/games/GamesOverview';
 
 import GridCell from 'components/grid/GridCell';
 import BackButton from 'components/layouts/BackButton';
+import GamesMedalsTable from 'components/pages/games/GamesMedalsTable';
 
 export interface OlympicGameSeasonProps {
 	game: Games;
@@ -90,41 +91,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 					<GamesOverview game={game} />
 				</Grid.Col>
 				<Grid.Col span={4}>
-					<GridCell colour="green">
-						<Title order={2} p="xs">
-							{'Medals Top 10'}
-						</Title>
-						<Table p="xs">
-							<tbody>
-								<tr>
-									<td>Country</td>
-									<td>Gold</td>
-									<td>Silver</td>
-									<td>Bronze</td>
-									<td>Total</td>
-								</tr>
-								{Object.values(countryMedals)
-									.slice(0, 10)
-									.map(({ country, gold, silver, bronze, country_detail }) => (
-										<tr key={country}>
-											<td>
-												<Image
-													src={country_detail.flag}
-													alt={country}
-													width={30}
-													sx={{ display: 'inline-block' }}
-												/>
-												<span>{country}</span>
-											</td>
-											<td>{gold}</td>
-											<td>{silver}</td>
-											<td>{bronze}</td>
-											<td>{gold + silver + bronze}</td>
-										</tr>
-									))}
-							</tbody>
-						</Table>
-					</GridCell>
+					<GamesMedalsTable countryMedals={countryMedals} />
 				</Grid.Col>
 				<Grid.Col span={4}>
 					<GridCell colour="green">
