@@ -21,6 +21,7 @@ import GamesOverview from 'components/pages/games/GamesOverview';
 import GridCell from 'components/grid/GridCell';
 import BackButton from 'components/layouts/BackButton';
 import GamesMedalsTable from 'components/pages/games/GamesMedalsTable';
+import GamesSports from 'components/pages/games/GamesSports';
 
 export interface OlympicGameSeasonProps {
 	game: Games;
@@ -94,23 +95,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 					<GamesMedalsTable countryMedals={countryMedals} />
 				</Grid.Col>
 				<Grid.Col span={4}>
-					<GridCell colour="green">
-						<Title order={2} m="sm">
-							{'Sports'}
-						</Title>
-						<Container
-							sx={{
-								display: 'grid',
-								gridTemplateColumns: '1fr 1fr 1fr',
-								gridTemplateRows: '1fr 1fr 1fr',
-							}}>
-							{sportEvents.slice(0, 8).map(sport => (
-								<div key={sport.sport}>
-									<h5>{sport.sport}</h5>
-								</div>
-							))}
-						</Container>
-					</GridCell>
+					<GamesSports sportEvents={sportEvents} />
 				</Grid.Col>
 				<Grid.Col span={8}>
 					<GridCell colour="green">
