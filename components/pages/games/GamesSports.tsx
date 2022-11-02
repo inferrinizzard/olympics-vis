@@ -1,6 +1,6 @@
 import { Container, Title } from '@mantine/core';
 
-import { OlympicGameSeasonProps } from 'pages/games/[game]';
+import { type OlympicGameSeasonProps } from 'pages/games/[game]';
 import GridCell from 'components/grid/GridCell';
 
 interface GamesSportsProps {

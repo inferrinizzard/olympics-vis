@@ -10,18 +10,13 @@ import {
 	CountryAthletes,
 } from '@prisma/client';
 
-import worldCountries from 'resources/countries.min.geo.json';
-import nocIsoLookup from 'resources/geo_noc_map.json';
-import { ResponsiveChoropleth } from '@nivo/geo';
-
-import { Container, Grid, Image, Title, Table } from '@mantine/core';
+import { Container, Grid } from '@mantine/core';
 
 import GamesOverview from 'components/pages/games/GamesOverview';
-
-import GridCell from 'components/grid/GridCell';
-import BackButton from 'components/layouts/BackButton';
 import GamesMedalsTable from 'components/pages/games/GamesMedalsTable';
 import GamesSports from 'components/pages/games/GamesSports';
+import GamesChoropleth from 'components/pages/games/GamesChoropleth';
+import BackButton from 'components/layouts/BackButton';
 
 export interface OlympicGameSeasonProps {
 	game: Games;
@@ -72,12 +67,6 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	sportEvents,
 	countryAthletes: { country_athletes: countryAthletes },
 }) => {
-	const countryData = Object.entries(countryAthletes).map(([id, value]) => ({
-		id:
-			(nocIsoLookup[id as keyof typeof nocIsoLookup] as { name: string; iso?: string })?.iso ?? id,
-		value,
-	}));
-
 	return (
 		<Container fluid>
 			<BackButton />
@@ -98,61 +87,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 					<GamesSports sportEvents={sportEvents} />
 				</Grid.Col>
 				<Grid.Col span={8}>
-					<GridCell colour="green">
-						<Title order={2} m="sm">
-							{'Choropleth'}
-						</Title>
-						<div style={{ width: '100%', height: '40vh' }}>
-							<ResponsiveChoropleth
-								data={countryData}
-								features={worldCountries.features}
-								margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-								colors="nivo"
-								domain={[
-									0,
-									Math.max(
-										...Object.values(
-											countryAthletes as OlympicGameSeasonProps['countryAthletes']['country_athletes']
-										)
-									),
-								]}
-								unknownColor="#666666"
-								label="properties.name"
-								valueFormat=".2s"
-								projectionTranslation={[0.5, 0.5]}
-								projectionRotation={[0, 0, 0]}
-								enableGraticule={true}
-								graticuleLineColor="#dddddd"
-								borderWidth={0.5}
-								borderColor="#152538"
-								legends={[
-									{
-										anchor: 'bottom-left',
-										direction: 'column',
-										justify: true,
-										translateX: 20,
-										translateY: -100,
-										itemsSpacing: 0,
-										itemWidth: 94,
-										itemHeight: 18,
-										itemDirection: 'left-to-right',
-										itemTextColor: '#444444',
-										itemOpacity: 0.85,
-										symbolSize: 18,
-										effects: [
-											{
-												on: 'hover',
-												style: {
-													itemTextColor: '#000000',
-													itemOpacity: 1,
-												},
-											},
-										],
-									},
-								]}
-							/>
-						</div>
-					</GridCell>
+					<GamesChoropleth countryAthletes={countryAthletes} />
 				</Grid.Col>
 			</Grid>
 		</Container>
