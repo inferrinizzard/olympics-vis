@@ -3,15 +3,13 @@ import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'ne
 
 import { PrismaClient, type CountrySportsMedals, type Games, type Sport } from '@prisma/client';
 
-import { Box, Container, Grid, Image, Title } from '@mantine/core';
-
-import { Calendar, Hash, MapPin } from 'tabler-icons-react';
+import { Container, Grid, Title } from '@mantine/core';
 
 import { ResponsiveBar } from '@nivo/bar';
 import { ResponsiveLine } from '@nivo/line';
 
+import SportsOverview from 'components/pages/sports/SportsOverview';
 import GridCell from 'components/grid/GridCell';
-import StatCard from 'components/grid/StatCard';
 import { sortByMedals } from 'pages/utils';
 
 export interface OlympicSportProps {
@@ -76,21 +74,10 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 					backgroundColor: theme.colors.blue[3],
 					borderRadius: '1rem',
 				})}>
+				<Grid.Col>
+					<SportsOverview sport={sport} />
+				</Grid.Col>
 				<Grid.Col p={0}>
-					<GridCell colour="red">
-						<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
-						<Image
-							src={sport.icon}
-							width={100}
-							alt={sport.sport + ' sport icon'}
-							// fit={'scale-down' as 'contain'}
-						/>
-						<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
-							<StatCard Icon={MapPin} title={'Best Country'} text={'Country'} />
-							<StatCard Icon={Calendar} title={'First Games'} text={'games'} />
-							<StatCard Icon={Hash} title={'Number of Events'} text={100} />
-						</Box>
-					</GridCell>
 					<GridCell colour="red">
 						<Title order={2}>{'Number of Events'}</Title>
 						<div style={{ width: '100%', height: '40vh' }}>
