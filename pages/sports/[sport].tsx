@@ -5,12 +5,9 @@ import { PrismaClient, type CountrySportsMedals, type Games, type Sport } from '
 
 import { Container, Grid, Title } from '@mantine/core';
 
-import { ResponsiveBar } from '@nivo/bar';
-
 import SportsOverview from 'components/pages/sports/SportsOverview';
-import GridCell from 'components/grid/GridCell';
-import { sortByMedals } from 'pages/utils';
 import SportsEventsChart from 'components/pages/sports/SportsEventsChart';
+import SportsCountriesChart from 'components/pages/sports/SportsCountriesChart';
 
 export interface OlympicSportProps {
 	sport: Sport;
@@ -56,8 +53,6 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 	numEvents,
 	countrySportsMedals,
 }) => {
-	const leadingCountries = countrySportsMedals.sort(sortByMedals).reverse().slice(0, 10);
-
 	return (
 		<Container fluid sx={{ height: '100%' }}>
 			<Grid
@@ -72,28 +67,9 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 				</Grid.Col>
 				<Grid.Col p={0}>
 					<SportsEventsChart sport={sport} numEvents={numEvents} />
-					<GridCell colour="red">
-						<Title order={2}>{'Leading Countries'}</Title>
-						<div style={{ width: '100%', height: '40vh' }}>
-							<ResponsiveBar
-								data={leadingCountries}
-								keys={['bronze', 'silver', 'gold']}
-								indexBy="country"
-								margin={{ top: 20, bottom: 50, left: 30 }}
-								valueScale={{ type: 'linear' }}
-								indexScale={{ type: 'band' }}
-								colors={{ scheme: 'nivo' }}
-								axisBottom={{
-									tickSize: 5,
-									tickPadding: 5,
-									tickRotation: 45,
-									legend: '',
-									legendPosition: 'middle',
-									legendOffset: 32,
-								}}
-							/>
-						</div>
-					</GridCell>
+				</Grid.Col>
+				<Grid.Col p={0}>
+					<SportsCountriesChart countrySportsMedals={countrySportsMedals} />
 				</Grid.Col>
 			</Grid>
 		</Container>
