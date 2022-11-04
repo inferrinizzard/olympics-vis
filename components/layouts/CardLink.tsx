@@ -23,7 +23,13 @@ const CardLink: React.FC<CardLinkProps> = props => {
 						figure: { height: '100%', aspectRatio: '3 / 2' },
 						imageWrapper: { height: '100%' },
 					}}
-					imageProps={{ style: { height: '100%', objectFit: 'scale-down' } }}
+					imageProps={{
+						style: {
+							height: '100%',
+							objectFit: 'scale-down',
+							...props.imgStyles,
+						},
+					}}
 				/>
 				<Title order={2}>{props.caption}</Title>
 				{props.secondary && <Title order={5}>{props.secondary}</Title>}

@@ -108,6 +108,10 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 								href={`/countries/${country.country}`}
 								caption={country.country}
 								secondary={country.name}
+								imgStyles={{
+									boxShadow:
+										'1px 1px 8px 1px rgba(0, 0, 0, 0.05), -1px -1px 8px 1px rgba(0, 0, 0, 0.05)',
+								}}
 							/>
 						))}
 					</div>
