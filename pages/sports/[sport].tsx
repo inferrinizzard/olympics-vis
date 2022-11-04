@@ -55,20 +55,14 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 }) => {
 	return (
 		<Container fluid sx={{ height: '100%' }}>
-			<Grid
-				p="xs"
-				sx={theme => ({
-					marginTop: 0,
-					backgroundColor: theme.colors.blue[3],
-					borderRadius: '1rem',
-				})}>
+			<Grid sx={{ marginTop: 0 }}>
 				<Grid.Col>
 					<SportsOverview sport={sport} />
 				</Grid.Col>
-				<Grid.Col p={0}>
+				<Grid.Col>
 					<SportsEventsChart sport={sport} numEvents={numEvents} />
 				</Grid.Col>
-				<Grid.Col p={0}>
+				<Grid.Col>
 					<SportsCountriesChart countrySportsMedals={countrySportsMedals} />
 				</Grid.Col>
 			</Grid>

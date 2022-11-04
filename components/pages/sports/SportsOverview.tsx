@@ -12,7 +12,7 @@ interface SportsOverviewProps {
 
 const SportsOverview: React.FC<SportsOverviewProps> = ({ sport }) => {
 	return (
-		<GridCell colour="red">
+		<GridCell colour="red" sx={theme => ({ backgroundColor: theme.colors.red[1] })}>
 			<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
 			<Image
 				src={sport.icon}
