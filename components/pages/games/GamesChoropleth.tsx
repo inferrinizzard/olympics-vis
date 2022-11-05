@@ -19,7 +19,7 @@ const GamesChoropleth: React.FC<GamesChoroplethProps> = ({ countryAthletes }) =>
 	}));
 
 	return (
-		<GridCell colour="green">
+		<GridCell>
 			<Title order={2} m="sm">
 				{'Choropleth'}
 			</Title>

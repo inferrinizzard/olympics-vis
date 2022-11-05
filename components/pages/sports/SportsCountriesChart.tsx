@@ -14,7 +14,7 @@ const SportsCountriesChart: React.FC<SportsCountriesChartProps> = ({ countrySpor
 	const leadingCountries = countrySportsMedals.sort(sortByMedals).reverse().slice(0, 10);
 
 	return (
-		<GridCell colour="red">
+		<GridCell>
 			<Title order={2}>{'Leading Countries'}</Title>
 			<div style={{ width: '100%', height: '40vh' }}>
 				<ResponsiveBar

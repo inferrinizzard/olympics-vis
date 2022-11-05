@@ -13,14 +13,7 @@ interface GamesOverviewProps {
 
 const GamesOverview: React.FC<GamesOverviewProps> = ({ game }) => {
 	return (
-		<GridCell
-			colour="green"
-			sx={theme => ({
-				height: '100%',
-				display: 'flex',
-				justifyContent: 'space-between',
-				backgroundColor: theme.colors.green[1],
-			})}>
+		<GridCell bg="green" h="100%" sx={{ display: 'flex', justifyContent: 'space-between' }}>
 			<Box m="xs" sx={{ width: '75%', display: 'flex', flexDirection: 'column' }}>
 				<Title order={1}>{`${game.year} ${
 					game.season[0].toUpperCase() + game.season.slice(1)

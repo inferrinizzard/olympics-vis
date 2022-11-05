@@ -19,7 +19,7 @@ const SportsEventsChart: React.FC<SportsEventsChartProps> = ({ sport, numEvents 
 	];
 
 	return (
-		<GridCell colour="red">
+		<GridCell>
 			<Title order={2}>{'Number of Events'}</Title>
 			<div style={{ width: '100%', height: '40vh' }}>
 				<ResponsiveLine

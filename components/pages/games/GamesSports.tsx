@@ -9,7 +9,7 @@ interface GamesSportsProps {
 
 const GamesSports: React.FC<GamesSportsProps> = ({ sportEvents }) => {
 	return (
-		<GridCell colour="green" sx={{ height: '100%' }}>
+		<GridCell h="100%">
 			<Title order={2} m="sm">
 				{'Sports'}
 			</Title>

@@ -9,7 +9,7 @@ interface GamesMedalsTableProps {
 
 const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({ countryMedals }) => {
 	return (
-		<GridCell colour="white">
+		<GridCell>
 			<Title order={2} p="xs">
 				{'Medals Top 10'}
 			</Title>
