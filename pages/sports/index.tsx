@@ -3,7 +3,7 @@ import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 
 import { PrismaClient, type Games, type Sport } from '@prisma/client';
 
-import { Title } from '@mantine/core';
+import { Box, Title } from '@mantine/core';
 
 import CardLink from 'components/layouts/CardLink';
 
@@ -71,8 +71,8 @@ const Sports: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 			{Object.entries(groupedSports).map(([group, sportList]) => (
 				<section key={group}>
 					<Title order={2}>{group.slice(0, 1).toUpperCase() + group.slice(1)}</Title>
-					<div
-						style={{
+					<Box
+						sx={{
 							display: 'grid',
 							gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
 							gap: '1rem',
@@ -86,7 +86,7 @@ const Sports: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 								caption={name}
 							/>
 						))}
-					</div>
+					</Box>
 				</section>
 			))}
 		</>

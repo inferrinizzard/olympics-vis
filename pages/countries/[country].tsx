@@ -10,11 +10,8 @@ import {
 	type MedalTotals,
 } from '@prisma/client';
 
-import { Container, Grid, Title } from '@mantine/core';
+import { Container, Grid } from '@mantine/core';
 
-import { ResponsiveBar } from '@nivo/bar';
-
-import GridCell from 'components/grid/GridCell';
 import CountryOverview from 'components/pages/countries/CountryOverview';
 import CountryMedalTotals from 'components/pages/countries/CountryMedalTotals';
 import CountryGamesMedalsChart from 'components/pages/countries/CountryGamesMedalsChart';
@@ -91,13 +88,8 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	return (
 		<Container fluid sx={{ height: '100%' }}>
 			<BackButton />
-			<Grid
-				sx={theme => ({
-					marginTop: 0,
-					height: '100%',
-					borderRadius: '1rem',
-				})}>
-				<Grid.Col p={'0.25rem'} span={4} sx={{ height: '100%' }}>
+			<Grid mt={0} h="100%" sx={{ borderRadius: '1rem' }}>
+				<Grid.Col span={4} p={'0.25rem'} h="100%">
 					<CountryOverview country={country} />
 				</Grid.Col>
 				<Grid.Col

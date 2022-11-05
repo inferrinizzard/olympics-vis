@@ -57,7 +57,7 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 	return (
 		<Container fluid sx={{ height: '100%' }}>
 			<BackButton />
-			<Grid sx={{ marginTop: 0 }}>
+			<Grid mt={0}>
 				<Grid.Col>
 					<SportsOverview sport={sport} />
 				</Grid.Col>

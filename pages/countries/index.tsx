@@ -3,7 +3,7 @@ import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 
 import { Country, Games, MedalTotals, PrismaClient } from '@prisma/client';
 
-import { Title } from '@mantine/core';
+import { Box, Title } from '@mantine/core';
 
 import { Bar } from '@nivo/bar';
 
@@ -94,8 +94,8 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 			{Object.entries(NOCs).map(([nocType, nocs]) => (
 				<section key={nocType}>
 					<Title order={2}>{`${nocType} NOCs`}</Title>
-					<div
-						style={{
+					<Box
+						sx={{
 							display: 'grid',
 							gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
 							gap: '1rem',
@@ -114,7 +114,7 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 								}}
 							/>
 						))}
-					</div>
+					</Box>
 				</section>
 			))}
 		</>
