@@ -1,6 +1,9 @@
 import Link from 'next/link';
 
 import { Card, CSSObject, Image, Title } from '@mantine/core';
+import { useHover } from '@mantine/hooks';
+
+import useAccentColour from 'src/hooks/useAccentColour';
 
 interface CardLinkProps {
 	href: string;
@@ -21,9 +24,18 @@ const CardLink: React.FC<CardLinkProps> = ({
 	caption,
 	secondary,
 }) => {
+	const { hovered, ref } = useHover();
+	const { primary } = useAccentColour();
+
 	return (
 		<Link passHref href={href}>
-			<Card sx={{ cursor: 'pointer' }}>
+			<Card
+				ref={ref}
+				sx={{
+					cursor: 'pointer',
+					backgroundColor: hovered ? primary : undefined,
+					transform: hovered ? 'scale(1.05)' : undefined,
+				}}>
 				<Image
 					src={img}
 					alt={alt}
