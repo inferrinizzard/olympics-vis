@@ -1,18 +1,14 @@
 import { useState } from 'react';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 
-import {
-	AppShell,
-	ColorSchemeProvider,
-	MantineProvider,
-	type ColorScheme,
-	type Tuple,
-} from '@mantine/core';
+import { AppShell, ColorSchemeProvider, MantineProvider, type ColorScheme } from '@mantine/core';
 
 import Header from 'components/layouts/Header';
 
 import '../styles/globals.css';
-import { colours } from 'src/constants/colours';
+import { colours as colors } from 'src/constants/colours';
+import useAccentColour from 'src/hooks/useAccentColour';
 
 const OlympicsVis = ({
 	Component,
@@ -20,6 +16,7 @@ const OlympicsVis = ({
 	...props
 }: AppProps & { colorScheme: ColorScheme }) => {
 	const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);
+	const { primary } = useAccentColour();
 
 	const toggleColorScheme = (value?: ColorScheme) => {
 		const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');
@@ -31,20 +28,16 @@ const OlympicsVis = ({
 		<>
 			<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
 				<MantineProvider
-					theme={{
-						colorScheme,
-						colors: colours as Record<keyof typeof colours, Tuple<string, 10>>,
-						primaryShade: 6,
-					}}
+					theme={{ colorScheme, colors, primaryShade: 1 }}
 					withGlobalStyles
 					withNormalizeCSS>
 					<AppShell
 						padding="md"
-						header={<Header />}
+						header={<Header bg={primary} />}
 						styles={theme => ({
 							main: {
 								backgroundColor:
-									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[2],
 								minHeight: '95vh',
 							},
 						})}>

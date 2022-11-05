@@ -1,26 +1,22 @@
-import { CSSProperties } from 'react';
-import { Box, Grid, type ColProps } from '@mantine/core';
+import { Paper, type BoxProps, type Sx } from '@mantine/core';
 
-const GridCell: React.FC<ColProps & { boxStyle?: CSSProperties }> = ({
-	children,
-	boxStyle,
-	...props
-}) => {
+interface GridCellProps extends BoxProps {
+	sx?: Sx;
+}
+
+const GridCell: React.FC<GridCellProps> = ({ children, sx, ...props }) => {
 	return (
-		<>
-			<Grid.Col {...props}>
-				<Box
-					p="md"
-					sx={theme => ({
-						...boxStyle,
-						backgroundColor: theme.colors.blue[4],
-						borderRadius: '1rem',
-						height: '100%',
-					})}>
-					{children}
-				</Box>
-			</Grid.Col>
-		</>
+		<Paper
+			p="sm"
+			shadow="md"
+			sx={theme => ({
+				accentColor: 'white',
+				borderRadius: '1rem',
+				...(sx instanceof Function ? sx(theme) : sx),
+			})}
+			{...props}>
+			{children}
+		</Paper>
 	);
 };
 
