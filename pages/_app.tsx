@@ -7,7 +7,8 @@ import { AppShell, ColorSchemeProvider, MantineProvider, type ColorScheme } from
 import Header from 'components/layouts/Header';
 
 import '../styles/globals.css';
-import { colours as colors, accentColourMapping } from 'src/constants/colours';
+import { colours as colors } from 'src/constants/colours';
+import useAccentColour from 'src/hooks/useAccentColour';
 
 const OlympicsVis = ({
 	Component,
@@ -15,15 +16,13 @@ const OlympicsVis = ({
 	...props
 }: AppProps & { colorScheme: ColorScheme }) => {
 	const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);
+	const { primary } = useAccentColour();
 
 	const toggleColorScheme = (value?: ColorScheme) => {
 		const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');
 		setColorScheme(nextColorScheme);
 		// setCookies('mantine-color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
 	};
-
-	const { route } = useRouter();
-	const colourKey = route.split('/')[1];
 
 	return (
 		<>
@@ -34,13 +33,7 @@ const OlympicsVis = ({
 					withNormalizeCSS>
 					<AppShell
 						padding="md"
-						header={
-							<Header
-								sx={theme => ({
-									backgroundColor: theme.colors[accentColourMapping[colourKey]][1],
-								})}
-							/>
-						}
+						header={<Header bg={primary} />}
 						styles={theme => ({
 							main: {
 								backgroundColor:
