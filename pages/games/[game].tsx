@@ -70,13 +70,7 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	return (
 		<Container fluid>
 			<BackButton />
-			<Grid
-				p="xs"
-				sx={theme => ({
-					marginTop: 0,
-					backgroundColor: theme.colors.blue[3],
-					borderRadius: '1rem',
-				})}>
+			<Grid sx={{ marginTop: 0, alignContent: 'stretch' }}>
 				<Grid.Col span={8}>
 					<GamesOverview game={game} />
 				</Grid.Col>

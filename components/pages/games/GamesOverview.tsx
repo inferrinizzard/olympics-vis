@@ -16,6 +16,7 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({ game }) => {
 		<GridCell
 			colour="green"
 			sx={theme => ({
+				height: '100%',
 				display: 'flex',
 				justifyContent: 'space-between',
 				backgroundColor: theme.colors.green[1],
@@ -26,12 +27,12 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({ game }) => {
 				} Olympics`}</Title>
 				<Title order={3}>{game.title}</Title>
 				<Text sx={{ flexGrow: 1 }}>Description goes here</Text>
-				<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
-					<StatCard Icon={BuildingSkyscraper} title={'Host'} text={game.host} />
+				<Box sx={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
 					<StatCard Icon={Calendar} title={'Start Date'} text={game.start_date} />
 					<StatCard Icon={CalendarEvent} title={'End Date'} text={game.end_date} />
 					<StatCard Icon={Run} title={'Total Athletes'} text={game.num_athletes} />
 					<StatCard Icon={Hash} title={'Total Countries'} text={100} />
+					<StatCard Icon={BuildingSkyscraper} title={'Host'} text={game.host} />
 				</Box>
 			</Box>
 			<Box p="sm" sx={{ width: '25%' }}>
