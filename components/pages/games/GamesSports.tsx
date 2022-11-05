@@ -1,4 +1,4 @@
-import { Container, Title } from '@mantine/core';
+import { Box, Container, Title } from '@mantine/core';
 
 import { type OlympicGameSeasonProps } from 'pages/games/[game]';
 import GridCell from 'components/grid/GridCell';
@@ -20,9 +20,9 @@ const GamesSports: React.FC<GamesSportsProps> = ({ sportEvents }) => {
 					gridTemplateRows: '1fr 1fr 1fr',
 				}}>
 				{sportEvents.slice(0, 8).map(sport => (
-					<div key={sport.sport}>
+					<Box key={sport.sport}>
 						<h5>{sport.sport}</h5>
-					</div>
+					</Box>
 				))}
 			</Container>
 		</GridCell>

@@ -14,10 +14,10 @@ interface GamesOverviewProps {
 const GamesOverview: React.FC<GamesOverviewProps> = ({ game }) => {
 	return (
 		<GridCell bg="green" h="100%" sx={{ display: 'flex', justifyContent: 'space-between' }}>
-			<Box m="xs" sx={{ width: '75%', display: 'flex', flexDirection: 'column' }}>
-				<Title order={1}>{`${game.year} ${
-					game.season[0].toUpperCase() + game.season.slice(1)
-				} Olympics`}</Title>
+			<Box m="xs" w="75%" sx={{ display: 'flex', flexDirection: 'column' }}>
+				<Title order={1}>
+					{`${game.year} ${game.season[0].toUpperCase() + game.season.slice(1)} Olympics`}
+				</Title>
 				<Title order={3}>{game.title}</Title>
 				<Text sx={{ flexGrow: 1 }}>Description goes here</Text>
 				<Box sx={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>

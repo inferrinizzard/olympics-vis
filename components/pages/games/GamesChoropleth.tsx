@@ -1,4 +1,4 @@
-import { Title } from '@mantine/core';
+import { Box, Title } from '@mantine/core';
 
 import { ResponsiveChoropleth } from '@nivo/geo';
 import worldCountries from 'resources/countries.min.geo.json';
@@ -23,7 +23,7 @@ const GamesChoropleth: React.FC<GamesChoroplethProps> = ({ countryAthletes }) =>
 			<Title order={2} m="sm">
 				{'Choropleth'}
 			</Title>
-			<div style={{ width: '100%', height: '40vh' }}>
+			<Box h="40vh" w="100%">
 				<ResponsiveChoropleth
 					data={countryData}
 					features={worldCountries.features}
@@ -65,7 +65,7 @@ const GamesChoropleth: React.FC<GamesChoroplethProps> = ({ countryAthletes }) =>
 						},
 					]}
 				/>
-			</div>
+			</Box>
 		</GridCell>
 	);
 };

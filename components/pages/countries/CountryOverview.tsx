@@ -14,13 +14,13 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({ country }) => {
 	return (
 		<GridCell bg="blue" h="100%" sx={theme => ({ color: theme.colors.blue[2] })}>
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
-			<div style={{ maxHeight: '50%' }}>
+			<Box mah="50%">
 				<Image
 					src={country.flag}
 					alt={'NOC Flag for ' + country.country}
 					fit={'scale-down' as 'contain'}
 				/>
-			</div>
+			</Box>
 			<Box p="xs" sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
 				<StatCard Icon={Calendar} title={'First Games'} text={''} />
 				<StatCard Icon={Hash} title={'Total Medals'} text={''} />

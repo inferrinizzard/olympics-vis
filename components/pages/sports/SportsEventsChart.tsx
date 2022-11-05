@@ -1,4 +1,4 @@
-import { Title } from '@mantine/core';
+import { Box, Title } from '@mantine/core';
 
 import { ResponsiveLine } from '@nivo/line';
 
@@ -21,7 +21,7 @@ const SportsEventsChart: React.FC<SportsEventsChartProps> = ({ sport, numEvents 
 	return (
 		<GridCell>
 			<Title order={2}>{'Number of Events'}</Title>
-			<div style={{ width: '100%', height: '40vh' }}>
+			<Box h="40vh" w="100%">
 				<ResponsiveLine
 					data={eventCountData}
 					margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -83,7 +83,7 @@ const SportsEventsChart: React.FC<SportsEventsChartProps> = ({ sport, numEvents 
 						},
 					]}
 				/>
-			</div>
+			</Box>
 		</GridCell>
 	);
 };

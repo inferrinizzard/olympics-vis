@@ -1,4 +1,4 @@
-import { Box, Image, Title, Text } from '@mantine/core';
+import { Box, Image, Title } from '@mantine/core';
 
 import { OlympicNOCProps } from 'pages/countries/[country]';
 import GridCell from 'components/grid/GridCell';

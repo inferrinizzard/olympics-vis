@@ -1,4 +1,4 @@
-import { Title } from '@mantine/core';
+import { Box, Title } from '@mantine/core';
 
 import { type BarDatum, ResponsiveBar } from '@nivo/bar';
 
@@ -13,7 +13,7 @@ const CountrySportsMedalsChart: React.FC<CountrySportsMedalsChartProps> = ({ dat
 	return (
 		<GridCell>
 			<Title order={2}>{'Medals per Sport'}</Title>
-			<div style={{ width: '100%', height: '30vh' }}>
+			<Box w="100%" h="30vh">
 				<ResponsiveBar
 					data={data}
 					keys={keys}
@@ -31,7 +31,7 @@ const CountrySportsMedalsChart: React.FC<CountrySportsMedalsChartProps> = ({ dat
 						legendOffset: 32,
 					}}
 				/>
-			</div>
+			</Box>
 		</GridCell>
 	);
 };
