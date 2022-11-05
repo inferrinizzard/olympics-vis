@@ -19,6 +19,7 @@ import CountryOverview from 'components/pages/countries/CountryOverview';
 import CountryMedalTotals from 'components/pages/countries/CountryMedalTotals';
 import CountryGamesMedalsChart from 'components/pages/countries/CountryGamesMedalsChart';
 import CountrySportsMedalsChart from 'components/pages/countries/CountrySportsMedalsChart';
+import BackButton from 'components/layouts/BackButton';
 
 export interface OlympicNOCProps {
 	country: Country;
@@ -89,6 +90,7 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }) => {
 	return (
 		<Container fluid sx={{ height: '100%' }}>
+			<BackButton />
 			<Grid
 				sx={theme => ({
 					marginTop: 0,

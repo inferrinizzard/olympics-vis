@@ -8,6 +8,7 @@ import { Container, Grid, Title } from '@mantine/core';
 import SportsOverview from 'components/pages/sports/SportsOverview';
 import SportsEventsChart from 'components/pages/sports/SportsEventsChart';
 import SportsCountriesChart from 'components/pages/sports/SportsCountriesChart';
+import BackButton from 'components/layouts/BackButton';
 
 export interface OlympicSportProps {
 	sport: Sport;
@@ -55,6 +56,7 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 }) => {
 	return (
 		<Container fluid sx={{ height: '100%' }}>
+			<BackButton />
 			<Grid sx={{ marginTop: 0 }}>
 				<Grid.Col>
 					<SportsOverview sport={sport} />
