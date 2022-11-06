@@ -1,7 +1,8 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 
-import { PrismaClient, type Games, type Sport } from '@prisma/client';
+import prisma from 'src/db/prisma';
+import { type Games, type Sport } from '@prisma/client';
 
 import { Box, Title } from '@mantine/core';
 
@@ -16,8 +17,6 @@ export interface SportsProps {
 }
 
 export const getStaticProps: GetStaticProps<SportsProps> = async () => {
-	const prisma = new PrismaClient();
-
 	const sports = await prisma.sport.findMany();
 
 	const sportsList: (Pick<Games, 'season'> & { sport: Sport['sport'][] })[] =

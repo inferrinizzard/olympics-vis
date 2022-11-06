@@ -1,7 +1,8 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 
-import { Country, Games, MedalTotals, PrismaClient } from '@prisma/client';
+import prisma from 'src/db/prisma';
+import { type Country, type Games, type MedalTotals } from '@prisma/client';
 
 import { Box, Title } from '@mantine/core';
 
@@ -15,8 +16,6 @@ export interface CountriesProps {
 }
 
 export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
-	const prisma = new PrismaClient();
-
 	const countries = await prisma.country.findMany();
 
 	const medalTotals = (await prisma.$queryRaw`

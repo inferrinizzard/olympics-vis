@@ -1,7 +1,8 @@
 import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
 
-import { PrismaClient, type CountrySportsMedals, type Games, type Sport } from '@prisma/client';
+import prisma from 'src/db/prisma';
+import { type CountrySportsMedals, type Games, type Sport } from '@prisma/client';
 
 import { Container, Grid, Title } from '@mantine/core';
 
@@ -18,7 +19,6 @@ export interface OlympicSportProps {
 
 export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({ params }) => {
 	const sportId = params!.sport as string;
-	const prisma = new PrismaClient();
 
 	const sport = (await prisma.sport.findFirst({ where: { sport: sportId } }))!;
 
@@ -42,8 +42,6 @@ export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({ params
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const prisma = new PrismaClient();
-
 	const sports = await prisma.sport.findMany({ select: { sport: true } });
 
 	return { paths: sports.map(params => ({ params })), fallback: false };

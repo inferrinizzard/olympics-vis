@@ -1,7 +1,8 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 
-import { Games, PrismaClient } from '@prisma/client';
+import prisma from 'src/db/prisma';
+import { type Games } from '@prisma/client';
 
 import { Title } from '@mantine/core';
 
@@ -12,9 +13,8 @@ export interface GamesProps {
 }
 
 export const getStaticProps: GetStaticProps<GamesProps> = async () => {
-	const prisma = new PrismaClient();
-
 	const games = await prisma.games.findMany();
+
 	return { props: { games: games.sort((a, b) => (a.year < b.year ? 1 : -1)) } };
 };
 
