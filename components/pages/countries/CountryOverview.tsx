@@ -5,6 +5,7 @@ import { Calendar, Hash, Home, Run } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
+import { getGameName } from 'src/util';
 
 interface CountryOverviewData {
 	firstGames: Games['game'];
@@ -34,10 +35,12 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 				/>
 			</Box>
 			<Box p="xs" sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
-				<StatCard Icon={Calendar} title={'First Games'} text={firstGames} />
+				<StatCard Icon={Calendar} title={'First Games'} text={getGameName(firstGames)} />
 				<StatCard Icon={Hash} title={'Total Medals'} text={`${totalMedals}`} />
 				<StatCard Icon={Home} title={'Games Hosted'} text={''} />
-				{bestGames && <StatCard Icon={Calendar} title={'Best Games'} text={bestGames} />}
+				{bestGames && (
+					<StatCard Icon={Calendar} title={'Best Games'} text={getGameName(bestGames)} />
+				)}
 				{bestSport && <StatCard Icon={Run} title={'Best Sport'} text={bestSport} />}
 			</Box>
 		</GridCell>
