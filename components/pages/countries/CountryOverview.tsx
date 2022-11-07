@@ -1,11 +1,12 @@
 import { type Country, type Games, type Sport } from '@prisma/client';
 
-import { Box, Image, Title } from '@mantine/core';
+import { Box, Image, Title, Text } from '@mantine/core';
 import { Calendar, Hash, Home, Run } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
-import { getGameName } from 'src/util';
+import { getGameName, getWikipediaExcerpt, getWikipediaUrl } from 'src/util';
+import { useEffect, useState } from 'react';
 
 interface CountryOverviewData {
 	firstGames: Games['game'];
@@ -24,6 +25,12 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 	country,
 	overviewData: { firstGames, totalMedals, hostedGames, bestGames, bestSport },
 }) => {
+	const [description, setDescription] = useState('');
+
+	useEffect(() => {
+		getWikipediaExcerpt(getWikipediaUrl(country.name)).then(setDescription);
+	}, [country]);
+
 	return (
 		<GridCell bg="blue" h="100%" sx={theme => ({ color: theme.colors.blue[2] })}>
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
@@ -33,6 +40,9 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 					alt={'NOC Flag for ' + country.country}
 					fit={'scale-down' as 'contain'}
 				/>
+			</Box>
+			<Box>
+				<Text sx={{ color: 'white' }}>{description}</Text>
 			</Box>
 			<Box p="xs" sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
 				<StatCard Icon={Calendar} title={'First Games'} text={getGameName(firstGames)} />
