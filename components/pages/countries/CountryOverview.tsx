@@ -37,8 +37,10 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 			<Box mah="50%">
 				<Image
 					src={country.flag}
+					height="12rem"
 					alt={'NOC Flag for ' + country.country}
-					fit={'scale-down' as 'contain'}
+					fit="scale-down"
+					p="md"
 				/>
 			</Box>
 			<Box>
