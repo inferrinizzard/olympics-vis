@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import type { AppProps } from 'next/app';
-import { AppShell, ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
+import { useRouter } from 'next/router';
+
+import { AppShell, ColorSchemeProvider, MantineProvider, type ColorScheme } from '@mantine/core';
+
+import Header from 'components/layouts/Header';
 
 import '../styles/globals.css';
-import Header from 'components/layouts/Header';
+import { colours as colors } from 'src/constants/colours';
+import useAccentColour from 'src/hooks/useAccentColour';
 
 const OlympicsVis = ({
 	Component,
@@ -11,6 +16,7 @@ const OlympicsVis = ({
 	...props
 }: AppProps & { colorScheme: ColorScheme }) => {
 	const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);
+	const { primary } = useAccentColour();
 
 	const toggleColorScheme = (value?: ColorScheme) => {
 		const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');
@@ -21,16 +27,18 @@ const OlympicsVis = ({
 	return (
 		<>
 			<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-				<MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+				<MantineProvider
+					theme={{ colorScheme, colors, primaryShade: 1 }}
+					withGlobalStyles
+					withNormalizeCSS>
 					<AppShell
 						padding="md"
-						// navbar={<Navbar width={{ base: 300 }} height={500} p="xs">{/* Navbar content */}</Navbar>}
-						header={<Header />}
+						header={<Header bg={primary} />}
 						styles={theme => ({
 							main: {
 								backgroundColor:
-									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-								height: '95vh',
+									theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[2],
+								minHeight: '95vh',
 							},
 						})}>
 						<Component {...pageProps} />

@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 
 import { NextLink } from '@mantine/next';
-import { Breadcrumbs, Header as MantineHeader } from '@mantine/core';
+import { Breadcrumbs, Header as MantineHeader, type HeaderProps } from '@mantine/core';
 
 import { Home } from 'tabler-icons-react';
 
-const Header = () => {
+const Header: React.FC<Partial<HeaderProps>> = props => {
 	const router = useRouter();
 	const path = router.asPath;
 
@@ -20,7 +20,8 @@ const Header = () => {
 		).crumbs;
 
 	return (
-		<MantineHeader height="5vh" p="xs">
+		<MantineHeader {...props} height={48} p="xs">
+			{/* 48px = 3rem */}
 			<Breadcrumbs>
 				<NextLink href="/">
 					<Home style={{ cursor: 'pointer' }} />
