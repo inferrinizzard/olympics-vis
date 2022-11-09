@@ -1,12 +1,11 @@
-import { useEffect, useRef, type RefObject } from 'react';
-
 import type { NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
 
 import { PrismaClient, type Country, type Games, type Sport } from '.prisma/client';
 
-import { Image, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
+
+import CardScroller from 'components/pages/hero/CardScroller';
 
 interface HeroProps {
 	games: Games[];
@@ -31,146 +30,32 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	sports,
 	countries,
 }) => {
-	const gamesRef = useRef<HTMLDivElement>(null);
-	const sportsRef = useRef<HTMLDivElement>(null);
-	const countriesRef = useRef<HTMLDivElement>(null);
-
-	const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
-		const scrollElement = ref?.current;
-		const flexWrapper = scrollElement?.firstElementChild;
-		const targetElement = flexWrapper?.firstElementChild;
-		const secondElement = flexWrapper?.children[1];
-		const childWidth = flexWrapper?.firstElementChild?.clientWidth ?? 0;
-		const visibleWrapperWidth = scrollElement?.clientWidth;
-
-		const headObserverOptions = {
-			root: scrollElement,
-			rootMargin: `${childWidth}px`,
-			threshold: 0.0,
-		};
-
-		const positiveLoop = (
-			entries: IntersectionObserverEntry[],
-			headObserver: IntersectionObserver
-		) => {
-			const targetEntry = entries.find(entry => !entry.isIntersecting);
-			if (!targetEntry) return;
-
-			// move target to end, fix scroll pos
-			flexWrapper?.appendChild(targetEntry.target);
-			scrollElement?.scrollTo({
-				left:
-					step > 0
-						? childWidth
-						: scrollElement.scrollWidth - childWidth - (visibleWrapperWidth ?? 0),
-			});
-
-			// update observers
-			flexWrapper?.firstElementChild && headObserver.observe(flexWrapper.firstElementChild);
-			headObserver.unobserve(targetEntry.target);
-		};
-
-		const headObserver = new IntersectionObserver(positiveLoop, headObserverOptions);
-		targetElement && headObserver.observe(targetElement);
-
-		return setInterval(
-			() =>
-				window.requestAnimationFrame(() =>
-					scrollElement?.scrollTo({ left: scrollElement.scrollLeft + step })
-				),
-			100
-		);
-	};
-
-	useEffect(() => {
-		const gamesInterval = autoscroll(gamesRef, 1 + Math.random());
-		sportsRef?.current?.scrollTo({ left: sportsRef.current.scrollWidth });
-		const sportsInterval = autoscroll(sportsRef, -1 - Math.random());
-		const countriesInterval = autoscroll(countriesRef, 1 + Math.random());
-
-		return () => [gamesInterval, sportsInterval, countriesInterval].forEach(clearInterval);
-	}, []);
-
 	return (
 		<main>
 			<section>
 				<Title order={1}>{'Olympics Vis'}</Title>
 			</section>
-			<section>
-				<div
-					ref={gamesRef}
-					className={'disable-scrollbar'}
-					style={{ width: '100%', overflowX: 'scroll' }}>
-					<div style={{ display: 'inline-flex' }}>
-						{games.map(game => (
-							<span key={game.game} style={{ width: '13rem', height: '13rem' }}>
-								<Link href={`/games/${game.game}`} passHref>
-									<Image
-										src={game.emblem}
-										alt={game.game}
-										fit={'contain'}
-										height={'100%'}
-										sx={{ cursor: 'pointer' }}
-										style={{ height: '100%' }}
-										styles={{ imageWrapper: { height: '100%' }, figure: { height: '100%' } }}
-									/>
-								</Link>
-							</span>
-						))}
-					</div>
-				</div>
-				<Link href="/games">{'See all →'}</Link>
-			</section>
-			<section>
-				<div
-					ref={sportsRef}
-					className={'disable-scrollbar'}
-					style={{ width: '100%', overflowX: 'scroll' }}>
-					<div style={{ display: 'inline-flex', flexDirection: 'row-reverse' }}>
-						{sports.map(sport => (
-							<span key={sport.sport} style={{ width: '13rem', height: '13rem' }}>
-								<Link href={`/sports/${sport.sport}`} passHref>
-									<Image
-										src={sport.icon}
-										alt={sport.sport}
-										fit={'contain'}
-										height={'100%'}
-										sx={{ cursor: 'pointer' }}
-										style={{ height: '100%' }}
-										styles={{ imageWrapper: { height: '100%' }, figure: { height: '100%' } }}
-									/>
-								</Link>
-							</span>
-						))}
-					</div>
-				</div>
-				<Link href="/sports">{'See all →'}</Link>
-			</section>
-			<section>
-				<div
-					ref={countriesRef}
-					className={'disable-scrollbar'}
-					style={{ width: '100%', overflowX: 'scroll' }}>
-					<div style={{ display: 'inline-flex' }}>
-						{countries.map(country => (
-							<span key={country.country} style={{ width: '13rem', height: '13rem' }}>
-								<Link href={`/countries/${country.country}`} passHref>
-									<Image
-										src={country.flag}
-										alt={country.country}
-										fit={'contain'}
-										height={'100%'}
-										sx={{ cursor: 'pointer' }}
-										style={{ height: '100%' }}
-										styles={{ imageWrapper: { height: '100%' }, figure: { height: '100%' } }}
-									/>
-								</Link>
-							</span>
-						))}
-					</div>
-				</div>
-				<Link href="/countries">{'See all →'}</Link>
-			</section>
+			<CardScroller<Games>
+				data={games}
+				route="games"
+				idKey="game"
+				imageKey="emblem"
+				direction={1}
+			/>
+			<CardScroller<Sport>
+				data={sports}
+				route="sports"
+				idKey="sport"
+				imageKey="icon"
+				direction={-1}
+			/>
+			<CardScroller<Country>
+				data={countries}
+				route="countries"
+				idKey="country"
+				imageKey="flag"
+				direction={1}
+			/>
 		</main>
 	);
 };
