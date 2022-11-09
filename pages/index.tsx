@@ -4,7 +4,8 @@ import type { NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
-import { PrismaClient, type Country, type Games, type Sport } from '.prisma/client';
+import prisma from 'src/db/prisma';
+import { type Country, type Games, type Sport } from '.prisma/client';
 
 import { Image, Title } from '@mantine/core';
 
@@ -15,8 +16,6 @@ interface HeroProps {
 }
 
 export const getStaticProps: GetStaticProps<HeroProps> = async () => {
-	const prisma = new PrismaClient();
-
 	const games = await prisma.games.findMany({ orderBy: [{ year: 'desc' }, { season: 'asc' }] });
 
 	const sports = await prisma.sport.findMany();

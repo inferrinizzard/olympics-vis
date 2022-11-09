@@ -1,8 +1,8 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
 
+import prisma from 'src/db/prisma';
 import {
-	PrismaClient,
 	type Country,
 	type CountryAthletes,
 	type CountryMedals,
@@ -30,7 +30,6 @@ export interface OlympicNOCProps {
 
 export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }) => {
 	const countryId = params!.country as string;
-	const prisma = new PrismaClient();
 
 	const country = (await prisma.country.findFirst({
 		where: { country: countryId },
@@ -85,8 +84,6 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const prisma = new PrismaClient();
-
 	const countries = await prisma.country.findMany({ select: { country: true } });
 
 	return { paths: countries.map(({ country }) => ({ params: { country } })), fallback: false };
