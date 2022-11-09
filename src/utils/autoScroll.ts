@@ -1,6 +1,8 @@
 import { type RefObject } from 'react';
 
 export const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
+	if (step < 0) return;
+
 	const scrollElement = ref?.current;
 	const flexWrapper = scrollElement?.firstElementChild;
 	const targetElement = flexWrapper?.firstElementChild;
