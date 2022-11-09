@@ -27,6 +27,7 @@
 		"olympics-api": "git+https://github.com/inferrinizzard/olympics-api.git#api-types",
 		"react": "18.0.0",
 		"react-dom": "18.0.0",
+		"rxjs": "^7.5.7",
 		"tabler-icons-react": "^1.47.0"
 	},
 	"devDependencies": {
