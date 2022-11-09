@@ -1,5 +1,7 @@
 import { type RefObject } from 'react';
 
+import { interval } from 'rxjs';
+
 export const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
 	if (step < 0) return;
 
@@ -38,11 +40,9 @@ export const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
 	const headObserver = new IntersectionObserver(positiveLoop, headObserverOptions);
 	targetElement && headObserver.observe(targetElement);
 
-	return setInterval(
-		() =>
-			window.requestAnimationFrame(() =>
-				scrollElement?.scrollTo({ left: scrollElement.scrollLeft + step })
-			),
-		100
+	return interval(100).subscribe(() =>
+		window.requestAnimationFrame(() =>
+			scrollElement?.scrollTo({ left: scrollElement.scrollLeft + step })
+		)
 	);
 };

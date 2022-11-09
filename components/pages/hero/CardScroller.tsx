@@ -30,7 +30,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 			scrollRef?.current?.scrollTo({ left: scrollRef.current.scrollWidth });
 		}
 
-		if (scrollInterval) return () => clearInterval(scrollInterval);
+		if (scrollInterval) return () => scrollInterval.unsubscribe();
 	}, [direction]);
 
 	return (
