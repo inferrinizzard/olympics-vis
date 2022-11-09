@@ -26,11 +26,8 @@ const CardScroller = <T extends Record<string, string | number>>({
 
 	useEffect(() => {
 		const scrollInterval = autoscroll(scrollRef, direction * (1 + Math.random()));
-		if (direction < 0) {
-			scrollRef?.current?.scrollTo({ left: scrollRef.current.scrollWidth });
-		}
 
-		if (scrollInterval) return () => clearInterval(scrollInterval);
+		return () => clearInterval(scrollInterval);
 	}, [direction]);
 
 	return (
@@ -39,7 +36,8 @@ const CardScroller = <T extends Record<string, string | number>>({
 				ref={scrollRef}
 				className="disable-scrollbar"
 				style={{ width: '100%', overflowX: 'scroll' }}>
-				<div style={{ display: 'inline-flex' }}>
+				<div
+					style={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
 					{data.map(datum => (
 						<span key={datum[idKey]} style={{ width: '13rem', height: '13rem', margin: '0.25rem' }}>
 							<CardLink

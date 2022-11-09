@@ -1,14 +1,16 @@
 import { type RefObject } from 'react';
 
 export const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
-	if (step < 0) return;
-
 	const scrollElement = ref?.current;
 	const flexWrapper = scrollElement?.firstElementChild;
 	const targetElement = flexWrapper?.firstElementChild;
-	const secondElement = flexWrapper?.children[1];
 	const childWidth = flexWrapper?.firstElementChild?.clientWidth ?? 0;
 	const visibleWrapperWidth = scrollElement?.clientWidth;
+
+	// scroll negative loop
+	if (step < 0) {
+		scrollElement?.scrollTo({ left: scrollElement.scrollWidth + childWidth });
+	}
 
 	const headObserverOptions = {
 		root: scrollElement,
