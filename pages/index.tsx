@@ -41,6 +41,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				idKey="game"
 				imageKey="emblem"
 				direction={1}
+				color="green"
 			/>
 			<CardScroller<Sport>
 				data={sports}
@@ -48,6 +49,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				idKey="sport"
 				imageKey="icon"
 				direction={-1}
+				color="red"
 			/>
 			<CardScroller<Country>
 				data={countries}
@@ -55,6 +57,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				idKey="country"
 				imageKey="flag"
 				direction={1}
+				color="blue"
 			/>
 		</main>
 	);

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import Link from 'next/link';
 
-import { Image } from '@mantine/core';
+import CardLink from 'components/layouts/CardLink';
 import { autoscroll } from 'src/utils/autoScroll';
 
 interface CardScrollerProps<T> {
@@ -11,6 +11,7 @@ interface CardScrollerProps<T> {
 	idKey: keyof T;
 	imageKey: keyof T;
 	direction: 1 | -1;
+	color: string;
 }
 
 const CardScroller = <T extends Record<string, string | number>>({
@@ -19,6 +20,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 	idKey,
 	imageKey,
 	direction,
+	color,
 }: CardScrollerProps<T>) => {
 	const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -39,18 +41,13 @@ const CardScroller = <T extends Record<string, string | number>>({
 				style={{ width: '100%', overflowX: 'scroll' }}>
 				<div style={{ display: 'inline-flex' }}>
 					{data.map(datum => (
-						<span key={datum[idKey]} style={{ width: '13rem', height: '13rem' }}>
-							<Link href={`/${route}/${datum[idKey]}`} passHref>
-								<Image
-									src={datum[imageKey] as string}
-									alt={datum[idKey] as string}
-									fit={'contain'}
-									height={'100%'}
-									sx={{ cursor: 'pointer' }}
-									style={{ height: '100%' }}
-									styles={{ imageWrapper: { height: '100%' }, figure: { height: '100%' } }}
-								/>
-							</Link>
+						<span key={datum[idKey]} style={{ width: '13rem', height: '13rem', margin: '0.25rem' }}>
+							<CardLink
+								href={`/${route}/${datum[idKey]}`}
+								img={datum[imageKey] as string}
+								alt={datum[idKey] as string}
+								hoverColour={color}
+							/>
 						</span>
 					))}
 				</div>
