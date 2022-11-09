@@ -31,6 +31,12 @@ interface MedalSetProps extends Pick<MedalTotals[keyof MedalTotals], 'gold' | 's
 }
 
 const MedalSet: React.FC<MedalSetProps> = ({ title, gold, silver, bronze }) => {
+	const medalUrls = [
+		'https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg',
+	].map(url => [url, url.replace(/^.+[/]/, '')]);
+
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<Title order={4}>{title}</Title>
@@ -40,16 +46,17 @@ const MedalSet: React.FC<MedalSetProps> = ({ title, gold, silver, bronze }) => {
 					gridTemplateColumns: '[gold] 1fr [silver] 1fr [bronze] 1fr',
 					gridTemplateRows: '[medals] 1fr [counts] 1fr',
 				}}>
-				{[
-					'https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg',
-					'https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg',
-					'https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg',
-				].map(url => {
-					const medalType = url.replace(/^.+[/]/, '');
-					return <Image key={medalType} height="3rem" width="3rem" src={url} alt={medalType} />;
-				})}
-				{[gold, silver, bronze].map(medal => (
-					<Title order={5} key={`${title} ${medal}`}>
+				{medalUrls.map(([url, medalType]) => (
+					<Image
+						key={`${title} ${medalType}`}
+						height="3rem"
+						width="3rem"
+						src={url}
+						alt={medalType}
+					/>
+				))}
+				{[gold, silver, bronze].map((medal, i) => (
+					<Title order={5} key={`${title} ${medalUrls[i][1]}`}>
 						{medal}
 					</Title>
 				))}

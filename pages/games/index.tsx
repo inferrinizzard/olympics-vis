@@ -6,6 +6,7 @@ import { Games, PrismaClient } from '@prisma/client';
 import { Title } from '@mantine/core';
 
 import CardLink from 'components/layouts/CardLink';
+import { getGameName } from 'src/util';
 
 export interface GamesProps {
 	games: Games[];
@@ -19,19 +20,6 @@ export const getStaticProps: GetStaticProps<GamesProps> = async () => {
 };
 
 const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games }) => {
-	const gameName = (gamesId: string) => {
-		const slugs = gamesId.split('-');
-		if (/^\d{4}/.test(gamesId)) {
-			let [year, season] = slugs;
-			season = season[0].toUpperCase() + season.slice(1);
-			return `${season} ${year}`;
-		}
-		const year = slugs.pop();
-		const city = slugs.map(slug => slug[0].toUpperCase() + slug.slice(1)).join(' ');
-
-		return `${city} ${year}`;
-	};
-
 	return (
 		<>
 			<Title order={1}>{'Games'}</Title>
@@ -47,7 +35,7 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 						img={emblem}
 						alt={'Olympic emblem for ' + game}
 						href={`/games/${game}`}
-						caption={gameName(game)}
+						caption={getGameName(game)}
 					/>
 				))}
 			</section>
