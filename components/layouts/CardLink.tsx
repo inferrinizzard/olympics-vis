@@ -11,8 +11,9 @@ interface CardLinkProps {
 	alt: string;
 	aspectRatio?: CSSObject['aspectRatio'];
 	imgStyles?: {};
-	caption: string;
+	caption?: string;
 	secondary?: string;
+	hoverColour?: string;
 }
 
 const CardLink: React.FC<CardLinkProps> = ({
@@ -23,6 +24,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 	imgStyles,
 	caption,
 	secondary,
+	hoverColour,
 }) => {
 	const { hovered, ref } = useHover();
 	const { primary } = useAccentColour();
@@ -31,11 +33,16 @@ const CardLink: React.FC<CardLinkProps> = ({
 		<Link passHref href={href}>
 			<Card
 				ref={ref}
-				sx={{
+				sx={theme => ({
 					cursor: 'pointer',
-					backgroundColor: hovered ? primary : undefined,
+					backgroundColor: hovered
+						? hoverColour
+							? theme.colors[hoverColour][1]
+							: primary
+						: undefined,
 					transform: hovered ? 'scale(1.05)' : undefined,
-				}}>
+					zIndex: hovered ? 1 : undefined,
+				})}>
 				<Image
 					src={img}
 					alt={alt}
@@ -51,7 +58,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 						},
 					}}
 				/>
-				<Title order={2}>{caption}</Title>
+				{caption && <Title order={2}>{caption}</Title>}
 				{secondary && <Title order={5}>{secondary}</Title>}
 			</Card>
 		</Link>
