@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
 
 import { AppShell, ColorSchemeProvider, MantineProvider, type ColorScheme } from '@mantine/core';
 
@@ -28,7 +27,13 @@ const OlympicsVis = ({
 		<>
 			<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
 				<MantineProvider
-					theme={{ colorScheme, colors, primaryShade: 1 }}
+					theme={{
+						colorScheme,
+						colors,
+						primaryShade: 1,
+						fontFamily: 'Work Sans',
+						headings: { fontFamily: 'Montserrat' },
+					}}
 					withGlobalStyles
 					withNormalizeCSS>
 					<AppShell
