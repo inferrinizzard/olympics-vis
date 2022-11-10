@@ -32,6 +32,9 @@ export const autoscroll = (ref: RefObject<HTMLDivElement>, step: number) => {
 				step > 0 ? childWidth : scrollElement.scrollWidth - childWidth - (visibleWrapperWidth ?? 0),
 		});
 
+		// TODO: adjust visibleWrapperWidth on resize
+		// TODO: make scrolling work backwards
+
 		// update observers
 		flexWrapper?.firstElementChild && headObserver.observe(flexWrapper.firstElementChild);
 		headObserver.unobserve(targetEntry.target);
