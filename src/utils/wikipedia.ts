@@ -21,7 +21,7 @@ export const getWikipediaExcerpt = async (url: string) => {
 				},
 			}) => {
 				const trimPreLinks = wikitext.replace(/^(?:\s*\{\{.+?\}\}\s*)+/, '');
-				const trimInfobox = trimPreLinks.replace(/^(\s*[|{&(](.|\n)+?\}\}\s*)+/, '');
+				const trimInfobox = trimPreLinks.replace(/^(\s*[^\w](.|\n)+?\}\}\s*)+/, '');
 				const trimHyperlinks = trimInfobox.replace(/<.+>.+?<\/.+>/g, '');
 				const trimTripleQuotes = trimHyperlinks.replace(/'''(.+?)'''/g, '$1');
 				const trimDoubleBrace = trimTripleQuotes.replace(/\{\{.+?\}\}/g, '');
