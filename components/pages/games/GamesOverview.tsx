@@ -33,7 +33,9 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({ game }) => {
 					{`${game.year} ${game.season[0].toUpperCase() + game.season.slice(1)} Olympics`}
 				</Title>
 				<Title order={3}>{game.title}</Title>
-				<Text sx={{ flexGrow: 1 }}>{description.slice(0, 1000) + '... [Wikipedia]'}</Text>
+				<Text sx={{ flexGrow: 1 }}>
+					{description ? description.slice(0, 500) + '... [Wikipedia]' : ''}
+				</Text>
 				<Box sx={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
 					<StatCard Icon={Calendar} title={'Start Date'} text={game.start_date} />
 					<StatCard Icon={CalendarEvent} title={'End Date'} text={game.end_date} />

@@ -20,15 +20,33 @@ export const getWikipediaExcerpt = async (url: string) => {
 					parse: { wikitext },
 				},
 			}) => {
-				const trimPreLinks = wikitext.replace(/^(?:\s*\{\{.+?\}\}\s*)+/, '');
-				const trimInfobox = trimPreLinks.replace(/^(\s*[^\w](.|\n)+?\}\}\s*)+/, '');
-				const trimHyperlinks = trimInfobox.replace(/<.+>.+?<\/.+>/g, '');
+				// const trimPreLinks = wikitext.replace(/^(?:\s*\{\{.+?\}\}\s*)+/, '');
+				// console.log('trimPreLinks', trimPreLinks);
+
+				const trimInfobox = wikitext.replace(/^(\s*[^\w](.|\n)+?\}\}\s*)+/, '');
+				const trimHyperlinks = trimInfobox.replace(/<ref[^>]*>[^<]*<\/ref>|<ref.+?\/>/g, '');
 				const trimTripleQuotes = trimHyperlinks.replace(/'''(.+?)'''/g, '$1');
-				const trimDoubleBrace = trimTripleQuotes.replace(/\{\{.+?\}\}/g, '');
+
+				// targets {nihongo|ENGLISH|KANJI|ROMAJI|etc}
+				const trimSpecialDoubleBrace = trimTripleQuotes.replace(
+					/\{\{\w+\|(?:\w+=)?(.+?)\|(?:\w+=)?(.+?)(?:\|(?:\w+=)?(.+?)(?:\|.+?)?)?\}\}/g,
+					(_match: RegExpMatchArray, ...groups: string[]) =>
+						groups[2]
+							? `${groups[0]} (${groups[1]}, ${groups[2]})`
+							: groups[1]
+							? `${groups[0]}, ${groups[1]}`
+							: groups[0]
+				);
+				const trimDoubleBrace = trimSpecialDoubleBrace.replace(/\{\{.+?\}\}/g, '');
 				const trimDoubleBracket = trimDoubleBrace.replace(/\[\[([^|]+?)\]\]/g, '$1');
 				const trimRenamedDoubleBracket = trimDoubleBracket.replace(/\[\[.+?\|(.+?)\]\]/g, '$1');
+				const replaceNonBreakingSpace = trimRenamedDoubleBracket.replace(/&nbsp;/g, '\u00A0');
 
-				return trimRenamedDoubleBracket + ' [Wikipedia]';
+				const final = replaceNonBreakingSpace;
+
+				// const firstTwoParagraphs = final.split('\n').slice(0, 3).join('\n');
+
+				return final + ' [Wikipedia]';
 			}
 		)
 		.catch(() => 'Unable to fetch excerpt.');
