@@ -13,17 +13,18 @@ interface SportsOverviewProps {
 const SportsOverview: React.FC<SportsOverviewProps> = ({ sport }) => {
 	return (
 		<GridCell bg="red">
-			<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
-			<Image
-				src={sport.icon}
-				width={100}
-				alt={sport.sport + ' sport icon'}
-				// fit={'scale-down' as 'contain'}
-			/>
-			<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
-				<StatCard Icon={MapPin} title={'Best Country'} text={'Country'} />
-				<StatCard Icon={Calendar} title={'First Games'} text={'games'} />
-				<StatCard Icon={Hash} title={'Number of Events'} text={100} />
+			<Box sx={{ display: 'flex' }}>
+				<Box>
+					<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
+					<Image src={sport.icon} width={100} alt={sport.sport + ' sport icon'} />
+				</Box>
+				<Box sx={{ flexGrow: 1, padding: '1rem' }}>Lorem Ipsum</Box>
+				<Box
+					sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column', alignSelf: 'flex-end' }}>
+					<StatCard Icon={MapPin} title={'Best Country'} text={'Country'} />
+					<StatCard Icon={Calendar} title={'First Games'} text={'games'} />
+					<StatCard Icon={Hash} title={'Number of Events'} text={100} />
+				</Box>
 			</Box>
 		</GridCell>
 	);
