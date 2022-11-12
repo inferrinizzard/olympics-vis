@@ -1,12 +1,14 @@
+import { useEffect, useState } from 'react';
+
 import { type Country, type Games, type Sport } from '@prisma/client';
 
 import { Box, Image, Title, Text } from '@mantine/core';
-import { Calendar, Home, Medal, Run, Trophy } from 'tabler-icons-react';
+import { Calendar, Medal, Run, Trophy } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
-import { getGameName, getWikipediaExcerpt, getWikipediaUrl } from 'src/util';
-import { useEffect, useState } from 'react';
+import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
+import { getGameName } from 'src/util';
 
 interface CountryOverviewData {
 	firstGames: Games['game'];
@@ -28,7 +30,7 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 	const [description, setDescription] = useState('');
 
 	useEffect(() => {
-		getWikipediaExcerpt(getWikipediaUrl(country.name)).then(setDescription);
+		getWikipediaExcerpt(getWikipediaUrl('countries', country.name)).then(setDescription);
 	}, [country]);
 
 	return (
