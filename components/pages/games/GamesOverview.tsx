@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 
 import { type Games } from '@prisma/client';
 
-import { Title, Box, Text, Image, Spoiler } from '@mantine/core';
+import { Box, Image, Title } from '@mantine/core';
 
 import { BuildingSkyscraper, Calendar, CalendarEvent, Run, Hash } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
-import TextLoader from 'components/layouts/TextLoader';
+import Excerpt from 'components/layouts/Excerpt';
 import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
 
 interface GamesOverviewProps {
@@ -35,13 +35,7 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({ game }) => {
 				</Title>
 				<Title order={3}>{game.title}</Title>
 				<Box sx={{ flexGrow: 1 }}>
-					{description ? (
-						<Spoiler maxHeight={200} showLabel="Keep Reading" hideLabel="Hide">
-							<Text>{description.slice(0, 1000) + '... [Wikipedia]'}</Text>
-						</Spoiler>
-					) : (
-						<TextLoader width="100%" />
-					)}
+					<Excerpt height={200} text={description.slice(0, 1000) + '... [Wikipedia]'} />
 				</Box>
 				<Box sx={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
 					<StatCard Icon={Calendar} title={'Start Date'} text={game.start_date} />
