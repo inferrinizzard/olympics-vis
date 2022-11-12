@@ -30,6 +30,7 @@
 		"tabler-icons-react": "^1.47.0"
 	},
 	"devDependencies": {
+		"@builder.io/partytown": "^0.7.1",
 		"@emotion/react": "^11.10.4",
 		"@emotion/server": "^11.10.0",
 		"@types/node": "^17.0.23",
