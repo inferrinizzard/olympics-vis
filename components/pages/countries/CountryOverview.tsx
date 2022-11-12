@@ -56,7 +56,11 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 				)}
 			</Box>
 			<Box p="xs" sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
-				<StatCard Icon={Calendar} title={'First Games'} text={getGameName(firstGames)} />
+				<StatCard
+					Icon={Calendar}
+					title={'First Games'}
+					text={firstGames ? getGameName(firstGames) : 'N/a'}
+				/>
 				<StatCard Icon={Medal} title={'Total Medals'} text={`${totalMedals}`} />
 				{/* <StatCard Icon={Home} title={'Games Hosted'} text={''} /> */}
 				{bestGames && <StatCard Icon={Trophy} title={'Best Games'} text={getGameName(bestGames)} />}

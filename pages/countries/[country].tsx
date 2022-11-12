@@ -68,8 +68,9 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 		WHERE country_athletes.country_athletes ? ${countryId};
 	`) as OlympicNOCProps['countryAthletes'];
 
-	const firstGames = (await prisma.countryAttendance.findFirst({ where: { country: countryId } }))
-		?.games[0] as Games['game'];
+	const firstGames =
+		(await prisma.countryAttendance.findFirst({ where: { country: countryId } }))?.games?.[0] ??
+		('' as Games['game']);
 
 	return {
 		props: {
