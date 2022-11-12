@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { type Country, type Games, type Sport } from '@prisma/client';
 
-import { Box, Image, Title, Text } from '@mantine/core';
+import { Box, Image, Title, Text, Spoiler } from '@mantine/core';
 import { Calendar, Medal, Run, Trophy } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
@@ -48,7 +48,9 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 			</Box>
 			<Box m="0.5rem">
 				{description ? (
-					<Text sx={{ color: 'white' }}>{description}</Text>
+					<Spoiler maxHeight={250} showLabel="Keep Reading" hideLabel="Hide">
+						<Text sx={{ color: 'white' }}>{description}</Text>
+					</Spoiler>
 				) : (
 					<TextLoader width="100%" />
 				)}

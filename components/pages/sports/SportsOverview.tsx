@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Box, Image, Text, Title } from '@mantine/core';
+import { Box, Image, Spoiler, Text, Title } from '@mantine/core';
 
 import { MapPin, Calendar, Hash } from 'tabler-icons-react';
 
@@ -34,7 +34,13 @@ const SportsOverview: React.FC<SportsOverviewProps> = ({ sport }) => {
 					/>
 				</Box>
 				<Box p="1rem" sx={{ flexGrow: 1 }}>
-					{description ? <Text>{description}</Text> : <TextLoader width="100%" />}
+					{description ? (
+						<Spoiler maxHeight={250} showLabel="Keep Reading" hideLabel="Hide">
+							<Text>{description}</Text>
+						</Spoiler>
+					) : (
+						<TextLoader width="100%" />
+					)}
 				</Box>
 				<Box sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
 					<StatCard Icon={MapPin} title={'Best Country'} text={'Country'} />

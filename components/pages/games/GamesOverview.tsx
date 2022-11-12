@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { type Games } from '@prisma/client';
 
-import { Title, Box, Text, Image } from '@mantine/core';
+import { Title, Box, Text, Image, Spoiler } from '@mantine/core';
 
 import { BuildingSkyscraper, Calendar, CalendarEvent, Run, Hash } from 'tabler-icons-react';
 
@@ -34,13 +34,15 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({ game }) => {
 					{`${game.year} ${game.season[0].toUpperCase() + game.season.slice(1)} Olympics`}
 				</Title>
 				<Title order={3}>{game.title}</Title>
-				{description ? (
-					<Text sx={{ flexGrow: 1 }}>
-						{description ? description.slice(0, 500) + '... [Wikipedia]' : ''}
-					</Text>
-				) : (
-					<TextLoader width="100%" />
-				)}
+				<Box sx={{ flexGrow: 1 }}>
+					{description ? (
+						<Spoiler maxHeight={200} showLabel="Keep Reading" hideLabel="Hide">
+							<Text>{description.slice(0, 1000) + '... [Wikipedia]'}</Text>
+						</Spoiler>
+					) : (
+						<TextLoader width="100%" />
+					)}
+				</Box>
 				<Box sx={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
 					<StatCard Icon={Calendar} title={'Start Date'} text={game.start_date} />
 					<StatCard Icon={CalendarEvent} title={'End Date'} text={game.end_date} />
