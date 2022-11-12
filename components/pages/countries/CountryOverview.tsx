@@ -7,6 +7,7 @@ import { Calendar, Medal, Run, Trophy } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
+import TextLoader from 'components/layouts/TextLoader';
 import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
 import { getGameName } from 'src/util';
 
@@ -45,8 +46,12 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 					p="md"
 				/>
 			</Box>
-			<Box>
-				<Text sx={{ color: 'white' }}>{description}</Text>
+			<Box m="0.5rem">
+				{description ? (
+					<Text sx={{ color: 'white' }}>{description}</Text>
+				) : (
+					<TextLoader width="100%" />
+				)}
 			</Box>
 			<Box p="xs" sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
 				<StatCard Icon={Calendar} title={'First Games'} text={getGameName(firstGames)} />

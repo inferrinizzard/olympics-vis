@@ -8,6 +8,7 @@ import { BuildingSkyscraper, Calendar, CalendarEvent, Run, Hash } from 'tabler-i
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
+import TextLoader from 'components/layouts/TextLoader';
 import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
 
 interface GamesOverviewProps {
@@ -33,9 +34,13 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({ game }) => {
 					{`${game.year} ${game.season[0].toUpperCase() + game.season.slice(1)} Olympics`}
 				</Title>
 				<Title order={3}>{game.title}</Title>
-				<Text sx={{ flexGrow: 1 }}>
-					{description ? description.slice(0, 500) + '... [Wikipedia]' : ''}
-				</Text>
+				{description ? (
+					<Text sx={{ flexGrow: 1 }}>
+						{description ? description.slice(0, 500) + '... [Wikipedia]' : ''}
+					</Text>
+				) : (
+					<TextLoader width="100%" />
+				)}
 				<Box sx={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
 					<StatCard Icon={Calendar} title={'Start Date'} text={game.start_date} />
 					<StatCard Icon={CalendarEvent} title={'End Date'} text={game.end_date} />
