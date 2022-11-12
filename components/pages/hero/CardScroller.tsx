@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-import { Box } from '@mantine/core';
+import { Box, Tooltip } from '@mantine/core';
 
 import CardLink from 'components/layouts/CardLink';
 import { autoscroll } from 'src/utils/autoScroll';
@@ -36,19 +36,16 @@ const CardScroller = <T extends Record<string, string | number>>({
 			<Box ref={scrollRef} className="disable-scrollbar" w="100%" sx={{ overflowX: 'scroll' }}>
 				<Box sx={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
 					{data.map(datum => (
-						<Box
-							key={datum[idKey]}
-							m="0.25rem"
-							h="13rem"
-							w="13rem"
-							sx={{ display: 'inline-block' }}>
-							<CardLink
-								href={`/${route}/${datum[idKey]}`}
-								img={datum[imageKey] as string}
-								alt={datum[idKey] as string}
-								hoverColour={color}
-							/>
-						</Box>
+						<Tooltip key={datum[idKey]} label={datum[idKey]} position="bottom">
+							<Box m="0.25rem" h="13rem" w="13rem" sx={{ display: 'inline-block' }}>
+								<CardLink
+									href={`/${route}/${datum[idKey]}`}
+									img={datum[imageKey] as string}
+									alt={datum[idKey] as string}
+									hoverColour={color}
+								/>
+							</Box>
+						</Tooltip>
 					))}
 				</Box>
 			</Box>
