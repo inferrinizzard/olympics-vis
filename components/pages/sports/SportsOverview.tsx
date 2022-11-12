@@ -14,10 +14,10 @@ interface SportsOverviewProps {
 }
 
 const SportsOverview: React.FC<SportsOverviewProps> = ({ sport }) => {
-	const [description, setDescription] = useState('Excerpt TODO');
+	const [description, setDescription] = useState('');
 
 	useEffect(() => {
-		// getWikipediaExcerpt(getWikipediaUrl('sports', sport.name)).then(setDescription);
+		getWikipediaExcerpt(getWikipediaUrl('sports', sport.name)).then(setDescription);
 	}, [sport]);
 
 	return (

@@ -9,7 +9,7 @@ const pageMap = {
 export const getWikipediaUrl = (pageType: keyof typeof pageMap, page: string) =>
 	`https://en.wikipedia.org/w/api.php?action=parse&format=json&page=${pageMap[pageType](
 		page
-	)}&prop=wikitext&wrapoutputclass=mw-parser-output&section=0&disablelimitreport=1&disableeditsection=1&disabletoc=1&utf8=1&formatversion=2`;
+	)}&redirects=1&prop=wikitext&wrapoutputclass=mw-parser-output&section=0&disablelimitreport=1&disableeditsection=1&disabletoc=1&utf8=1&formatversion=2`;
 
 export const getWikipediaExcerpt = async (url: string) => {
 	return axios
