@@ -1,13 +1,19 @@
 import { useRouter } from 'next/router';
 
 import { NextLink } from '@mantine/next';
-import { Breadcrumbs, Group, Header as MantineHeader, TextInput } from '@mantine/core';
+import {
+	Breadcrumbs,
+	Group,
+	Header as MantineHeader,
+	TextInput,
+	type HeaderProps,
+} from '@mantine/core';
 
 import { Home, Search } from 'tabler-icons-react';
 
 import ColorSchemeToggle from 'components/controls/ColorSchemeToggle';
 
-const Header = () => {
+const Header: React.FC<Partial<HeaderProps>> = props => {
 	const router = useRouter();
 	const path = router.asPath;
 
@@ -22,7 +28,17 @@ const Header = () => {
 		).crumbs;
 
 	return (
-		<MantineHeader height="5vh" p="xs" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+		<MantineHeader
+			{...props}
+			height={48}
+			// 48px = 3rem
+			p="xs"
+			sx={{
+				display: 'flex',
+				justifyContent: 'space-between',
+				height: 'fit-content',
+				maxHeight: 'fit-content',
+			}}>
 			<Group>
 				<Breadcrumbs>
 					<NextLink href="/">

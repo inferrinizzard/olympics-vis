@@ -1,23 +1,23 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
 
+import prisma from 'src/db/prisma';
 import {
-	PrismaClient,
 	type Country,
 	type CountryAthletes,
 	type CountryMedals,
 	type CountrySportsMedals,
+	type Games,
 	type MedalTotals,
 } from '@prisma/client';
 
-import { Box, Container, Grid, Image, Title } from '@mantine/core';
+import { Container, Grid } from '@mantine/core';
 
-import { Calendar, Hash } from 'tabler-icons-react';
-
-import { ResponsiveBar } from '@nivo/bar';
-
-import GridCell from 'components/grid/GridCell';
-import StatCard from 'components/grid/StatCard';
+import CountryOverview from 'components/pages/countries/CountryOverview';
+import CountryMedalTotals from 'components/pages/countries/CountryMedalTotals';
+import CountryGamesMedalsChart from 'components/pages/countries/CountryGamesMedalsChart';
+import CountrySportsMedalsChart from 'components/pages/countries/CountrySportsMedalsChart';
+import BackButton from 'components/layouts/BackButton';
 
 export interface OlympicNOCProps {
 	country: Country;
@@ -25,11 +25,11 @@ export interface OlympicNOCProps {
 	countrySportsMedals: CountrySportsMedals[];
 	countryMedals: CountryMedals[];
 	countryAthletes: Pick<CountryAthletes, 'game'> & Record<'athletes', number>;
+	firstGames: Games['game'];
 }
 
 export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }) => {
 	const countryId = params!.country as string;
-	const prisma = new PrismaClient();
 
 	const country = (await prisma.country.findFirst({
 		where: { country: countryId },
@@ -68,12 +68,22 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 		WHERE country_athletes.country_athletes ? ${countryId};
 	`) as OlympicNOCProps['countryAthletes'];
 
-	return { props: { country, medalTotals, countrySportsMedals, countryMedals, countryAthletes } };
+	const firstGames = (await prisma.countryAttendance.findFirst({ where: { country: countryId } }))
+		?.games[0] as Games['game'];
+
+	return {
+		props: {
+			country,
+			medalTotals,
+			countrySportsMedals,
+			countryMedals,
+			countryAthletes,
+			firstGames,
+		},
+	};
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const prisma = new PrismaClient();
-
 	const countries = await prisma.country.findMany({ select: { country: true } });
 
 	return { paths: countries.map(({ country }) => ({ params: { country } })), fallback: false };
@@ -85,120 +95,59 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	countrySportsMedals,
 	countryMedals,
 	countryAthletes,
+	firstGames,
 }) => {
-	const { summer, winter } = medalTotals;
-	const allGoldMedals = summer.gold + winter.gold;
-	const allSilverMedals = summer.silver + winter.silver;
-	const allBronzeMedals = summer.bronze + winter.bronze;
+	const totalMedals = Object.values(medalTotals).reduce(
+		(sum, { gold, silver, bronze }) => sum + gold + silver + bronze,
+		0
+	);
+
+	const bestGames = countryMedals.reduce(
+		({ bestTotal, bestGame }, { game, gold, silver, bronze }) => {
+			const total = gold + silver + bronze;
+			return {
+				bestTotal: Math.max(total, bestTotal),
+				bestGame: total > bestTotal ? game : bestGame,
+			};
+		},
+		{ bestTotal: 0, bestGame: '' }
+	).bestGame;
+
+	const bestSport = countrySportsMedals.reduce(
+		({ bestTotal, bestSport }, { sport, gold, silver, bronze }) => {
+			const total = gold + silver + bronze;
+			return {
+				bestTotal: Math.max(total, bestTotal),
+				bestSport: total > bestTotal ? sport : bestSport,
+			};
+		},
+		{ bestTotal: 0, bestSport: '' }
+	).bestSport;
 
 	return (
 		<Container fluid sx={{ height: '100%' }}>
-			<Grid
-				sx={theme => ({
-					height: '100%',
-					backgroundColor: theme.colors.blue[3],
-					borderRadius: '1rem',
-				})}>
-				<Grid.Col span={4} sx={{ height: '100%' }}>
-					<GridCell sx={{ height: '100%' }}>
-						<Title order={1}>{`${country.name} (${country.country})`}</Title>
-						<div style={{ maxHeight: '50%' }}>
-							<Image
-								src={country.flag}
-								alt={'NOC Flag for ' + country.country}
-								fit={'scale-down' as 'contain'}
-							/>
-						</div>
-						<Box sx={{ display: 'flex', columnGap: '1rem', flexShrink: 2, maxWidth: '100%' }}>
-							<StatCard icon={<Calendar />} title={'First Games'} text={''} />
-							<StatCard icon={<Hash />} title={'Total Medals'} text={''} />
-							<StatCard icon={<Hash />} title={'Games Hosted'} text={''} />
-						</Box>
-					</GridCell>
+			<BackButton />
+			<Grid mt={0} h="100%" sx={{ borderRadius: '1rem' }}>
+				<Grid.Col span={4} p={'0.25rem'} h="100%">
+					<CountryOverview
+						country={country}
+						overviewData={{ firstGames, totalMedals, bestGames, bestSport }}
+					/>
 				</Grid.Col>
-				<Grid.Col span={8}>
-					<GridCell>
-						<Title order={2}>{'Medals'}</Title>
-						<Title order={4}>{'Total'}</Title>
-						<div style={{ display: 'flex', columnGap: '1rem' }}>
-							<Title order={6}>{'Total'}</Title>
-							<div>{allGoldMedals + allSilverMedals + allBronzeMedals}</div>
-						</div>
-						<div style={{ display: 'flex', columnGap: '1rem' }}>
-							<Title order={6}>{'Split'}</Title>
-							<div>{allGoldMedals}</div>
-							<div>{allSilverMedals}</div>
-							<div>{allBronzeMedals}</div>
-						</div>
-
-						<Title order={4}>{'Summer'}</Title>
-						<div style={{ display: 'flex', columnGap: '1rem' }}>
-							<Title order={6}>{'Total'}</Title>
-							<div>{summer.gold + summer.silver + summer.bronze}</div>
-						</div>
-						<div style={{ display: 'flex', columnGap: '1rem' }}>
-							<Title order={6}>{'Split'}</Title>
-							<div>{summer.gold}</div>
-							<div>{summer.silver}</div>
-							<div>{summer.bronze}</div>
-						</div>
-
-						<Title order={4}>{'Winter'}</Title>
-						<div style={{ display: 'flex', columnGap: '1rem' }}>
-							<Title order={6}>{'Total'}</Title>
-							<div>{winter.gold + winter.silver + winter.bronze}</div>
-						</div>
-						<div style={{ display: 'flex', columnGap: '1rem' }}>
-							<Title order={6}>{'Split'}</Title>
-							<div>{winter.gold}</div>
-							<div>{winter.silver}</div>
-							<div>{winter.bronze}</div>
-						</div>
-					</GridCell>
-					<GridCell>
-						<Title order={2}>{'Medals per Sport'}</Title>
-						<div style={{ width: '100%', height: '30vh' }}>
-							<ResponsiveBar
-								data={countrySportsMedals}
-								keys={['bronze', 'silver', 'gold']}
-								indexBy="sport"
-								margin={{ top: 20, bottom: 50, left: 30 }}
-								valueScale={{ type: 'linear' }}
-								indexScale={{ type: 'band' }}
-								colors={{ scheme: 'nivo' }}
-								axisBottom={{
-									tickSize: 5,
-									tickPadding: 5,
-									tickRotation: 45,
-									legend: '',
-									legendPosition: 'middle',
-									legendOffset: 32,
-								}}
-							/>
-						</div>
-					</GridCell>
-					<GridCell>
-						<Title order={2}>{'Medals per Game'}</Title>
-						<div style={{ width: '100%', height: '30vh' }}>
-							<ResponsiveBar
-								data={countryMedals}
-								keys={['bronze', 'silver', 'gold']}
-								indexBy="game"
-								margin={{ top: 20, bottom: 50, left: 30 }}
-								valueScale={{ type: 'linear' }}
-								indexScale={{ type: 'band' }}
-								colors={{ scheme: 'nivo' }}
-								axisBottom={{
-									tickSize: 5,
-									tickPadding: 5,
-									tickRotation: 45,
-									legend: '',
-									legendPosition: 'middle',
-									legendOffset: 32,
-								}}
-							/>
-						</div>
-					</GridCell>
+				<Grid.Col
+					span={8}
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						rowGap: '1rem',
+						padding: '0.25rem 0.25rem 0.25rem 0.75rem',
+					}}>
+					<CountryMedalTotals {...medalTotals} />
+					<CountrySportsMedalsChart
+						data={countrySportsMedals}
+						keys={['bronze', 'silver', 'gold']}
+					/>
+					<CountryGamesMedalsChart data={countryMedals} keys={['bronze', 'silver', 'gold']} />
 				</Grid.Col>
 			</Grid>
 		</Container>
