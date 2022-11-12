@@ -23,13 +23,19 @@ const SportsOverview: React.FC<SportsOverviewProps> = ({ sport }) => {
 	return (
 		<GridCell bg="red">
 			<Box sx={{ display: 'flex' }}>
-				<Box>
+				<Box maw="15rem" miw="fit-content">
 					<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
-					<Image src={sport.icon} width={100} alt={sport.sport + ' sport icon'} />
+					<Image
+						src={sport.icon}
+						width="100%"
+						alt={sport.sport + ' sport icon'}
+						styles={{ root: { width: '100%', aspectRatio: '1 / 1' } }}
+					/>
 				</Box>
-				<Box sx={{ flexGrow: 1, padding: '1rem' }}>{description}</Box>
-				<Box
-					sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column', alignSelf: 'flex-end' }}>
+				<Box p="1rem" sx={{ flexGrow: 1 }}>
+					{description}
+				</Box>
+				<Box sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
 					<StatCard Icon={MapPin} title={'Best Country'} text={'Country'} />
 					<StatCard Icon={Calendar} title={'First Games'} text={'games'} />
 					<StatCard Icon={Hash} title={'Number of Events'} text={100} />
