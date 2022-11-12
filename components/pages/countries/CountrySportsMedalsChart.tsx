@@ -10,6 +10,15 @@ interface CountrySportsMedalsChartProps {
 }
 
 const CountrySportsMedalsChart: React.FC<CountrySportsMedalsChartProps> = ({ data, keys }) => {
+	if (!data.length) {
+		return (
+			<GridCell>
+				<Title order={2}>{'Medals per Sport'}</Title>
+				<Title order={6}>{'Has not earned any medals yet.'}</Title>
+			</GridCell>
+		);
+	}
+
 	return (
 		<GridCell>
 			<Title order={2}>{'Medals per Sport'}</Title>

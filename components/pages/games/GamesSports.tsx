@@ -11,13 +11,13 @@ const GamesSports: React.FC<GamesSportsProps> = ({ sportEvents }) => {
 	return (
 		<GridCell h="100%">
 			<Title order={2} m="sm">
-				{'Sports'}
+				{'Sports (WIP)'}
 			</Title>
 			<Container
 				sx={{
 					display: 'grid',
-					gridTemplateColumns: '1fr 1fr 1fr',
-					gridTemplateRows: '1fr 1fr 1fr',
+					gridTemplateColumns: 'repeat(3, 1fr)',
+					gridTemplateRows: 'repeat(3, 1fr)',
 				}}>
 				{sportEvents.slice(0, 8).map(sport => (
 					<Box key={sport.sport}>

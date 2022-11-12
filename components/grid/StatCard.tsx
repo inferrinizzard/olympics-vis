@@ -8,7 +8,7 @@ export interface StatCardProps {
 
 const StatCard: React.FC<StatCardProps> = ({ Icon, title, text }) => {
 	return (
-		<Paper p="sm">
+		<Paper p="sm" sx={{ minWidth: '15rem' }}>
 			<Box sx={{ display: 'flex', columnGap: '0.5rem' }}>
 				<Box sx={{ display: 'flex', alignContent: 'center' }}>
 					<Icon style={{ height: '3rem', width: '100%' }} />
