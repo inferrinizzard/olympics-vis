@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
-
 import Link from 'next/link';
+
+import { Box, Tooltip } from '@mantine/core';
 
 import CardLink from 'components/layouts/CardLink';
 import { autoscroll } from 'src/utils/autoScroll';
@@ -32,24 +33,22 @@ const CardScroller = <T extends Record<string, string | number>>({
 
 	return (
 		<section>
-			<div
-				ref={scrollRef}
-				className="disable-scrollbar"
-				style={{ width: '100%', overflowX: 'scroll' }}>
-				<div
-					style={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
+			<Box ref={scrollRef} className="disable-scrollbar" w="100%" sx={{ overflowX: 'scroll' }}>
+				<Box sx={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
 					{data.map(datum => (
-						<span key={datum[idKey]} style={{ width: '13rem', height: '13rem', margin: '0.25rem' }}>
-							<CardLink
-								href={`/${route}/${datum[idKey]}`}
-								img={datum[imageKey] as string}
-								alt={datum[idKey] as string}
-								hoverColour={color}
-							/>
-						</span>
+						<Tooltip key={datum[idKey]} label={datum[idKey]} position="bottom">
+							<Box m="0.25rem" h="13rem" w="13rem" sx={{ display: 'inline-block' }}>
+								<CardLink
+									href={`/${route}/${datum[idKey]}`}
+									img={datum[imageKey] as string}
+									alt={datum[idKey] as string}
+									hoverColour={color}
+								/>
+							</Box>
+						</Tooltip>
 					))}
-				</div>
-			</div>
+				</Box>
+			</Box>
 			<Link href={`/${route}`}>{'See all →'}</Link>
 		</section>
 	);
