@@ -1,9 +1,19 @@
 import { useRouter } from 'next/router';
 
 import { NextLink } from '@mantine/next';
-import { Breadcrumbs, Header as MantineHeader, type HeaderProps } from '@mantine/core';
+import {
+	Breadcrumbs,
+	Group,
+	Image,
+	Header as MantineHeader,
+	TextInput,
+	type HeaderProps,
+	Box,
+} from '@mantine/core';
 
-import { Home } from 'tabler-icons-react';
+import { Home, Search } from 'tabler-icons-react';
+
+import ColorSchemeToggle from 'components/controls/ColorSchemeToggle';
 
 const Header: React.FC<Partial<HeaderProps>> = props => {
 	const router = useRouter();
@@ -20,18 +30,44 @@ const Header: React.FC<Partial<HeaderProps>> = props => {
 		).crumbs;
 
 	return (
-		<MantineHeader {...props} height={48} p="xs">
-			{/* 48px = 3rem */}
-			<Breadcrumbs>
+		<MantineHeader
+			{...props}
+			height={48}
+			// 48px = 3rem
+			p="xs"
+			sx={{
+				display: 'flex',
+				justifyContent: 'space-between',
+				height: 'fit-content',
+				maxHeight: 'fit-content',
+			}}>
+			<Group>
 				<NextLink href="/">
-					<Home style={{ cursor: 'pointer' }} />
+					<Box h="2.5rem" w="2.5rem" bg="white" sx={{ borderRadius: '0.5rem', overflow: 'hidden' }}>
+						<Image
+							src={'https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg'}
+							alt="Home"
+							height={'2.5rem'}
+							fit="scale-down"
+						/>
+					</Box>
 				</NextLink>
-				{pathBreadCrumbs.map(({ title, href }) => (
-					<NextLink key={href} href={href}>
-						{title.replace(/^[/]/, '')}
+				<Breadcrumbs>
+					<NextLink href="/">
+						<Home style={{ cursor: 'pointer' }} />
 					</NextLink>
-				))}
-			</Breadcrumbs>
+					{pathBreadCrumbs.map(({ title, href }) => (
+						<NextLink key={href} href={href}>
+							{title.replace(/^[/]/, '')}
+						</NextLink>
+					))}
+				</Breadcrumbs>
+			</Group>
+
+			<Group>
+				<TextInput variant="filled" placeholder="Search" icon={<Search />} radius="md" />
+				<ColorSchemeToggle />
+			</Group>
 		</MantineHeader>
 	);
 };
