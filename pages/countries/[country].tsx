@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
+import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
 import {
@@ -126,32 +127,37 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	).bestSport;
 
 	return (
-		<Container fluid sx={{ height: '100%' }}>
-			<BackButton />
-			<Grid mt={0} h="100%" sx={{ borderRadius: '1rem' }}>
-				<Grid.Col span={4} p={'0.25rem'} h="100%">
-					<CountryOverview
-						country={country}
-						overviewData={{ firstGames, totalMedals, bestGames, bestSport }}
-					/>
-				</Grid.Col>
-				<Grid.Col
-					span={8}
-					sx={{
-						display: 'flex',
-						flexDirection: 'column',
-						rowGap: '1rem',
-						padding: '0.25rem 0.25rem 0.25rem 0.75rem',
-					}}>
-					<CountryMedalTotals {...medalTotals} />
-					<CountrySportsMedalsChart
-						data={countrySportsMedals}
-						keys={['bronze', 'silver', 'gold']}
-					/>
-					<CountryGamesMedalsChart data={countryMedals} keys={['bronze', 'silver', 'gold']} />
-				</Grid.Col>
-			</Grid>
-		</Container>
+		<>
+			<Head>
+				<title>{`Olympics Vis - ${country.name}`}</title>
+			</Head>
+			<Container fluid sx={{ height: '100%' }}>
+				<BackButton />
+				<Grid mt={0} h="100%" sx={{ borderRadius: '1rem' }}>
+					<Grid.Col span={4} p={'0.25rem'} h="100%">
+						<CountryOverview
+							country={country}
+							overviewData={{ firstGames, totalMedals, bestGames, bestSport }}
+						/>
+					</Grid.Col>
+					<Grid.Col
+						span={8}
+						sx={{
+							display: 'flex',
+							flexDirection: 'column',
+							rowGap: '1rem',
+							padding: '0.25rem 0.25rem 0.25rem 0.75rem',
+						}}>
+						<CountryMedalTotals {...medalTotals} />
+						<CountrySportsMedalsChart
+							data={countrySportsMedals}
+							keys={['bronze', 'silver', 'gold']}
+						/>
+						<CountryGamesMedalsChart data={countryMedals} keys={['bronze', 'silver', 'gold']} />
+					</Grid.Col>
+				</Grid>
+			</Container>
+		</>
 	);
 };
 

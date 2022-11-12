@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
+import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
 import { type CountrySportsMedals, type Games, type Sport } from '@prisma/client';
@@ -53,20 +54,25 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 	countrySportsMedals,
 }) => {
 	return (
-		<Container fluid sx={{ height: '100%' }}>
-			<BackButton />
-			<Grid mt={0}>
-				<Grid.Col>
-					<SportsOverview sport={sport} />
-				</Grid.Col>
-				<Grid.Col>
-					<SportsEventsChart sport={sport} numEvents={numEvents} />
-				</Grid.Col>
-				<Grid.Col>
-					<SportsCountriesChart countrySportsMedals={countrySportsMedals} />
-				</Grid.Col>
-			</Grid>
-		</Container>
+		<>
+			<Head>
+				<title>{`Olympics Vis - ${sport.name}`}</title>
+			</Head>
+			<Container fluid sx={{ height: '100%' }}>
+				<BackButton />
+				<Grid mt={0}>
+					<Grid.Col>
+						<SportsOverview sport={sport} />
+					</Grid.Col>
+					<Grid.Col>
+						<SportsEventsChart sport={sport} numEvents={numEvents} />
+					</Grid.Col>
+					<Grid.Col>
+						<SportsCountriesChart countrySportsMedals={countrySportsMedals} />
+					</Grid.Col>
+				</Grid>
+			</Container>
+		</>
 	);
 };
 

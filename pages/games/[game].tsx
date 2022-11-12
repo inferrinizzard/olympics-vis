@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
+import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
 import {
@@ -17,6 +18,7 @@ import GamesMedalsTable from 'components/pages/games/GamesMedalsTable';
 import GamesSports from 'components/pages/games/GamesSports';
 import GamesChoropleth from 'components/pages/games/GamesChoropleth';
 import BackButton from 'components/layouts/BackButton';
+import { getGameName } from 'src/util';
 
 export interface OlympicGameSeasonProps {
 	game: Games;
@@ -66,23 +68,28 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	countryAthletes: { country_athletes: countryAthletes },
 }) => {
 	return (
-		<Container fluid>
-			<BackButton />
-			<Grid mt={0}>
-				<Grid.Col span={8}>
-					<GamesOverview game={game} />
-				</Grid.Col>
-				<Grid.Col span={4}>
-					<GamesMedalsTable countryMedals={countryMedals} />
-				</Grid.Col>
-				<Grid.Col span={4}>
-					<GamesSports sportEvents={sportEvents} />
-				</Grid.Col>
-				<Grid.Col span={8}>
-					<GamesChoropleth countryAthletes={countryAthletes} />
-				</Grid.Col>
-			</Grid>
-		</Container>
+		<>
+			<Head>
+				<title>{`Olympics Vis - ${getGameName(game.game)}`}</title>
+			</Head>
+			<Container fluid>
+				<BackButton />
+				<Grid mt={0}>
+					<Grid.Col span={8}>
+						<GamesOverview game={game} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<GamesMedalsTable countryMedals={countryMedals} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<GamesSports sportEvents={sportEvents} />
+					</Grid.Col>
+					<Grid.Col span={8}>
+						<GamesChoropleth countryAthletes={countryAthletes} />
+					</Grid.Col>
+				</Grid>
+			</Container>
+		</>
 	);
 };
 

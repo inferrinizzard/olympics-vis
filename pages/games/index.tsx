@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
 import { type Games } from '@prisma/client';
@@ -22,6 +23,9 @@ export const getStaticProps: GetStaticProps<GamesProps> = async () => {
 const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games }) => {
 	return (
 		<>
+			<Head>
+				<title>{'Olympics Vis - Games'}</title>
+			</Head>
 			<Title order={1}>{'Games'}</Title>
 			<section
 				style={{

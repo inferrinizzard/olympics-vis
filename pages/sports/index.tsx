@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
 import { type Games, type Sport } from '@prisma/client';
@@ -66,6 +67,9 @@ const Sports: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
 	return (
 		<>
+			<Head>
+				<title>{'Olympics Vis - Sports'}</title>
+			</Head>
 			<Title order={1}>{'Sports'}</Title>
 			{Object.entries(groupedSports).map(([group, sportList]) => (
 				<section key={group}>
