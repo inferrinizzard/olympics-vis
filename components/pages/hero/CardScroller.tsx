@@ -32,8 +32,13 @@ const CardScroller = <T extends Record<string, string | number>>({
 	}, [direction]);
 
 	return (
-		<section>
-			<Box ref={scrollRef} className="disable-scrollbar" w="100%" sx={{ overflowX: 'scroll' }}>
+		<>
+			<Box
+				ref={scrollRef}
+				component="section"
+				className="disable-scrollbar"
+				w="100%"
+				sx={{ overflowX: 'scroll' }}>
 				<Box sx={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
 					{data.map(datum => (
 						<Tooltip key={datum[idKey]} label={datum[idKey]} position="bottom">
@@ -50,7 +55,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 				</Box>
 			</Box>
 			<Link href={`/${route}`}>{'See all →'}</Link>
-		</section>
+		</>
 	);
 };
 
