@@ -4,7 +4,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import prisma from 'src/db/prisma';
 import { type Country, type Games, type Sport } from '.prisma/client';
 
-import { Title } from '@mantine/core';
+import { Box, Container, Title } from '@mantine/core';
 
 import CardScroller from 'components/pages/hero/CardScroller';
 
@@ -30,7 +30,20 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	countries,
 }) => {
 	return (
-		<main>
+		<Container fluid p={0} h="100%">
+			<Box
+				sx={{
+					position: 'absolute',
+					height: '100%',
+					width: '100%',
+					left: 0,
+					top: 0,
+					opacity: '10%',
+					backgroundImage:
+						'url("https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg")',
+					backgroundSize: 'contain',
+				}}
+			/>
 			<section>
 				<Title order={1}>{'Olympics Vis'}</Title>
 			</section>
@@ -58,7 +71,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				direction={1}
 				color="blue"
 			/>
-		</main>
+		</Container>
 	);
 };
 
