@@ -10,7 +10,6 @@ datasource db {
 model Country {
   country String @id @db.VarChar(3)
   name    String @db.VarChar(50)
-  icon    String
   flag    String
   status  String
 
