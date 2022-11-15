@@ -1,26 +1,18 @@
-import { useState, useEffect } from 'react';
-
-import { Box, Image, Spoiler, Text, Title } from '@mantine/core';
+import { Box, Image, Title } from '@mantine/core';
 
 import { MapPin, Calendar, Hash } from 'tabler-icons-react';
 
 import { type OlympicSportProps } from 'pages/sports/[sport]';
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
-import TextLoader from 'components/layouts/TextLoader';
-import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
+import Excerpt from 'components/layouts/Excerpt';
 
 interface SportsOverviewProps {
 	sport: OlympicSportProps['sport'];
+	wikipediaExcerpt: string;
 }
 
-const SportsOverview: React.FC<SportsOverviewProps> = ({ sport }) => {
-	const [description, setDescription] = useState('');
-
-	useEffect(() => {
-		getWikipediaExcerpt(getWikipediaUrl('sports', sport.name)).then(setDescription);
-	}, [sport]);
-
+const SportsOverview: React.FC<SportsOverviewProps> = ({ sport, wikipediaExcerpt }) => {
 	return (
 		<GridCell bg="red">
 			<Box sx={{ display: 'flex' }}>
@@ -34,13 +26,7 @@ const SportsOverview: React.FC<SportsOverviewProps> = ({ sport }) => {
 					/>
 				</Box>
 				<Box p="1rem" sx={{ flexGrow: 1 }}>
-					{description ? (
-						<Spoiler maxHeight={250} showLabel="Keep Reading" hideLabel="Hide">
-							<Text>{description}</Text>
-						</Spoiler>
-					) : (
-						<TextLoader width="100%" />
-					)}
+					<Excerpt text={wikipediaExcerpt} />
 				</Box>
 				<Box sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
 					<StatCard Icon={MapPin} title={'Best Country'} text={'Country'} />

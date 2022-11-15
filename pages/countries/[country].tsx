@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType, type GetStaticPaths } from 'next';
+import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
 import {
@@ -18,6 +19,7 @@ import CountryMedalTotals from 'components/pages/countries/CountryMedalTotals';
 import CountryGamesMedalsChart from 'components/pages/countries/CountryGamesMedalsChart';
 import CountrySportsMedalsChart from 'components/pages/countries/CountrySportsMedalsChart';
 import BackButton from 'components/layouts/BackButton';
+import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
 
 export interface OlympicNOCProps {
 	country: Country;
@@ -26,6 +28,7 @@ export interface OlympicNOCProps {
 	countryMedals: CountryMedals[];
 	countryAthletes: Pick<CountryAthletes, 'game'> & Record<'athletes', number>;
 	firstGames: Games['game'];
+	wikipediaExcerpt: string;
 }
 
 export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }) => {
@@ -72,6 +75,8 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 		(await prisma.countryAttendance.findFirst({ where: { country: countryId } }))?.games?.[0] ??
 		('' as Games['game']);
 
+	const wikipediaExcerpt = await getWikipediaExcerpt(getWikipediaUrl('countries', country.name));
+
 	return {
 		props: {
 			country,
@@ -80,6 +85,7 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({ params }
 			countryMedals,
 			countryAthletes,
 			firstGames,
+			wikipediaExcerpt,
 		},
 	};
 };
@@ -97,6 +103,7 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	countryMedals,
 	countryAthletes,
 	firstGames,
+	wikipediaExcerpt,
 }) => {
 	const totalMedals = Object.values(medalTotals).reduce(
 		(sum, { gold, silver, bronze }) => sum + gold + silver + bronze,
@@ -126,32 +133,38 @@ const OlympicNOC: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	).bestSport;
 
 	return (
-		<Container fluid sx={{ height: '100%' }}>
-			<BackButton />
-			<Grid mt={0} h="100%" sx={{ borderRadius: '1rem' }}>
-				<Grid.Col span={4} p={'0.25rem'} h="100%">
-					<CountryOverview
-						country={country}
-						overviewData={{ firstGames, totalMedals, bestGames, bestSport }}
-					/>
-				</Grid.Col>
-				<Grid.Col
-					span={8}
-					sx={{
-						display: 'flex',
-						flexDirection: 'column',
-						rowGap: '1rem',
-						padding: '0.25rem 0.25rem 0.25rem 0.75rem',
-					}}>
-					<CountryMedalTotals {...medalTotals} />
-					<CountrySportsMedalsChart
-						data={countrySportsMedals}
-						keys={['bronze', 'silver', 'gold']}
-					/>
-					<CountryGamesMedalsChart data={countryMedals} keys={['bronze', 'silver', 'gold']} />
-				</Grid.Col>
-			</Grid>
-		</Container>
+		<>
+			<Head>
+				<title>{`Olympics Vis - ${country.name}`}</title>
+			</Head>
+			<Container fluid sx={{ height: '100%' }}>
+				<BackButton />
+				<Grid mt={0} h="100%" sx={{ borderRadius: '1rem' }}>
+					<Grid.Col span={4} p={'0.25rem'} h="100%">
+						<CountryOverview
+							country={country}
+							overviewData={{ firstGames, totalMedals, bestGames, bestSport }}
+							wikipediaExcerpt={wikipediaExcerpt}
+						/>
+					</Grid.Col>
+					<Grid.Col
+						span={8}
+						sx={{
+							display: 'flex',
+							flexDirection: 'column',
+							rowGap: '1rem',
+							padding: '0.25rem 0.25rem 0.25rem 0.75rem',
+						}}>
+						<CountryMedalTotals {...medalTotals} />
+						<CountrySportsMedalsChart
+							data={countrySportsMedals}
+							keys={['bronze', 'silver', 'gold']}
+						/>
+						<CountryGamesMedalsChart data={countryMedals} keys={['bronze', 'silver', 'gold']} />
+					</Grid.Col>
+				</Grid>
+			</Container>
+		</>
 	);
 };
 

@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
 import { type Country, type Games, type MedalTotals } from '@prisma/client';
@@ -59,6 +60,9 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
 	return (
 		<>
+			<Head>
+				<title>{'Olympics Vis - Countries'}</title>
+			</Head>
 			<Title order={1}>{'Countries'}</Title>
 			<section>
 				<Bar

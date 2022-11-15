@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
-import { Card, CSSObject, Image, Title } from '@mantine/core';
+import { Box, Card, CSSObject, Title } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 
 import useAccentColour from 'src/hooks/useAccentColour';
@@ -20,7 +21,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 	href,
 	img,
 	alt,
-	aspectRatio,
+	aspectRatio = '1 / 1',
 	imgStyles,
 	caption,
 	secondary,
@@ -33,6 +34,8 @@ const CardLink: React.FC<CardLinkProps> = ({
 		<Link passHref href={href}>
 			<Card
 				ref={ref}
+				h="100%"
+				p="1rem"
 				sx={theme => ({
 					cursor: 'pointer',
 					backgroundColor: hovered
@@ -43,22 +46,10 @@ const CardLink: React.FC<CardLinkProps> = ({
 					transform: hovered ? 'scale(1.05)' : undefined,
 					zIndex: hovered ? 1 : undefined,
 				})}>
-				<Image
-					src={img}
-					alt={alt}
-					styles={{
-						figure: { height: '100%', aspectRatio: aspectRatio || '1 / 1' },
-						imageWrapper: { height: '100%' },
-					}}
-					imageProps={{
-						style: {
-							height: '100%',
-							objectFit: 'scale-down',
-							...imgStyles,
-						},
-					}}
-				/>
-				{caption && <Title order={2}>{caption}</Title>}
+				<Box className="next-img-wrapper" sx={{ position: 'relative', aspectRatio, ...imgStyles }}>
+					<Image src={img} alt={alt} layout="fill" />
+				</Box>
+				{caption && <Title order={3}>{caption}</Title>}
 				{secondary && <Title order={5}>{secondary}</Title>}
 			</Card>
 		</Link>

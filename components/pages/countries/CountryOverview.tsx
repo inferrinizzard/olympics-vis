@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
-
 import { type Country, type Games, type Sport } from '@prisma/client';
 
-import { Box, Image, Title, Text, Spoiler } from '@mantine/core';
+import { Box, Image, Title } from '@mantine/core';
 import { Calendar, Medal, Run, Trophy } from 'tabler-icons-react';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
-import TextLoader from 'components/layouts/TextLoader';
-import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
+import Excerpt from 'components/layouts/Excerpt';
 import { getGameName } from 'src/util';
 
 interface CountryOverviewData {
@@ -20,20 +17,16 @@ interface CountryOverviewData {
 }
 
 interface CountryOverviewProps {
+	wikipediaExcerpt: string;
 	country: Country;
 	overviewData: CountryOverviewData;
 }
 
 const CountryOverview: React.FC<CountryOverviewProps> = ({
+	wikipediaExcerpt,
 	country,
 	overviewData: { firstGames, totalMedals, hostedGames, bestGames, bestSport },
 }) => {
-	const [description, setDescription] = useState('');
-
-	useEffect(() => {
-		getWikipediaExcerpt(getWikipediaUrl('countries', country.name)).then(setDescription);
-	}, [country]);
-
 	return (
 		<GridCell bg="blue" h="100%" sx={theme => ({ color: theme.colors.blue[2] })}>
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
@@ -47,13 +40,7 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 				/>
 			</Box>
 			<Box m="0.5rem">
-				{description ? (
-					<Spoiler maxHeight={250} showLabel="Keep Reading" hideLabel="Hide">
-						<Text sx={{ color: 'white' }}>{description}</Text>
-					</Spoiler>
-				) : (
-					<TextLoader width="100%" />
-				)}
+				<Excerpt text={wikipediaExcerpt} />
 			</Box>
 			<Box p="xs" sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
 				<StatCard

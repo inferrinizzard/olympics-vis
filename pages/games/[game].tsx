@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
+import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
 import {
@@ -17,6 +18,8 @@ import GamesMedalsTable from 'components/pages/games/GamesMedalsTable';
 import GamesSports from 'components/pages/games/GamesSports';
 import GamesChoropleth from 'components/pages/games/GamesChoropleth';
 import BackButton from 'components/layouts/BackButton';
+import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
+import { getGameName } from 'src/util';
 
 export interface OlympicGameSeasonProps {
 	game: Games;
@@ -25,6 +28,7 @@ export interface OlympicGameSeasonProps {
 	countryAthletes: Omit<CountryAthletes, 'country_athletes'> & {
 		country_athletes: Record<string, number>;
 	};
+	wikipediaExcerpt: string;
 }
 
 export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ params }) => {
@@ -48,8 +52,15 @@ export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({ p
 		where: { game: params!.game as string },
 	})) as OlympicGameSeasonProps['countryAthletes'];
 
+	const wikipediaExcerpt = await getWikipediaExcerpt(
+		getWikipediaUrl(
+			'games',
+			`${game.year} ${game.season.slice(0, 1).toUpperCase() + game.season.slice(1)}`
+		)
+	);
+
 	return {
-		props: { game, countryMedals, sportEvents, countryAthletes },
+		props: { game, countryMedals, sportEvents, countryAthletes, wikipediaExcerpt },
 	};
 };
 
@@ -64,25 +75,31 @@ const OlympicGameSeason: NextPage<InferGetStaticPropsType<typeof getStaticProps>
 	countryMedals,
 	sportEvents,
 	countryAthletes: { country_athletes: countryAthletes },
+	wikipediaExcerpt,
 }) => {
 	return (
-		<Container fluid>
-			<BackButton />
-			<Grid mt={0}>
-				<Grid.Col span={8}>
-					<GamesOverview game={game} />
-				</Grid.Col>
-				<Grid.Col span={4}>
-					<GamesMedalsTable countryMedals={countryMedals} />
-				</Grid.Col>
-				<Grid.Col span={4}>
-					<GamesSports sportEvents={sportEvents} />
-				</Grid.Col>
-				<Grid.Col span={8}>
-					<GamesChoropleth countryAthletes={countryAthletes} />
-				</Grid.Col>
-			</Grid>
-		</Container>
+		<>
+			<Head>
+				<title>{`Olympics Vis - ${getGameName(game.game)}`}</title>
+			</Head>
+			<Container fluid>
+				<BackButton />
+				<Grid mt={0}>
+					<Grid.Col span={8}>
+						<GamesOverview game={game} wikipediaExcerpt={wikipediaExcerpt} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<GamesMedalsTable countryMedals={countryMedals} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<GamesSports sportEvents={sportEvents} />
+					</Grid.Col>
+					<Grid.Col span={8}>
+						<GamesChoropleth countryAthletes={countryAthletes} />
+					</Grid.Col>
+				</Grid>
+			</Container>
+		</>
 	);
 };
 
