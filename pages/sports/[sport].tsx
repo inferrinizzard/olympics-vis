@@ -11,11 +11,13 @@ import SportsOverview from 'components/pages/sports/SportsOverview';
 import SportsEventsChart from 'components/pages/sports/SportsEventsChart';
 import SportsCountriesChart from 'components/pages/sports/SportsCountriesChart';
 import BackButton from 'components/layouts/BackButton';
+import { getWikipediaExcerpt, getWikipediaUrl } from 'src/utils/wikipedia';
 
 export interface OlympicSportProps {
 	sport: Sport;
 	numEvents: Record<Games['game'], number>;
 	countrySportsMedals: CountrySportsMedals[];
+	wikipediaExcerpt: string;
 }
 
 export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({ params }) => {
@@ -39,7 +41,9 @@ export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({ params
 		where: { sport: sportId },
 	});
 
-	return { props: { sport, numEvents, countrySportsMedals } };
+	const wikipediaExcerpt = await getWikipediaExcerpt(getWikipediaUrl('sports', sport.name));
+
+	return { props: { sport, numEvents, countrySportsMedals, wikipediaExcerpt } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -52,6 +56,7 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 	sport,
 	numEvents,
 	countrySportsMedals,
+	wikipediaExcerpt,
 }) => {
 	return (
 		<>
@@ -62,7 +67,7 @@ const OlympicSport: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 				<BackButton />
 				<Grid mt={0}>
 					<Grid.Col>
-						<SportsOverview sport={sport} />
+						<SportsOverview sport={sport} wikipediaExcerpt={wikipediaExcerpt} />
 					</Grid.Col>
 					<Grid.Col>
 						<SportsEventsChart sport={sport} numEvents={numEvents} />
