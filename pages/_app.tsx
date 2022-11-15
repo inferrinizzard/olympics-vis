@@ -33,6 +33,14 @@ const OlympicsVis = ({
 						primaryShade: 1,
 						fontFamily: 'Work Sans',
 						headings: { fontFamily: 'Montserrat' },
+
+						globalStyles: _theme => ({
+							'.next-img-wrapper': {
+								'& > span': {
+									'& > img': { objectFit: 'scale-down' },
+								},
+							},
+						}),
 					}}
 					withGlobalStyles
 					withNormalizeCSS>
