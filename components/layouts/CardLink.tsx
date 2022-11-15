@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { Box, Card, CSSObject, Title } from '@mantine/core';
+import { Box, Card, Title, type CSSObject, type MantineNumberSize } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 
 import useAccentColour from 'src/hooks/useAccentColour';
@@ -35,7 +35,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 			<Card
 				ref={ref}
 				h="100%"
-				p="1rem"
+				p={'1rem' as MantineNumberSize}
 				sx={theme => ({
 					cursor: 'pointer',
 					backgroundColor: hovered
