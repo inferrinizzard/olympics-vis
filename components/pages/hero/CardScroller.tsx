@@ -5,7 +5,7 @@ import { Box, Tooltip } from '@mantine/core';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import CardLink from 'components/layouts/CardLink';
-import { autoscroll } from 'src/utils/autoScroll';
+import AutoScroller from 'src/utils/autoScroll';
 
 interface CardScrollerProps<T> {
 	data: T[];
@@ -36,9 +36,10 @@ const CardScroller = <T extends Record<string, string | number>>({
 	});
 
 	useEffect(() => {
-		const scrollInterval = autoscroll(scrollRef, direction * (1 + Math.random()));
+		const autoscroller = new AutoScroller(scrollRef, direction * (1 + Math.random()));
+		autoscroller.start();
 
-		return () => clearInterval(scrollInterval);
+		return () => autoscroller.close();
 	}, [direction]);
 
 	return (
