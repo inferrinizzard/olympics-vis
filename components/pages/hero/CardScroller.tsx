@@ -5,7 +5,7 @@ import { Box, Tooltip } from '@mantine/core';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import CardLink from 'components/layouts/CardLink';
-import AutoScroller from 'src/utils/autoScroll';
+import AutoScroller from 'src/utils/Autoscroller';
 
 interface CardScrollerProps<T> {
 	data: T[];
