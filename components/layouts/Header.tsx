@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 
 import { NextLink } from '@mantine/next';
 import {
+	Box,
 	Breadcrumbs,
 	Group,
-	Image,
 	Header as MantineHeader,
+	Image,
 	TextInput,
 	type HeaderProps,
-	Box,
 } from '@mantine/core';
 
 import { Home, Search } from 'tabler-icons-react';
@@ -28,6 +28,8 @@ const Header: React.FC<Partial<HeaderProps>> = props => {
 			}),
 			{ crumbs: [] as { title: string; href: string }[], path: '' }
 		).crumbs;
+
+	const showSearch = path.length > 1 && path.split('/').length === 2;
 
 	return (
 		<MantineHeader
@@ -65,7 +67,9 @@ const Header: React.FC<Partial<HeaderProps>> = props => {
 			</Group>
 
 			<Group>
-				<TextInput variant="filled" placeholder="Search" icon={<Search />} radius="md" />
+				{showSearch && (
+					<TextInput variant="filled" placeholder="Search" icon={<Search />} radius="md" />
+				)}
 				<ColorSchemeToggle />
 			</Group>
 		</MantineHeader>
