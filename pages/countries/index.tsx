@@ -1,6 +1,7 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import prisma from 'src/db/prisma';
 import { type Country, type Games, type MedalTotals } from '@prisma/client';
@@ -10,6 +11,7 @@ import { Box, Title } from '@mantine/core';
 import { Bar } from '@nivo/bar';
 
 import CardLink from 'components/layouts/CardLink';
+import { searchFilter } from 'src/util';
 
 export interface CountriesProps {
 	countries: Country[];
@@ -48,9 +50,21 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	countries,
 	medalTotals,
 }) => {
-	const activeNOCs = countries.filter(({ status }) => status === 'active');
-	const specialNOCs = countries.filter(({ status }) => status === 'special');
-	const historicNOCs = countries.filter(({ status }) => status === 'historic');
+	const router = useRouter();
+	const countrySearchFilter = searchFilter<Country>(
+		['country', 'name'],
+		router.query.search as string
+	);
+
+	const activeNOCs = countries
+		.filter(({ status }) => status === 'active')
+		.filter(countrySearchFilter);
+	const specialNOCs = countries
+		.filter(({ status }) => status === 'special')
+		.filter(countrySearchFilter);
+	const historicNOCs = countries
+		.filter(({ status }) => status === 'historic')
+		.filter(countrySearchFilter);
 
 	const NOCs = { Active: activeNOCs, Special: specialNOCs, Historic: historicNOCs };
 
@@ -94,33 +108,38 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 				/>
 			</section>
 
-			{Object.entries(NOCs).map(([nocType, nocs]) => (
-				<section key={nocType}>
-					<Title order={2}>{`${nocType} NOCs`}</Title>
-					<Box
-						sx={{
-							display: 'grid',
-							gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-							gap: '1rem',
-						}}>
-						{nocs.map(country => (
-							<CardLink
-								key={country.country}
-								img={country.flag}
-								alt={'NOC Flag for ' + country.country}
-								href={`/countries/${country.country}`}
-								caption={country.country}
-								secondary={country.name}
-								aspectRatio="3 / 2"
-								imgStyles={{
-									boxShadow:
-										'1px 1px 8px 1px rgba(0, 0, 0, 0.05), -1px -1px 8px 1px rgba(0, 0, 0, 0.05)',
-								}}
-							/>
-						))}
-					</Box>
-				</section>
-			))}
+			{Object.entries(NOCs).map(([nocType, nocs]) =>
+				nocs.length ? (
+					<section key={nocType}>
+						<Title order={2}>{`${nocType} NOCs`}</Title>
+						<Box
+							sx={{
+								display: 'grid',
+								gridTemplateColumns:
+									nocs.length > 10
+										? 'repeat(auto-fit, minmax(160px, 1fr))'
+										: 'repeat(auto-fill, 320px)',
+								gap: '1rem',
+							}}>
+							{nocs.map(country => (
+								<CardLink
+									key={country.country}
+									img={country.flag}
+									alt={'NOC Flag for ' + country.country}
+									href={`/countries/${country.country}`}
+									caption={country.country}
+									secondary={country.name}
+									aspectRatio="3 / 2"
+									imgStyles={{
+										boxShadow:
+											'1px 1px 8px 1px rgba(0, 0, 0, 0.05), -1px -1px 8px 1px rgba(0, 0, 0, 0.05)',
+									}}
+								/>
+							))}
+						</Box>
+					</section>
+				) : undefined
+			)}
 		</>
 	);
 };

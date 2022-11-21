@@ -1,6 +1,7 @@
 import { type NextPage } from 'next';
 import { type GetStaticProps, type InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import prisma from 'src/db/prisma';
 import { type Games } from '@prisma/client';
@@ -8,7 +9,7 @@ import { type Games } from '@prisma/client';
 import { Title } from '@mantine/core';
 
 import CardLink from 'components/layouts/CardLink';
-import { getGameName } from 'src/util';
+import { getGameName, searchFilter } from 'src/util';
 
 export interface GamesProps {
 	games: Games[];
@@ -21,6 +22,9 @@ export const getStaticProps: GetStaticProps<GamesProps> = async () => {
 };
 
 const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games }) => {
+	const router = useRouter();
+	const gamesSearchFilter = searchFilter<Games>(['game'], router.query.search as string);
+
 	return (
 		<>
 			<Head>
@@ -30,10 +34,11 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 			<section
 				style={{
 					display: 'grid',
-					gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+					gridTemplateColumns:
+						games.length > 10 ? 'repeat(auto-fit, minmax(200px, 1fr))' : 'repeat(auto-fill, 400px)',
 					gap: '1rem',
 				}}>
-				{games.map(({ game, emblem }) => (
+				{games.filter(gamesSearchFilter).map(({ game, emblem }) => (
 					<CardLink
 						key={game}
 						img={emblem}

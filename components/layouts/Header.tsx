@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-import { NextLink } from '@mantine/next';
 import {
+	Box,
 	Breadcrumbs,
 	Group,
-	Image,
 	Header as MantineHeader,
+	Image,
 	TextInput,
 	type HeaderProps,
-	Box,
 } from '@mantine/core';
 
 import { Home, Search } from 'tabler-icons-react';
@@ -29,6 +29,8 @@ const Header: React.FC<Partial<HeaderProps>> = props => {
 			{ crumbs: [] as { title: string; href: string }[], path: '' }
 		).crumbs;
 
+	const showSearch = path.length > 1 && path.split('/').length === 2;
+
 	return (
 		<MantineHeader
 			{...props}
@@ -42,7 +44,7 @@ const Header: React.FC<Partial<HeaderProps>> = props => {
 				maxHeight: 'fit-content',
 			}}>
 			<Group>
-				<NextLink href="/">
+				<Link passHref href="/">
 					<Box h="2.5rem" w="2.5rem" bg="white" sx={{ borderRadius: '0.5rem', overflow: 'hidden' }}>
 						<Image
 							src={'https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg'}
@@ -51,21 +53,35 @@ const Header: React.FC<Partial<HeaderProps>> = props => {
 							fit="scale-down"
 						/>
 					</Box>
-				</NextLink>
+				</Link>
 				<Breadcrumbs>
-					<NextLink href="/">
+					<Link passHref href="/">
 						<Home style={{ cursor: 'pointer' }} />
-					</NextLink>
+					</Link>
 					{pathBreadCrumbs.map(({ title, href }) => (
-						<NextLink key={href} href={href}>
-							{title.replace(/^[/]/, '')}
-						</NextLink>
+						<Link key={href} href={href}>
+							{title.replace(/^[/]|\?.+$/g, '')}
+						</Link>
 					))}
 				</Breadcrumbs>
 			</Group>
 
 			<Group>
-				<TextInput variant="filled" placeholder="Search" icon={<Search />} radius="md" />
+				{showSearch && (
+					<TextInput
+						id="search"
+						variant="filled"
+						placeholder="Search"
+						icon={<Search />}
+						radius="md"
+						// value={router.query.search}
+						onChange={e =>
+							router.replace({
+								query: e.target.value ? { search: e.target.value.trim() } : undefined,
+							})
+						}
+					/>
+				)}
 				<ColorSchemeToggle />
 			</Group>
 		</MantineHeader>
