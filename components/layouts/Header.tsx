@@ -69,13 +69,15 @@ const Header: React.FC<Partial<HeaderProps>> = props => {
 			<Group>
 				{showSearch && (
 					<TextInput
+						id="search"
 						variant="filled"
 						placeholder="Search"
 						icon={<Search />}
 						radius="md"
+						// value={router.query.search}
 						onChange={e =>
 							router.replace({
-								query: { search: e.target.value },
+								query: e.target.value ? { search: e.target.value.trim() } : undefined,
 							})
 						}
 					/>
