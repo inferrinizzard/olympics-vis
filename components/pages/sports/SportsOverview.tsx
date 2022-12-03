@@ -1,11 +1,13 @@
 import { Box, Image, Title } from '@mantine/core';
 
-import { MapPin, Calendar, Hash } from 'tabler-icons-react';
+import Calendar from 'tabler-icons-react/dist/icons/calendar';
+import Hash from 'tabler-icons-react/dist/icons/hash';
+import MapPin from 'tabler-icons-react/dist/icons/map-pin';
 
-import { type OlympicSportProps } from 'pages/sports/[sport]';
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 import Excerpt from 'components/layouts/Excerpt';
+import { type OlympicSportProps } from 'pages/sports/[sport]';
 
 interface SportsOverviewProps {
 	sport: OlympicSportProps['sport'];

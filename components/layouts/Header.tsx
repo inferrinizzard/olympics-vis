@@ -11,7 +11,8 @@ import {
 	type HeaderProps,
 } from '@mantine/core';
 
-import { Home, Search } from 'tabler-icons-react';
+import Home from 'tabler-icons-react/dist/icons/home';
+import Search from 'tabler-icons-react/dist/icons/search';
 
 import ColorSchemeToggle from 'components/controls/ColorSchemeToggle';
 
