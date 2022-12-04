@@ -2,7 +2,11 @@ import { type Games } from '@prisma/client';
 
 import { Box, Image, Title } from '@mantine/core';
 
-import { BuildingSkyscraper, Calendar, CalendarEvent, Run, Hash } from 'tabler-icons-react';
+import BuildingSkyscraper from 'tabler-icons-react/dist/icons/building-skyscraper';
+import Calendar from 'tabler-icons-react/dist/icons/calendar';
+import CalendarEvent from 'tabler-icons-react/dist/icons/calendar-event';
+import Hash from 'tabler-icons-react/dist/icons/hash';
+import Run from 'tabler-icons-react/dist/icons/run';
 
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
