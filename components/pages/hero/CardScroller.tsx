@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import { Box, Tooltip } from '@mantine/core';
@@ -24,27 +24,35 @@ const CardScroller = <T extends Record<string, string | number>>({
 	direction,
 	color,
 }: CardScrollerProps<T>) => {
-	// const scrollRef = useRef<HTMLDivElement>(null);
-	// const virtualizeWrapperRef = useRef<HTMLDivElement>(null);
+	const [start, setStart] = useState(0);
+	const [length, setLength] = useState(1);
 
-	// const virtualizer = useVirtualizer({
-	// 	horizontal: true,
-	// 	count: data.length,
-	// 	getScrollElement: () => virtualizeWrapperRef.current,
-	// 	estimateSize: () => 16 * 13.5, // ref: ITEM, 16px per rem
-	// 	overscan: 3,
-	// });
+	const scrollRef = useRef<HTMLDivElement>(null);
+	const virtualizeWrapperRef = useRef<HTMLDivElement>(null);
 
-	// useEffect(() => {
-	// 	const autoscroller = new AutoScroller(scrollRef, direction * (1 + Math.random()));
-	// 	autoscroller.start();
+	const virtualizer = useVirtualizer({
+		horizontal: true,
+		count: data.length,
+		getScrollElement: () => virtualizeWrapperRef.current,
+		estimateSize: () => 16 * 13.5, // ref: ITEM, 16px per rem
+		overscan: 3,
+	});
 
-	// 	return () => autoscroller.close();
-	// }, [direction]);
+	useEffect(() => {
+		const autoscroller = new AutoScroller(scrollRef, direction * (1 + Math.random()), setStart);
+		autoscroller.start();
+
+		setLength(Math.floor((scrollRef?.current?.scrollWidth ?? 0) / (13.5 * 16)) + 3);
+		window.addEventListener('resize', () =>
+			setLength(Math.floor((scrollRef?.current?.scrollWidth ?? 0) / (13.5 * 16)) + 3)
+		);
+
+		return () => autoscroller.close();
+	}, [direction]);
 
 	return (
 		<>
-			{/* <Box
+			<Box
 				ref={scrollRef}
 				component="section"
 				className="disable-scrollbar"
@@ -52,10 +60,9 @@ const CardScroller = <T extends Record<string, string | number>>({
 				sx={{ overflowX: 'scroll' }}>
 				<Box
 					ref={virtualizeWrapperRef}
-					w={virtualizer.getTotalSize()}
 					sx={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
-					{virtualizer.getVirtualItems().map(item => {
-						const datum = data[item.index];
+					{data.slice(0, length).map((_, i) => {
+						const datum = data[(start + i) % data.length];
 						return (
 							<Tooltip key={datum[idKey]} label={datum[idKey]} position="bottom">
 								<Box // ITEM: width + left & right margin
@@ -74,7 +81,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 					})}
 				</Box>
 			</Box>
-			<Link href={`/${route}`}>{'See all →'}</Link> */}
+			<Link href={`/${route}`}>{'See all →'}</Link>
 		</>
 	);
 };

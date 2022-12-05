@@ -1,8 +1,10 @@
-import { type RefObject } from 'react';
+import { type Dispatch, type RefObject, type SetStateAction } from 'react';
 
 class AutoScroller {
 	ref: RefObject<HTMLDivElement>;
 	step: number;
+	updateStart: Dispatch<SetStateAction<number>>;
+
 	interval?: ReturnType<typeof setInterval>;
 	observer?: IntersectionObserver;
 
@@ -12,9 +14,14 @@ class AutoScroller {
 	childWidth: number;
 	visibleWrapperWidth: number;
 
-	constructor(ref: RefObject<HTMLDivElement>, step: number) {
+	constructor(
+		ref: RefObject<HTMLDivElement>,
+		step: number,
+		updateStart: Dispatch<SetStateAction<number>>
+	) {
 		this.ref = ref;
 		this.step = step;
+		this.updateStart = updateStart;
 
 		this.scrollElement = ref?.current;
 		this.flexWrapper = this.scrollElement?.firstElementChild;
@@ -31,7 +38,7 @@ class AutoScroller {
 
 		const headObserverOptions = {
 			root: this.scrollElement,
-			rootMargin: `${this.childWidth}px`,
+			rootMargin: `${this.childWidth / 10}px`,
 			threshold: 0.0,
 		};
 
@@ -40,13 +47,15 @@ class AutoScroller {
 			if (!targetEntry) return;
 
 			// move target to end, fix scroll pos
-			this.flexWrapper?.appendChild(targetEntry.target);
+			this.flexWrapper?.appendChild(this.flexWrapper?.firstChild!);
 			this.scrollElement?.scrollTo({
 				left:
 					this.step > 0
-						? this.childWidth
+						? this.scrollElement.scrollLeft - this.childWidth - 8 // margin width
 						: this.scrollElement.scrollWidth - this.childWidth - (this.visibleWrapperWidth ?? 0),
 			});
+
+			this.updateStart(prev => prev + 1);
 
 			// TODO: adjust visibleWrapperWidth on resize
 			// TODO: make scrolling work backwards
