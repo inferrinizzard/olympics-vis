@@ -24,27 +24,27 @@ const CardScroller = <T extends Record<string, string | number>>({
 	direction,
 	color,
 }: CardScrollerProps<T>) => {
-	const scrollRef = useRef<HTMLDivElement>(null);
-	const virtualizeWrapperRef = useRef<HTMLDivElement>(null);
+	// const scrollRef = useRef<HTMLDivElement>(null);
+	// const virtualizeWrapperRef = useRef<HTMLDivElement>(null);
 
-	const virtualizer = useVirtualizer({
-		horizontal: true,
-		count: data.length,
-		getScrollElement: () => virtualizeWrapperRef.current,
-		estimateSize: () => 16 * 13.5, // ref: ITEM, 16px per rem
-		overscan: 3,
-	});
+	// const virtualizer = useVirtualizer({
+	// 	horizontal: true,
+	// 	count: data.length,
+	// 	getScrollElement: () => virtualizeWrapperRef.current,
+	// 	estimateSize: () => 16 * 13.5, // ref: ITEM, 16px per rem
+	// 	overscan: 3,
+	// });
 
-	useEffect(() => {
-		const autoscroller = new AutoScroller(scrollRef, direction * (1 + Math.random()));
-		autoscroller.start();
+	// useEffect(() => {
+	// 	const autoscroller = new AutoScroller(scrollRef, direction * (1 + Math.random()));
+	// 	autoscroller.start();
 
-		return () => autoscroller.close();
-	}, [direction]);
+	// 	return () => autoscroller.close();
+	// }, [direction]);
 
 	return (
 		<>
-			<Box
+			{/* <Box
 				ref={scrollRef}
 				component="section"
 				className="disable-scrollbar"
@@ -74,7 +74,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 					})}
 				</Box>
 			</Box>
-			<Link href={`/${route}`}>{'See all →'}</Link>
+			<Link href={`/${route}`}>{'See all →'}</Link> */}
 		</>
 	);
 };

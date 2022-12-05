@@ -60,7 +60,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					direction={1}
 					color="green"
 				/>
-				<CardScroller<Sport>
+				{/* <CardScroller<Sport>
 					data={sports}
 					route="sports"
 					idKey="sport"
@@ -75,7 +75,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					imageKey="flag"
 					direction={1}
 					color="blue"
-				/>
+				/> */}
 			</Container>
 		</>
 	);
