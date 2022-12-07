@@ -7,6 +7,7 @@ class AutoScroller {
 
 	interval?: ReturnType<typeof setInterval>;
 	headObserver?: IntersectionObserver;
+	wheelHandler: (e: WheelEvent) => void;
 
 	scrollElement: HTMLDivElement | null;
 	flexWrapper?: Element | null;
@@ -28,6 +29,14 @@ class AutoScroller {
 		this.targetElement = this.flexWrapper?.firstElementChild;
 		this.childWidth = this.flexWrapper?.firstElementChild?.clientWidth ?? 0;
 		this.visibleWrapperWidth = this.scrollElement?.clientWidth ?? 0;
+
+		this.wheelHandler = e => {
+			e.preventDefault();
+			this.scrollElement?.scrollTo({
+				left:
+					this.scrollElement.scrollLeft + Math.sign(e.deltaX) * Math.min(50, Math.abs(e.deltaX)),
+			});
+		};
 	}
 
 	start = () => {
@@ -35,6 +44,9 @@ class AutoScroller {
 		if (this.step < 0) {
 			this.scrollElement?.scrollTo({ left: this.scrollElement.scrollWidth + this.childWidth });
 		}
+
+		// add event handler to limit scroll speed
+		this.scrollElement?.addEventListener('wheel', this.wheelHandler);
 
 		const headObserverOptions = {
 			root: this.scrollElement,
@@ -64,7 +76,7 @@ class AutoScroller {
 			left:
 				this.step > 0
 					? this.scrollElement.scrollLeft - this.childWidth - 8 // margin width
-					: this.scrollElement.scrollWidth - this.childWidth - (this.visibleWrapperWidth ?? 0),
+					: this.scrollElement.scrollWidth - this.childWidth - (this.visibleWrapperWidth ?? 0) + 8,
 		});
 
 		this.updateStart(prev => prev + 1);
@@ -80,6 +92,7 @@ class AutoScroller {
 	close = () => {
 		this.interval && clearInterval(this.interval);
 		this.headObserver?.disconnect();
+		this.scrollElement?.removeEventListener('wheel', this.wheelHandler);
 	};
 }
 
