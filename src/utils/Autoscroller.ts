@@ -76,7 +76,7 @@ class AutoScroller {
 			left:
 				this.step > 0
 					? this.scrollElement.scrollLeft - this.childWidth - 8 // margin width
-					: this.scrollElement.scrollWidth - this.childWidth - (this.visibleWrapperWidth ?? 0) + 8,
+					: this.scrollElement.scrollWidth - (this.visibleWrapperWidth ?? 0) - 16,
 		});
 
 		this.updateStart(prev => prev + 1);
