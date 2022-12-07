@@ -6,7 +6,7 @@ class AutoScroller {
 	updateStart: Dispatch<SetStateAction<number>>;
 
 	interval?: ReturnType<typeof setInterval>;
-	observer?: IntersectionObserver;
+	headObserver?: IntersectionObserver;
 
 	scrollElement: HTMLDivElement | null;
 	flexWrapper?: Element | null;
@@ -42,31 +42,8 @@ class AutoScroller {
 			threshold: 0.0,
 		};
 
-		const positiveLoop = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-			const targetEntry = entries.find(entry => !entry.isIntersecting);
-			if (!targetEntry) return;
-
-			// move target to end, fix scroll pos
-			this.flexWrapper?.appendChild(this.flexWrapper?.firstChild!);
-			this.scrollElement?.scrollTo({
-				left:
-					this.step > 0
-						? this.scrollElement.scrollLeft - this.childWidth - 8 // margin width
-						: this.scrollElement.scrollWidth - this.childWidth - (this.visibleWrapperWidth ?? 0),
-			});
-
-			this.updateStart(prev => prev + 1);
-
-			// TODO: adjust visibleWrapperWidth on resize
-			// TODO: make scrolling work backwards
-
-			// update observers
-			this.flexWrapper?.firstElementChild && observer.observe(this.flexWrapper.firstElementChild);
-			observer.unobserve(targetEntry.target);
-		};
-
-		this.observer = new IntersectionObserver(positiveLoop, headObserverOptions);
-		this.targetElement && this.observer.observe(this.targetElement);
+		this.headObserver = new IntersectionObserver(this.headLoop, headObserverOptions);
+		this.targetElement && this.headObserver.observe(this.targetElement);
 
 		this.interval = setInterval(
 			() =>
@@ -77,9 +54,32 @@ class AutoScroller {
 		);
 	};
 
+	headLoop = (entries: IntersectionObserverEntry[], headObserver: IntersectionObserver) => {
+		const targetEntry = entries.find(entry => !entry.isIntersecting);
+		if (!targetEntry) return;
+
+		// move target to end, fix scroll pos
+		this.flexWrapper?.appendChild(this.flexWrapper?.firstChild!);
+		this.scrollElement?.scrollTo({
+			left:
+				this.step > 0
+					? this.scrollElement.scrollLeft - this.childWidth - 8 // margin width
+					: this.scrollElement.scrollWidth - this.childWidth - (this.visibleWrapperWidth ?? 0),
+		});
+
+		this.updateStart(prev => prev + 1);
+
+		// TODO: adjust visibleWrapperWidth on resize
+		// TODO: make scrolling work backwards
+
+		// update observers
+		this.flexWrapper?.firstElementChild && headObserver.observe(this.flexWrapper.firstElementChild);
+		headObserver.unobserve(targetEntry.target);
+	};
+
 	close = () => {
 		this.interval && clearInterval(this.interval);
-		this.observer?.disconnect();
+		this.headObserver?.disconnect();
 	};
 }
 
