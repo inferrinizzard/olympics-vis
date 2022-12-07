@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import { Box, Tooltip } from '@mantine/core';
-import { useVirtualizer } from '@tanstack/react-virtual';
 
 import CardLink from 'components/layouts/CardLink';
 import AutoScroller from 'src/utils/Autoscroller';
@@ -28,15 +27,6 @@ const CardScroller = <T extends Record<string, string | number>>({
 	const [length, setLength] = useState(1);
 
 	const scrollRef = useRef<HTMLDivElement>(null);
-	const virtualizeWrapperRef = useRef<HTMLDivElement>(null);
-
-	const virtualizer = useVirtualizer({
-		horizontal: true,
-		count: data.length,
-		getScrollElement: () => virtualizeWrapperRef.current,
-		estimateSize: () => 16 * 13.5, // ref: ITEM, 16px per rem
-		overscan: 3,
-	});
 
 	useEffect(() => {
 		const autoscroller = new AutoScroller(scrollRef, direction * (1 + Math.random()), setStart);
@@ -58,17 +48,12 @@ const CardScroller = <T extends Record<string, string | number>>({
 				className="disable-scrollbar"
 				w="100%"
 				sx={{ overflowX: 'scroll' }}>
-				<Box
-					ref={virtualizeWrapperRef}
-					sx={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
+				<Box sx={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
 					{data.slice(0, length).map((_, i) => {
 						const datum = data[(start + i) % data.length];
 						return (
 							<Tooltip key={datum[idKey]} label={datum[idKey]} position="bottom">
-								<Box // ITEM: width + left & right margin
-									m="0.25rem"
-									w="13rem"
-									h="13rem">
+								<Box m="0.25rem" w="13rem" h="13rem">
 									<CardLink
 										href={`/${route}/${datum[idKey]}`}
 										img={datum[imageKey] as string}
