@@ -124,7 +124,7 @@ const Countries: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 							{nocs.map(country => (
 								<CardLink
 									key={country.country}
-									img={country.flag}
+									img={`/images/countries/${country.country}.svg`}
 									alt={'NOC Flag for ' + country.country}
 									href={`/countries/${country.country}`}
 									caption={country.country}

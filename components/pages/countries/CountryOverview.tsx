@@ -36,7 +36,7 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
 			<Box mah="50%">
 				<Image
-					src={country.flag}
+					src={`/images/countries/${country.country}.svg`}
 					height="12rem"
 					alt={'NOC Flag for ' + country.country}
 					fit="scale-down"

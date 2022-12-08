@@ -9,7 +9,7 @@ import { type Games } from '@prisma/client';
 import { Title } from '@mantine/core';
 
 import CardLink from 'components/layouts/CardLink';
-import { getGameName, searchFilter } from 'src/util';
+import { getGameImage, getGameName, searchFilter } from 'src/util';
 
 export interface GamesProps {
 	games: Games[];
@@ -38,10 +38,10 @@ const Games: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ games
 						games.length > 10 ? 'repeat(auto-fit, minmax(200px, 1fr))' : 'repeat(auto-fill, 400px)',
 					gap: '1rem',
 				}}>
-				{games.filter(gamesSearchFilter).map(({ game, emblem }) => (
+				{games.filter(gamesSearchFilter).map(({ game }) => (
 					<CardLink
 						key={game}
-						img={emblem}
+						img={`/images/games/${getGameImage(game)}`}
 						alt={'Olympic emblem for ' + game}
 						href={`/games/${game}`}
 						caption={getGameName(game)}

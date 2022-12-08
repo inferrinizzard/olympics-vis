@@ -8,7 +8,7 @@ import { type Country, type Games, type Sport } from '.prisma/client';
 import { Box, Container, Title } from '@mantine/core';
 
 import CardScroller from 'components/pages/hero/CardScroller';
-import { getGameName } from 'src/util';
+import { getGameImage, getGameName } from 'src/util';
 
 interface HeroProps {
 	games: Games[];
@@ -57,7 +57,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					data={games}
 					route="games"
 					idKey="game"
-					imageKey="emblem"
+					img={game => `/images/games/${getGameImage(game.game as string)}`}
 					tooltip={game => getGameName(game.game)}
 					direction={1}
 					color="green"
@@ -66,7 +66,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					data={sports}
 					route="sports"
 					idKey="sport"
-					imageKey="icon"
+					img={sport => `/images/sports/${sport.sport}.svg`}
 					tooltip={sport => sport.name}
 					direction={-1}
 					color="red"
@@ -75,7 +75,7 @@ const Hero: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 					data={countries}
 					route="countries"
 					idKey="country"
-					imageKey="flag"
+					img={country => `/images/countries/${country.country}.svg`}
 					tooltip={country => country.name}
 					direction={1}
 					color="blue"

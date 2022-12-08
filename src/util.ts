@@ -1,3 +1,5 @@
+import gamesImages from './gameImages.json';
+
 export const getGameName = (gamesId: string) => {
 	const slugs = gamesId.split('-');
 	if (/^\d{4}/.test(gamesId)) {
@@ -9,6 +11,10 @@ export const getGameName = (gamesId: string) => {
 	const city = slugs.map(slug => slug[0].toUpperCase() + slug.slice(1)).join(' ');
 
 	return `${city} ${year}`;
+};
+
+export const getGameImage = (gamesId: string) => {
+	return gamesImages[gamesId as keyof typeof gamesImages];
 };
 
 export const sortByMedals = <Row extends { gold: number; silver: number; bronze: number }>(
