@@ -48,9 +48,9 @@ const Header: React.FC<Partial<HeaderProps>> = props => {
 				<Link passHref href="/">
 					<Box h="2.5rem" w="2.5rem" bg="white" sx={{ borderRadius: '0.5rem', overflow: 'hidden' }}>
 						<Image
-							src={'https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg'}
+							src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg"
 							alt="Home"
-							height={'2.5rem'}
+							height="2.5rem"
 							fit="scale-down"
 						/>
 					</Box>
