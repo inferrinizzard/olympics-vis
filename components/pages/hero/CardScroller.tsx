@@ -59,6 +59,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 										img={datum[imageKey] as string}
 										alt={datum[idKey] as string}
 										hoverColour={color}
+										nextImageProps={{ priority: true }}
 									/>
 								</Box>
 							</Tooltip>
