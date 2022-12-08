@@ -5,13 +5,12 @@ import { Box, Title, Tooltip } from '@mantine/core';
 
 import CardLink from 'components/layouts/CardLink';
 import AutoScroller from 'src/utils/Autoscroller';
-import { getGameImage } from 'src/util';
 
 interface CardScrollerProps<T> {
 	data: T[];
 	route: string;
 	idKey: keyof T;
-	imageKey: keyof T;
+	img: (t: T) => string;
 	tooltip: (t: T) => string;
 	direction: 1 | -1;
 	color: string;
@@ -21,7 +20,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 	data,
 	route,
 	idKey,
-	imageKey,
+	img,
 	tooltip,
 	direction,
 	color,
@@ -59,11 +58,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 								<Box m="0.25rem" w="13rem" h="13rem">
 									<CardLink
 										href={`/${route}/${datum[idKey]}`}
-										img={
-											imageKey === 'emblem'
-												? `/images/games/${getGameImage(datum.game as string)}`
-												: (datum[imageKey] as string)
-										}
+										img={img(datum)}
 										alt={datum[idKey] as string}
 										hoverColour={color}
 										nextImageProps={{ priority: true }}

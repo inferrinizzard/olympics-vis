@@ -21,7 +21,7 @@ const SportsOverview: React.FC<SportsOverviewProps> = ({ sport, wikipediaExcerpt
 				<Box maw="15rem" miw="fit-content">
 					<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
 					<Image
-						src={sport.icon}
+						src={`/images/sports/${sport.sport}.svg`}
 						width="100%"
 						alt={sport.sport + ' sport icon'}
 						styles={{ root: { width: '100%', aspectRatio: '1 / 1' } }}

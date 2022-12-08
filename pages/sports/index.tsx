@@ -96,7 +96,7 @@ const Sports: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 							{sportList.map(({ sport, icon, name }) => (
 								<CardLink
 									key={sport}
-									img={icon}
+									img={`/images/sports/${sport}.svg`}
 									alt={'Icon for ' + sport}
 									href={`/sports/${sport}`}
 									caption={name}
