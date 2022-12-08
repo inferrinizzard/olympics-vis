@@ -22,7 +22,6 @@
 		"@nivo/geo": "^0.79.1",
 		"@nivo/line": "^0.80.0",
 		"@prisma/client": "^4.2.1",
-		"@tanstack/react-virtual": "^3.0.0-beta.22",
 		"axios": "^0.26.1",
 		"next": "12.1.4",
 		"olympics-api": "git+https://github.com/inferrinizzard/olympics-api.git#api-types",
