@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import { ActionIcon, Tooltip } from '@mantine/core';
 
-import { ArrowBack } from 'tabler-icons-react';
+import ArrowBack from 'tabler-icons-react/dist/icons/arrow-back';
 
 import useAccentColour from 'src/hooks/useAccentColour';
 

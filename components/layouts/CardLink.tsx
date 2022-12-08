@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import Image, { type ImageProps } from 'next/image';
 
 import { Box, Card, Title, type CSSObject, type MantineNumberSize } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
@@ -15,6 +15,7 @@ interface CardLinkProps {
 	caption?: string;
 	secondary?: string;
 	hoverColour?: string;
+	nextImageProps?: Partial<ImageProps>;
 }
 
 const CardLink: React.FC<CardLinkProps> = ({
@@ -26,6 +27,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 	caption,
 	secondary,
 	hoverColour,
+	nextImageProps,
 }) => {
 	const { hovered, ref } = useHover();
 	const { primary } = useAccentColour();
@@ -45,9 +47,10 @@ const CardLink: React.FC<CardLinkProps> = ({
 						: undefined,
 					transform: hovered ? 'scale(1.05)' : undefined,
 					zIndex: hovered ? 1 : undefined,
+					borderRadius: '1rem',
 				})}>
 				<Box className="next-img-wrapper" sx={{ position: 'relative', aspectRatio, ...imgStyles }}>
-					<Image src={img} alt={alt} layout="fill" />
+					<Image src={img} alt={alt} layout="fill" {...nextImageProps} />
 				</Box>
 				{caption && <Title order={3}>{caption}</Title>}
 				{secondary && <Title order={5}>{secondary}</Title>}
