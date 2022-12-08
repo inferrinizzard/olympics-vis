@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-import { Box, Tooltip } from '@mantine/core';
+import { Box, Title, Tooltip } from '@mantine/core';
 
 import CardLink from 'components/layouts/CardLink';
 import AutoScroller from 'src/utils/Autoscroller';
@@ -66,7 +66,15 @@ const CardScroller = <T extends Record<string, string | number>>({
 					})}
 				</Box>
 			</Box>
-			<Link href={`/${route}`}>{'See all →'}</Link>
+			<Link passHref href={`/${route}`}>
+				<Title
+					order={4}
+					m="1rem"
+					w="fit-content"
+					sx={{ position: 'relative', zIndex: 1, cursor: 'pointer' }}>
+					{'See all →'}
+				</Title>
+			</Link>
 		</>
 	);
 };
