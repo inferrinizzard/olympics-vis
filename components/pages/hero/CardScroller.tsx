@@ -11,6 +11,7 @@ interface CardScrollerProps<T> {
 	route: string;
 	idKey: keyof T;
 	imageKey: keyof T;
+	tooltip: (t: T) => string;
 	direction: 1 | -1;
 	color: string;
 }
@@ -20,6 +21,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 	route,
 	idKey,
 	imageKey,
+	tooltip,
 	direction,
 	color,
 }: CardScrollerProps<T>) => {
@@ -52,7 +54,7 @@ const CardScroller = <T extends Record<string, string | number>>({
 					{data.slice(0, length).map((_, i) => {
 						const datum = data[(start + i) % data.length];
 						return (
-							<Tooltip key={datum[idKey]} label={datum[idKey]} position="bottom">
+							<Tooltip key={datum[idKey]} label={tooltip(datum)} position="bottom">
 								<Box m="0.25rem" w="13rem" h="13rem">
 									<CardLink
 										href={`/${route}/${datum[idKey]}`}

@@ -47,6 +47,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 						: undefined,
 					transform: hovered ? 'scale(1.05)' : undefined,
 					zIndex: hovered ? 1 : undefined,
+					borderRadius: '1rem',
 				})}>
 				<Box className="next-img-wrapper" sx={{ position: 'relative', aspectRatio, ...imgStyles }}>
 					<Image src={img} alt={alt} layout="fill" {...nextImageProps} />
