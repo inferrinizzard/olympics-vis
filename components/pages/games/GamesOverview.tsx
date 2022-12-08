@@ -11,6 +11,7 @@ import Run from 'tabler-icons-react/dist/icons/run';
 import GridCell from 'components/grid/GridCell';
 import StatCard from 'components/grid/StatCard';
 import Excerpt from 'components/layouts/Excerpt';
+import { getGameImage } from 'src/util';
 
 interface GamesOverviewProps {
 	game: Games;
@@ -37,7 +38,11 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({ game, wikipediaExcerpt })
 				</Box>
 			</Box>
 			<Box p="sm" sx={{ width: '25%' }}>
-				<Image src={game.emblem} alt={'Olympic emblem for ' + game} sx={{ width: '100%' }} />
+				<Image
+					src={`/images/games/${getGameImage(game.game)}`}
+					alt={'Olympic emblem for ' + game}
+					sx={{ width: '100%' }}
+				/>
 			</Box>
 		</GridCell>
 	);
