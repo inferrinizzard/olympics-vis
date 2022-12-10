@@ -22,7 +22,7 @@ export const getWikipediaExcerpt = async (url: string) => {
 						pages: [page],
 					},
 				},
-			}) => page.extract
+			}) => page.extract ?? 'Unable to fetch excerpt from Wikipedia.'
 		)
-		.catch(() => 'Unable to fetch excerpt.');
+		.catch(() => 'Error whilst fetching excerpt from Wikipedia.');
 };
