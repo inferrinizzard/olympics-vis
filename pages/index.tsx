@@ -3,7 +3,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 
 import prisma from 'src/db/prisma';
-import { type Country, type Games, type Sport } from '.prisma/client';
+import type { Country, Games, Sport } from '.prisma/client';
 
 import { Box, Container, Title } from '@mantine/core';
 

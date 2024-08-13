@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
+// biome-ignore lint/suspicious/noEmptyInterface: <explanation>
 interface DocumentProps {}
 
 const Document: React.FC<DocumentProps> = () => {
