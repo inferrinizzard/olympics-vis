@@ -6,7 +6,7 @@ import type {
 } from "next";
 import Head from "next/head";
 
-import prisma from "src/db/prisma";
+import prisma from "lib/db/prisma";
 import type {
 	Country,
 	CountryAthletes,
@@ -23,7 +23,7 @@ import CountryMedalTotals from "components/pages/countries/CountryMedalTotals";
 import CountryGamesMedalsChart from "components/pages/countries/CountryGamesMedalsChart";
 import CountrySportsMedalsChart from "components/pages/countries/CountrySportsMedalsChart";
 import BackButton from "components/layouts/BackButton";
-import { getWikipediaExcerpt, getWikipediaUrl } from "src/utils/wikipedia";
+import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 export interface OlympicNOCProps {
 	country: Country;

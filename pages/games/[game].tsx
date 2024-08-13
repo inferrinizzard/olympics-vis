@@ -6,7 +6,7 @@ import type {
 } from "next";
 import Head from "next/head";
 
-import prisma from "src/db/prisma";
+import prisma from "lib/db/prisma";
 import type {
 	Country,
 	CountryAthletes,
@@ -22,8 +22,8 @@ import GamesMedalsTable from "components/pages/games/GamesMedalsTable";
 import GamesSports from "components/pages/games/GamesSports";
 import GamesChoropleth from "components/pages/games/GamesChoropleth";
 import BackButton from "components/layouts/BackButton";
-import { getWikipediaExcerpt, getWikipediaUrl } from "src/utils/wikipedia";
-import { getGameName } from "src/util";
+import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
+import { getGameName } from "lib/util";
 
 export interface OlympicGameSeasonProps {
 	game: Games;

@@ -2,7 +2,7 @@ import type { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import prisma from "src/db/prisma";
+import prisma from "lib/db/prisma";
 import type { Country, Games, MedalTotals } from "@prisma/client";
 
 import { Box, Title } from "@mantine/core";
@@ -10,7 +10,7 @@ import { Box, Title } from "@mantine/core";
 import { Bar } from "@nivo/bar";
 
 import CardLink from "components/layouts/CardLink";
-import { searchFilter } from "src/util";
+import { searchFilter } from "lib/util";
 
 export interface CountriesProps {
 	countries: Country[];

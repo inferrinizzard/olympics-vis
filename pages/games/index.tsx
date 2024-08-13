@@ -2,13 +2,13 @@ import type { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import prisma from "src/db/prisma";
+import prisma from "lib/db/prisma";
 import type { Games } from "@prisma/client";
 
 import { Title } from "@mantine/core";
 
 import CardLink from "components/layouts/CardLink";
-import { getGameImage, getGameName, searchFilter } from "src/util";
+import { getGameImage, getGameName, searchFilter } from "lib/util";
 
 export interface GamesProps {
 	games: Games[];

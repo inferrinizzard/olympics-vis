@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
-import { Box, Title, Tooltip } from '@mantine/core';
+import { Box, Title, Tooltip } from "@mantine/core";
 
-import CardLink from 'components/layouts/CardLink';
-import AutoScroller from 'src/utils/Autoscroller';
+import CardLink from "components/layouts/CardLink";
+import AutoScroller from "lib/utils/Autoscroller";
 
 interface CardScrollerProps<T> {
 	data: T[];
@@ -31,12 +31,20 @@ const CardScroller = <T extends Record<string, string | number>>({
 	const scrollRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const autoscroller = new AutoScroller(scrollRef, direction * (1 + Math.random()), setStart);
+		const autoscroller = new AutoScroller(
+			scrollRef,
+			direction * (1 + Math.random()),
+			setStart,
+		);
 		autoscroller.start();
 
-		setLength(Math.floor((scrollRef?.current?.scrollWidth ?? 0) / (13.5 * 16)) + 3);
-		window.addEventListener('resize', () =>
-			setLength(Math.floor((scrollRef?.current?.scrollWidth ?? 0) / (13.5 * 16)) + 3)
+		setLength(
+			Math.floor((scrollRef?.current?.scrollWidth ?? 0) / (13.5 * 16)) + 3,
+		);
+		window.addEventListener("resize", () =>
+			setLength(
+				Math.floor((scrollRef?.current?.scrollWidth ?? 0) / (13.5 * 16)) + 3,
+			),
 		);
 
 		return () => autoscroller.close();
@@ -49,12 +57,22 @@ const CardScroller = <T extends Record<string, string | number>>({
 				component="section"
 				className="disable-scrollbar"
 				w="100%"
-				sx={{ overflowX: 'scroll' }}>
-				<Box sx={{ display: 'inline-flex', flexDirection: direction > 0 ? 'row' : 'row-reverse' }}>
+				sx={{ overflowX: "scroll" }}
+			>
+				<Box
+					sx={{
+						display: "inline-flex",
+						flexDirection: direction > 0 ? "row" : "row-reverse",
+					}}
+				>
 					{data.slice(0, length).map((_, i) => {
 						const datum = data[(start + i) % data.length];
 						return (
-							<Tooltip key={datum[idKey]} label={tooltip(datum)} position="bottom">
+							<Tooltip
+								key={datum[idKey]}
+								label={tooltip(datum)}
+								position="bottom"
+							>
 								<Box m="0.25rem" w="13rem" h="13rem">
 									<CardLink
 										href={`/${route}/${datum[idKey]}`}
@@ -74,8 +92,9 @@ const CardScroller = <T extends Record<string, string | number>>({
 					order={4}
 					m="1rem"
 					w="fit-content"
-					sx={{ position: 'relative', zIndex: 1, cursor: 'pointer' }}>
-					{'See all →'}
+					sx={{ position: "relative", zIndex: 1, cursor: "pointer" }}
+				>
+					{"See all →"}
 				</Title>
 			</Link>
 		</>

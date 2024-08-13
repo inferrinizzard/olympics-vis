@@ -1,23 +1,23 @@
-import { type Country, type Games, type Sport } from '@prisma/client';
+import { type Country, type Games, type Sport } from "@prisma/client";
 
-import { Box, Image, Title } from '@mantine/core';
+import { Box, Image, Title } from "@mantine/core";
 
-import Calendar from 'tabler-icons-react/dist/icons/calendar';
-import Medal from 'tabler-icons-react/dist/icons/medal';
-import Run from 'tabler-icons-react/dist/icons/run';
-import Trophy from 'tabler-icons-react/dist/icons/trophy';
+import Calendar from "tabler-icons-react/dist/icons/calendar";
+import Medal from "tabler-icons-react/dist/icons/medal";
+import Run from "tabler-icons-react/dist/icons/run";
+import Trophy from "tabler-icons-react/dist/icons/trophy";
 
-import GridCell from 'components/grid/GridCell';
-import StatCard from 'components/grid/StatCard';
-import Excerpt from 'components/layouts/Excerpt';
-import { getGameName } from 'src/util';
+import GridCell from "components/grid/GridCell";
+import StatCard from "components/grid/StatCard";
+import Excerpt from "components/layouts/Excerpt";
+import { getGameName } from "lib/util";
 
 interface CountryOverviewData {
-	firstGames: Games['game'];
+	firstGames: Games["game"];
 	totalMedals: number;
-	hostedGames?: Games['game'][];
-	bestGames: Games['game'];
-	bestSport: Sport['sport'];
+	hostedGames?: Games["game"][];
+	bestGames: Games["game"];
+	bestSport: Sport["sport"];
 }
 
 interface CountryOverviewProps {
@@ -32,13 +32,17 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 	overviewData: { firstGames, totalMedals, hostedGames, bestGames, bestSport },
 }) => {
 	return (
-		<GridCell bg="blue" h="100%" sx={theme => ({ color: theme.colors.blue[2] })}>
+		<GridCell
+			bg="blue"
+			h="100%"
+			sx={(theme) => ({ color: theme.colors.blue[2] })}
+		>
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
 			<Box mah="50%">
 				<Image
 					src={`/images/countries/${country.country}.svg`}
 					height="12rem"
-					alt={'NOC Flag for ' + country.country}
+					alt={"NOC Flag for " + country.country}
 					fit="scale-down"
 					p="md"
 				/>
@@ -46,16 +50,27 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 			<Box m="0.5rem">
 				<Excerpt text={wikipediaExcerpt} />
 			</Box>
-			<Box p="xs" sx={{ display: 'flex', rowGap: '1rem', flexDirection: 'column' }}>
+			<Box
+				p="xs"
+				sx={{ display: "flex", rowGap: "1rem", flexDirection: "column" }}
+			>
 				<StatCard
 					Icon={Calendar}
-					title={'First Games'}
-					text={firstGames ? getGameName(firstGames) : 'N/a'}
+					title={"First Games"}
+					text={firstGames ? getGameName(firstGames) : "N/a"}
 				/>
-				<StatCard Icon={Medal} title={'Total Medals'} text={`${totalMedals}`} />
+				<StatCard Icon={Medal} title={"Total Medals"} text={`${totalMedals}`} />
 				{/* <StatCard Icon={Home} title={'Games Hosted'} text={''} /> */}
-				{bestGames && <StatCard Icon={Trophy} title={'Best Games'} text={getGameName(bestGames)} />}
-				{bestSport && <StatCard Icon={Run} title={'Best Sport'} text={bestSport} />}
+				{bestGames && (
+					<StatCard
+						Icon={Trophy}
+						title={"Best Games"}
+						text={getGameName(bestGames)}
+					/>
+				)}
+				{bestSport && (
+					<StatCard Icon={Run} title={"Best Sport"} text={bestSport} />
+				)}
 			</Box>
 		</GridCell>
 	);

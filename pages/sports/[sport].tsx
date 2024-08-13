@@ -6,7 +6,7 @@ import type {
 } from "next";
 import Head from "next/head";
 
-import prisma from "src/db/prisma";
+import prisma from "lib/db/prisma";
 import type { CountrySportsMedals, Games, Sport } from "@prisma/client";
 
 import { Container, Grid, Title } from "@mantine/core";
@@ -15,7 +15,7 @@ import SportsOverview from "components/pages/sports/SportsOverview";
 import SportsEventsChart from "components/pages/sports/SportsEventsChart";
 import SportsCountriesChart from "components/pages/sports/SportsCountriesChart";
 import BackButton from "components/layouts/BackButton";
-import { getWikipediaExcerpt, getWikipediaUrl } from "src/utils/wikipedia";
+import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 export interface OlympicSportProps {
 	sport: Sport;

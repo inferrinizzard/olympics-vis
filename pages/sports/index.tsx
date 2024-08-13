@@ -3,13 +3,13 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import prisma from "src/db/prisma";
+import prisma from "lib/db/prisma";
 import type { Games, Sport } from "@prisma/client";
 
 import { Box, Title } from "@mantine/core";
 
 import CardLink from "components/layouts/CardLink";
-import { searchFilter } from "src/util";
+import { searchFilter } from "lib/util";
 
 export interface SportsProps {
 	sports: Sport[];
