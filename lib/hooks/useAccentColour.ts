@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { accentColourMapping, colours } from 'src/constants/colours';
+import { accentColourMapping, colours } from 'lib/constants/colours';
 
 const useAccentColour = () => {
   const { route } = useRouter();

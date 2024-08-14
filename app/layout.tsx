@@ -1,5 +1,5 @@
 import "@mantine/core/styles.css";
-import React from "react";
+import React, { type PropsWithChildren } from "react";
 
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 
@@ -10,7 +10,7 @@ export const metadata = {
 	description: "I am using Mantine with Next.js!",
 };
 
-export default function RootLayout({ children }: { children: any }) {
+export default function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<html lang="en">
 			<head>
