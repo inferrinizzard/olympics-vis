@@ -2,7 +2,7 @@ import { Box, Title } from "@mantine/core";
 
 import { ResponsiveBar } from "@nivo/bar";
 
-import { type OlympicSportProps } from "pages/sports/[sport]";
+import { type OlympicSportProps } from "_pages/sports/[sport]";
 import GridCell from "components/grid/GridCell";
 import { sortByMedals } from "lib/util";
 

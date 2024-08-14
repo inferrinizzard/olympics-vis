@@ -1,27 +1,34 @@
-import { Box, Title } from '@mantine/core';
+import { Box, Title } from "@mantine/core";
 
-import { ResponsiveChoropleth } from '@nivo/geo';
-import worldCountries from 'resources/json/countries.min.geo.json';
-import nocIsoLookup from 'resources/json/geo_noc_map.json';
+import { ResponsiveChoropleth } from "@nivo/geo";
+import worldCountries from "resources/json/countries.min.geo.json";
+import nocIsoLookup from "resources/json/geo_noc_map.json";
 
-import { type OlympicGameSeasonProps } from 'pages/games/[game]';
-import GridCell from 'components/grid/GridCell';
+import { type OlympicGameSeasonProps } from "_pages/games/[game]";
+import GridCell from "components/grid/GridCell";
 
 interface GamesChoroplethProps {
-	countryAthletes: OlympicGameSeasonProps['countryAthletes']['country_athletes'];
+	countryAthletes: OlympicGameSeasonProps["countryAthletes"]["country_athletes"];
 }
 
-const GamesChoropleth: React.FC<GamesChoroplethProps> = ({ countryAthletes }) => {
+const GamesChoropleth: React.FC<GamesChoroplethProps> = ({
+	countryAthletes,
+}) => {
 	const countryData = Object.entries(countryAthletes).map(([id, value]) => ({
 		id:
-			(nocIsoLookup[id as keyof typeof nocIsoLookup] as { name: string; iso?: string })?.iso ?? id,
+			(
+				nocIsoLookup[id as keyof typeof nocIsoLookup] as {
+					name: string;
+					iso?: string;
+				}
+			)?.iso ?? id,
 		value,
 	}));
 
 	return (
 		<GridCell>
 			<Title order={2} m="sm">
-				{'Choropleth'}
+				{"Choropleth"}
 			</Title>
 			<Box h="40vh" w="100%">
 				<ResponsiveChoropleth
@@ -41,23 +48,23 @@ const GamesChoropleth: React.FC<GamesChoroplethProps> = ({ countryAthletes }) =>
 					borderColor="#152538"
 					legends={[
 						{
-							anchor: 'bottom-left',
-							direction: 'column',
+							anchor: "bottom-left",
+							direction: "column",
 							justify: true,
 							translateX: 20,
 							translateY: -100,
 							itemsSpacing: 0,
 							itemWidth: 94,
 							itemHeight: 18,
-							itemDirection: 'left-to-right',
-							itemTextColor: '#444444',
+							itemDirection: "left-to-right",
+							itemTextColor: "#444444",
 							itemOpacity: 0.85,
 							symbolSize: 18,
 							effects: [
 								{
-									on: 'hover',
+									on: "hover",
 									style: {
-										itemTextColor: '#000000',
+										itemTextColor: "#000000",
 										itemOpacity: 1,
 									},
 								},

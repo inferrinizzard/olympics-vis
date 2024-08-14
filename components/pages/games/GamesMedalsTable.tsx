@@ -1,17 +1,19 @@
-import { Image, Title, Table } from '@mantine/core';
+import { Image, Title, Table } from "@mantine/core";
 
-import { type OlympicGameSeasonProps } from 'pages/games/[game]';
-import GridCell from 'components/grid/GridCell';
+import { type OlympicGameSeasonProps } from "_pages/games/[game]";
+import GridCell from "components/grid/GridCell";
 
 interface GamesMedalsTableProps {
-	countryMedals: OlympicGameSeasonProps['countryMedals'];
+	countryMedals: OlympicGameSeasonProps["countryMedals"];
 }
 
-const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({ countryMedals }) => {
+const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({
+	countryMedals,
+}) => {
 	return (
 		<GridCell>
 			<Title order={2} p="xs">
-				{'Medals Top 10'}
+				{"Medals Top 10"}
 			</Title>
 			<Table p="xs">
 				<tbody>
@@ -31,7 +33,7 @@ const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({ countryMedals }) =>
 										src={country_detail.flag}
 										alt={country}
 										width={30}
-										sx={{ display: 'inline-block' }}
+										sx={{ display: "inline-block" }}
 									/>
 									<span>{country}</span>
 								</td>
