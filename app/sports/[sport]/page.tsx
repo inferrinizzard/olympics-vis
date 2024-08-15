@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 
-// import { prisma } from "lib/db/prisma";
+// import { getAllSports } from "lib/db";
 
 // export async function generateStaticParams() {
-// 	const sports = await prisma.sport.findMany({ select: { sport: true } });
+// 	const sports = await getAllSports();
 
 // 	return sports.map((params) => ({ params }));
 // }

@@ -6,16 +6,21 @@ import type {
 } from "next";
 import Head from "next/head";
 
-import prisma from "lib/db/prisma";
-import type { CountrySportsMedals, Games, Sport } from "@prisma/client";
-
 import { Container, Grid, Title } from "@mantine/core";
+
+import type { CountrySportsMedals, Games, Sport } from "@prisma/client";
+import {
+	getAllSports,
+	getMedalsBySport,
+	getSport,
+	getSportEventCountByGame,
+} from "lib/db";
+import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 import SportsOverview from "components/pages/sports/SportsOverview";
 import SportsEventsChart from "components/pages/sports/SportsEventsChart";
 import SportsCountriesChart from "components/pages/sports/SportsCountriesChart";
 import BackButton from "components/layouts/BackButton";
-import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 export interface OlympicSportProps {
 	sport: Sport;
@@ -29,13 +34,9 @@ export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({
 }) => {
 	const sportId = params?.sport as string;
 
-	const sport = await prisma.sport.findFirst({ where: { sport: sportId } });
+	const sport = await getSport({ sport: sportId });
 
-	const countEvents = await prisma.sportsEvent.groupBy({
-		by: ["game"],
-		_count: { sport: true },
-		where: { sport: sportId },
-	});
+	const countEvents = await getSportEventCountByGame({ sport: sportId });
 	const numEvents = countEvents
 		.reverse()
 		.reduce(
@@ -44,9 +45,7 @@ export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({
 			{},
 		);
 
-	const countrySportsMedals = await prisma.countrySportsMedals.findMany({
-		where: { sport: sportId },
-	});
+	const countrySportsMedals = await getMedalsBySport({ sport: sportId });
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl("sports", sport?.name),
@@ -56,7 +55,7 @@ export const getStaticProps: GetStaticProps<OlympicSportProps> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const sports = await prisma.sport.findMany({ select: { sport: true } });
+	const sports = await getAllSports();
 
 	return { paths: sports.map((params) => ({ params })), fallback: false };
 };

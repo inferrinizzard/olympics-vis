@@ -3,13 +3,13 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import prisma from "lib/db/prisma";
-import type { Games, Sport } from "@prisma/client";
-
 import { Box, Title } from "@mantine/core";
 
-import CardLink from "components/layouts/CardLink";
+import type { Sport } from "@prisma/client";
+import { getAllSports, getSportWithSeason } from "lib/db";
 import { searchFilter } from "lib/util";
+
+import CardLink from "components/layouts/CardLink";
 
 export interface SportsProps {
 	sports: Sport[];
@@ -20,24 +20,9 @@ export interface SportsProps {
 }
 
 export const getStaticProps: GetStaticProps<SportsProps> = async () => {
-	const sports = await prisma.sport.findMany();
+	const sports = await getAllSports();
 
-	const sportsList: (Pick<Games, "season"> & { sport: Sport["sport"][] })[] =
-		await prisma.$queryRaw`
-		SELECT sport, season
-		FROM (
-			SELECT DISTINCT ON (season) game, season
-			FROM games_detail
-			ORDER BY season, year DESC
-		) latest_games
-		JOIN (
-			SELECT ARRAY_AGG(DISTINCT sport) AS sport, game
-			FROM sports_events
-			GROUP BY game
-		) sports
-		ON latest_games.game = sports.game
-		;
-	`;
+	const sportsList = await getSportWithSeason();
 
 	const currentSports = sportsList.reduce(
 		(acc, { season, sport }) => ({ ...acc, [season]: sport }),
