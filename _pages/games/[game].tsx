@@ -6,7 +6,8 @@ import type {
 } from "next";
 import Head from "next/head";
 
-import prisma from "lib/db/prisma";
+import { Container, Grid } from "@mantine/core";
+
 import type {
 	Country,
 	CountryAthletes,
@@ -14,8 +15,13 @@ import type {
 	Games,
 	SportsEvent,
 } from "@prisma/client";
-
-import { Container, Grid } from "@mantine/core";
+import {
+	getAllGames,
+	getCountryAthletesForGames,
+	getGames,
+	getSportEventsForGame,
+	getTopTenCountriesForGames,
+} from "lib/db";
 
 import GamesOverview from "components/pages/games/GamesOverview";
 import GamesMedalsTable from "components/pages/games/GamesMedalsTable";
@@ -38,27 +44,15 @@ export interface OlympicGameSeasonProps {
 export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({
 	params,
 }) => {
-	const gamesTable = prisma.games.findFirst({
-		where: { game: params?.game as string },
-	});
-	const game = await gamesTable;
+	const gamesId = params?.game as string;
 
-	const countryMedals = await prisma.countryMedals.findMany({
-		where: { game: params?.game as string },
-		take: 10,
-		include: { country_detail: true },
-		orderBy: [{ gold: "desc" }, { silver: "desc" }, { bronze: "desc" }],
-	});
+	const game = await getGames({ games: gamesId });
 
-	const sportEvents = await prisma.sportsEvent.findMany({
-		where: { game: params?.game as string },
-		distinct: "sport",
-		// include: { sport_detail: true },
-	});
+	const countryMedals = await getTopTenCountriesForGames({ games: gamesId });
 
-	const countryAthletes = (await prisma.countryAthletes.findFirst({
-		where: { game: params?.game as string },
-	})) as OlympicGameSeasonProps["countryAthletes"];
+	const sportEvents = await getSportEventsForGame({ games: gamesId });
+
+	const countryAthletes = await getCountryAthletesForGames({ games: gamesId });
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl(
@@ -78,11 +72,14 @@ export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({
 	};
 };
 
-export const getStaticPaths: GetStaticPaths = () =>
-	prisma.games.findMany({ select: { game: true } }).then((gameRows) => ({
-		paths: gameRows.map(({ game }) => ({ params: { game } })),
+export const getStaticPaths: GetStaticPaths = async () => {
+	const games = await getAllGames();
+
+	return {
+		paths: games.map(({ game }) => ({ params: { game } })),
 		fallback: false,
-	}));
+	};
+};
 
 const OlympicGameSeason: NextPage<
 	InferGetStaticPropsType<typeof getStaticProps>

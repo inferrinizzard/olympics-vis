@@ -2,10 +2,10 @@ import type { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import prisma from "lib/db/prisma";
-import type { Games } from "@prisma/client";
-
 import { Title } from "@mantine/core";
+
+import type { Games } from "@prisma/client";
+import { getAllGames } from "lib/db";
 
 import CardLink from "components/layouts/CardLink";
 import { getGameImage, getGameName, searchFilter } from "lib/util";
@@ -15,7 +15,7 @@ export interface GamesProps {
 }
 
 export const getStaticProps: GetStaticProps<GamesProps> = async () => {
-	const games = await prisma.games.findMany();
+	const games = await getAllGames();
 
 	return { props: { games: games.sort((a, b) => (a.year < b.year ? 1 : -1)) } };
 };

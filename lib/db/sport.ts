@@ -4,7 +4,7 @@ import prisma from "./prisma";
 
 import type { SportKey } from "types/prisma";
 
-type SportParam = { sport: SportKey };
+export type SportParam = { sport: SportKey };
 
 /** Get sport key and name for 1 sport */
 export const getSport = async ({ sport }: SportParam) =>
@@ -41,3 +41,11 @@ export const getSportWithSeason = async (): Promise<
 		ON latest_games.game = sports.game
 		;
 	`;
+
+/** Get sport events for a specific games */
+export const getSportEventsForGame = async ({ games }: GamesParam) =>
+	prisma.sportsEvent.findMany({
+		where: { game: games },
+		distinct: "sport",
+		// include: { sport_detail: true },
+	});
