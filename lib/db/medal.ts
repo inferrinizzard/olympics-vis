@@ -33,6 +33,7 @@ export const getMedalTotalsPerGamesForCountry = async ({
 	country,
 }: CountryParam) => prisma.countryMedals.findMany({ where: { country } });
 
+/** Get countries with most medals from past 10 games */
 export const getMedalsLeadersFromLastTenGames = async (): Promise<
 	(Pick<MedalTotals, "country"> &
 		Pick<Games, "game" | "year"> & { total: number })[]

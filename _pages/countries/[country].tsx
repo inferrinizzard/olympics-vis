@@ -17,8 +17,8 @@ import type {
 	MedalTotals,
 } from "@prisma/client";
 import {
+	getAllCountries,
 	getCountry,
-	getCountryKeys,
 	getFirstGamesForCountry,
 	getMedalsByCountry,
 	getMedalTotalsForCountry,
@@ -103,7 +103,7 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const countries = await getCountryKeys();
+	const countries = await getAllCountries({ select: { country: true } });
 
 	return {
 		paths: countries.map(({ country }) => ({ params: { country } })),

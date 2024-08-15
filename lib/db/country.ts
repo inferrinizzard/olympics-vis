@@ -1,4 +1,6 @@
-import type { CountryAthletes } from "@prisma/client";
+import prisma from "./prisma";
+
+import type { Prisma, CountryAthletes } from "@prisma/client";
 import type { CountryKey } from "types/prisma";
 
 export type CountryParam = { country: CountryKey };
@@ -9,11 +11,9 @@ export const getCountry = async ({ country }: CountryParam) =>
 		where: { country },
 	});
 
-/** Get keys for all countries */
-export const getCountryKeys = async () =>
-	prisma.country.findMany({
-		select: { country: true },
-	});
+/** Get country data for all countries */
+export const getAllCountries = async (args?: Prisma.CountryFindManyArgs) =>
+	prisma.country.findMany(args);
 
 /** Get first games that a country attended */
 export const getFirstGamesForCountry = async ({ country }: CountryParam) =>

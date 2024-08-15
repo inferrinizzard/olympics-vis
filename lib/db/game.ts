@@ -1,4 +1,6 @@
-import { CountryAthletes } from "@prisma/client";
+import prisma from "./prisma";
+
+import type { Prisma } from "@prisma/client";
 import type { GamesKey } from "types/prisma";
 
 export type GamesParam = { games: GamesKey };
@@ -7,12 +9,9 @@ export type GamesParam = { games: GamesKey };
 export const getGames = async ({ games }: GamesParam) =>
 	await prisma.games.findFirst({ where: { game: games } });
 
-/** Get games keys for all games */
-export const getAllGamesKeys = async () =>
-	prisma.games.findMany({ select: { game: true } });
-
 /** Get games data for all games */
-export const getAllGames = async () => prisma.games.findMany();
+export const getAllGames = async (args?: Prisma.GamesFindManyArgs) =>
+	prisma.games.findMany(args);
 
 /** Get number of athletes from each country for a games */
 export const getCountryAthletesForGames = async ({ games }: GamesParam) =>
