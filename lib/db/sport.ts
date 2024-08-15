@@ -1,8 +1,8 @@
-import type { Games, Sport } from "@prisma/client";
-
 import prisma from "./prisma";
 
+import type { Games, Sport } from "@prisma/client";
 import type { SportKey } from "types/prisma";
+import type { GamesParam } from "./game";
 
 export type SportParam = { sport: SportKey };
 

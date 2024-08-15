@@ -2,12 +2,11 @@ import type { NextPage, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import prisma from "lib/db/prisma";
-import type { Country, Games, MedalTotals } from "@prisma/client";
-
 import { Box, Title } from "@mantine/core";
-
 import { Bar } from "@nivo/bar";
+
+import type { Country, Games, MedalTotals } from "@prisma/client";
+import { getAllCountries, getMedalsLeadersFromLastTenGames } from "lib/db";
 
 import CardLink from "components/layouts/CardLink";
 import { searchFilter } from "lib/util";
@@ -19,29 +18,9 @@ export interface CountriesProps {
 }
 
 export const getStaticProps: GetStaticProps<CountriesProps> = async () => {
-	const countries = await prisma.country.findMany();
+	const countries = await getAllCountries();
 
-	const medalTotals = (await prisma.$queryRaw`
-		SELECT game, country, total
-		FROM (
-			SELECT
-				last10games.game AS game,
-				country,
-				CAST(gold + silver + bronze AS SMALLINT) AS total,
-				year,
-				RANK() OVER (PARTITION BY last10games.game ORDER BY gold + silver + bronze DESC) AS num
-			FROM country_game_medals
-			JOIN (
-				SELECT game, year
-				FROM games_detail
-				ORDER BY year DESC, season ASC
-				LIMIT 10
-			) last10games
-			ON country_game_medals.game = last10games.game
-		) ranked
-		WHERE num <= 5
-		ORDER BY year, total;
-		`) as CountriesProps["medalTotals"];
+	const medalTotals = await getMedalsLeadersFromLastTenGames();
 
 	return { props: { countries, medalTotals } };
 };
