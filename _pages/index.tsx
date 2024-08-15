@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
-
-import prisma from "lib/db/prisma";
-import type { Country, Games, Sport } from ".prisma/client";
-
 import { Box, Container, Title } from "@mantine/core";
+
+import type { Country, Games, Sport } from ".prisma/client";
+import { getAllCountries, getAllGames, getAllSports } from "lib/db";
 
 import CardScroller from "components/pages/hero/CardScroller";
 import { getGameImage, getGameName } from "lib/util";
@@ -17,13 +16,13 @@ interface HeroProps {
 }
 
 export const getStaticProps: GetStaticProps<HeroProps> = async () => {
-	const games = await prisma.games.findMany({
+	const games = await getAllGames({
 		orderBy: [{ year: "desc" }, { season: "asc" }],
 	});
 
-	const sports = await prisma.sport.findMany();
+	const sports = await getAllSports();
 
-	const countries = await prisma.country.findMany();
+	const countries = await getAllCountries();
 
 	return { props: { games, sports, countries } };
 };

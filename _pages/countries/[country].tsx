@@ -6,7 +6,8 @@ import type {
 } from "next";
 import Head from "next/head";
 
-import prisma from "lib/db/prisma";
+import { Container, Grid } from "@mantine/core";
+
 import type {
 	Country,
 	CountryAthletes,
@@ -15,8 +16,15 @@ import type {
 	Games,
 	MedalTotals,
 } from "@prisma/client";
-
-import { Container, Grid } from "@mantine/core";
+import {
+	getAllCountries,
+	getCountry,
+	getFirstGamesForCountry,
+	getMedalsByCountry,
+	getMedalTotalsForCountry,
+	getMedalTotalsPerGamesForCountry,
+	getNumberOfAthletesForCountry,
+} from "lib/db";
 
 import CountryOverview from "components/pages/countries/CountryOverview";
 import CountryMedalTotals from "components/pages/countries/CountryMedalTotals";
@@ -40,13 +48,9 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({
 }) => {
 	const countryId = params?.country as string;
 
-	const country = await prisma.country.findFirst({
-		where: { country: countryId },
-	});
+	const country = await getCountry({ country: countryId });
 
-	const medalsRows = await prisma.medalTotals.findMany({
-		where: { country: countryId },
-	});
+	const medalsRows = await getMedalTotalsForCountry({ country: countryId });
 
 	const zeroMedals = {
 		gold: 0,
@@ -64,33 +68,22 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({
 	);
 
 	const countrySportsMedals = (
-		await prisma.countrySportsMedals.findMany({
-			where: { country: countryId },
-		})
+		await getMedalsByCountry({ country: countryId })
 	).sort((a, b) =>
 		a.gold + a.silver + a.bronze > b.gold + b.silver + b.bronze ? -1 : 1,
 	);
 
 	const countryMedals = (
-		await prisma.countryMedals.findMany({
-			where: { country: countryId },
-		})
+		await getMedalTotalsPerGamesForCountry({ country: countryId })
 	).reverse();
 
-	const countryAthletes = (await prisma.$queryRaw`
-		SELECT
-			game,
-			CAST(country_athletes->>${countryId} AS SMALLINT) AS athletes
-		FROM country_athletes
-		WHERE country_athletes.country_athletes ? ${countryId};
-	`) as OlympicNOCProps["countryAthletes"];
+	const countryAthletes = await getNumberOfAthletesForCountry({
+		country: countryId,
+	});
 
 	const firstGames =
-		(
-			await prisma.countryAttendance.findFirst({
-				where: { country: countryId },
-			})
-		)?.games?.[0] ?? ("" as Games["game"]);
+		(await getFirstGamesForCountry({ country: countryId }))?.games?.[0] ??
+		("" as Games["game"]);
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl("countries", country?.name),
@@ -110,9 +103,7 @@ export const getStaticProps: GetStaticProps<OlympicNOCProps> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const countries = await prisma.country.findMany({
-		select: { country: true },
-	});
+	const countries = await getAllCountries({ select: { country: true } });
 
 	return {
 		paths: countries.map(({ country }) => ({ params: { country } })),
