@@ -14,10 +14,13 @@ export const getMedalsByCountry = async ({ country }: CountryParam) =>
 	prisma.countrySportsMedals.findMany({ where: { country } });
 
 /** Get top ten countries with the most medals for a games */
-export const getTopTenCountriesForGames = async ({ games }: GamesParam) =>
+export const getTopCountriesForGames = async ({
+	games,
+	num = 10,
+}: GamesParam & { num?: number }) =>
 	await prisma.countryMedals.findMany({
 		where: { game: games },
-		take: 10,
+		take: num,
 		include: { country_detail: true },
 		orderBy: [{ gold: "desc" }, { silver: "desc" }, { bronze: "desc" }],
 	});

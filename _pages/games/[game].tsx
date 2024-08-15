@@ -20,7 +20,7 @@ import {
 	getCountryAthletesForGames,
 	getGames,
 	getSportEventsForGame,
-	getTopTenCountriesForGames,
+	getTopCountriesForGames,
 } from "lib/db";
 
 import GamesOverview from "components/pages/games/GamesOverview";
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps<OlympicGameSeasonProps> = async ({
 
 	const game = await getGames({ games: gamesId });
 
-	const countryMedals = await getTopTenCountriesForGames({ games: gamesId });
+	const countryMedals = await getTopCountriesForGames({ games: gamesId });
 
 	const sportEvents = await getSportEventsForGame({ games: gamesId });
 
