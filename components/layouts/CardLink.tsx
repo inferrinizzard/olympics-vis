@@ -1,23 +1,16 @@
+import type { CSSProperties } from "react";
+
 import Link from "next/link";
 import Image, { type ImageProps } from "next/image";
 
-import {
-	Box,
-	Card,
-	Title,
-	type CSSObject,
-	type MantineNumberSize,
-} from "@mantine/core";
-import { useHover } from "@mantine/hooks";
-
-import useAccentColour from "lib/hooks/useAccentColour";
+import { Card, CardSection, Title } from "@mantine/core";
 
 interface CardLinkProps {
 	href: string;
 	img: string;
 	alt: string;
-	aspectRatio?: CSSObject["aspectRatio"];
-	imgStyles?: {};
+	aspectRatio?: CSSProperties["aspectRatio"];
+	imgStyles?: CSSProperties;
 	caption?: string;
 	secondary?: string;
 	hoverColour?: string;
@@ -35,34 +28,42 @@ const CardLink: React.FC<CardLinkProps> = ({
 	hoverColour,
 	nextImageProps,
 }) => {
-	const { hovered, ref } = useHover();
-	const { primary } = useAccentColour();
-
 	return (
 		<Link passHref href={href}>
 			<Card
-				ref={ref}
 				h="100%"
-				p={"1rem" as MantineNumberSize}
-				sx={(theme) => ({
-					cursor: "pointer",
-					backgroundColor: hovered
-						? hoverColour
-							? theme.colors[hoverColour][1]
-							: primary
-						: undefined,
-					transform: hovered ? "scale(1.05)" : undefined,
-					zIndex: hovered ? 1 : undefined,
-					borderRadius: "1rem",
-				})}
+				maw="12.5rem"
+				p="1rem"
+				shadow="sm"
+				padding="lg"
+				radius="lg"
+				withBorder
+				// style={(theme) => ({
+				// 	// backgroundColor: hovered
+				// 	// 	? hoverColour
+				// 	// 		? theme.colors[hoverColour][1]
+				// 	// 		: "white"
+				// 	// 	: undefined,
+				// 	// transform: hovered ? "scale(1.05)" : undefined,
+				// 	// zIndex: hovered ? 1 : undefined,
+				// })}
+				display="flex"
+				style={{ justifyContent: "center", cursor: "pointer" }}
 			>
-				<Box
+				<CardSection
 					className="next-img-wrapper"
-					sx={{ position: "relative", aspectRatio, ...imgStyles }}
+					style={{ position: "relative", aspectRatio, ...imgStyles }}
 				>
 					<Image src={img} alt={alt} layout="fill" {...nextImageProps} />
-				</Box>
-				{caption && <Title order={3}>{caption}</Title>}
+				</CardSection>
+				{caption && (
+					<Title
+						order={3}
+						style={{ textDecoration: "none", textAlign: "center" }}
+					>
+						{caption}
+					</Title>
+				)}
 				{secondary && <Title order={5}>{secondary}</Title>}
 			</Card>
 		</Link>
