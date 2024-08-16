@@ -1,7 +1,10 @@
-import { Title } from "@mantine/core";
+import { Container, Title } from "@mantine/core";
 
 import type { Sport } from "@prisma/client";
+import type { SportKey } from "types/prisma";
 import { getAllSports, getSportWithSeason } from "lib/db";
+
+import { CardList } from "components/layouts/CardList";
 
 interface FutureSport extends Omit<Sport, "icon"> {
 	season?: "summer" | "winter" | "historic";
@@ -34,46 +37,32 @@ export const SportsAll = async () => {
 		];
 	})();
 
+	const sportsCardMapper = (sportId: SportKey) => {
+		const sport = sportsMap[sportId];
+		return {
+			img: `/images/sports/${sportId}.svg`,
+			alt: `Icon for ${sportId}`,
+			href: `/sports/${sportId}`,
+			caption: sport?.name,
+		};
+	};
+
 	return (
-		<>
+		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
 			<Title order={1}>{"Sports"}</Title>
-			<h2>{"summer"}</h2>
-			{summerSportIds.map((sportId) => {
-				const sport = sportsMap[sportId];
-
-				return (
-					<div key={sportId}>
-						<span>{sportId}</span>
-						{" - "}
-						<span>{sport?.name}</span>
-					</div>
-				);
-			})}
-			<h2>{"winter"}</h2>
-			{winterSportIds.map((sportId) => {
-				const sport = sportsMap[sportId];
-
-				return (
-					<div key={sportId}>
-						<span>{sportId}</span>
-						{" - "}
-						<span>{sport?.name}</span>
-					</div>
-				);
-			})}
-			<h2>{"historic"}</h2>
-			{historicSportIds.map((sportId) => {
-				const sport = sportsMap[sportId];
-
-				return (
-					<div key={sportId}>
-						<span>{sportId}</span>
-						{" - "}
-						<span>{sport?.name}</span>
-					</div>
-				);
-			})}
-		</>
+			<CardList
+				title="Summer"
+				cardData={summerSportIds.map(sportsCardMapper)}
+			/>
+			<CardList
+				title="Winter"
+				cardData={winterSportIds.map(sportsCardMapper)}
+			/>
+			<CardList
+				title="Historic"
+				cardData={historicSportIds.map(sportsCardMapper)}
+			/>
+		</Container>
 	);
 };
 

@@ -5,7 +5,7 @@ import Image, { type ImageProps } from "next/image";
 
 import { Card, CardSection, Title } from "@mantine/core";
 
-interface CardLinkProps {
+export interface CardLinkProps {
 	href: string;
 	img: string;
 	alt: string;
@@ -29,9 +29,14 @@ const CardLink: React.FC<CardLinkProps> = ({
 	nextImageProps,
 }) => {
 	return (
-		<Link passHref href={href}>
+		<Link
+			passHref
+			href={href}
+			style={{ flexGrow: 1, flexBasis: "10rem", textDecoration: "none" }}
+		>
 			<Card
 				h="100%"
+				miw="10rem"
 				maw="12.5rem"
 				p="1rem"
 				shadow="sm"
@@ -48,7 +53,10 @@ const CardLink: React.FC<CardLinkProps> = ({
 				// 	// zIndex: hovered ? 1 : undefined,
 				// })}
 				display="flex"
-				style={{ justifyContent: "center", cursor: "pointer" }}
+				style={{
+					justifyContent: "center",
+					cursor: "pointer",
+				}}
 			>
 				<CardSection
 					className="next-img-wrapper"
@@ -57,10 +65,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 					<Image src={img} alt={alt} layout="fill" {...nextImageProps} />
 				</CardSection>
 				{caption && (
-					<Title
-						order={3}
-						style={{ textDecoration: "none", textAlign: "center" }}
-					>
+					<Title order={3} style={{ textAlign: "center" }}>
 						{caption}
 					</Title>
 				)}
