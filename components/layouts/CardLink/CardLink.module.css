@@ -1,0 +1,14 @@
+.CardLinkCard {
+	height: 100%;
+	min-width: 10rem;
+	max-width: 12.5rem;
+	padding: 1rem;
+	/* shadow: sm; */
+	padding: 1rem;
+	border-radius: 1rem;
+	display: flex;
+	gap: 0.5rem;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}

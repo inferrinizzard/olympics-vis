@@ -2,6 +2,8 @@ import { Box, Container, Title } from "@mantine/core";
 
 import CardLink, { type CardLinkProps } from "../CardLink";
 
+import classes from "./CardList.module.css";
+
 export interface CardListProps {
 	title: string;
 	cardData: CardLinkProps[];
@@ -9,16 +11,11 @@ export interface CardListProps {
 
 export const CardList = ({ title, cardData }: CardListProps) => {
 	return (
-		<Container component="section">
+		<Container component="section" w="100%">
 			<Title order={2}>{title}</Title>
-			<Box
-				display="flex"
-				style={{
-					flexWrap: "wrap",
-					gap: "1rem",
-				}}
-			>
+			<Box className={classes.CardListGrid}>
 				{cardData.map((cardProps, i) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					<CardLink key={`${title}_${i}`} {...cardProps} />
 				))}
 			</Box>
