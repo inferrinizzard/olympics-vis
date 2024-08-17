@@ -59,7 +59,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 						marginTop: 0,
 					}}
 				>
-					<Image src={img} alt={alt} layout="fill" {...nextImageProps} />
+					<Image src={img} alt={alt} {...nextImageProps} fill sizes="100vw" />
 				</CardSection>
 				{caption && (
 					<Title order={3} style={{ textAlign: "center" }}>

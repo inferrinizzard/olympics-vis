@@ -4,7 +4,7 @@ import Head from "next/head";
 import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 
-import { theme } from "../theme";
+import { baseTheme } from "styles/theme";
 
 export const metadata = {
 	title: "Mantine Next.js template",
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				/>
 			</Head>
 			<body>
-				<MantineProvider theme={theme}>{children}</MantineProvider>
+				<MantineProvider theme={baseTheme}>{children}</MantineProvider>
 			</body>
 		</html>
 	);

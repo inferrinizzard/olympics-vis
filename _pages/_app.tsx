@@ -11,7 +11,7 @@ import {
 import Header from "components/layouts/Header";
 
 import "../styles/globals.css";
-import { colours as colors } from "lib/constants/colours";
+import { colours as colors } from "styles/colours";
 import useAccentColour from "lib/hooks/useAccentColour";
 
 const OlympicsVis = ({
