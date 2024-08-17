@@ -1,9 +1,9 @@
-import "@mantine/core/styles.css";
 import React, { type PropsWithChildren } from "react";
 
+import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 
-import { theme } from "../theme";
+import { baseTheme } from "styles/theme";
 
 export const metadata = {
 	title: "Mantine Next.js template",
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				/>
 			</head>
 			<body>
-				<MantineProvider theme={theme}>{children}</MantineProvider>
+				<MantineProvider theme={baseTheme}>{children}</MantineProvider>
 			</body>
 		</html>
 	);
