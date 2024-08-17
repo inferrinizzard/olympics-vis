@@ -1,5 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
+import { vars } from "styles/theme";
+
 export const CardLinkCard = style({
 	height: "100%",
 	minWidth: "10rem",
@@ -12,4 +14,8 @@ export const CardLinkCard = style({
 	justifyContent: "space-between",
 	alignItems: "center",
 	cursor: "pointer",
+
+	":hover": {
+		backgroundColor: vars.colors.primary,
+	},
 });
