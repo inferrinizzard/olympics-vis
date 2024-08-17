@@ -3,8 +3,8 @@
 import { createTheme } from "@mantine/core";
 import { themeToVars } from "@mantine/vanilla-extract";
 
-export const theme = createTheme({
+export const baseTheme = createTheme({
 	/* Put your mantine theme override here */
 });
 
-export const vars = themeToVars(theme);
+export const vars = themeToVars(baseTheme);
