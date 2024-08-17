@@ -2,7 +2,7 @@ import { Box, Container, Title } from "@mantine/core";
 
 import CardLink, { type CardLinkProps } from "../CardLink";
 
-import classes from "./CardList.module.css";
+import * as classes from "./CardList.css";
 
 export interface CardListProps {
 	title: string;

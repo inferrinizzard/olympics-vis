@@ -5,7 +5,7 @@ import Image, { type ImageProps } from "next/image";
 
 import { Card, CardSection, Title } from "@mantine/core";
 
-import classes from "./CardLink.module.css";
+import * as classes from "./CardLink.css";
 
 export interface CardLinkProps {
 	href: string;
