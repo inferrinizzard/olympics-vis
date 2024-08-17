@@ -1,7 +1,10 @@
 "use client";
 
 import { createTheme } from "@mantine/core";
+import { themeToVars } from "@mantine/vanilla-extract";
 
 export const theme = createTheme({
-  /* Put your mantine theme override here */
+	/* Put your mantine theme override here */
 });
+
+export const vars = themeToVars(theme);

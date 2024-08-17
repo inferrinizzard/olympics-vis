@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
+
+import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
+
+const withVanillaExtract = createVanillaExtractPlugin();
+
 const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
@@ -17,4 +22,4 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 	enabled: process.env.ANALYZE === "true",
 });
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = withVanillaExtract(withBundleAnalyzer(nextConfig));
