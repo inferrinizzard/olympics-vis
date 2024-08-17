@@ -60,7 +60,7 @@ const CardLink: React.FC<CardLinkProps> = ({
 					className="next-img-wrapper"
 					sx={{ position: "relative", aspectRatio, ...imgStyles }}
 				>
-					<Image src={img} alt={alt} layout="fill" {...nextImageProps} />
+					<Image src={img} alt={alt} {...nextImageProps} fill sizes="100vw" />
 				</Box>
 				{caption && <Title order={3}>{caption}</Title>}
 				{secondary && <Title order={5}>{secondary}</Title>}
