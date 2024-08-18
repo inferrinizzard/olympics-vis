@@ -1,10 +1,13 @@
 import { Box, Image, Title } from "@mantine/core";
 
-import { OlympicNOCProps } from "_pages/countries/[country]";
+import type { MedalTotals } from "@prisma/client";
+
 import GridCell from "components/grid/GridCell";
 
-type MedalTotals = OlympicNOCProps["medalTotals"];
-interface CountryMedalTotalsProps extends MedalTotals {}
+interface CountryMedalTotalsProps {
+	summer: MedalTotals;
+	winter: MedalTotals;
+}
 
 const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
 	summer,
@@ -18,7 +21,7 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
 		<GridCell>
 			<Title order={2}>{"Medals"}</Title>
 			<Box
-				sx={{
+				style={{
 					display: "flex",
 					columnGap: "1rem",
 					justifyContent: "space-evenly",
@@ -40,7 +43,7 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
 };
 
 interface MedalSetProps
-	extends Pick<MedalTotals[keyof MedalTotals], "gold" | "silver" | "bronze"> {
+	extends Pick<MedalTotals, "gold" | "silver" | "bronze"> {
 	title: string;
 }
 
@@ -52,10 +55,10 @@ const MedalSet: React.FC<MedalSetProps> = ({ title, gold, silver, bronze }) => {
 	].map((url) => [url, url.replace(/^.+[/]/, "")]);
 
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box style={{ flexGrow: 1 }}>
 			<Title order={4}>{title}</Title>
 			<Box
-				sx={{
+				style={{
 					display: "grid",
 					gridTemplateColumns: "[gold] 1fr [silver] 1fr [bronze] 1fr",
 					gridTemplateRows: "[medals] 1fr [counts] 1fr",

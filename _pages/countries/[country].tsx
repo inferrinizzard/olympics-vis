@@ -26,10 +26,10 @@ import {
 	getNumberOfAthletesForCountry,
 } from "lib/db";
 
-import CountryOverview from "components/pages/countries/CountryOverview";
-import CountryMedalTotals from "components/pages/countries/CountryMedalTotals";
-import CountryGamesMedalsChart from "components/pages/countries/CountryGamesMedalsChart";
-import CountrySportsMedalsChart from "components/pages/countries/CountrySportsMedalsChart";
+import CountryOverview from "app/countries/_components/CountryOverview";
+import CountryMedalTotals from "app/countries/_components/CountryMedalTotals";
+import CountryGamesMedalsChart from "app/countries/_components/CountryGamesMedalsChart";
+import CountrySportsMedalsChart from "app/countries/_components/CountrySportsMedalsChart";
 import BackButton from "components/layouts/BackButton";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 

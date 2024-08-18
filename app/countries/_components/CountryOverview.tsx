@@ -1,6 +1,7 @@
-import { type Country, type Games, type Sport } from "@prisma/client";
+import Image from "next/image";
+import { Box, Title } from "@mantine/core";
 
-import { Box, Image, Title } from "@mantine/core";
+import type { Country, Games, Sport } from "@prisma/client";
 
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Medal from "tabler-icons-react/dist/icons/medal";
@@ -35,16 +36,17 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 		<GridCell
 			bg="blue"
 			h="100%"
-			sx={(theme) => ({ color: theme.colors.blue[2] })}
+			// style={(theme) => ({ color: theme.colors.blue[2] })}
 		>
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
-			<Box mah="50%">
+			<Box mah="min(50%, 12rem)" style={{ position: "relative" }}>
 				<Image
 					src={`/images/countries/${country.country}.svg`}
-					height="12rem"
-					alt={"NOC Flag for " + country.country}
-					fit="scale-down"
-					p="md"
+					fill
+					style={{
+						objectFit: "scale-down",
+					}}
+					alt={`NOC Flag for ${country.country}`}
 				/>
 			</Box>
 			<Box m="0.5rem">
@@ -52,7 +54,7 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 			</Box>
 			<Box
 				p="xs"
-				sx={{ display: "flex", rowGap: "1rem", flexDirection: "column" }}
+				style={{ display: "flex", rowGap: "1rem", flexDirection: "column" }}
 			>
 				<StatCard
 					Icon={Calendar}
