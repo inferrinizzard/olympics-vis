@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Title } from "@mantine/core";
 
 import { ResponsiveLine } from "@nivo/line";
