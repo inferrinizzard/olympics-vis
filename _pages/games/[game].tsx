@@ -23,10 +23,10 @@ import {
 	getTopCountriesForGames,
 } from "lib/db";
 
-import GamesOverview from "components/pages/games/GamesOverview";
-import GamesMedalsTable from "components/pages/games/GamesMedalsTable";
-import GamesSports from "components/pages/games/GamesSports";
-import GamesChoropleth from "components/pages/games/GamesChoropleth";
+import GamesOverview from "app/games/_components/GamesOverview";
+import GamesMedalsTable from "app/games/_components/GamesMedalsTable";
+import GamesSports from "app/games/_components/GamesSports";
+import GamesChoropleth from "app/games/_components/GamesChoropleth";
 import BackButton from "components/layouts/BackButton";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 import { getGameName } from "lib/util";

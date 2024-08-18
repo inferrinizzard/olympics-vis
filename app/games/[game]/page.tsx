@@ -11,10 +11,10 @@ import {
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
-import GamesChoropleth from "components/pages/games/GamesChoropleth";
-import GamesMedalsTable from "components/pages/games/GamesMedalsTable";
-import GamesOverview from "components/pages/games/GamesOverview";
-import GamesSports from "components/pages/games/GamesSports";
+import GamesChoropleth from "../_components/GamesChoropleth";
+import GamesMedalsTable from "../_components/GamesMedalsTable";
+import GamesOverview from "../_components/GamesOverview";
+import GamesSports from "../_components/GamesSports";
 
 export async function generateStaticParams() {
 	const games = await getAllGames({ select: { game: true } });
