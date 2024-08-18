@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 	return sports.map((params) => ({ params }));
 }
 
-export const SportPage: NextPage<{ params: { sport: string } }> = async ({
+const SportPage: NextPage<{ params: { sport: string } }> = async ({
 	params: { sport: sportId },
 }) => {
 	const sport = await getSport({ sport: sportId });

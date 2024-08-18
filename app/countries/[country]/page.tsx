@@ -19,12 +19,12 @@ import CountryOverview from "../_components/CountryOverview";
 import CountrySportsMedalsChart from "../_components/CountrySportsMedalsChart";
 
 export async function generateStaticParams() {
-	const countries = await getAllCountries();
+	const countries = await getAllCountries({ select: { country: true } });
 
 	return countries.map((params) => ({ params }));
 }
 
-export const CountryPage: NextPage<{ params: { country: string } }> = async ({
+const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	params: { country: countryId },
 }) => {
 	const country = await getCountry({ country: countryId });

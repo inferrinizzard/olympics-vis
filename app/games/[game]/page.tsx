@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 	return games.map((params) => ({ params }));
 }
 
-export const GamesPage: NextPage<{ params: { game: string } }> = async ({
+const GamesPage: NextPage<{ params: { game: string } }> = async ({
 	params: { game: gamesId },
 }) => {
 	const game = await getGames({ games: gamesId });
