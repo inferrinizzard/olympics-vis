@@ -17,9 +17,9 @@ import {
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
-import SportsOverview from "app/sports/[sport]/_components/SportsOverview";
-import SportsEventsChart from "app/sports/[sport]/_components/SportsEventsChart";
-import SportsCountriesChart from "app/sports/[sport]/_components/SportsCountriesChart";
+import SportsOverview from "app/sports/_components/SportsOverview";
+import SportsEventsChart from "app/sports/_components/SportsEventsChart";
+import SportsCountriesChart from "app/sports/_components/SportsCountriesChart";
 import BackButton from "components/layouts/BackButton";
 
 export interface OlympicSportProps {

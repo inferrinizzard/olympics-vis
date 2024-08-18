@@ -5,9 +5,9 @@ import { getSport, getSportEventCountByGame, getMedalsBySport } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 // import BackButton from "components/layouts/BackButton";
-import SportsCountriesChart from "app/sports/[sport]/_components/SportsCountriesChart";
-import SportsEventsChart from "app/sports/[sport]/_components/SportsEventsChart";
-import SportsOverview from "app/sports/[sport]/_components/SportsOverview";
+import SportsCountriesChart from "../_components/SportsCountriesChart";
+import SportsEventsChart from "../_components/SportsEventsChart";
+import SportsOverview from "../_components/SportsOverview";
 
 import { getAllSports } from "lib/db";
 
