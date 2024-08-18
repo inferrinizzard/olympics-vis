@@ -1,5 +1,7 @@
 import { Box, Image, Title } from "@mantine/core";
 
+import type { Sport } from "@prisma/client";
+
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Hash from "tabler-icons-react/dist/icons/hash";
 import MapPin from "tabler-icons-react/dist/icons/map-pin";
@@ -7,10 +9,9 @@ import MapPin from "tabler-icons-react/dist/icons/map-pin";
 import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
-import type { OlympicSportProps } from "_pages/sports/[sport]";
 
 interface SportsOverviewProps {
-	sport: OlympicSportProps["sport"];
+	sport: Sport;
 	wikipediaExcerpt: string;
 }
 
