@@ -2,9 +2,8 @@ import { Box, Container, Title } from "@mantine/core";
 
 import type { Games, Sport, Country } from "@prisma/client";
 import { getAllGames, getAllSports, getAllCountries } from "lib/db";
-import { getGameImage, getGameName } from "lib/util";
 
-import CardScroller from "components/pages/hero/CardScroller";
+import CardScroller from "./_components/CardScroller";
 
 const HomePage = async () => {
 	const games = await getAllGames({

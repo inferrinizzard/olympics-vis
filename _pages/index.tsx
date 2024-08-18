@@ -6,7 +6,7 @@ import { Box, Container, Title } from "@mantine/core";
 import type { Country, Games, Sport } from ".prisma/client";
 import { getAllCountries, getAllGames, getAllSports } from "lib/db";
 
-import CardScroller from "components/pages/hero/CardScroller";
+import CardScroller from "app/(hero)/_components/CardScroller";
 import { getGameImage, getGameName } from "lib/util";
 
 interface HeroProps {
