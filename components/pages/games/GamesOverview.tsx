@@ -1,4 +1,4 @@
-import { type Games } from "@prisma/client";
+import type { Games } from "@prisma/client";
 
 import { Box, Image, Title } from "@mantine/core";
 
@@ -26,21 +26,21 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 		<GridCell
 			bg="green"
 			h="100%"
-			sx={{ display: "flex", justifyContent: "space-between" }}
+			style={{ display: "flex", justifyContent: "space-between" }}
 		>
-			<Box m="xs" w="75%" sx={{ display: "flex", flexDirection: "column" }}>
+			<Box m="xs" w="75%" style={{ display: "flex", flexDirection: "column" }}>
 				<Title order={1}>
 					{`${game.year} ${game.season[0].toUpperCase() + game.season.slice(1)} Olympics`}
 				</Title>
 				<Title order={3}>{game.title}</Title>
-				<Box sx={{ flexGrow: 1 }}>
+				<Box style={{ flexGrow: 1 }}>
 					<Excerpt
 						height={200}
-						text={wikipediaExcerpt.slice(0, 1000) + "... [Wikipedia]"}
+						text={`${wikipediaExcerpt.slice(0, 1000)}... [Wikipedia]`}
 					/>
 				</Box>
 				<Box
-					sx={{
+					style={{
 						display: "grid",
 						gap: "1rem",
 						gridTemplateColumns: "repeat(2, 1fr)",
@@ -65,11 +65,11 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 					<StatCard Icon={BuildingSkyscraper} title={"Host"} text={game.host} />
 				</Box>
 			</Box>
-			<Box p="sm" sx={{ width: "25%" }}>
+			<Box p="sm" style={{ width: "25%" }}>
 				<Image
 					src={`/images/games/${getGameImage(game.game)}`}
-					alt={"Olympic emblem for " + game}
-					sx={{ width: "100%" }}
+					alt={`Olympic emblem for ${game}`}
+					style={{ width: "100%" }}
 				/>
 			</Box>
 		</GridCell>

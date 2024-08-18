@@ -1,10 +1,11 @@
 import { Box, Container, Title } from "@mantine/core";
 
-import { type OlympicGameSeasonProps } from "_pages/games/[game]";
+import type { SportsEvent } from "@prisma/client";
+
 import GridCell from "components/grid/GridCell";
 
 interface GamesSportsProps {
-	sportEvents: OlympicGameSeasonProps["sportEvents"];
+	sportEvents: SportsEvent[];
 }
 
 const GamesSports: React.FC<GamesSportsProps> = ({ sportEvents }) => {
@@ -14,7 +15,7 @@ const GamesSports: React.FC<GamesSportsProps> = ({ sportEvents }) => {
 				{"Sports (WIP)"}
 			</Title>
 			<Container
-				sx={{
+				style={{
 					display: "grid",
 					gridTemplateColumns: "repeat(3, 1fr)",
 					gridTemplateRows: "repeat(3, 1fr)",

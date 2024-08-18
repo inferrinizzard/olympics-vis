@@ -1,10 +1,11 @@
 import { Image, Title, Table } from "@mantine/core";
 
-import { type OlympicGameSeasonProps } from "_pages/games/[game]";
+import type { CountryMedals, Country } from "@prisma/client";
+
 import GridCell from "components/grid/GridCell";
 
 interface GamesMedalsTableProps {
-	countryMedals: OlympicGameSeasonProps["countryMedals"];
+	countryMedals: (CountryMedals & { country_detail: Country })[];
 }
 
 const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({
@@ -33,7 +34,7 @@ const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({
 										src={country_detail.flag}
 										alt={country}
 										width={30}
-										sx={{ display: "inline-block" }}
+										style={{ display: "inline-block" }}
 									/>
 									<span>{country}</span>
 								</td>
