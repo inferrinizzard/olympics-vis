@@ -5,6 +5,13 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 
 import { baseTheme } from "styles/theme";
 
+import { Work_Sans } from "next/font/google";
+
+const workSans = Work_Sans({
+	subsets: ["latin"],
+	display: "swap",
+});
+
 export const metadata = {
 	title: "Mantine Next.js template",
 	description: "I am using Mantine with Next.js!",
@@ -12,7 +19,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
-		<html lang="en">
+		<html lang="en" className={workSans.className}>
 			<head>
 				<ColorSchemeScript />
 				<link rel="shortcut icon" href="/favicon.svg" />
