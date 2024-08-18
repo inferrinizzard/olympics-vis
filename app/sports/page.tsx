@@ -10,7 +10,7 @@ interface FutureSport extends Omit<Sport, "icon"> {
 	season?: "summer" | "winter" | "historic";
 }
 
-export const SportsAll = async () => {
+const SportsAll = async () => {
 	const sports = await getAllSports();
 	const sportsMap = sports.reduce(
 		(acc, cur) => {
