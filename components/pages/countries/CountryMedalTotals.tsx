@@ -1,6 +1,6 @@
 import { Box, Image, Title } from "@mantine/core";
 
-import { OlympicNOCProps } from "_pages/countries/[country]";
+import type { OlympicNOCProps } from "_pages/countries/[country]";
 import GridCell from "components/grid/GridCell";
 
 type MedalTotals = OlympicNOCProps["medalTotals"];
@@ -18,7 +18,7 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
 		<GridCell>
 			<Title order={2}>{"Medals"}</Title>
 			<Box
-				sx={{
+				style={{
 					display: "flex",
 					columnGap: "1rem",
 					justifyContent: "space-evenly",
@@ -52,10 +52,10 @@ const MedalSet: React.FC<MedalSetProps> = ({ title, gold, silver, bronze }) => {
 	].map((url) => [url, url.replace(/^.+[/]/, "")]);
 
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box style={{ flexGrow: 1 }}>
 			<Title order={4}>{title}</Title>
 			<Box
-				sx={{
+				style={{
 					display: "grid",
 					gridTemplateColumns: "[gold] 1fr [silver] 1fr [bronze] 1fr",
 					gridTemplateRows: "[medals] 1fr [counts] 1fr",
