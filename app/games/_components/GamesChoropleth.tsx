@@ -1,14 +1,14 @@
+"use client";
 import { Box, Title } from "@mantine/core";
 
 import { ResponsiveChoropleth } from "@nivo/geo";
 import worldCountries from "resources/json/countries.min.geo.json";
 import nocIsoLookup from "resources/json/geo_noc_map.json";
 
-import { type OlympicGameSeasonProps } from "_pages/games/[game]";
 import GridCell from "components/grid/GridCell";
 
 interface GamesChoroplethProps {
-	countryAthletes: OlympicGameSeasonProps["countryAthletes"]["country_athletes"];
+	countryAthletes: Record<string, number>;
 }
 
 const GamesChoropleth: React.FC<GamesChoroplethProps> = ({
