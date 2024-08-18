@@ -1,10 +1,13 @@
 import { Box, Image, Title } from "@mantine/core";
 
-import type { OlympicNOCProps } from "_pages/countries/[country]";
+import type { MedalTotals } from "@prisma/client";
+
 import GridCell from "components/grid/GridCell";
 
-type MedalTotals = OlympicNOCProps["medalTotals"];
-interface CountryMedalTotalsProps extends MedalTotals {}
+interface CountryMedalTotalsProps {
+	summer: MedalTotals;
+	winter: MedalTotals;
+}
 
 const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
 	summer,
@@ -40,7 +43,7 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
 };
 
 interface MedalSetProps
-	extends Pick<MedalTotals[keyof MedalTotals], "gold" | "silver" | "bronze"> {
+	extends Pick<MedalTotals, "gold" | "silver" | "bronze"> {
 	title: string;
 }
 

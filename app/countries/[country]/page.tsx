@@ -13,10 +13,10 @@ import {
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
-import CountryGamesMedalsChart from "components/pages/countries/CountryGamesMedalsChart";
-import CountryMedalTotals from "components/pages/countries/CountryMedalTotals";
-import CountryOverview from "components/pages/countries/CountryOverview";
-import CountrySportsMedalsChart from "components/pages/countries/CountrySportsMedalsChart";
+import CountryGamesMedalsChart from "../_components/CountryGamesMedalsChart";
+import CountryMedalTotals from "../_components/CountryMedalTotals";
+import CountryOverview from "../_components/CountryOverview";
+import CountrySportsMedalsChart from "../_components/CountrySportsMedalsChart";
 
 export async function generateStaticParams() {
 	const countries = await getAllCountries();
