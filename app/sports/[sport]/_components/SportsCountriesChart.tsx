@@ -1,18 +1,20 @@
-import { Box, Title } from "@mantine/core";
+"use client";
 
+import { Box, Title } from "@mantine/core";
 import { ResponsiveBar } from "@nivo/bar";
 
-import { type OlympicSportProps } from "_pages/sports/[sport]";
+import type { CountrySportsMedals } from "@prisma/client";
+
 import GridCell from "components/grid/GridCell";
 import { sortByMedals } from "lib/util";
 
 interface SportsCountriesChartProps {
-	countrySportsMedals: OlympicSportProps["countrySportsMedals"];
+	countrySportsMedals: CountrySportsMedals[];
 }
 
-const SportsCountriesChart: React.FC<SportsCountriesChartProps> = ({
+const SportsCountriesChart = ({
 	countrySportsMedals,
-}) => {
+}: SportsCountriesChartProps) => {
 	const leadingCountries = countrySportsMedals
 		.sort(sortByMedals)
 		.reverse()

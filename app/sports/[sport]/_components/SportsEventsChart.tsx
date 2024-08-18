@@ -1,19 +1,18 @@
-import { Box, Title } from "@mantine/core";
+"use client";
 
+import { Box, Title } from "@mantine/core";
 import { ResponsiveLine } from "@nivo/line";
 
-import { type OlympicSportProps } from "_pages/sports/[sport]";
+import type { Games, Sport } from "@prisma/client";
+
 import GridCell from "components/grid/GridCell";
 
 interface SportsEventsChartProps {
-	sport: OlympicSportProps["sport"];
-	numEvents: OlympicSportProps["numEvents"];
+	sport: Sport;
+	numEvents: Record<Games["game"], number>;
 }
 
-const SportsEventsChart: React.FC<SportsEventsChartProps> = ({
-	sport,
-	numEvents,
-}) => {
+const SportsEventsChart = ({ sport, numEvents }: SportsEventsChartProps) => {
 	const eventCountData = [
 		{
 			id: sport.sport,

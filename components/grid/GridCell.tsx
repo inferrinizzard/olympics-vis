@@ -1,20 +1,20 @@
-import { Paper, type BoxProps, type Sx } from '@mantine/core';
+import type { PropsWithChildren } from "react";
+import { Paper, type BoxProps } from "@mantine/core";
 
-interface GridCellProps extends BoxProps {
-	sx?: Sx;
-}
+interface GridCellProps extends BoxProps {}
 
-const GridCell: React.FC<GridCellProps> = ({ children, sx, ...props }) => {
+const GridCell = ({ children, ...props }: PropsWithChildren<GridCellProps>) => {
 	return (
 		<Paper
 			p="sm"
 			shadow="md"
-			sx={theme => ({
-				accentColor: 'white',
-				borderRadius: '1rem',
-				...(sx instanceof Function ? sx(theme) : sx),
-			})}
-			{...props}>
+			// sx={theme => ({
+			// 	accentColor: 'white',
+			// 	borderRadius: '1rem',
+			// 	...(sx instanceof Function ? sx(theme) : sx),
+			// })}
+			{...props}
+		>
 			{children}
 		</Paper>
 	);
