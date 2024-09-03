@@ -1,0 +1,4 @@
+[submodule "public/images"]
+	path = public/images
+	url = https://github.com/inferrinizzard/olympics-api.git
+	branch = images
