@@ -4,7 +4,9 @@ import type { Country } from "@prisma/client";
 import { getAllCountries, getMedalsLeadersFromLastTenGames } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
+import CardLink from "components/layouts/CardLink";
 
+import { CountryImage } from "./_components/CountryImage";
 import { TopMedalsChart } from "./_components/TopMedalsChart";
 
 const CountriesAll = async () => {
@@ -34,6 +36,7 @@ const CountriesAll = async () => {
 	);
 
 	const countryCardsMapper = (country: Country) => ({
+		code: country.country,
 		img: `/images/countries/${country.country}.svg`,
 		alt: `NOC Flag for ${country.country}`,
 		href: `/countries/${country.country}`,
@@ -51,14 +54,62 @@ const CountriesAll = async () => {
 			<Title order={1}>{"Countries"}</Title>
 			<TopMedalsChart medalTotals={medalTotals} countryMedals={countryMedals} />
 
-			<CardList title="Active" cardData={activeNOCs.map(countryCardsMapper)} />
+			<CardList
+				title="Active"
+				cardData={activeNOCs.map(countryCardsMapper)}
+				renderCardLink={(props) => (
+					<CardLink
+						key={props.code}
+						{...props}
+						imageElement={
+							<CountryImage
+								code={props.code}
+								src={props.img}
+								alt={props.alt}
+								fill
+								sizes="100vw"
+							/>
+						}
+					/>
+				)}
+			/>
 			<CardList
 				title="Special"
 				cardData={specialNOCs.map(countryCardsMapper)}
+				renderCardLink={(props) => (
+					<CardLink
+						key={props.code}
+						{...props}
+						imageElement={
+							<CountryImage
+								code={props.code}
+								src={props.img}
+								alt={props.alt}
+								fill
+								sizes="100vw"
+							/>
+						}
+					/>
+				)}
 			/>
 			<CardList
 				title="Historic"
 				cardData={historicNOCs.map(countryCardsMapper)}
+				renderCardLink={(props) => (
+					<CardLink
+						key={props.code}
+						{...props}
+						imageElement={
+							<CountryImage
+								code={props.code}
+								src={props.img}
+								alt={props.alt}
+								fill
+								sizes="100vw"
+							/>
+						}
+					/>
+				)}
 			/>
 		</Container>
 	);

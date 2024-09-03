@@ -9,9 +9,7 @@ export interface CountryImageProps extends ImageProps {
 export const CountryImage = ({ code, ...props }: CountryImageProps) => {
 	if (code in sharedFlags) {
 		const sharedFlag = sharedFlags[code as keyof typeof sharedFlags];
-		return (
-			<Image {...props} src={`/images/country/shared/${sharedFlag}.svg`} />
-		);
+		return <Image {...props} src={`/images/country/shared/${sharedFlag}`} />;
 	}
 	return <Image {...props} />;
 };
