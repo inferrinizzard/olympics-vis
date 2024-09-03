@@ -49,6 +49,24 @@ const CountriesAll = async () => {
 		},
 	});
 
+	const renderCountryCardLink = (
+		props: ReturnType<typeof countryCardsMapper>,
+	) => (
+		<CardLink
+			key={props.code}
+			{...props}
+			imageElement={
+				<CountryImage
+					code={props.code}
+					src={props.img}
+					alt={props.alt}
+					fill
+					sizes="100vw"
+				/>
+			}
+		/>
+	);
+
 	return (
 		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
 			<Title order={1}>{"Countries"}</Title>
@@ -57,59 +75,17 @@ const CountriesAll = async () => {
 			<CardList
 				title="Active"
 				cardData={activeNOCs.map(countryCardsMapper)}
-				renderCardLink={(props) => (
-					<CardLink
-						key={props.code}
-						{...props}
-						imageElement={
-							<CountryImage
-								code={props.code}
-								src={props.img}
-								alt={props.alt}
-								fill
-								sizes="100vw"
-							/>
-						}
-					/>
-				)}
+				renderCardLink={renderCountryCardLink}
 			/>
 			<CardList
 				title="Special"
 				cardData={specialNOCs.map(countryCardsMapper)}
-				renderCardLink={(props) => (
-					<CardLink
-						key={props.code}
-						{...props}
-						imageElement={
-							<CountryImage
-								code={props.code}
-								src={props.img}
-								alt={props.alt}
-								fill
-								sizes="100vw"
-							/>
-						}
-					/>
-				)}
+				renderCardLink={renderCountryCardLink}
 			/>
 			<CardList
 				title="Historic"
 				cardData={historicNOCs.map(countryCardsMapper)}
-				renderCardLink={(props) => (
-					<CardLink
-						key={props.code}
-						{...props}
-						imageElement={
-							<CountryImage
-								code={props.code}
-								src={props.img}
-								alt={props.alt}
-								fill
-								sizes="100vw"
-							/>
-						}
-					/>
-				)}
+				renderCardLink={renderCountryCardLink}
 			/>
 		</Container>
 	);
