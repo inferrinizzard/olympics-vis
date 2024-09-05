@@ -1,8 +1,9 @@
-import { Image, Title, Table } from "@mantine/core";
+import { Title, Table } from "@mantine/core";
 
 import type { CountryMedals, Country } from "@prisma/client";
 
 import GridCell from "components/grid/GridCell";
+import { Image } from "components/util/Image";
 
 interface GamesMedalsTableProps {
 	countryMedals: (CountryMedals & { country_detail: Country })[];
@@ -31,7 +32,8 @@ const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({
 							<tr key={country}>
 								<td>
 									<Image
-										src={country_detail.flag}
+										dir="country"
+										code={country_detail.country}
 										alt={country}
 										width={30}
 										style={{ display: "inline-block" }}
