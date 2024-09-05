@@ -12,7 +12,7 @@ export interface CardLinkProps {
 	img: string;
 	alt: string;
 	aspectRatio?: CSSProperties["aspectRatio"];
-	imgStyles?: CSSProperties;
+	imageContainerStyles?: CSSProperties;
 	caption?: string;
 	secondary?: string;
 	hoverColour?: string;
@@ -25,7 +25,7 @@ const CardLink = ({
 	img,
 	alt,
 	aspectRatio = "1 / 1",
-	imgStyles,
+	imageContainerStyles,
 	caption,
 	secondary,
 	hoverColour,
@@ -53,7 +53,7 @@ const CardLink = ({
 				<CardSection
 					className="next-img-wrapper"
 					style={{
-						...imgStyles,
+						...imageContainerStyles,
 						position: "relative",
 						width: "100%",
 						aspectRatio,

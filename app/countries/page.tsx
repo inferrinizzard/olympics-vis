@@ -37,13 +37,13 @@ const CountriesAll = async () => {
 
 	const countryCardsMapper = (country: Country) => ({
 		code: country.country,
-		img: `/images/countries/${country.country}.svg`,
-		alt: `NOC Flag for ${country.country}`,
+		img: `/images/country/${country.country}.svg`,
+		alt: `Flag for ${country.country}`,
 		href: `/countries/${country.country}`,
 		caption: country.country,
 		secondary: country.name,
 		aspectRatio: "3 / 2",
-		imgStyles: {
+		imageContainerStyles: {
 			boxShadow:
 				"1px 1px 8px 1px rgba(0, 0, 0, 0.05), -1px -1px 8px 1px rgba(0, 0, 0, 0.05)",
 		},
