@@ -16,6 +16,7 @@ interface FallbackImageProps extends Omit<NextImageProps, "src"> {}
 type ImageProps = (CountryImageProps | GamesImageProps | SportsImageProps) &
 	FallbackImageProps;
 
+// TODO: add final fallbacks and remove png
 const useCountryImageSrc = (code: CountryKey) => {
 	if (code in sharedFlags) {
 		const sharedFlag = sharedFlags[code as keyof typeof sharedFlags];
@@ -49,22 +50,23 @@ const useSportsImageSrc = (code: SportKey, games?: GamesKey) => {
 };
 
 export const Image = ({ dir, code, ...props }: ImageProps) => {
-	const src =
-		(() => {
-			if (dir === "country") {
-				return useCountryImageSrc(code);
-			}
-			if (dir === "games") {
-				useGamesImageSrc(code);
-			}
-			if (dir === "sports") {
-				return useSportsImageSrc(
+	const src = (() => {
+		if (dir === "country") {
+			return useCountryImageSrc(code) ?? "";
+		}
+		if (dir === "games") {
+			return useGamesImageSrc(code) ?? "";
+		}
+		if (dir === "sports") {
+			return (
+				useSportsImageSrc(
 					code,
 					(props as Omit<SportsImageProps, "dir" | "code">).games,
-				);
-			}
-			return "";
-		})() ?? "";
+				) ?? ""
+			);
+		}
+		return "";
+	})();
 
 	return <NextImage {...props} src={src} unoptimized={src.endsWith(".svg")} />;
 };
