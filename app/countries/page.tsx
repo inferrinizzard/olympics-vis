@@ -8,6 +8,7 @@ import CardLink from "components/layouts/CardLink";
 
 import { CountryImage } from "./_components/CountryImage";
 import { TopMedalsChart } from "./_components/TopMedalsChart";
+import { Image } from "components/util/Image";
 
 const CountriesAll = async () => {
 	const countries: Country[] = await getAllCountries();
@@ -56,9 +57,9 @@ const CountriesAll = async () => {
 			key={props.code}
 			{...props}
 			imageElement={
-				<CountryImage
+				<Image
+					dir="country"
 					code={props.code}
-					src={props.img}
 					alt={props.alt}
 					fill
 					sizes="100vw"
