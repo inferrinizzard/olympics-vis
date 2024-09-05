@@ -5,10 +5,9 @@ import { getAllCountries, getMedalsLeadersFromLastTenGames } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
 import CardLink from "components/layouts/CardLink";
-
-import { CountryImage } from "./_components/CountryImage";
-import { TopMedalsChart } from "./_components/TopMedalsChart";
 import { Image } from "components/util/Image";
+
+import { TopMedalsChart } from "./_components/TopMedalsChart";
 
 const CountriesAll = async () => {
 	const countries: Country[] = await getAllCountries();

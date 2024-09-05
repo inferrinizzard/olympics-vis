@@ -10,9 +10,8 @@ import Trophy from "tabler-icons-react/dist/icons/trophy";
 import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
+import { Image } from "components/util/Image";
 import { getGameName } from "lib/util";
-
-import { CountryImage } from "./CountryImage";
 
 interface CountryOverviewData {
 	firstGames: Games["game"];
@@ -41,9 +40,9 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 		>
 			<Title order={1}>{`${country.name} (${country.country})`}</Title>
 			<Box mah="min(50%, 12rem)" style={{ position: "relative" }}>
-				<CountryImage
+				<Image
+					dir="country"
 					code={country.country}
-					src={`/images/country/${country.country}.svg`}
 					fill
 					style={{
 						objectFit: "scale-down",

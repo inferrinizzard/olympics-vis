@@ -1,10 +1,7 @@
 "use server";
 import { existsSync } from "node:fs";
 
-import NextImage, {
-	type ImageProps as NextImageProps,
-	getImageProps,
-} from "next/image";
+import NextImage, { type ImageProps as NextImageProps } from "next/image";
 
 import type { CountryKey, GamesKey, SportKey } from "types/prisma";
 
@@ -14,9 +11,7 @@ type CountryImageProps = { dir: "country"; code: CountryKey };
 type GamesImageProps = { dir: "games"; code: GamesKey };
 type SportsImageProps = { dir: "sports"; code: SportKey; games?: GamesKey };
 
-interface FallbackImageProps extends Omit<NextImageProps, "src"> {
-	// fallback?: string;
-}
+interface FallbackImageProps extends Omit<NextImageProps, "src"> {}
 
 type ImageProps = (CountryImageProps | GamesImageProps | SportsImageProps) &
 	FallbackImageProps;
@@ -73,26 +68,3 @@ export const Image = ({ dir, code, ...props }: ImageProps) => {
 
 	return <NextImage {...props} src={src} unoptimized={src.endsWith(".svg")} />;
 };
-
-// interface BaseImageProps extends Omit<NextImageProps, "src"> {
-// 	srcs: string[];
-// }
-
-// const BaseImage = ({ srcs, ...props }: BaseImageProps) => {
-// 	const imagePropsList = srcs.map((src) => getImageProps({ src, ...props }));
-
-// 	const srcSets = imagePropsList.map((imgProps) => imgProps.props.srcSet);
-
-// 	const {
-// 		props: { srcSet, ...rest },
-// 	} = imagePropsList.at(-1)!;
-
-// 	return (
-// 		<picture>
-// 			{srcSets.map((srcSet, i) => (
-// 				<source key={i} srcSet={srcSet} />
-// 			))}
-// 			<img alt={props.alt} {...rest} />
-// 		</picture>
-// 	);
-// };
