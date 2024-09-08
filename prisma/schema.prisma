@@ -3,119 +3,60 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
-
 model Country {
-  country String @id @db.VarChar(3)
-  name    String @db.VarChar(50)
-  flag    String
-  status  String
+  code      String @id @unique @db.String(3)
+  name      String @db.String(50)
+  status    String
+	page_name String
 
-  country_medals        CountryMedals[]
-  country_sports_medals CountrySportsMedals[]
-  country_attendance    CountryAttendance?
-  medal_totals          MedalTotals[]
+  //#country_medals CountryMedals[]
+  //#country_sports_medals CountrySportsMedals[]
+  //#country_attendance CountryAttendance?
+  //#medal_totals   MedalTotals[]
 
   @@map("country_detail")
 }
 
-model CountryAthletes {
-  id               Int    @id @default(autoincrement())
-  game             String @db.VarChar(30)
-  country_athletes Json   @db.Json
 
-  games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_athletes_game")
 
-  @@map("country_athletes")
-}
 
-model CountryAttendance {
-  country String   @id @db.VarChar(3)
-  games   String[]
 
-  country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_country")
-
-  @@map("country_attendance")
-}
 
 model Games {
-  game         String @id @db.VarChar(30)
+  code         String @id @unique @db.String(50)
   year         Int
-  season       String @db.VarChar(6)
-  title        String @db.VarChar(30)
-  emblem       String
-  host         String @db.VarChar(100)
-  num_athletes Int
-  start_date   String @db.VarChar(20)
-  end_date     String @db.VarChar(20)
+  host         String @db.String(50)
+  season       String @db.String(6)
+  edition      String @db.String(20)
+  motto        String?
+  num_athletes Int?
+  start_date   String?
+  end_date     String?
+	page_name    String?
 
-  country_athletes CountryAthletes[]
-  country_medals   CountryMedals[]
-  sports_events    SportsEvent[]
+  //#country_athletes   CountryAthletes[]
+  //#country_medals     CountryMedals[]
+  //#sports_events      SportsEvent[]
 
   @@map("games_detail")
 }
 
-model CountryMedals {
-  game    String @db.VarChar(30)
-  country String @db.VarChar(3)
-  gold    Int    @default(0)
-  silver  Int    @default(0)
-  bronze  Int    @default(0)
-
-  country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_country")
-  games_detail   Games   @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_medals_game")
-
-  @@id([game, country])
-  @@map("country_game_medals")
-}
-
-model CountrySportsMedals {
-  sport   String @db.VarChar(30)
-  country String @db.VarChar(3)
-  gold    Int    @default(0)
-  silver  Int    @default(0)
-  bronze  Int    @default(0)
-
-  country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_sports_medals_country")
-
-  @@id([sport, country])
-  @@map("country_sports_medals")
-}
-
-model MedalTotals {
-  country String @db.VarChar(3)
-  season  String @db.VarChar(6)
-  gold    Int    @default(0)
-  silver  Int    @default(0)
-  bronze  Int    @default(0)
-
-  country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_medal_totals_country")
-
-  @@id([country, season])
-  @@map("country_medal_totals")
-}
 
 model Sport {
-  sport String @id @db.VarChar(3)
-  name  String @db.VarChar(50)
-  icon  String
+  code      String @id @db.String(5)
+  name      String @db.String(30)
+  category  String @db.String(15)
+  parent    String @db.String(5)
+  status    String @db.String(15)
+  season    String @db.String(6)
+  page_name String
+
+	@@unique([code, category])
 
   @@map("sports_detail")
 }
 
-model SportsEvent {
-  id     Int      @id @default(autoincrement())
-  game   String   @db.VarChar(30)
-  sport  String   @db.VarChar(3)
-  event  String
-  gold   String[]
-  silver String[]
-  bronze String[]
 
-  games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_sports_events_game")
-
-  @@map("sports_events")
-}
