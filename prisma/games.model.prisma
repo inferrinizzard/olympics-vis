@@ -1,13 +1,14 @@
 model Games {
-  game         String @id //#@db.VarChar(30)
+  code         String @id @unique @db.String(50)
   year         Int
-  season       String //#@db.VarChar(6)
-  title        String //#@db.VarChar(30)
-  emblem       String
-  host         String //#@db.VarChar(100)
-  num_athletes Int
-  start_date   String //#@db.VarChar(20)
-  end_date     String //#@db.VarChar(20)
+  host         String @db.String(50)
+  season       String @db.String(6)
+  edition      String @db.String(20)
+  motto        String?
+  num_athletes Int?
+  start_date   String?
+  end_date     String?
+	page_name    String?
 
   //#country_athletes   CountryAthletes[]
   //#country_medals     CountryMedals[]
