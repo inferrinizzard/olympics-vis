@@ -6,5 +6,4 @@ export type GamesKey = string;
 
 export type CountryAttendance_CountryAthletes = Record<string, number>;
 
-
 // export type Sport = Omit<PrismaSport, 'sport'> & Record<'sport', SportKey>;

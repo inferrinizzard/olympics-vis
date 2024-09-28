@@ -9,7 +9,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"prisma:rebuild": "cat prisma/base.prisma > prisma/schema.prisma",
-		"prisma:append": "cat prisma/*.model.prisma | tr -d '//#' >> prisma/schema.prisma",
+		"prisma:append": "cat prisma/*.model.prisma | sed '\\,^//#,d' >> prisma/schema.prisma",
 		"prisma": "yarn prisma:rebuild && yarn prisma:append && prisma generate"
 	},
 	"dependencies": {

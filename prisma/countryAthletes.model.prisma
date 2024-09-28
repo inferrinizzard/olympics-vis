@@ -1,0 +1,9 @@
+//#model CountryAthletes {
+//#  id               Int    @id @default(autoincrement())
+//#  game             String //#@db.VarChar(30)
+//#  country_athletes Json //#@db.Json
+
+//#  //#games_detail Games @relation(fields: [game], references: [game], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_athletes_game")
+
+//#  @@map("country_athletes")
+//#}
