@@ -10,5 +10,7 @@ model Games {
   end_date     String?
   page_name    String?
 
+  ParticipationRecords ParticipationRecords[]
+
   @@map("games_detail")
 }

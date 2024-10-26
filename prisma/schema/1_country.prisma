@@ -4,5 +4,7 @@ model Country {
   status    String
   page_name String
 
+  ParticipationRecords ParticipationRecords[]
+
   @@map("country_detail")
 }
