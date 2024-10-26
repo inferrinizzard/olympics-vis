@@ -1,7 +1,7 @@
 model ParticipationRecords {
-  game    String @db.VarChar(30)
-  country String @db.VarChar(3)
-  sport   String @db.VarChar(5)
+  game    String @db.String(30)
+  country String @db.String(3)
+  sport   String @db.String(5)
   gold    Int
   silver  Int
   bronze  Int
