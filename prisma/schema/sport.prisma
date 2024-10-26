@@ -1,13 +1,11 @@
 model Sport {
-  code      String @id @db.String(5)
+  code      String @id @unique @db.String(5)
   name      String @db.String(30)
   category  String @db.String(15)
   parent    String @db.String(5)
   status    String @db.String(15)
   season    String @db.String(6)
   page_name String
-
-	@@unique([code, category])
 
   @@map("sports_detail")
 }

@@ -2,12 +2,7 @@ model Country {
   code      String @id @unique @db.String(3)
   name      String @db.String(50)
   status    String
-	page_name String
-
-  //#country_medals CountryMedals[]
-  //#country_sports_medals CountrySportsMedals[]
-  //#country_attendance CountryAttendance?
-  //#medal_totals   MedalTotals[]
+  page_name String
 
   @@map("country_detail")
 }
