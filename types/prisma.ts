@@ -1,9 +1,9 @@
-// import type { Sport as PrismaSport } from "@prisma/client";
+import type {
+	Country as PrismaCountry,
+	Games as PrismaGames,
+	Sport as PrismaSport,
+} from "@prisma/client";
 
-export type SportKey = string;
-export type CountryKey = string;
-export type GamesKey = string;
-
-export type CountryAttendance_CountryAthletes = Record<string, number>;
-
-// export type Sport = Omit<PrismaSport, 'sport'> & Record<'sport', SportKey>;
+export type CountryKey = string & PrismaCountry["code"];
+export type GamesKey = string & PrismaGames["code"];
+export type SportKey = string & PrismaSport["code"];

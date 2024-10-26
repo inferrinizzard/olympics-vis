@@ -7,7 +7,7 @@ export type GamesParam = { games: GamesKey };
 
 /** Get games data for 1 games */
 export const getGames = async ({ games }: GamesParam) =>
-	await prisma.games.findFirst({ where: { game: games } });
+	await prisma.games.findFirst({ where: { code: games } });
 
 /** Get games data for all games */
 export const getAllGames = async (args?: Prisma.GamesFindManyArgs) =>
