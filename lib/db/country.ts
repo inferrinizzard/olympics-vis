@@ -22,16 +22,16 @@ export const getFirstGamesForCountry = async ({ country }: CountryParam) =>
 		where: { country },
 	});
 
-/** Get number of athletes for a country */
-export const getNumberOfAthletesForCountry = async ({
-	country,
-}: CountryParam): Promise<
-	Pick<CountryAthletes, "game"> & Record<"athletes", number>
-> =>
-	prisma.$queryRaw`
-		SELECT
-			game,
-			CAST(country_athletes->>${country} AS SMALLINT) AS athletes
-		FROM country_athletes
-		WHERE country_athletes.country_athletes ? ${country};
-	`;
+// /** Get number of athletes for a country */
+// export const getNumberOfAthletesForCountry = async ({
+// 	country,
+// }: CountryParam): Promise<
+// 	Pick<CountryAthletes, "game"> & Record<"athletes", number>
+// > =>
+// 	prisma.$queryRaw`
+// 		SELECT
+// 			game,
+// 			CAST(country_athletes->>${country} AS SMALLINT) AS athletes
+// 		FROM country_athletes
+// 		WHERE country_athletes.country_athletes ? ${country};
+// 	`;

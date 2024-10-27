@@ -7,3 +7,5 @@ import type {
 export type CountryKey = string & PrismaCountry["code"];
 export type GamesKey = string & PrismaGames["code"];
 export type SportKey = string & PrismaSport["code"];
+
+export type MedalType = "gold" | "silver" | "bronze";
