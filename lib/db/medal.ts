@@ -27,19 +27,28 @@ export const getTopCountriesForGames = async ({
 	games,
 	num = 10,
 }: GamesParam & { num?: number }) =>
-	await prisma.participationRecords.groupBy({
-		by: "country",
-		take: num,
-		_sum: { gold: true, silver: true, bronze: true },
-		orderBy: {
-			_sum: {
-				gold: "desc",
-				silver: "desc",
-				bronze: "desc",
+	await prisma.participationRecords
+		.groupBy({
+			by: "country",
+			take: num,
+			_sum: { gold: true, silver: true, bronze: true },
+			orderBy: {
+				_sum: {
+					gold: "desc",
+					silver: "desc",
+					bronze: "desc",
+				},
 			},
-		},
-		where: { game: games },
-	});
+			where: { game: games },
+		})
+		.then((res) =>
+			res.map(({ country, _sum: { gold, silver, bronze } }) => ({
+				country,
+				gold: gold ?? 0,
+				silver: silver ?? 0,
+				bronze: bronze ?? 0,
+			})),
+		);
 
 /** Get number of each medal for a country */
 export const getMedalTotalsForCountry = async ({ country }: CountryParam) =>

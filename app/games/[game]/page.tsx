@@ -32,7 +32,7 @@ const GamesPage: NextPage<
 		return null;
 	}
 
-	const countryMedals = await getTopCountriesForGames({ games: gamesCode });
+	const countryStandings = await getTopCountriesForGames({ games: gamesCode });
 
 	// const sportEvents = await getSportEventsForGame({ games: gamesCode });
 
@@ -57,7 +57,7 @@ const GamesPage: NextPage<
 					<GamesOverview game={game} wikipediaExcerpt={wikipediaExcerpt} />
 				</GridCol>
 				<GridCol span={4}>
-					<GamesMedalsTable countryMedals={countryMedals} />
+					<GamesMedalsTable countryStandings={countryStandings} />
 				</GridCol>
 				<GridCol span={4}>
 					<GamesSports sports={sports} />
