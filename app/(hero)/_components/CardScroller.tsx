@@ -18,7 +18,7 @@ interface CardScrollerProps<T> {
 	color: string;
 }
 
-const CardScroller = <T extends Record<string, string | number>>({
+const CardScroller = <T extends Record<string, string | number | null>>({
 	data,
 	route,
 	idKey,
