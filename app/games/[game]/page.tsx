@@ -4,7 +4,7 @@ import { Container, Grid, GridCol } from "@mantine/core";
 
 import {
 	getAllGames,
-	getCountryAthletesForGames,
+	getAthletesByCountryForGames,
 	getGames,
 	getSportEventsForGame,
 	getTopCountriesForGames,
@@ -17,7 +17,7 @@ import GamesOverview from "../_components/GamesOverview";
 import GamesSports from "../_components/GamesSports";
 
 export async function generateStaticParams() {
-	const games = await getAllGames({ select: { game: true } });
+	const games = await getAllGames({ select: { code: true } });
 
 	return games.map((params) => ({ params }));
 }
@@ -35,7 +35,9 @@ const GamesPage: NextPage<{ params: { game: string } }> = async ({
 
 	const sportEvents = await getSportEventsForGame({ games: gamesId });
 
-	const countryAthletes = await getCountryAthletesForGames({ games: gamesId });
+	const athleteCounts = await getAthletesByCountryForGames({
+		games: gamesId,
+	});
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl(
@@ -58,12 +60,8 @@ const GamesPage: NextPage<{ params: { game: string } }> = async ({
 					<GamesSports sportEvents={sportEvents} />
 				</GridCol>
 				<GridCol span={8}>
-					{countryAthletes ? (
-						<GamesChoropleth
-							countryAthletes={
-								countryAthletes.country_athletes as Record<string, number>
-							}
-						/>
+					{athleteCounts ? (
+						<GamesChoropleth athleteCounts={athleteCounts} />
 					) : null}
 				</GridCol>
 			</Grid>

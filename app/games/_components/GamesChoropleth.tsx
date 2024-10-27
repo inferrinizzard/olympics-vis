@@ -1,29 +1,37 @@
 "use client";
 import { Box, Title } from "@mantine/core";
 
+import type { ParticipationRecords } from "@prisma/client";
+import type { AthleteSex } from "types/prisma";
+
 import { ResponsiveChoropleth } from "@nivo/geo";
 import worldCountries from "resources/json/countries.min.geo.json";
-import nocIsoLookup from "resources/json/geo_noc_map.json";
+import nocIsoLookup from "resources/json/geo_noc_map.json" assert {
+	type: "json",
+};
 
 import GridCell from "components/grid/GridCell";
 
 interface GamesChoroplethProps {
-	countryAthletes: Record<string, number>;
+	athleteCounts: Pick<ParticipationRecords, "country" | AthleteSex>[];
 }
 
-const GamesChoropleth: React.FC<GamesChoroplethProps> = ({
-	countryAthletes,
-}) => {
-	const countryData = Object.entries(countryAthletes).map(([id, value]) => ({
-		id:
-			(
-				nocIsoLookup[id as keyof typeof nocIsoLookup] as {
-					name: string;
-					iso?: string;
-				}
-			)?.iso ?? id,
-		value,
-	}));
+const GamesChoropleth: React.FC<GamesChoroplethProps> = ({ athleteCounts }) => {
+	const countryData = athleteCounts.map(({ country, men, women }) => {
+		const isoMatch = nocIsoLookup[country as keyof typeof nocIsoLookup];
+
+		return {
+			id: "iso" in isoMatch ? isoMatch.iso : country,
+			men,
+			women,
+			total: men + women,
+		};
+	});
+
+	const domainMax = countryData.reduce(
+		(max, { total }) => Math.max(max, total),
+		0,
+	);
 
 	return (
 		<GridCell>
@@ -36,7 +44,7 @@ const GamesChoropleth: React.FC<GamesChoroplethProps> = ({
 					features={worldCountries.features}
 					margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 					colors="nivo"
-					domain={[0, Math.max(...Object.values(countryAthletes))]}
+					domain={[0, domainMax]}
 					unknownColor="#666666"
 					label="properties.name"
 					valueFormat=".2s"
