@@ -1,6 +1,7 @@
 import prisma from "./prisma";
 
-import type { ParticipationRecords } from "@prisma/client";
+import type { Games, ParticipationRecords } from "@prisma/client";
+import type { MedalType } from "types/prisma";
 
 import type { CountryParam } from "./country";
 import type { GamesParam } from "./game";
@@ -16,11 +17,20 @@ export const getMedalsBySport = async ({ sport }: SportParam) =>
 
 /** Get medals for sports by a country */
 export const getMedalsByCountry = async ({ country }: CountryParam) =>
-	prisma.participationRecords.groupBy({
-		by: "sport",
-		_sum: { gold: true, silver: true, bronze: true },
-		where: { country },
-	});
+	prisma.participationRecords
+		.groupBy({
+			by: "sport",
+			_sum: { gold: true, silver: true, bronze: true },
+			where: { country },
+		})
+		.then((res) =>
+			res.map(({ sport, _sum: { gold, silver, bronze } }) => ({
+				sport,
+				gold: gold ?? 0,
+				silver: silver ?? 0,
+				bronze: bronze ?? 0,
+			})),
+		);
 
 /** Get top ten countries with the most medals for a games */
 export const getTopCountriesForGames = async ({
@@ -51,36 +61,44 @@ export const getTopCountriesForGames = async ({
 		);
 
 /** Get number of each medal for a country */
-export const getMedalTotalsForCountry = async ({ country }: CountryParam) =>
+export const getMedalTotalsForCountryBySeason = async ({
+	country,
+}: CountryParam) =>
+	prisma.$queryRaw`
+		SELECT country, season, SUM(gold) as gold, SUM(silver) as silver, SUM(bronze) as bronze
+		FROM participation_records
+		JOIN games_detail
+		ON participation_records.game = games_detail.game
+		WHERE country = ${country}
+		GROUP BY country, season;
+	` as Promise<
+		(Pick<ParticipationRecords, "country" | MedalType> &
+			Pick<Games, "season">)[]
+	>;
+
+/** Get medals won at each games for a country */
+export const getMedalTotalsPerGamesForCountry = async ({
+	country,
+}: CountryParam) =>
 	prisma.participationRecords
 		.groupBy({
-			by: "country",
+			by: "game",
 			_sum: { gold: true, silver: true, bronze: true },
 			where: { country },
 		})
 		.then((res) =>
-			res.map(({ country, _sum: { gold, silver, bronze } }) => ({
-				country,
+			res.map(({ game, _sum: { gold, silver, bronze } }) => ({
+				game,
 				gold: gold ?? 0,
 				silver: silver ?? 0,
 				bronze: bronze ?? 0,
 			})),
 		);
 
-/** Get medals won at each games for a country */
-export const getMedalTotalsPerGamesForCountry = async ({
-	country,
-}: CountryParam) =>
-	prisma.participationRecords.groupBy({
-		by: "game",
-		_sum: { gold: true, silver: true, bronze: true },
-		where: { country },
-	});
-
 /** Get countries with most medals from past 10 games */
-export const getMedalsLeadersFromLastTenGames = async ({
-	num = 5,
-}: { num?: number }) =>
+export const getMedalsLeadersFromLastTenGames = async (
+	{ num }: { num?: number } = { num: 10 },
+) =>
 	prisma.$queryRaw`
 	SELECT game, country, total
 	FROM (
@@ -99,7 +117,7 @@ export const getMedalsLeadersFromLastTenGames = async ({
 			ORDER BY
 				year DESC,
 				season ASC
-			LIMIT 10
+			LIMIT ${num}
 		) last10games
 		ON participation_records.game = last10games.game
 		ORDER BY year, total
@@ -108,5 +126,5 @@ export const getMedalsLeadersFromLastTenGames = async ({
 	-- WHERE num <= ${num}
 	-- ORDER BY year, total;
 	` as Promise<
-		Pick<ParticipationRecords, "game" | "country"> & { total: number }
+		(Pick<ParticipationRecords, "game" | "country"> & { total: number })[]
 	>;

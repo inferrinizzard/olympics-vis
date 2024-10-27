@@ -2,13 +2,12 @@
 
 import { Bar } from "@nivo/bar";
 
-import type { MedalTotals, Games } from "@prisma/client";
+import type { Games } from "@prisma/client";
 import type { CountryKey, GamesKey } from "types/prisma";
 
 interface TopMedalsChartProps {
 	countryMedals: Record<GamesKey, Record<CountryKey, number>>;
-	medalTotals: (Pick<MedalTotals, "country"> &
-		Pick<Games, "game" | "year"> & { total: number })[];
+	medalTotals: any[];
 }
 
 export const TopMedalsChart = ({
