@@ -1,15 +1,13 @@
 import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
 
-import type { MedalTotals, Games } from "@prisma/client";
 import {
 	getAllCountries,
 	getCountry,
 	getFirstGamesForCountry,
 	getMedalsByCountry,
-	getMedalTotalsForCountry,
+	getMedalTotalsForCountryBySeason,
 	getMedalTotalsPerGamesForCountry,
-	getNumberOfAthletesForCountry,
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
@@ -19,60 +17,46 @@ import CountryOverview from "../_components/CountryOverview";
 import CountrySportsMedalsChart from "../_components/CountrySportsMedalsChart";
 
 export async function generateStaticParams() {
-	const countries = await getAllCountries({ select: { country: true } });
+	const countries = await getAllCountries({ select: { code: true } });
 
 	return countries.map((params) => ({ params }));
 }
 
-const CountryPage: NextPage<{ params: { country: string } }> = async ({
-	params: { country: countryId },
-}) => {
-	const country = await getCountry({ country: countryId });
+const CountryPage: NextPage<
+	Awaited<ReturnType<typeof generateStaticParams>>[number]
+> = async ({ params: { code: countryCode } }) => {
+	const country = await getCountry({ country: countryCode });
 
 	if (!country) {
 		return null;
 	}
 
-	const medalsRows = await getMedalTotalsForCountry({ country: countryId });
-
-	const zeroMedals = {
-		gold: 0,
-		silver: 0,
-		bronze: 0,
-		total: 0,
-		country: countryId,
-	} as Omit<MedalTotals, "season">;
-	const medalTotals = medalsRows.reduce(
-		(acc, cur) => ({ ...acc, [cur.season]: cur }),
-		{
-			summer: { ...zeroMedals, season: "summer" },
-			winter: { ...zeroMedals, season: "winter" },
-		},
-	);
+	const countryMedalsBySeason = await getMedalTotalsForCountryBySeason({
+		country: countryCode,
+	});
 
 	const countrySportsMedals = (
-		await getMedalsByCountry({ country: countryId })
+		await getMedalsByCountry({ country: countryCode })
 	).sort((a, b) =>
 		a.gold + a.silver + a.bronze > b.gold + b.silver + b.bronze ? -1 : 1,
 	);
 
-	const countryMedals = (
-		await getMedalTotalsPerGamesForCountry({ country: countryId })
-	).reverse();
-
-	const countryAthletes = await getNumberOfAthletesForCountry({
-		country: countryId,
+	const countryMedals = await getMedalTotalsPerGamesForCountry({
+		country: countryCode,
 	});
 
+	// const countryAthletes = await getNumberOfAthletesForCountry({
+	// 	country: countryCode,
+	// });
+
 	const firstGames =
-		(await getFirstGamesForCountry({ country: countryId }))?.games?.[0] ??
-		("" as Games["game"]);
+		(await getFirstGamesForCountry({ country: countryCode }))?.game ?? "";
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl("countries", country?.name),
 	);
 
-	const totalMedals = Object.values(medalTotals).reduce(
+	const totalMedals = countryMedalsBySeason.reduce(
 		(sum, { gold, silver, bronze }) => sum + gold + silver + bronze,
 		0,
 	);
@@ -119,7 +103,7 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 						padding: "0.25rem 0.25rem 0.25rem 0.75rem",
 					}}
 				>
-					<CountryMedalTotals {...medalTotals} />
+					<CountryMedalTotals countryMedalsBySeason={countryMedalsBySeason} />
 					<CountrySportsMedalsChart
 						data={countrySportsMedals}
 						keys={["bronze", "silver", "gold"]}

@@ -1,0 +1,17 @@
+model ParticipationRecords {
+  game    String @db.String(30)
+  country String @db.String(3)
+  sport   String @db.String(5)
+  gold    Int
+  silver  Int
+  bronze  Int
+  men     Int
+  women   Int
+
+  games_detail   Games   @relation(fields: [game], references: [code], map: "fk_participation_records_games")
+  country_detail Country @relation(fields: [country], references: [code], map: "fk_participation_records_country")
+  sports_detail  Sport   @relation(fields: [sport], references: [code], map: "fk_participation_records_sport")
+
+  @@id([game, country, sport])
+  @@map("participation_records")
+}

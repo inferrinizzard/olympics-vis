@@ -3,13 +3,14 @@
 import { Box, Title } from "@mantine/core";
 import { ResponsiveBar } from "@nivo/bar";
 
-import type { CountrySportsMedals } from "@prisma/client";
+import type { ParticipationRecords } from "@prisma/client";
+import type { MedalType } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 import { sortByMedals } from "lib/util";
 
 interface SportsCountriesChartProps {
-	countrySportsMedals: CountrySportsMedals[];
+	countrySportsMedals: Pick<ParticipationRecords, "country" | MedalType>[];
 }
 
 const SportsCountriesChart = ({

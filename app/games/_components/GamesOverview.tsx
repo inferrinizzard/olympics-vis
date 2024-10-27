@@ -32,7 +32,7 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 				<Title order={1}>
 					{`${game.year} ${game.season[0].toUpperCase() + game.season.slice(1)} Olympics`}
 				</Title>
-				<Title order={3}>{game.title}</Title>
+				<Title order={3}>{game.motto}</Title>
 				<Box style={{ flexGrow: 1 }}>
 					<Excerpt
 						height={200}
@@ -67,7 +67,7 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 			</Box>
 			<Box p="sm" style={{ width: "25%" }}>
 				<Image
-					src={`/images/games/${getGameImage(game.game)}`}
+					src={`/images/games/${getGameImage(game.code)}`}
 					alt={`Olympic emblem for ${game}`}
 					style={{ width: "100%" }}
 				/>

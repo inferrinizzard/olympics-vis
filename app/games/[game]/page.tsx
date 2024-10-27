@@ -4,9 +4,10 @@ import { Container, Grid, GridCol } from "@mantine/core";
 
 import {
 	getAllGames,
-	getCountryAthletesForGames,
+	getAthletesByCountryForGames,
 	getGames,
-	getSportEventsForGame,
+	// getSportEventsForGame,
+	getSportsForGames,
 	getTopCountriesForGames,
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
@@ -17,25 +18,29 @@ import GamesOverview from "../_components/GamesOverview";
 import GamesSports from "../_components/GamesSports";
 
 export async function generateStaticParams() {
-	const games = await getAllGames({ select: { game: true } });
+	const games = await getAllGames({ select: { code: true } });
 
 	return games.map((params) => ({ params }));
 }
 
-const GamesPage: NextPage<{ params: { game: string } }> = async ({
-	params: { game: gamesId },
-}) => {
-	const game = await getGames({ games: gamesId });
+const GamesPage: NextPage<
+	Awaited<ReturnType<typeof generateStaticParams>>[number]
+> = async ({ params: { code: gamesCode } }) => {
+	const game = await getGames({ games: gamesCode });
 
 	if (!game) {
 		return null;
 	}
 
-	const countryMedals = await getTopCountriesForGames({ games: gamesId });
+	const countryStandings = await getTopCountriesForGames({ games: gamesCode });
 
-	const sportEvents = await getSportEventsForGame({ games: gamesId });
+	// const sportEvents = await getSportEventsForGame({ games: gamesCode });
 
-	const countryAthletes = await getCountryAthletesForGames({ games: gamesId });
+	const sports = await getSportsForGames({ games: gamesCode });
+
+	const athleteCounts = await getAthletesByCountryForGames({
+		games: gamesCode,
+	});
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl(
@@ -52,18 +57,14 @@ const GamesPage: NextPage<{ params: { game: string } }> = async ({
 					<GamesOverview game={game} wikipediaExcerpt={wikipediaExcerpt} />
 				</GridCol>
 				<GridCol span={4}>
-					<GamesMedalsTable countryMedals={countryMedals} />
+					<GamesMedalsTable countryStandings={countryStandings} />
 				</GridCol>
 				<GridCol span={4}>
-					<GamesSports sportEvents={sportEvents} />
+					<GamesSports sports={sports} />
 				</GridCol>
 				<GridCol span={8}>
-					{countryAthletes ? (
-						<GamesChoropleth
-							countryAthletes={
-								countryAthletes.country_athletes as Record<string, number>
-							}
-						/>
+					{athleteCounts ? (
+						<GamesChoropleth athleteCounts={athleteCounts} />
 					) : null}
 				</GridCol>
 			</Grid>

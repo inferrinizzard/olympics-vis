@@ -1,15 +1,16 @@
 import { Image, Title, Table } from "@mantine/core";
 
-import type { CountryMedals, Country } from "@prisma/client";
+import type { ParticipationRecords } from "@prisma/client";
+import type { MedalType } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 
 interface GamesMedalsTableProps {
-	countryMedals: (CountryMedals & { country_detail: Country })[];
+	countryStandings: Pick<ParticipationRecords, "country" | MedalType>[];
 }
 
 const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({
-	countryMedals,
+	countryStandings,
 }) => {
 	return (
 		<GridCell>
@@ -25,25 +26,23 @@ const GamesMedalsTable: React.FC<GamesMedalsTableProps> = ({
 						<td>Bronze</td>
 						<td>Total</td>
 					</tr>
-					{Object.values(countryMedals)
-						.slice(0, 10)
-						.map(({ country, gold, silver, bronze, country_detail }) => (
-							<tr key={country}>
-								<td>
-									<Image
-										src={country_detail.flag}
-										alt={country}
-										width={30}
-										style={{ display: "inline-block" }}
-									/>
-									<span>{country}</span>
-								</td>
-								<td>{gold}</td>
-								<td>{silver}</td>
-								<td>{bronze}</td>
-								<td>{gold + silver + bronze}</td>
-							</tr>
-						))}
+					{countryStandings.map(({ country, gold, silver, bronze }) => (
+						<tr key={country}>
+							<td>
+								{/* <Image
+									src={country_detail.flag}
+									alt={country}
+									width={30}
+									style={{ display: "inline-block" }}
+								/> */}
+								<span>{country}</span>
+							</td>
+							<td>{gold}</td>
+							<td>{silver}</td>
+							<td>{bronze}</td>
+							<td>{gold + silver + bronze}</td>
+						</tr>
+					))}
 				</tbody>
 			</Table>
 		</GridCell>

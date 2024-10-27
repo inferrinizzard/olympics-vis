@@ -11,7 +11,7 @@ const GamesAll = async () => {
 
 	const sortedGames = games.sort((a, b) => (a.year < b.year ? 1 : -1));
 
-	const gamesCardMapper = ({ game }: Games) => ({
+	const gamesCardMapper = ({ code: game }: Games) => ({
 		img: `/images/games/${getGameImage(game)}`,
 		alt: `Olympic emblem for ${game}`,
 		href: `/games/${game}`,

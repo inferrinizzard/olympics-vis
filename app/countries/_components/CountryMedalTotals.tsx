@@ -1,18 +1,20 @@
 import { Box, Image, Title } from "@mantine/core";
 
-import type { MedalTotals } from "@prisma/client";
+import type { ParticipationRecords } from "@prisma/client";
+import type { MedalType } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 
 interface CountryMedalTotalsProps {
-	summer: MedalTotals;
-	winter: MedalTotals;
+	countryMedalsBySeason: any[];
 }
 
 const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
-	summer,
-	winter,
+	countryMedalsBySeason,
 }) => {
+	const summer = countryMedalsBySeason.find((row) => row.season === "summer");
+	const winter = countryMedalsBySeason.find((row) => row.season === "winter");
+
 	const allGoldMedals = summer.gold + winter.gold;
 	const allSilverMedals = summer.silver + winter.silver;
 	const allBronzeMedals = summer.bronze + winter.bronze;
@@ -42,8 +44,7 @@ const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
 	);
 };
 
-interface MedalSetProps
-	extends Pick<MedalTotals, "gold" | "silver" | "bronze"> {
+interface MedalSetProps extends Pick<ParticipationRecords, MedalType> {
 	title: string;
 }
 

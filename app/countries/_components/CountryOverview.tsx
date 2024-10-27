@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { Box, Title } from "@mantine/core";
 
-import type { Country, Games, Sport } from "@prisma/client";
+import type { Country } from "@prisma/client";
+import type { GamesKey, SportKey } from "types/prisma";
 
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Medal from "tabler-icons-react/dist/icons/medal";
@@ -14,11 +15,11 @@ import Excerpt from "components/layouts/Excerpt";
 import { getGameName } from "lib/util";
 
 interface CountryOverviewData {
-	firstGames: Games["game"];
+	firstGames: GamesKey;
 	totalMedals: number;
-	hostedGames?: Games["game"][];
-	bestGames: Games["game"];
-	bestSport: Sport["sport"];
+	hostedGames?: GamesKey[];
+	bestGames: GamesKey;
+	bestSport: SportKey;
 }
 
 interface CountryOverviewProps {
@@ -38,15 +39,15 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 			h="100%"
 			// style={(theme) => ({ color: theme.colors.blue[2] })}
 		>
-			<Title order={1}>{`${country.name} (${country.country})`}</Title>
+			<Title order={1}>{`${country.name} (${country.code})`}</Title>
 			<Box mah="min(50%, 12rem)" style={{ position: "relative" }}>
 				<Image
-					src={`/images/countries/${country.country}.svg`}
+					src={`/images/countries/${country.code}.svg`}
 					fill
 					style={{
 						objectFit: "scale-down",
 					}}
-					alt={`NOC Flag for ${country.country}`}
+					alt={`NOC Flag for ${country.code}`}
 				/>
 			</Box>
 			<Box m="0.5rem">

@@ -8,23 +8,26 @@ export type SportParam = { sport: SportKey };
 
 /** Get sport key and name for 1 sport */
 export const getSport = async ({ sport }: SportParam) =>
-	await prisma.sport.findFirst({ where: { sport } });
+	await prisma.sport.findFirst({ where: { code: sport } });
 
 /** Get sport key and name for all sports */
 export const getAllSports = async () =>
-	await prisma.sport.findMany({ select: { sport: true, name: true } });
+	await prisma.sport.findMany(
+		// { select: { code: true, name: true } }
+	);
 
+// TODO-EVENTS: needs new data
 /** Get count of events for sport in each game */
-export const getSportEventCountByGame = async ({ sport }: SportParam) =>
-	prisma.sportsEvent.groupBy({
-		by: ["game"],
-		_count: { sport: true },
-		where: { sport },
-	});
+export const getSportEventCountByGame = async ({ sport }: SportParam) => [];
+// prisma.sportsEvent.groupBy({
+// 	by: ["game"],
+// 	_count: { sport: true },
+// 	where: { sport },
+// });
 
 /** Get sports and corresponding season */
 export const getSportWithSeason = async (): Promise<
-	(Pick<Games, "season"> & { sport: Sport["sport"][] })[]
+	(Pick<Games, "season"> & { sport: SportKey[] })[]
 > =>
 	prisma.$queryRaw`
 		SELECT sport, season
@@ -42,10 +45,11 @@ export const getSportWithSeason = async (): Promise<
 		;
 	`;
 
+// TODO-EVENTS: needs new data
 /** Get sport events for a specific games */
-export const getSportEventsForGame = async ({ games }: GamesParam) =>
-	prisma.sportsEvent.findMany({
-		where: { game: games },
-		distinct: "sport",
-		// include: { sport_detail: true },
-	});
+export const getSportEventsForGame = async ({ games }: GamesParam) => [];
+// prisma.sportsEvent.findMany({
+// 	where: { game: games },
+// 	distinct: "sport",
+// 	// include: { sport_detail: true },
+// });
