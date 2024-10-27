@@ -1,6 +1,6 @@
 import { Image, Title, Table } from "@mantine/core";
 
-import type { CountryMedals, Country } from "@prisma/client";
+import type { Country } from "@prisma/client";
 
 import GridCell from "components/grid/GridCell";
 

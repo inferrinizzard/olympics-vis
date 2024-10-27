@@ -1,14 +1,14 @@
 import { Box, Container, Title } from "@mantine/core";
 
-import type { SportsEvent } from "@prisma/client";
+import type { SportKey } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 
 interface GamesSportsProps {
-	sportEvents: SportsEvent[];
+	sports: SportKey[];
 }
 
-const GamesSports: React.FC<GamesSportsProps> = ({ sportEvents }) => {
+const GamesSports: React.FC<GamesSportsProps> = ({ sports }) => {
 	return (
 		<GridCell h="100%">
 			<Title order={2} m="sm">
@@ -21,9 +21,9 @@ const GamesSports: React.FC<GamesSportsProps> = ({ sportEvents }) => {
 					gridTemplateRows: "repeat(3, 1fr)",
 				}}
 			>
-				{sportEvents.slice(0, 8).map((sport) => (
-					<Box key={sport.sport}>
-						<h5>{sport.sport}</h5>
+				{sports.slice(0, 8).map((sport) => (
+					<Box key={sport}>
+						<h5>{sport}</h5>
 					</Box>
 				))}
 			</Container>

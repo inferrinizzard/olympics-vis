@@ -1,4 +1,5 @@
 import type {
+	ParticipationRecords,
 	Country as PrismaCountry,
 	Games as PrismaGames,
 	Sport as PrismaSport,
@@ -8,4 +9,6 @@ export type CountryKey = string & PrismaCountry["code"];
 export type GamesKey = string & PrismaGames["code"];
 export type SportKey = string & PrismaSport["code"];
 
-export type MedalType = "gold" | "silver" | "bronze";
+export type MedalType = keyof ParticipationRecords &
+	("gold" | "silver" | "bronze");
+export type AthleteSex = keyof ParticipationRecords & ("men" | "women");

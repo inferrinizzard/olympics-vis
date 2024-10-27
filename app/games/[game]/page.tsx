@@ -6,7 +6,8 @@ import {
 	getAllGames,
 	getAthletesByCountryForGames,
 	getGames,
-	getSportEventsForGame,
+	// getSportEventsForGame,
+	getSportsForGames,
 	getTopCountriesForGames,
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
@@ -22,21 +23,23 @@ export async function generateStaticParams() {
 	return games.map((params) => ({ params }));
 }
 
-const GamesPage: NextPage<{ params: { game: string } }> = async ({
-	params: { game: gamesId },
-}) => {
-	const game = await getGames({ games: gamesId });
+const GamesPage: NextPage<
+	Awaited<ReturnType<typeof generateStaticParams>>[number]
+> = async ({ params: { code: gamesCode } }) => {
+	const game = await getGames({ games: gamesCode });
 
 	if (!game) {
 		return null;
 	}
 
-	const countryMedals = await getTopCountriesForGames({ games: gamesId });
+	const countryMedals = await getTopCountriesForGames({ games: gamesCode });
 
-	const sportEvents = await getSportEventsForGame({ games: gamesId });
+	// const sportEvents = await getSportEventsForGame({ games: gamesCode });
+
+	const sports = await getSportsForGames({ games: gamesCode });
 
 	const athleteCounts = await getAthletesByCountryForGames({
-		games: gamesId,
+		games: gamesCode,
 	});
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
@@ -57,7 +60,7 @@ const GamesPage: NextPage<{ params: { game: string } }> = async ({
 					<GamesMedalsTable countryMedals={countryMedals} />
 				</GridCol>
 				<GridCol span={4}>
-					<GamesSports sportEvents={sportEvents} />
+					<GamesSports sports={sports} />
 				</GridCol>
 				<GridCol span={8}>
 					{athleteCounts ? (

@@ -1,7 +1,7 @@
 import prisma from "./prisma";
 
 import type { Prisma } from "@prisma/client";
-import type { GamesKey } from "types/prisma";
+import type { GamesKey, SportKey } from "types/prisma";
 
 export type GamesParam = { games: GamesKey };
 
@@ -28,3 +28,9 @@ export const getAthletesByCountryForGames = async ({ games }: GamesParam) =>
 				women: women ?? 0,
 			})),
 		);
+
+/** Get sports that were held at a games */
+export const getSportsForGames = async ({ games }: GamesParam) =>
+	prisma.participationRecords
+		.groupBy({ by: "sport", where: { game: games } })
+		.then((res) => res.map(({ sport }) => sport as SportKey));
