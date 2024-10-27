@@ -16,7 +16,7 @@ export const getAllSports = async () =>
 
 // TODO-EVENTS: needs new data
 /** Get count of events for sport in each game */
-export const getSportEventCountByGame = async ({ sport }: SportParam) => 0;
+export const getSportEventCountByGame = async ({ sport }: SportParam) => [];
 // prisma.sportsEvent.groupBy({
 // 	by: ["game"],
 // 	_count: { sport: true },

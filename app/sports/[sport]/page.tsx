@@ -17,16 +17,16 @@ export async function generateStaticParams() {
 	return sports.map((params) => ({ params }));
 }
 
-const SportPage: NextPage<{ params: { sport: string } }> = async ({
-	params: { sport: sportId },
-}) => {
-	const sport = await getSport({ sport: sportId });
+const SportPage: NextPage<
+	Awaited<ReturnType<typeof generateStaticParams>>[number]
+> = async ({ params: { code: sportCode } }) => {
+	const sport = await getSport({ sport: sportCode });
 
 	if (!sport) {
 		return null;
 	}
 
-	const countEvents = await getSportEventCountByGame({ sport: sportId });
+	const countEvents = await getSportEventCountByGame({ sport: sportCode });
 	const numEvents = countEvents
 		.reverse()
 		.reduce(
@@ -35,7 +35,7 @@ const SportPage: NextPage<{ params: { sport: string } }> = async ({
 			{},
 		);
 
-	const countrySportsMedals = await getMedalsBySport({ sport: sportId });
+	const countrySportsMedals = await getMedalsBySport({ sport: sportCode });
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl("sports", sport?.name),
@@ -49,7 +49,7 @@ const SportPage: NextPage<{ params: { sport: string } }> = async ({
 					<SportsOverview sport={sport} wikipediaExcerpt={wikipediaExcerpt} />
 				</GridCol>
 				<GridCol>
-					<SportsEventsChart sport={sport} numEvents={numEvents} />
+					{/* <SportsEventsChart sport={sport} numEvents={numEvents} /> */}
 				</GridCol>
 				<GridCol>
 					<SportsCountriesChart countrySportsMedals={countrySportsMedals} />

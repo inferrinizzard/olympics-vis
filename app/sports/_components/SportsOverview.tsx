@@ -20,11 +20,11 @@ const SportsOverview = ({ sport, wikipediaExcerpt }: SportsOverviewProps) => {
 		<GridCell bg="red">
 			<Box style={{ display: "flex" }}>
 				<Box maw="15rem" miw="fit-content">
-					<Title order={2}>{`${sport.name} (${sport.sport})`}</Title>
+					<Title order={2}>{`${sport.name} (${sport.code})`}</Title>
 					<Image
-						src={`/images/sports/${sport.sport}.svg`}
+						src={`/images/sports/${sport.code}.svg`}
 						width="100%"
-						alt={`${sport.sport} sport icon`}
+						alt={`${sport.code} sport icon`}
 						styles={{ root: { width: "100%", aspectRatio: "1 / 1" } }}
 					/>
 				</Box>
