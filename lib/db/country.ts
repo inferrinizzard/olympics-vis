@@ -15,13 +15,6 @@ export const getCountry = async ({ country }: CountryCodeParam) =>
 export const getAllCountries = async (args?: Prisma.CountryFindManyArgs) =>
 	prisma.country.findMany(args);
 
-/** Get first games that a country attended */
-export const getFirstGamesForCountry = async ({ country }: CountryCodeParam) =>
-	prisma.participationRecords.findFirst({
-		orderBy: { games_detail: { year: "asc" } },
-		where: { country },
-	});
-
 // /** Get number of athletes for a country */
 // export const getNumberOfAthletesForCountry = async ({
 // 	country,

@@ -28,11 +28,11 @@ interface CountryOverviewProps {
 	overviewData: CountryOverviewData;
 }
 
-const CountryOverview: React.FC<CountryOverviewProps> = ({
+const CountryOverview_Client = ({
 	wikipediaExcerpt,
 	country,
 	overviewData: { firstGames, totalMedals, hostedGames, bestGames, bestSport },
-}) => {
+}: CountryOverviewProps) => {
 	return (
 		<GridCell
 			bg="blue"
@@ -79,4 +79,4 @@ const CountryOverview: React.FC<CountryOverviewProps> = ({
 	);
 };
 
-export default CountryOverview;
+export default CountryOverview_Client;

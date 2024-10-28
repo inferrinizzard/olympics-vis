@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
 
-import { getAllCountries, getCountry, getFirstGamesForCountry } from "lib/db";
-import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
+import { getAllCountries, getCountry } from "lib/db";
 
 import CountryGamesMedalsChart from "../_components/CountryGamesMedalsChart";
 import CountryMedalTotals from "../_components/CountryMedalTotals";
@@ -28,50 +27,12 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	// 	country: countryCode,
 	// });
 
-	const firstGames =
-		(await getFirstGamesForCountry({ country: countryCode }))?.games ?? "";
-
-	const wikipediaExcerpt = await getWikipediaExcerpt(
-		getWikipediaUrl("countries", country?.name),
-	);
-
-	const totalMedals = countryMedalsBySeason.reduce(
-		(sum, { gold, silver, bronze }) => sum + gold + silver + bronze,
-		0,
-	);
-
-	const bestGames = countryMedals.reduce(
-		({ bestTotal, bestGame }, { games, gold, silver, bronze }) => {
-			const total = gold + silver + bronze;
-			return {
-				bestTotal: Math.max(total, bestTotal),
-				bestGame: total > bestTotal ? games : bestGame,
-			};
-		},
-		{ bestTotal: 0, bestGame: "" },
-	).bestGame;
-
-	const bestSport = countrySportsMedals.reduce(
-		({ bestTotal, bestSport }, { sport, gold, silver, bronze }) => {
-			const total = gold + silver + bronze;
-			return {
-				bestTotal: Math.max(total, bestTotal),
-				bestSport: total > bestTotal ? sport : bestSport,
-			};
-		},
-		{ bestTotal: 0, bestSport: "" },
-	).bestSport;
-
 	return (
 		<Container fluid style={{ height: "100%" }}>
 			{/* <BackButton /> */}
 			<Grid mt={0} h="100%" style={{ borderRadius: "1rem" }}>
 				<GridCol span={4} p={"0.25rem"} h="100%">
-					<CountryOverview
-						country={country}
-						overviewData={{ firstGames, totalMedals, bestGames, bestSport }}
-						wikipediaExcerpt={wikipediaExcerpt}
-					/>
+					<CountryOverview country={country} />
 				</GridCol>
 				<GridCol
 					span={8}
