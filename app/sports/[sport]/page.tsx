@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
 import type { ResolvedStaticParam } from "types/util";
 
-import { getSport, getSportEventCountByGame, getMedalsBySport } from "lib/db";
+import { getSport, getSportEventCountByGame } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 // import BackButton from "components/layouts/BackButton";
@@ -36,8 +36,6 @@ const SportPage: NextPage<
 			{},
 		);
 
-	const countrySportsMedals = await getMedalsBySport({ sport: sportCode });
-
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl("sports", sport?.name),
 	);
@@ -53,7 +51,7 @@ const SportPage: NextPage<
 					{/* <SportsEventsChart sport={sport} numEvents={numEvents} /> */}
 				</GridCol>
 				<GridCol>
-					<SportsCountriesChart countrySportsMedals={countrySportsMedals} />
+					<SportsCountriesChart sport={sport} />
 				</GridCol>
 			</Grid>
 		</Container>

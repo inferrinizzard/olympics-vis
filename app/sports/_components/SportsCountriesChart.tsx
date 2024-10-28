@@ -3,23 +3,36 @@
 import { Box, Title } from "@mantine/core";
 import { ResponsiveBar } from "@nivo/bar";
 
-import type { ParticipationRecords } from "@prisma/client";
-import type { MedalType } from "types/prisma";
+import type { SportProps } from "types";
 
 import GridCell from "components/grid/GridCell";
-import { sortByMedals } from "lib/util";
+import type { SportCodeParam } from "lib/db";
 
-interface SportsCountriesChartProps {
-	countrySportsMedals: Pick<ParticipationRecords, "country" | MedalType>[];
-}
+/** Get countries that have medals in a sport */
+export const getCountriesWithMedals = async ({ sport }: SportCodeParam) =>
+	prisma.participationRecords
+		.groupBy({
+			by: "country",
+			_sum: { gold: true, silver: true, bronze: true },
+			where: { sport },
+			orderBy: {
+				_sum: { gold: "desc", silver: "desc", bronze: "desc" },
+				country: "desc",
+			},
+		})
+		.then((res) =>
+			res.map(({ country, _sum: { gold, silver, bronze } }) => ({
+				country,
+				gold: gold ?? 0,
+				silver: silver ?? 0,
+				bronze: bronze ?? 0,
+			})),
+		);
 
-const SportsCountriesChart = ({
-	countrySportsMedals,
-}: SportsCountriesChartProps) => {
-	const leadingCountries = countrySportsMedals
-		.sort(sortByMedals)
-		.reverse()
-		.slice(0, 10);
+const SportsCountriesChart = async ({ sport }: SportProps) => {
+	const leadingCountries = (
+		await getCountriesWithMedals({ sport: sport.code })
+	).slice(0, 10);
 
 	return (
 		<GridCell>

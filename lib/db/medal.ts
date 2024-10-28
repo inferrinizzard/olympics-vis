@@ -5,24 +5,6 @@ import type { MedalType } from "types/prisma";
 
 import type { CountryCodeParam } from "./country";
 import type { GamesCodeParam } from "./game";
-import type { SportCodeParam } from "./sport";
-
-/** Get countries that have medals in a sport */
-export const getMedalsBySport = async ({ sport }: SportCodeParam) =>
-	prisma.participationRecords
-		.groupBy({
-			by: "country",
-			_sum: { gold: true, silver: true, bronze: true },
-			where: { sport },
-		})
-		.then((res) =>
-			res.map(({ country, _sum: { gold, silver, bronze } }) => ({
-				country,
-				gold: gold ?? 0,
-				silver: silver ?? 0,
-				bronze: bronze ?? 0,
-			})),
-		);
 
 /** Get medals for sports by a country */
 export const getMedalsByCountry = async ({ country }: CountryCodeParam) =>
