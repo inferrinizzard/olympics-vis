@@ -1,41 +1,30 @@
-import { Container, Grid, GridCol } from "@mantine/core";
 import type { NextPage } from "next";
+import { Container, Grid, GridCol } from "@mantine/core";
 
-import { getSport, getSportEventCountByGame, getMedalsBySport } from "lib/db";
+import { getSport } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 // import BackButton from "components/layouts/BackButton";
 import SportsCountriesChart from "../_components/SportsCountriesChart";
-import SportsEventsChart from "../_components/SportsEventsChart";
+import SportsEventsChart from "../_components/SportsEventsChart/client";
 import SportsOverview from "../_components/SportsOverview";
 
 import { getAllSports } from "lib/db";
 
 export async function generateStaticParams() {
-	const sports = await getAllSports();
+	const sports = await getAllSports({ select: { code: true } });
 
-	return sports.map((params) => ({ params }));
+	return sports.map(({ code }) => ({ params: { sport: code } }));
 }
 
-const SportPage: NextPage<
-	Awaited<ReturnType<typeof generateStaticParams>>[number]
-> = async ({ params: { code: sportCode } }) => {
+const SportPage: NextPage<{ params: { sport: string } }> = async ({
+	params: { sport: sportCode },
+}) => {
 	const sport = await getSport({ sport: sportCode });
 
 	if (!sport) {
 		return null;
 	}
-
-	const countEvents = await getSportEventCountByGame({ sport: sportCode });
-	const numEvents = countEvents
-		.reverse()
-		.reduce(
-			(acc, { game, _count: { sport: count } }) =>
-				count ? { ...acc, [game]: count } : acc,
-			{},
-		);
-
-	const countrySportsMedals = await getMedalsBySport({ sport: sportCode });
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl("sports", sport?.name),
@@ -48,11 +37,9 @@ const SportPage: NextPage<
 				<GridCol>
 					<SportsOverview sport={sport} wikipediaExcerpt={wikipediaExcerpt} />
 				</GridCol>
+				<GridCol>{/* <SportsEventsChart sport={sport}  /> */}</GridCol>
 				<GridCol>
-					{/* <SportsEventsChart sport={sport} numEvents={numEvents} /> */}
-				</GridCol>
-				<GridCol>
-					<SportsCountriesChart countrySportsMedals={countrySportsMedals} />
+					<SportsCountriesChart sport={sport} />
 				</GridCol>
 			</Grid>
 		</Container>

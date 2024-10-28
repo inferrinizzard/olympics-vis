@@ -2,15 +2,16 @@
 
 import { Bar } from "@nivo/bar";
 
-import type { Games } from "@prisma/client";
 import type { CountryKey, GamesKey } from "types/prisma";
+
+import type { LeadingCountriesPerGames } from "./data";
 
 interface TopMedalsChartProps {
 	countryMedals: Record<GamesKey, Record<CountryKey, number>>;
-	medalTotals: any[];
+	medalTotals: LeadingCountriesPerGames[];
 }
 
-export const TopMedalsChart = ({
+const TopMedalsChart_Client = ({
 	countryMedals,
 	medalTotals,
 }: TopMedalsChartProps) => {
@@ -19,7 +20,7 @@ export const TopMedalsChart = ({
 			<Bar
 				data={Object.values(countryMedals)}
 				keys={[...new Set(medalTotals.map(({ country }) => country))]}
-				indexBy="game"
+				indexBy="games"
 				width={1150}
 				height={500}
 				margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
@@ -46,3 +47,5 @@ export const TopMedalsChart = ({
 		</section>
 	);
 };
+
+export default TopMedalsChart_Client;

@@ -71,7 +71,7 @@ const CardScroller = <T extends Record<string, string | number | null>>({
 						return (
 							<Tooltip
 								key={
-									idKey === "game"
+									idKey === "games"
 										? getGameName(datum[idKey] as string)
 										: datum[idKey]
 								}
@@ -81,7 +81,7 @@ const CardScroller = <T extends Record<string, string | number | null>>({
 								<Box m="0.25rem" w="13rem" h="13rem">
 									<CardLink
 										href={`/${route}/${datum[idKey]}`}
-										img={`/images/${route}/${idKey === "game" ? getGameImage(datum[idKey] as string) : datum[idKey] + ".svg"}`}
+										img={`/images/${route}/${idKey === "games" ? getGameImage(datum[idKey] as string) : `${datum[idKey]}.svg`}`}
 										alt={datum[idKey] as string}
 										hoverColour={color}
 										nextImageProps={{ priority: true }}

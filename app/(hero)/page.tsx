@@ -36,7 +36,7 @@ const HomePage = async () => {
 				data={games}
 				route="games"
 				idKey="code"
-				tooltipKey={"game"}
+				tooltipKey={"games"}
 				direction={1}
 				color="green"
 			/>

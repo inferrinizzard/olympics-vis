@@ -5,10 +5,10 @@ import type { SportKey } from "types/prisma";
 import GridCell from "components/grid/GridCell";
 
 interface GamesSportsProps {
-	sports: SportKey[];
+	sportsList: SportKey[];
 }
 
-const GamesSports: React.FC<GamesSportsProps> = ({ sports }) => {
+const GamesSports_Client = ({ sportsList }: GamesSportsProps) => {
 	return (
 		<GridCell h="100%">
 			<Title order={2} m="sm">
@@ -21,7 +21,7 @@ const GamesSports: React.FC<GamesSportsProps> = ({ sports }) => {
 					gridTemplateRows: "repeat(3, 1fr)",
 				}}
 			>
-				{sports.slice(0, 8).map((sport) => (
+				{sportsList.slice(0, 8).map((sport) => (
 					<Box key={sport}>
 						<h5>{sport}</h5>
 					</Box>
@@ -31,4 +31,4 @@ const GamesSports: React.FC<GamesSportsProps> = ({ sports }) => {
 	);
 };
 
-export default GamesSports;
+export default GamesSports_Client;

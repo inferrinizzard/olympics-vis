@@ -5,15 +5,17 @@ import type { MedalType } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 
+import type { CountryMedalTotalsWithSeason } from "./data";
+
 interface CountryMedalTotalsProps {
-	countryMedalsBySeason: any[];
+	countryMedalsBySeason: CountryMedalTotalsWithSeason[];
 }
 
-const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
+const CountryMedalTotals_Client = ({
 	countryMedalsBySeason,
-}) => {
-	const summer = countryMedalsBySeason.find((row) => row.season === "summer");
-	const winter = countryMedalsBySeason.find((row) => row.season === "winter");
+}: CountryMedalTotalsProps) => {
+	const summer = countryMedalsBySeason.find((row) => row.season === "summer")!;
+	const winter = countryMedalsBySeason.find((row) => row.season === "winter")!;
 
 	const allGoldMedals = summer.gold + winter.gold;
 	const allSilverMedals = summer.silver + winter.silver;
@@ -84,4 +86,4 @@ const MedalSet: React.FC<MedalSetProps> = ({ title, gold, silver, bronze }) => {
 	);
 };
 
-export default CountryMedalTotals;
+export default CountryMedalTotals_Client;

@@ -1,14 +1,10 @@
 import type { NextPage } from "next";
-
 import { Container, Grid, GridCol } from "@mantine/core";
 
 import {
 	getAllGames,
-	getAthletesByCountryForGames,
 	getGames,
 	// getSportEventsForGame,
-	getSportsForGames,
-	getTopCountriesForGames,
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
@@ -20,32 +16,22 @@ import GamesSports from "../_components/GamesSports";
 export async function generateStaticParams() {
 	const games = await getAllGames({ select: { code: true } });
 
-	return games.map((params) => ({ params }));
+	return games.map(({ code }) => ({ params: { games: code } }));
 }
 
-const GamesPage: NextPage<
-	Awaited<ReturnType<typeof generateStaticParams>>[number]
-> = async ({ params: { code: gamesCode } }) => {
-	const game = await getGames({ games: gamesCode });
+const GamesPage: NextPage<{ params: { games: string } }> = async ({
+	params: { games: gamesCode },
+}) => {
+	const games = await getGames({ games: gamesCode });
 
-	if (!game) {
+	if (!games) {
 		return null;
 	}
-
-	const countryStandings = await getTopCountriesForGames({ games: gamesCode });
-
-	// const sportEvents = await getSportEventsForGame({ games: gamesCode });
-
-	const sports = await getSportsForGames({ games: gamesCode });
-
-	const athleteCounts = await getAthletesByCountryForGames({
-		games: gamesCode,
-	});
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl(
 			"games",
-			`${game?.year} ${game?.season.slice(0, 1).toUpperCase()}${game?.season.slice(1)}`,
+			`${games?.year} ${games?.season.slice(0, 1).toUpperCase()}${games?.season.slice(1)}`,
 		),
 	);
 
@@ -54,18 +40,16 @@ const GamesPage: NextPage<
 			{/* <BackButton /> */}
 			<Grid mt={0}>
 				<GridCol span={8}>
-					<GamesOverview game={game} wikipediaExcerpt={wikipediaExcerpt} />
+					<GamesOverview games={games} wikipediaExcerpt={wikipediaExcerpt} />
 				</GridCol>
 				<GridCol span={4}>
-					<GamesMedalsTable countryStandings={countryStandings} />
+					<GamesMedalsTable games={games} />
 				</GridCol>
 				<GridCol span={4}>
-					<GamesSports sports={sports} />
+					<GamesSports games={games} />
 				</GridCol>
 				<GridCol span={8}>
-					{athleteCounts ? (
-						<GamesChoropleth athleteCounts={athleteCounts} />
-					) : null}
+					<GamesChoropleth games={games} />
 				</GridCol>
 			</Grid>
 		</Container>

@@ -3,22 +3,24 @@
 import { Box, Title } from "@mantine/core";
 import { ResponsiveLine } from "@nivo/line";
 
-import type { Games, Sport } from "@prisma/client";
+import type { SportProps } from "types";
 import type { GamesKey } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 
-interface SportsEventsChartProps {
-	sport: Sport;
+interface SportsEventsChartProps extends SportProps {
 	numEvents: Record<GamesKey, number>;
 }
 
-const SportsEventsChart = ({ sport, numEvents }: SportsEventsChartProps) => {
+const SportsEventsChart_Client = ({
+	sport,
+	numEvents,
+}: SportsEventsChartProps) => {
 	const eventCountData = [
 		{
 			id: sport.code,
-			data: Object.entries(numEvents).map(([game, count]) => ({
-				x: game,
+			data: Object.entries(numEvents).map(([games, count]) => ({
+				x: games,
 				y: count,
 			})),
 		},
@@ -94,4 +96,4 @@ const SportsEventsChart = ({ sport, numEvents }: SportsEventsChartProps) => {
 	);
 };
 
-export default SportsEventsChart;
+export default SportsEventsChart_Client;
