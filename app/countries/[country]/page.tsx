@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	params: { country: countryCode },
 }) => {
-	const country = await getCountry({ country: countryCode });
+	const country = await getCountry({ country: countryCode.toUpperCase() });
 
 	if (!country) {
 		return null;
