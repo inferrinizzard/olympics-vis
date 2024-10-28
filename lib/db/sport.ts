@@ -11,10 +11,7 @@ export const getSport = async ({ sport }: SportCodeParam) =>
 	await prisma.sport.findFirst({ where: { code: sport } });
 
 /** Get sport key and name for all sports */
-export const getAllSports = async () =>
-	await prisma.sport.findMany(
-		// { select: { code: true, name: true } }
-	);
+export const getAllSports = async () => await prisma.sport.findMany();
 
 // TODO-EVENTS: needs new data
 /** Get count of events for sport in each game */

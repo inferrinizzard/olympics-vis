@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
-import type { ResolvedStaticParam } from "types/util";
 
 import {
 	getAllGames,
@@ -23,9 +22,9 @@ export async function generateStaticParams() {
 	return games.map((params) => ({ params }));
 }
 
-const GamesPage: NextPage<
-	ResolvedStaticParam<typeof generateStaticParams>
-> = async ({ params: { code: gamesCode } }) => {
+const GamesPage: NextPage<{ params: { games: string } }> = async ({
+	params: { games: gamesCode },
+}) => {
 	const game = await getGames({ games: gamesCode });
 
 	if (!game) {

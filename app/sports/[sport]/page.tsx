@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
-import type { ResolvedStaticParam } from "types/util";
 
 import { getSport, getSportEventCountByGame } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
@@ -18,9 +17,9 @@ export async function generateStaticParams() {
 	return sports.map((params) => ({ params }));
 }
 
-const SportPage: NextPage<
-	ResolvedStaticParam<typeof generateStaticParams>
-> = async ({ params: { code: sportCode } }) => {
+const SportPage: NextPage<{ params: { sport: string } }> = async ({
+	params: { sport: sportCode },
+}) => {
 	const sport = await getSport({ sport: sportCode });
 
 	if (!sport) {
