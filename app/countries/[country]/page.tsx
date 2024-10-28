@@ -1,12 +1,7 @@
 import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
 
-import {
-	getAllCountries,
-	getCountry,
-	getFirstGamesForCountry,
-	getMedalTotalsForCountryBySeason,
-} from "lib/db";
+import { getAllCountries, getCountry, getFirstGamesForCountry } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 import CountryGamesMedalsChart from "../_components/CountryGamesMedalsChart";
@@ -28,10 +23,6 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	if (!country) {
 		return null;
 	}
-
-	const countryMedalsBySeason = await getMedalTotalsForCountryBySeason({
-		country: countryCode,
-	});
 
 	// const countryAthletes = await getNumberOfAthletesForCountry({
 	// 	country: countryCode,
@@ -91,7 +82,7 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 						padding: "0.25rem 0.25rem 0.25rem 0.75rem",
 					}}
 				>
-					<CountryMedalTotals countryMedalsBySeason={countryMedalsBySeason} />
+					<CountryMedalTotals country={country} />
 					<CountrySportsMedalsChart country={country} />
 					<CountryGamesMedalsChart country={country} />
 				</GridCol>

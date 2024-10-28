@@ -1,25 +1,6 @@
 import prisma from "./prisma";
 
-import type { Games, ParticipationRecords } from "@prisma/client";
-import type { MedalType } from "types/prisma";
-
-import type { CountryCodeParam } from "./country";
-
-/** Get number of each medal for a country */
-export const getMedalTotalsForCountryBySeason = async ({
-	country,
-}: CountryCodeParam) =>
-	prisma.$queryRaw`
-		SELECT country, season, SUM(gold) as gold, SUM(silver) as silver, SUM(bronze) as bronze
-		FROM participation_records
-		JOIN games_detail
-		ON participation_records.games = games_detail.code
-		WHERE country = ${country}
-		GROUP BY country, season;
-	` as Promise<
-		(Pick<ParticipationRecords, "country" | MedalType> &
-			Pick<Games, "season">)[]
-	>;
+import type { ParticipationRecords } from "@prisma/client";
 
 /** Get countries with most medals from past 10 games */
 export const getMedalsLeadersFromLastTenGames = async (

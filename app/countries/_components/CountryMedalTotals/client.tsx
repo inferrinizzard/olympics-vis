@@ -9,9 +9,9 @@ interface CountryMedalTotalsProps {
 	countryMedalsBySeason: any[];
 }
 
-const CountryMedalTotals: React.FC<CountryMedalTotalsProps> = ({
+const CountryMedalTotals_Client = ({
 	countryMedalsBySeason,
-}) => {
+}: CountryMedalTotalsProps) => {
 	const summer = countryMedalsBySeason.find((row) => row.season === "summer");
 	const winter = countryMedalsBySeason.find((row) => row.season === "winter");
 
@@ -84,4 +84,4 @@ const MedalSet: React.FC<MedalSetProps> = ({ title, gold, silver, bronze }) => {
 	);
 };
 
-export default CountryMedalTotals;
+export default CountryMedalTotals_Client;
