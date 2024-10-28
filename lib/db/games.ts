@@ -13,22 +13,6 @@ export const getGames = async ({ games }: GamesCodeParam) =>
 export const getAllGames = async (args?: Prisma.GamesFindManyArgs) =>
 	prisma.games.findMany(args);
 
-/** Get number of athletes from each country for a games */
-export const getAthletesByCountryForGames = async ({ games }: GamesCodeParam) =>
-	prisma.participationRecords
-		.groupBy({
-			by: "country",
-			_sum: { men: true, women: true },
-			where: { games },
-		})
-		.then((res) =>
-			res.map(({ country, _sum: { men, women } }) => ({
-				country,
-				men: men ?? 0,
-				women: women ?? 0,
-			})),
-		);
-
 /** Get sports that were held at a games */
 export const getSportsForGames = async ({ games }: GamesCodeParam) =>
 	prisma.participationRecords

@@ -16,12 +16,12 @@ interface GamesChoroplethProps {
 	athleteCounts: Pick<ParticipationRecords, "country" | AthleteSex>[];
 }
 
-const GamesChoropleth: React.FC<GamesChoroplethProps> = ({ athleteCounts }) => {
+const GamesChoropleth_Client = ({ athleteCounts }: GamesChoroplethProps) => {
 	const countryData = athleteCounts.map(({ country, men, women }) => {
 		const isoMatch = nocIsoLookup[country as keyof typeof nocIsoLookup];
 
 		return {
-			id: "iso" in isoMatch ? isoMatch.iso : country,
+			id: isoMatch && "iso" in isoMatch ? isoMatch.iso : country,
 			men,
 			women,
 			total: men + women,
@@ -85,4 +85,4 @@ const GamesChoropleth: React.FC<GamesChoroplethProps> = ({ athleteCounts }) => {
 	);
 };
 
-export default GamesChoropleth;
+export default GamesChoropleth_Client;

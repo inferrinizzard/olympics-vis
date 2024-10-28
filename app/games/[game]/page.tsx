@@ -3,7 +3,6 @@ import { Container, Grid, GridCol } from "@mantine/core";
 
 import {
 	getAllGames,
-	getAthletesByCountryForGames,
 	getGames,
 	// getSportEventsForGame,
 	getSportsForGames,
@@ -32,10 +31,6 @@ const GamesPage: NextPage<{ params: { games: string } }> = async ({
 
 	const sports = await getSportsForGames({ games: gamesCode });
 
-	const athleteCounts = await getAthletesByCountryForGames({
-		games: gamesCode,
-	});
-
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl(
 			"games",
@@ -57,9 +52,7 @@ const GamesPage: NextPage<{ params: { games: string } }> = async ({
 					<GamesSports sports={sports} />
 				</GridCol>
 				<GridCol span={8}>
-					{athleteCounts ? (
-						<GamesChoropleth athleteCounts={athleteCounts} />
-					) : null}
+					<GamesChoropleth games={games} />
 				</GridCol>
 			</Grid>
 		</Container>
