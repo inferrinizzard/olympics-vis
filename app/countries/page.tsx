@@ -1,18 +1,16 @@
 import { Container, Title } from "@mantine/core";
 
 import type { Country } from "@prisma/client";
-import { getAllCountries, getMedalsLeadersFromLastTenGames } from "lib/db";
+import { getAllCountries } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
 import CardLink from "components/layouts/CardLink";
 import { Image } from "components/util/Image";
 
-import { TopMedalsChart } from "./_components/TopMedalsChart";
+import TopMedalsChart from "./_components/TopMedalsChart";
 
 const CountriesAll = async () => {
 	const countries: Country[] = await getAllCountries();
-
-	const medalTotals = await getMedalsLeadersFromLastTenGames();
 
 	const activeNOCs: Country[] = countries.filter(
 		({ status }) => status === "active",
@@ -24,23 +22,12 @@ const CountriesAll = async () => {
 		({ status }) => status === "historic",
 	);
 
-	const countryMedals = medalTotals.reduce(
-		(gameMap, { game, country, total }) => {
-			return {
-				...gameMap,
-				[game]: { game, ...(gameMap[game] ?? {}), [country]: total },
-			};
-		},
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		{} as any,
-	);
-
 	const countryCardsMapper = (country: Country) => ({
-		code: country.country,
-		img: `/images/country/${country.country}.svg`,
-		alt: `Flag for ${country.country}`,
-		href: `/countries/${country.country}`,
-		caption: country.country,
+		code: country.code,
+		img: `/images/country/${country.code}.svg`,
+		alt: `Flag for ${country.code}`,
+		href: `/countries/${country.code}`,
+		caption: country.code,
 		secondary: country.name,
 		aspectRatio: "3 / 2",
 		imageContainerStyles: {
@@ -70,7 +57,7 @@ const CountriesAll = async () => {
 	return (
 		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
 			<Title order={1}>{"Countries"}</Title>
-			<TopMedalsChart medalTotals={medalTotals} countryMedals={countryMedals} />
+			<TopMedalsChart />
 
 			<CardList
 				title="Active"

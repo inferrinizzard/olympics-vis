@@ -15,12 +15,12 @@ import { Image } from "components/util/Image";
 import { getGameImage } from "lib/util";
 
 interface GamesOverviewProps {
-	game: Games;
+	games: Games;
 	wikipediaExcerpt: string;
 }
 
 const GamesOverview: React.FC<GamesOverviewProps> = ({
-	game,
+	games,
 	wikipediaExcerpt,
 }) => {
 	return (
@@ -31,9 +31,9 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 		>
 			<Box m="xs" w="75%" style={{ display: "flex", flexDirection: "column" }}>
 				<Title order={1}>
-					{`${game.year} ${game.season[0].toUpperCase() + game.season.slice(1)} Olympics`}
+					{`${games.year} ${games.season[0].toUpperCase() + games.season.slice(1)} Olympics`}
 				</Title>
-				<Title order={3}>{game.title}</Title>
+				<Title order={3}>{games.motto}</Title>
 				<Box style={{ flexGrow: 1 }}>
 					<Excerpt
 						height={200}
@@ -50,27 +50,31 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 					<StatCard
 						Icon={Calendar}
 						title={"Start Date"}
-						text={game.start_date}
+						text={games.start_date}
 					/>
 					<StatCard
 						Icon={CalendarEvent}
 						title={"End Date"}
-						text={game.end_date}
+						text={games.end_date}
 					/>
 					<StatCard
 						Icon={Run}
 						title={"Total Athletes"}
-						text={game.num_athletes}
+						text={games.num_athletes}
 					/>
 					<StatCard Icon={Hash} title={"Total Countries"} text={100} />
-					<StatCard Icon={BuildingSkyscraper} title={"Host"} text={game.host} />
+					<StatCard
+						Icon={BuildingSkyscraper}
+						title={"Host"}
+						text={games.host}
+					/>
 				</Box>
 			</Box>
 			<Box p="sm" style={{ width: "25%" }}>
 				<Image
 					dir="games"
-					code={game.game}
-					alt={`Olympic emblem for ${game}`}
+					code={games.code}
+					alt={`Olympic emblem for ${games.code}`}
 					style={{ width: "100%" }}
 				/>
 			</Box>

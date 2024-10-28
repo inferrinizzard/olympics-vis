@@ -6,18 +6,14 @@ import { getAllSports, getSportWithSeason } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
 
-interface FutureSport extends Omit<Sport, "icon"> {
-	season?: "summer" | "winter" | "historic";
-}
-
 const SportsAll = async () => {
 	const sports = await getAllSports();
 	const sportsMap = sports.reduce(
 		(acc, cur) => {
-			acc[cur.sport] = cur;
+			acc[cur.code] = cur;
 			return acc;
 		},
-		{} as Record<string, FutureSport>,
+		{} as Record<SportKey, Pick<Sport, "code" | "name">>,
 	);
 
 	const sportsWithSeasons = await getSportWithSeason();
@@ -28,7 +24,7 @@ const SportsAll = async () => {
 		sportsWithSeasons.find((x) => x.season === "winter")?.sport ?? [];
 
 	const historicSportIds = (() => {
-		const allSportKeys = new Set(sports.map(({ sport }) => sport));
+		const allSportKeys = new Set(sports.map(({ code }) => code));
 		return [
 			...allSportKeys
 				.difference(new Set(summerSportIds))

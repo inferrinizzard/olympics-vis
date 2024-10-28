@@ -35,15 +35,15 @@ const HomePage = async () => {
 			<CardScroller<Games>
 				data={games}
 				route="games"
-				idKey="game"
-				tooltipKey={"game"}
+				idKey="code"
+				tooltipKey={"games"}
 				direction={1}
 				color="green"
 			/>
 			<CardScroller<Omit<Sport, "icon">>
 				data={sports}
 				route="sports"
-				idKey="sport"
+				idKey="code"
 				tooltipKey={"name"}
 				direction={-1}
 				color="red"
@@ -51,7 +51,7 @@ const HomePage = async () => {
 			<CardScroller<Country>
 				data={countries}
 				route="countries"
-				idKey="country"
+				idKey="code"
 				tooltipKey={"name"}
 				direction={1}
 				color="blue"

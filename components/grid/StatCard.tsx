@@ -4,10 +4,14 @@ import { Box, Paper, Text, Title } from "@mantine/core";
 export interface StatCardProps {
 	Icon: React.ComponentType<{ style: CSSProperties }>;
 	title: string;
-	text: string | number;
+	text: string | number | null;
 }
 
 const StatCard = ({ Icon, title, text }: StatCardProps) => {
+	if (!text) {
+		return null;
+	}
+
 	return (
 		<Paper p="sm" style={{ minWidth: "15rem" }}>
 			<Box style={{ display: "flex", columnGap: "0.5rem" }}>
