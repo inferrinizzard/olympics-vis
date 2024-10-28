@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
+import type { ResolvedStaticParam } from "types/util";
 
 import {
 	getAllCountries,
@@ -23,7 +24,7 @@ export async function generateStaticParams() {
 }
 
 const CountryPage: NextPage<
-	Awaited<ReturnType<typeof generateStaticParams>>[number]
+	ResolvedStaticParam<typeof generateStaticParams>
 > = async ({ params: { code: countryCode } }) => {
 	const country = await getCountry({ country: countryCode });
 
