@@ -7,7 +7,6 @@ import {
 	getFirstGamesForCountry,
 	getMedalsByCountry,
 	getMedalTotalsForCountryBySeason,
-	getMedalTotalsPerGamesForCountry,
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
@@ -40,10 +39,6 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	).sort((a, b) =>
 		a.gold + a.silver + a.bronze > b.gold + b.silver + b.bronze ? -1 : 1,
 	);
-
-	const countryMedals = await getMedalTotalsPerGamesForCountry({
-		country: countryCode,
-	});
 
 	// const countryAthletes = await getNumberOfAthletesForCountry({
 	// 	country: countryCode,
@@ -108,10 +103,7 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 						data={countrySportsMedals}
 						keys={["bronze", "silver", "gold"]}
 					/>
-					<CountryGamesMedalsChart
-						data={countryMedals}
-						keys={["bronze", "silver", "gold"]}
-					/>
+					<CountryGamesMedalsChart country={country} />
 				</GridCol>
 			</Grid>
 		</Container>

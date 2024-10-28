@@ -1,4 +1,5 @@
 "use client";
+
 import { type BarDatum, ResponsiveBar } from "@nivo/bar";
 
 import { Box, Title } from "@mantine/core";
@@ -10,10 +11,10 @@ interface CountryGamesMedalsChartProps {
 	keys: string[];
 }
 
-const CountryGamesMedalsChart: React.FC<CountryGamesMedalsChartProps> = ({
+const CountryGamesMedalsChart_Client = ({
 	data,
 	keys,
-}) => {
+}: CountryGamesMedalsChartProps) => {
 	if (!data.length) {
 		return (
 			<GridCell>
@@ -49,4 +50,4 @@ const CountryGamesMedalsChart: React.FC<CountryGamesMedalsChartProps> = ({
 	);
 };
 
-export default CountryGamesMedalsChart;
+export default CountryGamesMedalsChart_Client;
