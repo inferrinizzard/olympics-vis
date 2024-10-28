@@ -3,12 +3,12 @@ import prisma from "./prisma";
 import type { Games, ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
-import type { CountryParam } from "./country";
-import type { GamesParam } from "./game";
-import type { SportParam } from "./sport";
+import type { CountryCodeParam } from "./country";
+import type { GamesCodeParam } from "./game";
+import type { SportCodeParam } from "./sport";
 
 /** Get countries that have medals in a sport */
-export const getMedalsBySport = async ({ sport }: SportParam) =>
+export const getMedalsBySport = async ({ sport }: SportCodeParam) =>
 	prisma.participationRecords
 		.groupBy({
 			by: "country",
@@ -25,7 +25,7 @@ export const getMedalsBySport = async ({ sport }: SportParam) =>
 		);
 
 /** Get medals for sports by a country */
-export const getMedalsByCountry = async ({ country }: CountryParam) =>
+export const getMedalsByCountry = async ({ country }: CountryCodeParam) =>
 	prisma.participationRecords
 		.groupBy({
 			by: "sport",
@@ -45,7 +45,7 @@ export const getMedalsByCountry = async ({ country }: CountryParam) =>
 export const getTopCountriesForGames = async ({
 	games,
 	num = 10,
-}: GamesParam & { num?: number }) =>
+}: GamesCodeParam & { num?: number }) =>
 	await prisma.participationRecords
 		.groupBy({
 			by: "country",
@@ -72,7 +72,7 @@ export const getTopCountriesForGames = async ({
 /** Get number of each medal for a country */
 export const getMedalTotalsForCountryBySeason = async ({
 	country,
-}: CountryParam) =>
+}: CountryCodeParam) =>
 	prisma.$queryRaw`
 		SELECT country, season, SUM(gold) as gold, SUM(silver) as silver, SUM(bronze) as bronze
 		FROM participation_records
@@ -88,7 +88,7 @@ export const getMedalTotalsForCountryBySeason = async ({
 /** Get medals won at each games for a country */
 export const getMedalTotalsPerGamesForCountry = async ({
 	country,
-}: CountryParam) =>
+}: CountryCodeParam) =>
 	prisma.participationRecords
 		.groupBy({
 			by: "game",

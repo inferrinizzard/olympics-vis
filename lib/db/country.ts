@@ -3,10 +3,10 @@ import prisma from "./prisma";
 import type { Prisma } from "@prisma/client";
 import type { CountryKey } from "types/prisma";
 
-export type CountryParam = { country: CountryKey };
+export type CountryCodeParam = { country: CountryKey };
 
 /** Get country data for 1 country */
-export const getCountry = async ({ country }: CountryParam) =>
+export const getCountry = async ({ country }: CountryCodeParam) =>
 	prisma.country.findFirst({
 		where: { code: country },
 	});
@@ -16,7 +16,7 @@ export const getAllCountries = async (args?: Prisma.CountryFindManyArgs) =>
 	prisma.country.findMany(args);
 
 /** Get first games that a country attended */
-export const getFirstGamesForCountry = async ({ country }: CountryParam) =>
+export const getFirstGamesForCountry = async ({ country }: CountryCodeParam) =>
 	prisma.participationRecords.findFirst({
 		orderBy: { games_detail: { year: "asc" } },
 		where: { country },
@@ -25,7 +25,7 @@ export const getFirstGamesForCountry = async ({ country }: CountryParam) =>
 // /** Get number of athletes for a country */
 // export const getNumberOfAthletesForCountry = async ({
 // 	country,
-// }: CountryParam): Promise<
+// }: CountryCodeParam): Promise<
 // 	Pick<CountryAthletes, "game"> & Record<"athletes", number>
 // > =>
 // 	prisma.$queryRaw`

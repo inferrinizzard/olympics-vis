@@ -2,12 +2,12 @@ import prisma from "./prisma";
 
 import type { Games, Sport } from "@prisma/client";
 import type { SportKey } from "types/prisma";
-import type { GamesParam } from "./game";
+import type { GamesCodeParam } from "./game";
 
-export type SportParam = { sport: SportKey };
+export type SportCodeParam = { sport: SportKey };
 
 /** Get sport key and name for 1 sport */
-export const getSport = async ({ sport }: SportParam) =>
+export const getSport = async ({ sport }: SportCodeParam) =>
 	await prisma.sport.findFirst({ where: { code: sport } });
 
 /** Get sport key and name for all sports */
@@ -18,7 +18,7 @@ export const getAllSports = async () =>
 
 // TODO-EVENTS: needs new data
 /** Get count of events for sport in each game */
-export const getSportEventCountByGame = async ({ sport }: SportParam) => [];
+export const getSportEventCountByGame = async ({ sport }: SportCodeParam) => [];
 // prisma.sportsEvent.groupBy({
 // 	by: ["game"],
 // 	_count: { sport: true },
@@ -47,7 +47,7 @@ export const getSportWithSeason = async (): Promise<
 
 // TODO-EVENTS: needs new data
 /** Get sport events for a specific games */
-export const getSportEventsForGame = async ({ games }: GamesParam) => [];
+export const getSportEventsForGame = async ({ games }: GamesCodeParam) => [];
 // prisma.sportsEvent.findMany({
 // 	where: { game: games },
 // 	distinct: "sport",
