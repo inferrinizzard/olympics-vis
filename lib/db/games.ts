@@ -12,9 +12,3 @@ export const getGames = async ({ games }: GamesCodeParam) =>
 /** Get games data for all games */
 export const getAllGames = async (args?: Prisma.GamesFindManyArgs) =>
 	prisma.games.findMany(args);
-
-/** Get sports that were held at a games */
-export const getSportsForGames = async ({ games }: GamesCodeParam) =>
-	prisma.participationRecords
-		.groupBy({ by: "sport", where: { games } })
-		.then((res) => res.map(({ sport }) => sport as SportKey));

@@ -5,7 +5,6 @@ import {
 	getAllGames,
 	getGames,
 	// getSportEventsForGame,
-	getSportsForGames,
 } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
@@ -29,8 +28,6 @@ const GamesPage: NextPage<{ params: { games: string } }> = async ({
 		return null;
 	}
 
-	const sports = await getSportsForGames({ games: gamesCode });
-
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl(
 			"games",
@@ -49,7 +46,7 @@ const GamesPage: NextPage<{ params: { games: string } }> = async ({
 					<GamesMedalsTable games={games} />
 				</GridCol>
 				<GridCol span={4}>
-					<GamesSports sports={sports} />
+					<GamesSports games={games} />
 				</GridCol>
 				<GridCol span={8}>
 					<GamesChoropleth games={games} />
