@@ -14,7 +14,10 @@ export const getMedalTotalsForCountryBySeason = async ({
 		ON participation_records.games = games_detail.code
 		WHERE country = ${country}
 		GROUP BY country, season;
-	` as Promise<
-		(Pick<ParticipationRecords, "country" | MedalType> &
-			Pick<Games, "season">)[]
-	>;
+	` as Promise<CountryMedalTotalsWithSeason[]>;
+
+export type CountryMedalTotalsWithSeason = Pick<
+	ParticipationRecords,
+	"country" | MedalType
+> &
+	Pick<Games, "season">;

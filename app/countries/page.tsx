@@ -1,16 +1,14 @@
 import { Container, Title } from "@mantine/core";
 
 import type { Country } from "@prisma/client";
-import { getAllCountries, getMedalsLeadersFromLastTenGames } from "lib/db";
+import { getAllCountries } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
 
-import { TopMedalsChart } from "./_components/TopMedalsChart";
+import TopMedalsChart from "./_components/TopMedalsChart";
 
 const CountriesAll = async () => {
 	const countries: Country[] = await getAllCountries();
-
-	const medalTotals = await getMedalsLeadersFromLastTenGames();
 
 	const activeNOCs: Country[] = countries.filter(
 		({ status }) => status === "active",
@@ -20,17 +18,6 @@ const CountriesAll = async () => {
 	);
 	const historicNOCs: Country[] = countries.filter(
 		({ status }) => status === "historic",
-	);
-
-	const countryMedals = medalTotals.reduce(
-		(gameMap, { games, country, total }) => {
-			return {
-				...gameMap,
-				[games]: { games, ...(gameMap[games] ?? {}), [country]: total },
-			};
-		},
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		{} as any,
 	);
 
 	const countryCardsMapper = (country: Country) => ({
@@ -49,7 +36,7 @@ const CountriesAll = async () => {
 	return (
 		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
 			<Title order={1}>{"Countries"}</Title>
-			<TopMedalsChart medalTotals={medalTotals} countryMedals={countryMedals} />
+			<TopMedalsChart />
 
 			<CardList title="Active" cardData={activeNOCs.map(countryCardsMapper)} />
 			<CardList
