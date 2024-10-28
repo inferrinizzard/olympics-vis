@@ -13,15 +13,6 @@ export const getSport = async ({ sport }: SportCodeParam) =>
 /** Get sport key and name for all sports */
 export const getAllSports = async () => await prisma.sport.findMany();
 
-// TODO-EVENTS: needs new data
-/** Get count of events for sport in each game */
-export const getSportEventCountByGame = async ({ sport }: SportCodeParam) => [];
-// prisma.sportsEvent.groupBy({
-// 	by: ["game"],
-// 	_count: { sport: true },
-// 	where: { sport },
-// });
-
 /** Get sports and corresponding season */
 export const getSportWithSeason = async (): Promise<
 	(Pick<Games, "season"> & { sport: SportKey[] })[]

@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
 
-import { getSport, getSportEventCountByGame } from "lib/db";
+import { getSport } from "lib/db";
 import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 // import BackButton from "components/layouts/BackButton";
 import SportsCountriesChart from "../_components/SportsCountriesChart";
-import SportsEventsChart from "../_components/SportsEventsChart";
+import SportsEventsChart from "../_components/SportsEventsChart/client";
 import SportsOverview from "../_components/SportsOverview";
 
 import { getAllSports } from "lib/db";
@@ -26,15 +26,6 @@ const SportPage: NextPage<{ params: { sport: string } }> = async ({
 		return null;
 	}
 
-	const countEvents = await getSportEventCountByGame({ sport: sportCode });
-	const numEvents = countEvents
-		.reverse()
-		.reduce(
-			(acc, { game, _count: { sport: count } }) =>
-				count ? { ...acc, [game]: count } : acc,
-			{},
-		);
-
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl("sports", sport?.name),
 	);
@@ -46,9 +37,7 @@ const SportPage: NextPage<{ params: { sport: string } }> = async ({
 				<GridCol>
 					<SportsOverview sport={sport} wikipediaExcerpt={wikipediaExcerpt} />
 				</GridCol>
-				<GridCol>
-					{/* <SportsEventsChart sport={sport} numEvents={numEvents} /> */}
-				</GridCol>
+				<GridCol>{/* <SportsEventsChart sport={sport}  /> */}</GridCol>
 				<GridCol>
 					<SportsCountriesChart sport={sport} />
 				</GridCol>
