@@ -23,34 +23,6 @@ export const getMedalsByCountry = async ({ country }: CountryCodeParam) =>
 			})),
 		);
 
-/** Get top ten countries with the most medals for a games */
-export const getTopCountriesForGames = async ({
-	games,
-	num = 10,
-}: GamesCodeParam & { num?: number }) =>
-	await prisma.participationRecords
-		.groupBy({
-			by: "country",
-			take: num,
-			_sum: { gold: true, silver: true, bronze: true },
-			orderBy: {
-				_sum: {
-					gold: "desc",
-					silver: "desc",
-					bronze: "desc",
-				},
-			},
-			where: { game: games },
-		})
-		.then((res) =>
-			res.map(({ country, _sum: { gold, silver, bronze } }) => ({
-				country,
-				gold: gold ?? 0,
-				silver: silver ?? 0,
-				bronze: bronze ?? 0,
-			})),
-		);
-
 /** Get number of each medal for a country */
 export const getMedalTotalsForCountryBySeason = async ({
 	country,
