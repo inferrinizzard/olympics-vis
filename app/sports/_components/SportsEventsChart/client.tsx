@@ -19,8 +19,8 @@ const SportsEventsChart_Client = ({
 	const eventCountData = [
 		{
 			id: sport.code,
-			data: Object.entries(numEvents).map(([game, count]) => ({
-				x: game,
+			data: Object.entries(numEvents).map(([games, count]) => ({
+				x: games,
 				y: count,
 			})),
 		},

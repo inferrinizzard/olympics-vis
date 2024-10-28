@@ -15,7 +15,7 @@ export const getTopCountriesForGames = async ({
 				{ _sum: { silver: "desc" } },
 				{ _sum: { bronze: "desc" } },
 			],
-			where: { game: games },
+			where: { games },
 		})
 		.then((res) =>
 			res.map(({ country, _sum: { gold, silver, bronze } }) => ({

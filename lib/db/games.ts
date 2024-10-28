@@ -19,7 +19,7 @@ export const getAthletesByCountryForGames = async ({ games }: GamesCodeParam) =>
 		.groupBy({
 			by: "country",
 			_sum: { men: true, women: true },
-			where: { game: games },
+			where: { games },
 		})
 		.then((res) =>
 			res.map(({ country, _sum: { men, women } }) => ({
@@ -32,5 +32,5 @@ export const getAthletesByCountryForGames = async ({ games }: GamesCodeParam) =>
 /** Get sports that were held at a games */
 export const getSportsForGames = async ({ games }: GamesCodeParam) =>
 	prisma.participationRecords
-		.groupBy({ by: "sport", where: { game: games } })
+		.groupBy({ by: "sport", where: { games } })
 		.then((res) => res.map(({ sport }) => sport as SportKey));

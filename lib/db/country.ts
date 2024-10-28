@@ -26,11 +26,11 @@ export const getFirstGamesForCountry = async ({ country }: CountryCodeParam) =>
 // export const getNumberOfAthletesForCountry = async ({
 // 	country,
 // }: CountryCodeParam): Promise<
-// 	Pick<CountryAthletes, "game"> & Record<"athletes", number>
+// 	Pick<CountryAthletes, "games"> & Record<"athletes", number>
 // > =>
 // 	prisma.$queryRaw`
 // 		SELECT
-// 			game,
+// 			games,
 // 			CAST(country_athletes->>${country} AS SMALLINT) AS athletes
 // 		FROM country_athletes
 // 		WHERE country_athletes.country_athletes ? ${country};

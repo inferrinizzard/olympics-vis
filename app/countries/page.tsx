@@ -23,10 +23,10 @@ const CountriesAll = async () => {
 	);
 
 	const countryMedals = medalTotals.reduce(
-		(gameMap, { game, country, total }) => {
+		(gameMap, { games, country, total }) => {
 			return {
 				...gameMap,
-				[game]: { game, ...(gameMap[game] ?? {}), [country]: total },
+				[games]: { games, ...(gameMap[games] ?? {}), [country]: total },
 			};
 		},
 		// biome-ignore lint/suspicious/noExplicitAny: <explanation>

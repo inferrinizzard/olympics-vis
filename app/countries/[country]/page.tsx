@@ -50,7 +50,7 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	// });
 
 	const firstGames =
-		(await getFirstGamesForCountry({ country: countryCode }))?.game ?? "";
+		(await getFirstGamesForCountry({ country: countryCode }))?.games ?? "";
 
 	const wikipediaExcerpt = await getWikipediaExcerpt(
 		getWikipediaUrl("countries", country?.name),
@@ -62,11 +62,11 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	);
 
 	const bestGames = countryMedals.reduce(
-		({ bestTotal, bestGame }, { game, gold, silver, bronze }) => {
+		({ bestTotal, bestGame }, { games, gold, silver, bronze }) => {
 			const total = gold + silver + bronze;
 			return {
 				bestTotal: Math.max(total, bestTotal),
-				bestGame: total > bestTotal ? game : bestGame,
+				bestGame: total > bestTotal ? games : bestGame,
 			};
 		},
 		{ bestTotal: 0, bestGame: "" },

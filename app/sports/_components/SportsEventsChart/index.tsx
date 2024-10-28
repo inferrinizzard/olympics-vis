@@ -6,9 +6,9 @@ import { getSportEventCountByGame } from "./data";
 const SportsEventsChart = async ({ sport }: SportProps) => {
 	const countEvents = await getSportEventCountByGame({ sport: sport.code });
 	const numEvents = countEvents.reduceRight(
-		(acc, { game, _count: { sport: count } }) => {
+		(acc, { games, _count: { sport: count } }) => {
 			if (count) {
-				acc[game] = count;
+				acc[games] = count;
 			}
 			return acc;
 		},

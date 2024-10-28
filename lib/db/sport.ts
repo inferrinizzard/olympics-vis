@@ -2,7 +2,7 @@ import prisma from "./prisma";
 
 import type { Games, Sport } from "@prisma/client";
 import type { SportKey } from "types/prisma";
-import type { GamesCodeParam } from "./game";
+import type { GamesCodeParam } from "./games";
 
 export type SportCodeParam = { sport: SportKey };
 
@@ -20,16 +20,16 @@ export const getSportWithSeason = async (): Promise<
 	prisma.$queryRaw`
 		SELECT sport, season
 		FROM (
-			SELECT DISTINCT ON (season) game, season
+			SELECT DISTINCT ON (season) games, season
 			FROM games_detail
 			ORDER BY season, year DESC
 		) latest_games
 		JOIN (
-			SELECT ARRAY_AGG(DISTINCT sport) AS sport, game
+			SELECT ARRAY_AGG(DISTINCT sport) AS sport, games
 			FROM sports_events
-			GROUP BY game
+			GROUP BY games
 		) sports
-		ON latest_games.game = sports.game
+		ON latest_games.games = sports.games
 		;
 	`;
 
@@ -37,7 +37,7 @@ export const getSportWithSeason = async (): Promise<
 /** Get sport events for a specific games */
 export const getSportEventsForGame = async ({ games }: GamesCodeParam) => [];
 // prisma.sportsEvent.findMany({
-// 	where: { game: games },
+// 	where: { games },
 // 	distinct: "sport",
 // 	// include: { sport_detail: true },
 // });

@@ -11,11 +11,11 @@ const GamesAll = async () => {
 
 	const sortedGames = games.sort((a, b) => (a.year < b.year ? 1 : -1));
 
-	const gamesCardMapper = ({ code: game }: Games) => ({
-		img: `/images/games/${getGameImage(game)}`,
-		alt: `Olympic emblem for ${game}`,
-		href: `/games/${game}`,
-		caption: getGameName(game),
+	const gamesCardMapper = ({ code: games }: Games) => ({
+		img: `/images/games/${getGameImage(games)}`,
+		alt: `Olympic emblem for ${games}`,
+		href: `/games/${games}`,
+		caption: getGameName(games),
 	});
 
 	return (

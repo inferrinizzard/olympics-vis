@@ -4,7 +4,6 @@ import type { Games, ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
 import type { CountryCodeParam } from "./country";
-import type { GamesCodeParam } from "./game";
 
 /** Get medals for sports by a country */
 export const getMedalsByCountry = async ({ country }: CountryCodeParam) =>
@@ -31,7 +30,7 @@ export const getMedalTotalsForCountryBySeason = async ({
 		SELECT country, season, SUM(gold) as gold, SUM(silver) as silver, SUM(bronze) as bronze
 		FROM participation_records
 		JOIN games_detail
-		ON participation_records.game = games_detail.game
+		ON participation_records.games = games_detail.code
 		WHERE country = ${country}
 		GROUP BY country, season;
 	` as Promise<
@@ -45,13 +44,13 @@ export const getMedalTotalsPerGamesForCountry = async ({
 }: CountryCodeParam) =>
 	prisma.participationRecords
 		.groupBy({
-			by: "game",
+			by: "games",
 			_sum: { gold: true, silver: true, bronze: true },
 			where: { country },
 		})
 		.then((res) =>
-			res.map(({ game, _sum: { gold, silver, bronze } }) => ({
-				game,
+			res.map(({ games, _sum: { gold, silver, bronze } }) => ({
+				games,
 				gold: gold ?? 0,
 				silver: silver ?? 0,
 				bronze: bronze ?? 0,
@@ -63,18 +62,18 @@ export const getMedalsLeadersFromLastTenGames = async (
 	{ num }: { num?: number } = { num: 10 },
 ) =>
 	prisma.$queryRaw`
-	SELECT game, country, total
+	SELECT games, country, total
 	FROM (
 		SELECT
-			last10games.game AS game,
+			last10games.games AS games,
 			country,
 			CAST(gold + silver + bronze AS SMALLINT) AS total,
 			year,
-			-- RANK() OVER (PARTITION BY last10games.game ORDER BY gold + silver + bronze DESC) AS num
+			-- RANK() OVER (PARTITION BY last10games.games ORDER BY gold + silver + bronze DESC) AS num
 		FROM participation_records
 		JOIN (
 			SELECT
-				code AS game,
+				code AS games,
 				year
 			FROM games_detail
 			ORDER BY
@@ -82,12 +81,12 @@ export const getMedalsLeadersFromLastTenGames = async (
 				season ASC
 			LIMIT ${num}
 		) last10games
-		ON participation_records.game = last10games.game
+		ON participation_records.games = last10games.games
 		ORDER BY year, total
 	) ranked
 	LIMIT ${num};
 	-- WHERE num <= ${num}
 	-- ORDER BY year, total;
 	` as Promise<
-		(Pick<ParticipationRecords, "game" | "country"> & { total: number })[]
+		(Pick<ParticipationRecords, "games" | "country"> & { total: number })[]
 	>;
