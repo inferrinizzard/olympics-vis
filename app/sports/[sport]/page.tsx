@@ -12,9 +12,9 @@ import SportsOverview from "../_components/SportsOverview";
 import { getAllSports } from "lib/db";
 
 export async function generateStaticParams() {
-	const sports = await getAllSports();
+	const sports = await getAllSports({ select: { code: true } });
 
-	return sports.map((params) => ({ params }));
+	return sports.map(({ code }) => ({ params: { sport: code } }));
 }
 
 const SportPage: NextPage<{ params: { sport: string } }> = async ({

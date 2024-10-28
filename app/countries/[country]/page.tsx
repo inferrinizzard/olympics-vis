@@ -11,7 +11,7 @@ import CountrySportsMedalsChart from "../_components/CountrySportsMedalsChart";
 export async function generateStaticParams() {
 	const countries = await getAllCountries({ select: { code: true } });
 
-	return countries.map((params) => ({ params }));
+	return countries.map(({ code }) => ({ params: { country: code } }));
 }
 
 const CountryPage: NextPage<{ params: { country: string } }> = async ({

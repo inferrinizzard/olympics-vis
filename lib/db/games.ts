@@ -1,7 +1,7 @@
 import prisma from "./prisma";
 
 import type { Prisma } from "@prisma/client";
-import type { GamesKey, SportKey } from "types/prisma";
+import type { GamesKey } from "types/prisma";
 
 export type GamesCodeParam = { games: GamesKey };
 

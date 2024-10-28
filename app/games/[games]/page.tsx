@@ -16,7 +16,7 @@ import GamesSports from "../_components/GamesSports";
 export async function generateStaticParams() {
 	const games = await getAllGames({ select: { code: true } });
 
-	return games.map((params) => ({ params }));
+	return games.map(({ code }) => ({ params: { games: code } }));
 }
 
 const GamesPage: NextPage<{ params: { games: string } }> = async ({
