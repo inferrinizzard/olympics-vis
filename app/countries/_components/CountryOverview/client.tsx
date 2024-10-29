@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Box, Title } from "@mantine/core";
 
 import type { Country } from "@prisma/client";
@@ -12,6 +11,7 @@ import Trophy from "tabler-icons-react/dist/icons/trophy";
 import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
+import { Image } from "components/util/Image";
 import { getGameName } from "lib/util";
 
 interface CountryOverviewData {
@@ -42,7 +42,8 @@ const CountryOverview_Client = ({
 			<Title order={1}>{`${country.name} (${country.code})`}</Title>
 			<Box mah="min(50%, 12rem)" style={{ position: "relative" }}>
 				<Image
-					src={`/images/countries/${country.code}.svg`}
+					dir="country"
+					code={country.code}
 					fill
 					style={{
 						objectFit: "scale-down",

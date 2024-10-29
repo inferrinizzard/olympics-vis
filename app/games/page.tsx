@@ -2,7 +2,7 @@ import { Container, Title } from "@mantine/core";
 
 import type { Games } from "@prisma/client";
 import { getAllGames } from "lib/db";
-import { getGameImage, getGameName } from "lib/util";
+import { getGameName } from "lib/util";
 
 import { CardList } from "components/layouts/CardList";
 
@@ -12,8 +12,11 @@ const GamesAll = async () => {
 	const sortedGames = games.sort((a, b) => (a.year < b.year ? 1 : -1));
 
 	const gamesCardMapper = ({ code: games }: Games) => ({
-		img: `/images/games/${getGameImage(games)}`,
-		alt: `Olympic emblem for ${games}`,
+		imageProps: {
+			dir: "games" as const,
+			code: games,
+			alt: `Olympic emblem for ${games}`,
+		},
 		href: `/games/${games}`,
 		caption: getGameName(games),
 	});

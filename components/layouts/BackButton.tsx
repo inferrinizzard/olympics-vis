@@ -19,7 +19,7 @@ const BackButton = () => {
 			<ActionIcon
 				size="xl"
 				pos="fixed"
-				sx={{
+				style={{
 					cursor: "pointer",
 					right: "2rem",
 					bottom: "2rem",

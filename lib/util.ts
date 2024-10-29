@@ -1,5 +1,3 @@
-import gamesImages from "./gameImages.json";
-
 export const getGameName = (gamesId: string) => {
 	return gamesId;
 	// const slugs = gamesId.split("-");
@@ -14,10 +12,6 @@ export const getGameName = (gamesId: string) => {
 	// 	.join(" ");
 
 	// return `${city} ${year}`;
-};
-
-export const getGameImage = (gamesId: string) => {
-	return gamesImages[gamesId as keyof typeof gamesImages];
 };
 
 export const sortByMedals = <

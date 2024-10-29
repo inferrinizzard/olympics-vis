@@ -4,6 +4,8 @@ import type { Country } from "@prisma/client";
 import { getAllCountries } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
+import CardLink from "components/layouts/CardLink";
+import { Image } from "components/util/Image";
 
 import TopMedalsChart from "./_components/TopMedalsChart";
 
@@ -21,13 +23,16 @@ const CountriesAll = async () => {
 	);
 
 	const countryCardsMapper = (country: Country) => ({
-		img: `/images/countries/${country.code}.svg`,
-		alt: `NOC Flag for ${country.code}`,
+		imageProps: {
+			dir: "country" as const,
+			code: country.code,
+			alt: `Flag for ${country.code}`,
+		},
 		href: `/countries/${country.code}`,
 		caption: country.code,
 		secondary: country.name,
 		aspectRatio: "3 / 2",
-		imgStyles: {
+		imageContainerStyles: {
 			boxShadow:
 				"1px 1px 8px 1px rgba(0, 0, 0, 0.05), -1px -1px 8px 1px rgba(0, 0, 0, 0.05)",
 		},

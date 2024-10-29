@@ -1,35 +1,33 @@
 import type { CSSProperties } from "react";
 
 import Link from "next/link";
-import Image, { type ImageProps } from "next/image";
 
 import { Card, CardSection, Title } from "@mantine/core";
+
+import { Image, type ImageProps } from "components/util/Image";
 
 import * as classes from "./CardLink.css";
 
 export interface CardLinkProps {
 	href: string;
-	img: string;
-	alt: string;
-	aspectRatio?: CSSProperties["aspectRatio"];
-	imgStyles?: CSSProperties;
 	caption?: string;
 	secondary?: string;
 	hoverColour?: string;
-	nextImageProps?: Partial<ImageProps>;
+
+	aspectRatio?: CSSProperties["aspectRatio"];
+	imageContainerStyles?: CSSProperties;
+	imageProps: ImageProps;
 }
 
-const CardLink: React.FC<CardLinkProps> = ({
+const CardLink = ({
 	href,
-	img,
-	alt,
-	aspectRatio = "1 / 1",
-	imgStyles,
 	caption,
 	secondary,
 	hoverColour,
-	nextImageProps,
-}) => {
+	aspectRatio = "1 / 1",
+	imageContainerStyles,
+	imageProps,
+}: CardLinkProps) => {
 	return (
 		<Link
 			passHref
@@ -52,14 +50,14 @@ const CardLink: React.FC<CardLinkProps> = ({
 				<CardSection
 					className="next-img-wrapper"
 					style={{
-						...imgStyles,
+						...imageContainerStyles,
 						position: "relative",
 						width: "100%",
 						aspectRatio,
 						marginTop: 0,
 					}}
 				>
-					<Image src={img} alt={alt} {...nextImageProps} fill sizes="100vw" />
+					<Image {...imageProps} fill />
 				</CardSection>
 				{caption && (
 					<Title order={3} style={{ textAlign: "center" }}>

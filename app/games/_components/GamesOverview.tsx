@@ -1,6 +1,6 @@
 import type { Games } from "@prisma/client";
 
-import { Box, Image, Title } from "@mantine/core";
+import { Box, Title } from "@mantine/core";
 
 import BuildingSkyscraper from "tabler-icons-react/dist/icons/building-skyscraper";
 import Calendar from "tabler-icons-react/dist/icons/calendar";
@@ -11,7 +11,7 @@ import Run from "tabler-icons-react/dist/icons/run";
 import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
-import { getGameImage } from "lib/util";
+import { Image } from "components/util/Image";
 
 interface GamesOverviewProps {
 	games: Games;
@@ -71,8 +71,11 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 			</Box>
 			<Box p="sm" style={{ width: "25%" }}>
 				<Image
-					src={`/images/games/${getGameImage(games.code)}`}
-					alt={`Olympic emblem for ${games}`}
+					dir="games"
+					code={games.code}
+					alt={`Olympic emblem for ${games.code}`}
+					height={100}
+					width={100}
 					style={{ width: "100%" }}
 				/>
 			</Box>

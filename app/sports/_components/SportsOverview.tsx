@@ -1,4 +1,4 @@
-import { Box, Image, Title } from "@mantine/core";
+import { Box, Title } from "@mantine/core";
 
 import type { Sport } from "@prisma/client";
 
@@ -9,6 +9,7 @@ import MapPin from "tabler-icons-react/dist/icons/map-pin";
 import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
+import { Image } from "components/util/Image";
 
 interface SportsOverviewProps {
 	sport: Sport;
@@ -22,10 +23,11 @@ const SportsOverview = ({ sport, wikipediaExcerpt }: SportsOverviewProps) => {
 				<Box maw="15rem" miw="fit-content">
 					<Title order={2}>{`${sport.name} (${sport.code})`}</Title>
 					<Image
-						src={`/images/sports/${sport.code}.svg`}
-						width="100%"
+						dir="sports"
+						code={sport.code}
+						fill
 						alt={`${sport.code} sport icon`}
-						styles={{ root: { width: "100%", aspectRatio: "1 / 1" } }}
+						style={{ width: "100%", aspectRatio: "1 / 1" }}
 					/>
 				</Box>
 				<Box p="1rem" style={{ flexGrow: 1 }}>

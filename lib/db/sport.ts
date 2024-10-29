@@ -15,24 +15,24 @@ export const getAllSports = async (args?: Prisma.SportFindManyArgs) =>
 	await prisma.sport.findMany(args);
 
 /** Get sports and corresponding season */
-export const getSportWithSeason = async (): Promise<
-	(Pick<Games, "season"> & { sport: SportKey[] })[]
-> =>
-	prisma.$queryRaw`
-		SELECT sport, season
-		FROM (
-			SELECT DISTINCT ON (season) games, season
-			FROM games_detail
-			ORDER BY season, year DESC
-		) latest_games
-		JOIN (
-			SELECT ARRAY_AGG(DISTINCT sport) AS sport, games
-			FROM sports_events
-			GROUP BY games
-		) sports
-		ON latest_games.games = sports.games
-		;
-	`;
+export const getSportWithSeason = async () =>
+	prisma.sport.groupBy({ by: ["season", "status"] });
+
+// prisma.$queryRaw`
+// 	SELECT sport, season
+// 	FROM (
+// 		SELECT DISTINCT ON (season) games, season
+// 		FROM games_detail
+// 		ORDER BY season, year DESC
+// 	) latest_games
+// 	JOIN (
+// 		SELECT ARRAY_AGG(DISTINCT sport) AS sport, games
+// 		FROM sports_events
+// 		GROUP BY games
+// 	) sports
+// 	ON latest_games.games = sports.games
+// 	;
+// `;
 
 // TODO-EVENTS: needs new data
 /** Get sport events for a specific games */

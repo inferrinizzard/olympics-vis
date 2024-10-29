@@ -11,7 +11,7 @@ export const getMedalsLeadersFromLastTenGames = async (
 			last10games.games AS games,
 			country,
 			CAST(gold + silver + bronze AS SMALLINT) AS total,
-			year,
+			year
 			-- RANK() OVER (PARTITION BY last10games.games ORDER BY gold + silver + bronze DESC) AS num
 		FROM participation_records
 		JOIN (

@@ -1,9 +1,10 @@
-import { Image, Title, Table } from "@mantine/core";
+import { Title, Table } from "@mantine/core";
 
 import type { ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
+import { Image } from "components/util/Image";
 
 interface GamesMedalsTableProps {
 	countryStandings: Pick<ParticipationRecords, "country" | MedalType>[];
@@ -29,12 +30,14 @@ const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
 					{countryStandings.map(({ country, gold, silver, bronze }) => (
 						<tr key={country}>
 							<td>
-								{/* <Image
-									src={country_detail.flag}
+								<Image
+									dir="country"
+									code={country}
 									alt={country}
 									width={30}
+									height={30}
 									style={{ display: "inline-block" }}
-								/> */}
+								/>
 								<span>{country}</span>
 							</td>
 							<td>{gold}</td>

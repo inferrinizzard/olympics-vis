@@ -38,7 +38,7 @@ const Header: React.FC<Partial<HeaderProps>> = (props) => {
 			height={48}
 			// 48px = 3rem
 			p="xs"
-			sx={{
+			style={{
 				display: "flex",
 				justifyContent: "space-between",
 				height: "fit-content",
@@ -51,7 +51,7 @@ const Header: React.FC<Partial<HeaderProps>> = (props) => {
 						h="2.5rem"
 						w="2.5rem"
 						bg="white"
-						sx={{ borderRadius: "0.5rem", overflow: "hidden" }}
+						style={{ borderRadius: "0.5rem", overflow: "hidden" }}
 					>
 						<Image
 							src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg"

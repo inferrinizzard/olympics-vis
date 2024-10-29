@@ -4,19 +4,24 @@ import CardLink, { type CardLinkProps } from "../CardLink";
 
 import * as classes from "./CardList.css";
 
-export interface CardListProps {
+export interface CardListProps<CardProps extends CardLinkProps> {
 	title: string;
-	cardData: CardLinkProps[];
+	cardData: CardProps[];
 }
 
-export const CardList = ({ title, cardData }: CardListProps) => {
+export const CardList = <CardProps extends CardLinkProps>({
+	title,
+	cardData,
+}: CardListProps<CardProps>) => {
 	return (
 		<Container component="section" w="100%">
 			<Title order={2}>{title}</Title>
 			<Box className={classes.CardListGrid}>
-				{cardData.map((cardProps, i) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-					<CardLink key={`${title}_${i}`} {...cardProps} />
+				{cardData.map((cardProps) => (
+					<CardLink
+						key={`${title}_${cardProps.imageProps.code}`}
+						{...cardProps}
+					/>
 				))}
 			</Box>
 		</Container>
