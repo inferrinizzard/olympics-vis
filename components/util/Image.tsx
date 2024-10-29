@@ -1,4 +1,5 @@
 "use server";
+
 import { existsSync } from "node:fs";
 
 import NextImage, { type ImageProps as NextImageProps } from "next/image";
@@ -7,13 +8,21 @@ import type { CountryKey, GamesKey, SportKey } from "types/prisma";
 
 import sharedFlags from "public/images/country/shared/sharedFlags.json";
 
-type CountryImageProps = { dir: "country"; code: CountryKey };
-type GamesImageProps = { dir: "games"; code: GamesKey };
-type SportsImageProps = { dir: "sports"; code: SportKey; games?: GamesKey };
+export type CountryImageProps = { dir: "country"; code: CountryKey };
+export type GamesImageProps = { dir: "games"; code: GamesKey };
+export type SportsImageProps = {
+	dir: "sports";
+	code: SportKey;
+	games?: GamesKey;
+};
 
 interface FallbackImageProps extends Omit<NextImageProps, "src"> {}
 
-type ImageProps = (CountryImageProps | GamesImageProps | SportsImageProps) &
+export type ImageProps = (
+	| CountryImageProps
+	| GamesImageProps
+	| SportsImageProps
+) &
 	FallbackImageProps;
 
 // TODO: add final fallbacks and remove png
@@ -29,7 +38,7 @@ const useCountryImageSrc = (code: CountryKey) => {
 };
 
 const useGamesImageSrc = (code: GamesKey) => {
-	return ["svg", "avif", "png"]
+	return ["svg", "avif", "png", "jpg"]
 		.map((ext) => `/images/games/${code}/emblem.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
 };
@@ -50,7 +59,7 @@ const useSportsImageSrc = (code: SportKey, games?: GamesKey) => {
 };
 
 export const Image = ({ dir, code, ...props }: ImageProps) => {
-	const src = (() => {
+	const srcGetter = () => {
 		if (dir === "country") {
 			return useCountryImageSrc(code) ?? "";
 		}
@@ -66,7 +75,9 @@ export const Image = ({ dir, code, ...props }: ImageProps) => {
 			);
 		}
 		return "";
-	})();
+	};
+
+	const src = srcGetter();
 
 	return <NextImage {...props} src={src} unoptimized={src.endsWith(".svg")} />;
 };

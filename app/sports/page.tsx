@@ -5,6 +5,8 @@ import type { SportKey } from "types/prisma";
 import { getAllSports, getSportWithSeason } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
+import CardLink from "components/layouts/CardLink";
+import { Image } from "components/util/Image";
 
 const SportsAll = async () => {
 	const sports = await getAllSports();
@@ -36,13 +38,15 @@ const SportsAll = async () => {
 	const sportsCardMapper = (sportId: SportKey) => {
 		const sport = sportsMap[sportId];
 		return {
-			img: `/images/sports/${sportId}.svg`,
-			alt: `Icon for ${sportId}`,
+			imageProps: {
+				dir: "sports" as const,
+				code: sportId,
+				alt: `Icon for ${sportId}`,
+			},
 			href: `/sports/${sportId}`,
-			caption: sport?.name,
+			caption: sport.name,
 		};
 	};
-
 	return (
 		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
 			<Title order={1}>{"Sports"}</Title>

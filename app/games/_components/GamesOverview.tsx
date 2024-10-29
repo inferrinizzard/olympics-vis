@@ -12,7 +12,6 @@ import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
 import { Image } from "components/util/Image";
-import { getGameImage } from "lib/util";
 
 interface GamesOverviewProps {
 	games: Games;
@@ -75,6 +74,8 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 					dir="games"
 					code={games.code}
 					alt={`Olympic emblem for ${games.code}`}
+					height={100}
+					width={100}
 					style={{ width: "100%" }}
 				/>
 			</Box>
