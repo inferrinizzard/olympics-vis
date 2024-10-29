@@ -1,4 +1,5 @@
 "use server";
+
 import { existsSync } from "node:fs";
 
 import NextImage, { type ImageProps as NextImageProps } from "next/image";
@@ -50,7 +51,7 @@ const useSportsImageSrc = (code: SportKey, games?: GamesKey) => {
 };
 
 export const Image = ({ dir, code, ...props }: ImageProps) => {
-	const src = (() => {
+	const srcGetter = () => {
 		if (dir === "country") {
 			return useCountryImageSrc(code) ?? "";
 		}
@@ -66,7 +67,9 @@ export const Image = ({ dir, code, ...props }: ImageProps) => {
 			);
 		}
 		return "";
-	})();
+	};
+
+	const src = srcGetter();
 
 	return <NextImage {...props} src={src} unoptimized={src.endsWith(".svg")} />;
 };

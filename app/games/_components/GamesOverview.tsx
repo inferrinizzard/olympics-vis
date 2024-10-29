@@ -74,6 +74,8 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 					dir="games"
 					code={games.code}
 					alt={`Olympic emblem for ${games.code}`}
+					height={100}
+					width={100}
 					style={{ width: "100%" }}
 				/>
 			</Box>

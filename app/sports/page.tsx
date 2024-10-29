@@ -39,7 +39,7 @@ const SportsAll = async () => {
 			img: `/images/sports/${sportId}.svg`,
 			alt: `Icon for ${sportId}`,
 			href: `/sports/${sportId}`,
-			caption: sport?.name,
+			caption: sport.name,
 		};
 	};
 

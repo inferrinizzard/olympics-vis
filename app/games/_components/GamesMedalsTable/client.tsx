@@ -35,6 +35,7 @@ const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
 									code={country}
 									alt={country}
 									width={30}
+									height={30}
 									style={{ display: "inline-block" }}
 								/>
 								<span>{country}</span>
