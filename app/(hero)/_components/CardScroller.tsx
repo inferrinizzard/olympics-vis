@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 
 import { Box, Title, Tooltip } from "@mantine/core";
 
 import CardLink from "components/layouts/CardLink";
 import AutoScroller from "lib/utils/Autoscroller";
-import { getGameImage, getGameName } from "lib/util";
+import { getGameName } from "lib/util";
 
 interface CardScrollerProps<T> {
 	data: T[];
@@ -81,7 +81,7 @@ const CardScroller = <T extends Record<string, string | number | null>>({
 								<Box m="0.25rem" w="13rem" h="13rem">
 									<CardLink
 										href={`/${route}/${datum[idKey]}`}
-										img={`/images/${route}/${idKey === "games" ? getGameImage(datum[idKey] as string) : `${datum[idKey]}.svg`}`}
+										img={`/images/${route}/${idKey === "games" ? `${datum[idKey]}/emblem.jpg` : `${datum[idKey]}.svg`}`}
 										alt={datum[idKey] as string}
 										hoverColour={color}
 										nextImageProps={{ priority: true }}

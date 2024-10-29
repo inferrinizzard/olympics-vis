@@ -12,7 +12,6 @@ import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
 import { Image } from "components/util/Image";
-import { getGameImage } from "lib/util";
 
 interface GamesOverviewProps {
 	games: Games;
