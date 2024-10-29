@@ -16,7 +16,7 @@ export type AthleteSex = keyof ParticipationRecords & ("men" | "women");
 export type Sport = {
 	code: string & SportKey;
 	name: string & PrismaSport["name"];
-	category: ("sport" | "discipline") & PrismaSport["category"];
+	category: ("sport" | "discipline" | "general") & PrismaSport["category"];
 	status?: ("active" | "other" | "unrecognised") & PrismaSport["status"];
 	season?: ("summer" | "winter") & PrismaSport["season"];
 	parent?: string & PrismaSport["parent"];
