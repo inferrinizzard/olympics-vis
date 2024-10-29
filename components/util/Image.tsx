@@ -30,7 +30,7 @@ const useCountryImageSrc = (code: CountryKey) => {
 };
 
 const useGamesImageSrc = (code: GamesKey) => {
-	return ["svg", "avif", "png"]
+	return ["svg", "avif", "png", "jpg"]
 		.map((ext) => `/images/games/${code}/emblem.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
 };

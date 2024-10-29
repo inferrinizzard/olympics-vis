@@ -5,6 +5,8 @@ import type { SportKey } from "types/prisma";
 import { getAllSports, getSportWithSeason } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
+import CardLink from "components/layouts/CardLink";
+import { Image } from "components/util/Image";
 
 const SportsAll = async () => {
 	const sports = await getAllSports();
@@ -36,6 +38,7 @@ const SportsAll = async () => {
 	const sportsCardMapper = (sportId: SportKey) => {
 		const sport = sportsMap[sportId];
 		return {
+			code: sportId,
 			img: `/images/sports/${sportId}.svg`,
 			alt: `Icon for ${sportId}`,
 			href: `/sports/${sportId}`,
@@ -43,20 +46,33 @@ const SportsAll = async () => {
 		};
 	};
 
+	const renderSportsCardLink = (props: ReturnType<typeof sportsCardMapper>) => (
+		<CardLink
+			key={props.code}
+			{...props}
+			imageElement={
+				<Image dir="sports" code={props.code} alt={props.alt} fill />
+			}
+		/>
+	);
+
 	return (
 		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
 			<Title order={1}>{"Sports"}</Title>
 			<CardList
 				title="Summer"
 				cardData={summerSportIds.map(sportsCardMapper)}
+				renderCardLink={renderSportsCardLink}
 			/>
 			<CardList
 				title="Winter"
 				cardData={winterSportIds.map(sportsCardMapper)}
+				renderCardLink={renderSportsCardLink}
 			/>
 			<CardList
 				title="Historic"
 				cardData={historicSportIds.map(sportsCardMapper)}
+				renderCardLink={renderSportsCardLink}
 			/>
 		</Container>
 	);

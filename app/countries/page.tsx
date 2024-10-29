@@ -43,13 +43,7 @@ const CountriesAll = async () => {
 			key={props.code}
 			{...props}
 			imageElement={
-				<Image
-					dir="country"
-					code={props.code}
-					alt={props.alt}
-					fill
-					sizes="100vw"
-				/>
+				<Image dir="country" code={props.code} alt={props.alt} fill />
 			}
 		/>
 	);
