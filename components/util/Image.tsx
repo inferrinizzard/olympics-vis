@@ -8,13 +8,21 @@ import type { CountryKey, GamesKey, SportKey } from "types/prisma";
 
 import sharedFlags from "public/images/country/shared/sharedFlags.json";
 
-type CountryImageProps = { dir: "country"; code: CountryKey };
-type GamesImageProps = { dir: "games"; code: GamesKey };
-type SportsImageProps = { dir: "sports"; code: SportKey; games?: GamesKey };
+export type CountryImageProps = { dir: "country"; code: CountryKey };
+export type GamesImageProps = { dir: "games"; code: GamesKey };
+export type SportsImageProps = {
+	dir: "sports";
+	code: SportKey;
+	games?: GamesKey;
+};
 
 interface FallbackImageProps extends Omit<NextImageProps, "src"> {}
 
-type ImageProps = (CountryImageProps | GamesImageProps | SportsImageProps) &
+export type ImageProps = (
+	| CountryImageProps
+	| GamesImageProps
+	| SportsImageProps
+) &
 	FallbackImageProps;
 
 // TODO: add final fallbacks and remove png

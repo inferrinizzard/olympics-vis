@@ -1,35 +1,32 @@
 import type { CSSProperties } from "react";
 
 import Link from "next/link";
-import NextImage from "next/image";
 
 import { Card, CardSection, Title } from "@mantine/core";
+
+import { Image, type ImageProps } from "components/util/Image";
 
 import * as classes from "./CardLink.css";
 
 export interface CardLinkProps {
 	href: string;
-	img: string;
-	alt: string;
-	aspectRatio?: CSSProperties["aspectRatio"];
-	imageContainerStyles?: CSSProperties;
 	caption?: string;
 	secondary?: string;
 	hoverColour?: string;
 
-	imageElement?: JSX.Element;
+	aspectRatio?: CSSProperties["aspectRatio"];
+	imageContainerStyles?: CSSProperties;
+	imageProps: ImageProps;
 }
 
 const CardLink = ({
 	href,
-	img,
-	alt,
-	aspectRatio = "1 / 1",
-	imageContainerStyles,
 	caption,
 	secondary,
 	hoverColour,
-	imageElement,
+	aspectRatio = "1 / 1",
+	imageContainerStyles,
+	imageProps,
 }: CardLinkProps) => {
 	return (
 		<Link
@@ -60,15 +57,7 @@ const CardLink = ({
 						marginTop: 0,
 					}}
 				>
-					{imageElement ?? (
-						<NextImage
-							src={img}
-							alt={alt}
-							// {...imageProps}
-							fill
-							sizes="100vw"
-						/>
-					)}
+					<Image {...imageProps} fill />
 				</CardSection>
 				{caption && (
 					<Title order={3} style={{ textAlign: "center" }}>

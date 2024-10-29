@@ -38,41 +38,29 @@ const SportsAll = async () => {
 	const sportsCardMapper = (sportId: SportKey) => {
 		const sport = sportsMap[sportId];
 		return {
-			code: sportId,
-			img: `/images/sports/${sportId}.svg`,
-			alt: `Icon for ${sportId}`,
+			imageProps: {
+				dir: "sports" as const,
+				code: sportId,
+				alt: `Icon for ${sportId}`,
+			},
 			href: `/sports/${sportId}`,
 			caption: sport.name,
 		};
 	};
-
-	const renderSportsCardLink = (props: ReturnType<typeof sportsCardMapper>) => (
-		<CardLink
-			key={props.code}
-			{...props}
-			imageElement={
-				<Image dir="sports" code={props.code} alt={props.alt} fill />
-			}
-		/>
-	);
-
 	return (
 		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
 			<Title order={1}>{"Sports"}</Title>
 			<CardList
 				title="Summer"
 				cardData={summerSportIds.map(sportsCardMapper)}
-				renderCardLink={renderSportsCardLink}
 			/>
 			<CardList
 				title="Winter"
 				cardData={winterSportIds.map(sportsCardMapper)}
-				renderCardLink={renderSportsCardLink}
 			/>
 			<CardList
 				title="Historic"
 				cardData={historicSportIds.map(sportsCardMapper)}
-				renderCardLink={renderSportsCardLink}
 			/>
 		</Container>
 	);

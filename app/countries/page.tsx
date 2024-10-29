@@ -23,9 +23,11 @@ const CountriesAll = async () => {
 	);
 
 	const countryCardsMapper = (country: Country) => ({
-		code: country.code,
-		img: `/images/country/${country.code}.svg`,
-		alt: `Flag for ${country.code}`,
+		imageProps: {
+			dir: "country" as const,
+			code: country.code,
+			alt: `Flag for ${country.code}`,
+		},
 		href: `/countries/${country.code}`,
 		caption: country.code,
 		secondary: country.name,
@@ -36,37 +38,19 @@ const CountriesAll = async () => {
 		},
 	});
 
-	const renderCountryCardLink = (
-		props: ReturnType<typeof countryCardsMapper>,
-	) => (
-		<CardLink
-			key={props.code}
-			{...props}
-			imageElement={
-				<Image dir="country" code={props.code} alt={props.alt} fill />
-			}
-		/>
-	);
-
 	return (
 		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
 			<Title order={1}>{"Countries"}</Title>
 			<TopMedalsChart />
 
-			<CardList
-				title="Active"
-				cardData={activeNOCs.map(countryCardsMapper)}
-				renderCardLink={renderCountryCardLink}
-			/>
+			<CardList title="Active" cardData={activeNOCs.map(countryCardsMapper)} />
 			<CardList
 				title="Special"
 				cardData={specialNOCs.map(countryCardsMapper)}
-				renderCardLink={renderCountryCardLink}
 			/>
 			<CardList
 				title="Historic"
 				cardData={historicNOCs.map(countryCardsMapper)}
-				renderCardLink={renderCountryCardLink}
 			/>
 		</Container>
 	);

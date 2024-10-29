@@ -7,24 +7,22 @@ import * as classes from "./CardList.css";
 export interface CardListProps<CardProps extends CardLinkProps> {
 	title: string;
 	cardData: CardProps[];
-	renderCardLink?: (props: CardProps) => JSX.Element;
 }
 
 export const CardList = <CardProps extends CardLinkProps>({
 	title,
 	cardData,
-	renderCardLink,
 }: CardListProps<CardProps>) => {
 	return (
 		<Container component="section" w="100%">
 			<Title order={2}>{title}</Title>
 			<Box className={classes.CardListGrid}>
-				{cardData.map(
-					renderCardLink ??
-						((cardProps, i) => (
-							<CardLink key={`${title}_${i}`} {...cardProps} />
-						)),
-				)}
+				{cardData.map((cardProps) => (
+					<CardLink
+						key={`${title}_${cardProps.imageProps.code}`}
+						{...cardProps}
+					/>
+				))}
 			</Box>
 		</Container>
 	);
