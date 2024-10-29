@@ -1,7 +1,6 @@
 import { Container, Title } from "@mantine/core";
 
-import type { Sport } from "@prisma/client";
-import type { SportKey } from "types/prisma";
+import type { Sport, SportKey } from "types/prisma";
 import { getAllSports, getSportWithSeason } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";

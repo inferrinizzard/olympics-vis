@@ -1,6 +1,6 @@
 import { Box, Title } from "@mantine/core";
 
-import type { Sport } from "@prisma/client";
+import type { Sport } from "types/prisma";
 
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Hash from "tabler-icons-react/dist/icons/hash";

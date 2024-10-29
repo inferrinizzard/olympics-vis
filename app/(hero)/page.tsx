@@ -40,7 +40,7 @@ const HomePage = async () => {
 				direction={1}
 				color="green"
 			/>
-			<CardScroller<Omit<Sport, "icon">>
+			<CardScroller<Sport>
 				data={sports}
 				route="sports"
 				idKey="code"
