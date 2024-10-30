@@ -16,7 +16,10 @@ interface SportsOverviewProps {
 	wikipediaExcerpt: string;
 }
 
-const SportsOverview = ({ sport, wikipediaExcerpt }: SportsOverviewProps) => {
+const SportsOverview_Client = ({
+	sport,
+	wikipediaExcerpt,
+}: SportsOverviewProps) => {
 	return (
 		<GridCell bg="red">
 			<Box style={{ display: "flex" }}>
@@ -45,4 +48,4 @@ const SportsOverview = ({ sport, wikipediaExcerpt }: SportsOverviewProps) => {
 	);
 };
 
-export default SportsOverview;
+export default SportsOverview_Client;

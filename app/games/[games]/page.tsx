@@ -6,7 +6,7 @@ import {
 	getGames,
 	// getSportEventsForGame,
 } from "lib/db";
-import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
+import { getWikipediaExcerpt } from "lib/utils/wikipedia";
 
 import GamesChoropleth from "../_components/GamesChoropleth";
 import GamesMedalsTable from "../_components/GamesMedalsTable";
@@ -28,19 +28,12 @@ const GamesPage: NextPage<{ params: { games: string } }> = async ({
 		return null;
 	}
 
-	const wikipediaExcerpt = await getWikipediaExcerpt(
-		getWikipediaUrl(
-			"games",
-			`${games?.year} ${games?.season.slice(0, 1).toUpperCase()}${games?.season.slice(1)}`,
-		),
-	);
-
 	return (
 		<Container fluid style={{ height: "100%" }}>
 			{/* <BackButton /> */}
 			<Grid mt={0}>
 				<GridCol span={8}>
-					<GamesOverview games={games} wikipediaExcerpt={wikipediaExcerpt} />
+					<GamesOverview games={games} />
 				</GridCol>
 				<GridCol span={4}>
 					<GamesMedalsTable games={games} />

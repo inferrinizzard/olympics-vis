@@ -2,11 +2,10 @@ import type { NextPage } from "next";
 import { Container, Grid, GridCol } from "@mantine/core";
 
 import { getSport } from "lib/db";
-import { getWikipediaExcerpt, getWikipediaUrl } from "lib/utils/wikipedia";
 
 // import BackButton from "components/layouts/BackButton";
 import SportsCountriesChart from "../_components/SportsCountriesChart";
-import SportsEventsChart from "../_components/SportsEventsChart/client";
+import SportsEventsChart from "../_components/SportsEventsChart";
 import SportsOverview from "../_components/SportsOverview";
 
 import { getAllSports } from "lib/db";
@@ -26,16 +25,12 @@ const SportPage: NextPage<{ params: { sport: string } }> = async ({
 		return null;
 	}
 
-	const wikipediaExcerpt = await getWikipediaExcerpt(
-		getWikipediaUrl("sports", sport?.name),
-	);
-
 	return (
 		<Container fluid style={{ height: "100%" }}>
 			{/* <BackButton /> */}
 			<Grid mt={0}>
 				<GridCol>
-					<SportsOverview sport={sport} wikipediaExcerpt={wikipediaExcerpt} />
+					<SportsOverview sport={sport} />
 				</GridCol>
 				<GridCol>{/* <SportsEventsChart sport={sport}  /> */}</GridCol>
 				<GridCol>
