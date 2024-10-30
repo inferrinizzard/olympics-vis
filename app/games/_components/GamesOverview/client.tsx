@@ -18,10 +18,10 @@ interface GamesOverviewProps {
 	wikipediaExcerpt: string;
 }
 
-const GamesOverview: React.FC<GamesOverviewProps> = ({
+const GamesOverview_Client = ({
 	games,
 	wikipediaExcerpt,
-}) => {
+}: GamesOverviewProps) => {
 	return (
 		<GridCell
 			bg="green"
@@ -83,4 +83,4 @@ const GamesOverview: React.FC<GamesOverviewProps> = ({
 	);
 };
 
-export default GamesOverview;
+export default GamesOverview_Client;
