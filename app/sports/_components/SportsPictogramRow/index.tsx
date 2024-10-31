@@ -1,9 +1,31 @@
 import type { SportProps } from "types";
 
-import SportsPictogramRow_Client from "./client";
+import { Box, Tooltip } from "@mantine/core";
 
-const SportsPictogramRow = ({ sport }: SportProps) => {
-	return <SportsPictogramRow_Client />;
+import { Image } from "components/util/Image";
+
+import { getAllGamesForSport } from "./data";
+
+const SportsPictogramRow = async ({ sport }: SportProps) => {
+	const gamesForSport = await getAllGamesForSport({ sport: sport.code });
+
+	return (
+		<Box display="flex" mah="10rem" style={{ overflow: "scroll", gap: "1rem" }}>
+			{gamesForSport.map((games) => (
+				<Tooltip key={`${sport.code}~${games}`} label={`${games}`}>
+					<Box h="10rem" w="10rem" pos="relative" style={{ flexShrink: 0 }}>
+						<Image
+							dir="sports"
+							alt={`${sport.code} pictogram at ${games}`}
+							code={sport.code}
+							games={games}
+							fill
+						/>
+					</Box>
+				</Tooltip>
+			))}
+		</Box>
+	);
 };
 
 export default SportsPictogramRow;

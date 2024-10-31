@@ -53,7 +53,8 @@ const useSportsImageSrc = (
 	const paths = [];
 
 	if (games) {
-		paths.push(`/images/games/${games}/sports/${code}.avif`);
+		// paths.push(`/images/games/${games}/sports/${code}.avif`);
+		paths.push(`/images/games/${games}/sports/${code}.png`);
 	}
 
 	paths.push(
