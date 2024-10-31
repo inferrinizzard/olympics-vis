@@ -23,15 +23,28 @@ const SportsOverview_Client = ({
 	return (
 		<GridCell bg="red">
 			<Box style={{ display: "flex" }}>
-				<Box maw="15rem" miw="fit-content">
+				<Box
+					maw="15rem"
+					miw="fit-content"
+					display="flex"
+					flex="column"
+					style={{ gap: "1rem" }}
+				>
 					<Title order={2}>{`${sport.name} (${sport.code})`}</Title>
-					<Image
-						dir="sports"
-						code={sport.code}
-						fill
-						alt={`${sport.code} sport icon`}
-						style={{ width: "100%", aspectRatio: "1 / 1" }}
-					/>
+					<Box
+						maw="10rem"
+						mah="10rem"
+						pos="relative"
+						style={{ alignSelf: "center" }}
+					>
+						<Image
+							dir="sports"
+							code={sport.code}
+							fill
+							alt={`${sport.code} sport icon`}
+							style={{ width: "100%", aspectRatio: "1 / 1" }}
+						/>
+					</Box>
 				</Box>
 				<Box p="1rem" style={{ flexGrow: 1 }}>
 					<Excerpt text={wikipediaExcerpt} />
