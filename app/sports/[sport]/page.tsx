@@ -7,6 +7,7 @@ import { getSport } from "lib/db";
 import SportsCountriesChart from "../_components/SportsCountriesChart";
 import SportsEventsChart from "../_components/SportsEventsChart";
 import SportsOverview from "../_components/SportsOverview";
+import SportsPictogramRow from "../_components/SportsPictogramRow";
 
 import { getAllSports } from "lib/db";
 
@@ -31,6 +32,9 @@ const SportPage: NextPage<{ params: { sport: string } }> = async ({
 			<Grid mt={0}>
 				<GridCol>
 					<SportsOverview sport={sport} />
+				</GridCol>
+				<GridCol>
+					<SportsPictogramRow sport={sport} />
 				</GridCol>
 				<GridCol>{/* <SportsEventsChart sport={sport}  /> */}</GridCol>
 				<GridCol>

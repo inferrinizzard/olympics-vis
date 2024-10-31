@@ -1,6 +1,6 @@
 import { Box, Title } from "@mantine/core";
 
-import type { Sport } from "@prisma/client";
+import type { CountryKey, GamesKey, Sport } from "types/prisma";
 
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Hash from "tabler-icons-react/dist/icons/hash";
@@ -10,28 +10,47 @@ import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
 import { Image } from "components/util/Image";
+import { getGameName } from "lib/util";
 
 interface SportsOverviewProps {
 	sport: Sport;
 	wikipediaExcerpt: string;
+	bestCountry: CountryKey;
+	firstGames: GamesKey;
 }
 
 const SportsOverview_Client = ({
 	sport,
 	wikipediaExcerpt,
+	bestCountry,
+	firstGames,
 }: SportsOverviewProps) => {
 	return (
 		<GridCell bg="red">
 			<Box style={{ display: "flex" }}>
-				<Box maw="15rem" miw="fit-content">
+				<Box
+					maw="15rem"
+					miw="fit-content"
+					display="flex"
+					style={{ flexDirection: "column", gap: "1rem" }}
+				>
 					<Title order={2}>{`${sport.name} (${sport.code})`}</Title>
-					<Image
-						dir="sports"
-						code={sport.code}
-						fill
-						alt={`${sport.code} sport icon`}
-						style={{ width: "100%", aspectRatio: "1 / 1" }}
-					/>
+					<Box
+						h="100%"
+						w="100%"
+						maw="10rem"
+						mah="10rem"
+						pos="relative"
+						style={{ alignSelf: "center" }}
+					>
+						<Image
+							dir="sports"
+							code={sport.code}
+							fill
+							alt={`${sport.code} sport icon`}
+							style={{ width: "100%", aspectRatio: "1 / 1" }}
+						/>
+					</Box>
 				</Box>
 				<Box p="1rem" style={{ flexGrow: 1 }}>
 					<Excerpt text={wikipediaExcerpt} />
@@ -39,8 +58,12 @@ const SportsOverview_Client = ({
 				<Box
 					style={{ display: "flex", rowGap: "1rem", flexDirection: "column" }}
 				>
-					<StatCard Icon={MapPin} title={"Best Country"} text={"Country"} />
-					<StatCard Icon={Calendar} title={"First Games"} text={"games"} />
+					<StatCard Icon={MapPin} title={"Best Country"} text={bestCountry} />
+					<StatCard
+						Icon={Calendar}
+						title={"First Games"}
+						text={getGameName(firstGames)}
+					/>
 					<StatCard Icon={Hash} title={"Number of Events"} text={100} />
 				</Box>
 			</Box>

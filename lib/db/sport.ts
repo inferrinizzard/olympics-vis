@@ -1,18 +1,18 @@
 import prisma from "./prisma";
 
 import type { Games, Prisma } from "@prisma/client";
-import type { SportKey } from "types/prisma";
+import type { Sport, SportKey } from "types/prisma";
 import type { GamesCodeParam } from "./games";
 
 export type SportCodeParam = { sport: SportKey };
 
 /** Get sport key and name for 1 sport */
 export const getSport = async ({ sport }: SportCodeParam) =>
-	await prisma.sport.findFirst({ where: { code: sport } });
+	(await prisma.sport.findFirst({ where: { code: sport } })) as Sport;
 
 /** Get sport key and name for all sports */
 export const getAllSports = async (args?: Prisma.SportFindManyArgs) =>
-	await prisma.sport.findMany(args);
+	(await prisma.sport.findMany(args)) as Sport[];
 
 /** Get sports and corresponding season */
 export const getSportWithSeason = async () =>
