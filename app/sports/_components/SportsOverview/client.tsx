@@ -32,11 +32,12 @@ const SportsOverview_Client = ({
 					maw="15rem"
 					miw="fit-content"
 					display="flex"
-					flex="column"
-					style={{ gap: "1rem" }}
+					style={{ flexDirection: "column", gap: "1rem" }}
 				>
 					<Title order={2}>{`${sport.name} (${sport.code})`}</Title>
 					<Box
+						h="100%"
+						w="100%"
 						maw="10rem"
 						mah="10rem"
 						pos="relative"
