@@ -1,6 +1,6 @@
 import { Box, Title } from "@mantine/core";
 
-import type { Sport } from "types/prisma";
+import type { CountryKey, GamesKey, Sport } from "types/prisma";
 
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Hash from "tabler-icons-react/dist/icons/hash";
@@ -10,15 +10,20 @@ import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
 import Excerpt from "components/layouts/Excerpt";
 import { Image } from "components/util/Image";
+import { getGameName } from "lib/util";
 
 interface SportsOverviewProps {
 	sport: Sport;
 	wikipediaExcerpt: string;
+	bestCountry: CountryKey;
+	firstGames: GamesKey;
 }
 
 const SportsOverview_Client = ({
 	sport,
 	wikipediaExcerpt,
+	bestCountry,
+	firstGames,
 }: SportsOverviewProps) => {
 	return (
 		<GridCell bg="red">
@@ -52,8 +57,12 @@ const SportsOverview_Client = ({
 				<Box
 					style={{ display: "flex", rowGap: "1rem", flexDirection: "column" }}
 				>
-					<StatCard Icon={MapPin} title={"Best Country"} text={"Country"} />
-					<StatCard Icon={Calendar} title={"First Games"} text={"games"} />
+					<StatCard Icon={MapPin} title={"Best Country"} text={bestCountry} />
+					<StatCard
+						Icon={Calendar}
+						title={"First Games"}
+						text={getGameName(firstGames)}
+					/>
 					<StatCard Icon={Hash} title={"Number of Events"} text={100} />
 				</Box>
 			</Box>
