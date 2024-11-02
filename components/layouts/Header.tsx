@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -5,10 +7,10 @@ import {
 	Box,
 	Breadcrumbs,
 	Group,
-	Header as MantineHeader,
+	AppShellHeader as MantineHeader,
 	Image,
 	TextInput,
-	type HeaderProps,
+	type AppShellHeaderProps,
 } from "@mantine/core";
 
 import Home from "tabler-icons-react/dist/icons/home";
@@ -16,33 +18,28 @@ import Search from "tabler-icons-react/dist/icons/search";
 
 import ColorSchemeToggle from "components/controls/ColorSchemeToggle";
 
-const Header: React.FC<Partial<HeaderProps>> = (props) => {
-	const router = useRouter();
-	const path = router.asPath;
+const Header = (props: AppShellHeaderProps) => {
+	// const router = useRouter();
+	// const path = router.asPath;
 
-	const pathBreadCrumbs = [...path.matchAll(/[/][^/]+/g)]
-		.flatMap((crumb) => crumb)
-		.reduce(
-			(acc, slug) => ({
-				crumbs: [...acc.crumbs, { title: slug, href: acc.path + slug }],
-				path: acc.path + slug,
-			}),
-			{ crumbs: [] as { title: string; href: string }[], path: "" },
-		).crumbs;
+	// const pathBreadCrumbs = [...path.matchAll(/[/][^/]+/g)].flat().reduce(
+	// 	(acc, slug) => ({
+	// 		crumbs: [...acc.crumbs, { title: slug, href: acc.path + slug }],
+	// 		path: acc.path + slug,
+	// 	}),
+	// 	{ crumbs: [] as { title: string; href: string }[], path: "" },
+	// ).crumbs;
 
-	const showSearch = path.length > 1 && path.split("/").length === 2;
+	// const showSearch = path.length > 1 && path.split("/").length === 2;
 
 	return (
 		<MantineHeader
 			{...props}
-			height={48}
-			// 48px = 3rem
+			h="3rem"
 			p="xs"
+			display="flex"
 			style={{
-				display: "flex",
 				justifyContent: "space-between",
-				height: "fit-content",
-				maxHeight: "fit-content",
 			}}
 		>
 			<Group>
@@ -65,21 +62,21 @@ const Header: React.FC<Partial<HeaderProps>> = (props) => {
 					<Link passHref href="/">
 						<Home style={{ cursor: "pointer" }} />
 					</Link>
-					{pathBreadCrumbs.map(({ title, href }) => (
+					{/* {[].map(({ title, href }) => (
 						<Link key={href} href={href}>
 							{title.replace(/^[/]|\?.+$/g, "")}
 						</Link>
-					))}
+					))} */}
 				</Breadcrumbs>
 			</Group>
 
 			<Group>
-				{showSearch && (
+				{/* {showSearch && (
 					<TextInput
 						id="search"
 						variant="filled"
 						placeholder="Search"
-						icon={<Search />}
+						leftSection={<Search />}
 						radius="md"
 						// value={router.query.search}
 						onChange={(e) =>
@@ -90,7 +87,7 @@ const Header: React.FC<Partial<HeaderProps>> = (props) => {
 							})
 						}
 					/>
-				)}
+				)} */}
 				<ColorSchemeToggle />
 			</Group>
 		</MantineHeader>
