@@ -14,11 +14,11 @@ const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
 	countryStandings,
 }) => {
 	return (
-		<GridCell>
+		<GridCell h="100%" display="flex" style={{ flexDirection: "column" }}>
 			<Title order={2} p="xs">
 				{"Medals Top 10"}
 			</Title>
-			<Table p="xs">
+			<Table p="xs" style={{ flexGrow: 1 }}>
 				<tbody>
 					<tr>
 						<td>Country</td>
