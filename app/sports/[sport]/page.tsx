@@ -27,7 +27,7 @@ const SportPage: NextPage<{ params: { sport: string } }> = async ({
 	}
 
 	return (
-		<Container fluid style={{ height: "100%" }}>
+		<Container fluid h="100%" p="xs">
 			{/* <BackButton /> */}
 			<Grid mt={0}>
 				<GridCol>

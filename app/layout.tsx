@@ -1,7 +1,7 @@
 import React, { type PropsWithChildren } from "react";
 
 import "@mantine/core/styles.css";
-import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import { MantineProvider, ColorSchemeScript, AppShell } from "@mantine/core";
 
 import { baseTheme } from "styles/theme";
 
@@ -30,9 +30,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			</head>
 			<body>
 				<MantineProvider theme={baseTheme}>
-					{/* <AppShell
-						padding="md"
-						header={<Header bg={primary} />}
+					<AppShell
+						padding="xs"
+						// header={<Header bg={primary} />}
 						// styles={(theme) => ({
 						// 	body: {
 						// 		minHeight: "100vh",
@@ -46,9 +46,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
 						// 	},
 						// })}
 					>
-					{children}
-					</AppShell> */}
-					{children}
+						{children}
+					</AppShell>
 				</MantineProvider>
 			</body>
 		</html>
