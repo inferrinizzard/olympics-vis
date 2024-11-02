@@ -27,29 +27,61 @@ export type ImageProps = (
 ) &
 	FallbackImageProps;
 
+const imageMap: Record<string, string> = {};
+
 // TODO: add final fallbacks and remove png
-const useCountryImageSrc = (code: CountryKey) => {
+export const getCountryImageSrc = async (code: CountryKey) => {
+	const mapKey = `country:${code}`;
+
+	if (mapKey in imageMap) {
+		return imageMap[mapKey];
+	}
+
 	if (code in sharedFlags) {
 		const sharedFlag = sharedFlags[code as keyof typeof sharedFlags];
 		return `/images/country/shared/${sharedFlag}`;
 	}
 
-	return ["svg", "avif", "png"]
+	const match = ["svg", "avif", "png"]
 		.map((ext) => `/images/country/${code}.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
+
+	if (match) {
+		imageMap[mapKey] = match;
+	}
+
+	return match;
 };
 
-const useGamesImageSrc = (code: GamesKey) => {
-	return ["svg", "avif", "png", "jpg"]
+export const getGamesImageSrc = async (code: GamesKey) => {
+	const mapKey = `games:${code}`;
+
+	if (mapKey in imageMap) {
+		return imageMap[mapKey];
+	}
+
+	const match = ["svg", "avif", "png", "jpg"]
 		.map((ext) => `/images/games/${code}/emblem.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
+
+	if (match) {
+		imageMap[mapKey] = match;
+	}
+
+	return match;
 };
 
-const useSportsImageSrc = (
+export const getSportsImageSrc = async (
 	code: SportKey,
 	parent?: SportKey,
 	games?: GamesKey,
-): string | undefined => {
+): Promise<string | undefined> => {
+	const mapKey = `sport:${[code, games].join("+")}`;
+
+	if (mapKey in imageMap) {
+		return imageMap[mapKey];
+	}
+
 	const paths = [];
 
 	if (games) {
@@ -65,7 +97,7 @@ const useSportsImageSrc = (
 	);
 
 	if (parent) {
-		const parentPath = useSportsImageSrc(parent, undefined, games);
+		const parentPath = await getSportsImageSrc(parent, undefined, games);
 		if (parentPath) {
 			paths.push(parentPath);
 		}
@@ -74,35 +106,41 @@ const useSportsImageSrc = (
 	if (code in parentDisciplineMap) {
 		const disciplines =
 			parentDisciplineMap[code as keyof typeof parentDisciplineMap];
-		const validPaths = disciplines.flatMap((d) => useSportsImageSrc(d) ?? []);
+		const validPaths = await Promise.all(
+			disciplines.flatMap((d) => getSportsImageSrc(d) ?? []),
+		);
 		paths.push(...validPaths);
 	}
 
-	return paths.find((path) => existsSync(`public/${path}`));
+	const match = paths.find((path) => existsSync(`public/${path}`));
+
+	if (match) {
+		imageMap[mapKey] = match;
+	}
+
+	return match;
 };
 
-export const Image = ({ dir, code, ...props }: ImageProps) => {
-	const srcGetter = () => {
+export const Image = async ({ dir, code, ...props }: ImageProps) => {
+	const srcGetter = async () => {
 		if (dir === "country") {
-			return useCountryImageSrc(code) ?? "";
+			return (await getCountryImageSrc(code)) ?? "";
 		}
 		if (dir === "games") {
-			return useGamesImageSrc(code) ?? "";
+			return (await getGamesImageSrc(code)) ?? "";
 		}
 		if (dir === "sports") {
-			return (
-				useSportsImageSrc(
-					code,
-					(props as Omit<SportsImageProps, "dir" | "code">).parent,
-					(props as Omit<SportsImageProps, "dir" | "code">).games,
-				) ?? ""
-			);
+			return await (getSportsImageSrc(
+				code,
+				(props as Omit<SportsImageProps, "dir" | "code">).parent,
+				(props as Omit<SportsImageProps, "dir" | "code">).games,
+			) ?? "");
 		}
 		return "";
 	};
 
 	const src =
-		srcGetter() ||
+		(await srcGetter()) ||
 		(code.startsWith("P-")
 			? "/images/country/shared/Paralympic_flag.svg"
 			: "/images/country/shared/Olympic_flag.svg");
