@@ -30,7 +30,7 @@ export type ImageProps = (
 const imageMap: Record<string, string> = {};
 
 // TODO: add final fallbacks and remove png
-const getCountryImageSrc = (code: CountryKey) => {
+export const getCountryImageSrc = async (code: CountryKey) => {
 	const mapKey = `country:${code}`;
 
 	if (mapKey in imageMap) {
@@ -53,7 +53,7 @@ const getCountryImageSrc = (code: CountryKey) => {
 	return match;
 };
 
-const getGamesImageSrc = (code: GamesKey) => {
+export const getGamesImageSrc = async (code: GamesKey) => {
 	const mapKey = `games:${code}`;
 
 	if (mapKey in imageMap) {
@@ -71,11 +71,11 @@ const getGamesImageSrc = (code: GamesKey) => {
 	return match;
 };
 
-const getSportsImageSrc = (
+export const getSportsImageSrc = async (
 	code: SportKey,
 	parent?: SportKey,
 	games?: GamesKey,
-): string | undefined => {
+): Promise<string | undefined> => {
 	const mapKey = `sport:${[code, games].join("+")}`;
 
 	if (mapKey in imageMap) {
@@ -97,7 +97,7 @@ const getSportsImageSrc = (
 	);
 
 	if (parent) {
-		const parentPath = getSportsImageSrc(parent, undefined, games);
+		const parentPath = await getSportsImageSrc(parent, undefined, games);
 		if (parentPath) {
 			paths.push(parentPath);
 		}
@@ -106,7 +106,9 @@ const getSportsImageSrc = (
 	if (code in parentDisciplineMap) {
 		const disciplines =
 			parentDisciplineMap[code as keyof typeof parentDisciplineMap];
-		const validPaths = disciplines.flatMap((d) => getSportsImageSrc(d) ?? []);
+		const validPaths = await Promise.all(
+			disciplines.flatMap((d) => getSportsImageSrc(d) ?? []),
+		);
 		paths.push(...validPaths);
 	}
 
@@ -119,28 +121,26 @@ const getSportsImageSrc = (
 	return match;
 };
 
-export const Image = ({ dir, code, ...props }: ImageProps) => {
-	const srcGetter = () => {
+export const Image = async ({ dir, code, ...props }: ImageProps) => {
+	const srcGetter = async () => {
 		if (dir === "country") {
-			return getCountryImageSrc(code) ?? "";
+			return (await getCountryImageSrc(code)) ?? "";
 		}
 		if (dir === "games") {
-			return getGamesImageSrc(code) ?? "";
+			return (await getGamesImageSrc(code)) ?? "";
 		}
 		if (dir === "sports") {
-			return (
-				getSportsImageSrc(
-					code,
-					(props as Omit<SportsImageProps, "dir" | "code">).parent,
-					(props as Omit<SportsImageProps, "dir" | "code">).games,
-				) ?? ""
-			);
+			return await (getSportsImageSrc(
+				code,
+				(props as Omit<SportsImageProps, "dir" | "code">).parent,
+				(props as Omit<SportsImageProps, "dir" | "code">).games,
+			) ?? "");
 		}
 		return "";
 	};
 
 	const src =
-		srcGetter() ||
+		(await srcGetter()) ||
 		(code.startsWith("P-")
 			? "/images/country/shared/Paralympic_flag.svg"
 			: "/images/country/shared/Olympic_flag.svg");
