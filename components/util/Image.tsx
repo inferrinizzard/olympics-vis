@@ -27,29 +27,61 @@ export type ImageProps = (
 ) &
 	FallbackImageProps;
 
+const imageMap: Record<string, string> = {};
+
 // TODO: add final fallbacks and remove png
-const useCountryImageSrc = (code: CountryKey) => {
+const getCountryImageSrc = (code: CountryKey) => {
+	const mapKey = `country:${code}`;
+
+	if (mapKey in imageMap) {
+		return imageMap[mapKey];
+	}
+
 	if (code in sharedFlags) {
 		const sharedFlag = sharedFlags[code as keyof typeof sharedFlags];
 		return `/images/country/shared/${sharedFlag}`;
 	}
 
-	return ["svg", "avif", "png"]
+	const match = ["svg", "avif", "png"]
 		.map((ext) => `/images/country/${code}.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
+
+	if (match) {
+		imageMap[mapKey] = match;
+	}
+
+	return match;
 };
 
-const useGamesImageSrc = (code: GamesKey) => {
-	return ["svg", "avif", "png", "jpg"]
+const getGamesImageSrc = (code: GamesKey) => {
+	const mapKey = `games:${code}`;
+
+	if (mapKey in imageMap) {
+		return imageMap[mapKey];
+	}
+
+	const match = ["svg", "avif", "png", "jpg"]
 		.map((ext) => `/images/games/${code}/emblem.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
+
+	if (match) {
+		imageMap[mapKey] = match;
+	}
+
+	return match;
 };
 
-const useSportsImageSrc = (
+const getSportsImageSrc = (
 	code: SportKey,
 	parent?: SportKey,
 	games?: GamesKey,
 ): string | undefined => {
+	const mapKey = `sport:${[code, games].join("+")}`;
+
+	if (mapKey in imageMap) {
+		return imageMap[mapKey];
+	}
+
 	const paths = [];
 
 	if (games) {
@@ -65,7 +97,7 @@ const useSportsImageSrc = (
 	);
 
 	if (parent) {
-		const parentPath = useSportsImageSrc(parent, undefined, games);
+		const parentPath = getSportsImageSrc(parent, undefined, games);
 		if (parentPath) {
 			paths.push(parentPath);
 		}
@@ -74,24 +106,30 @@ const useSportsImageSrc = (
 	if (code in parentDisciplineMap) {
 		const disciplines =
 			parentDisciplineMap[code as keyof typeof parentDisciplineMap];
-		const validPaths = disciplines.flatMap((d) => useSportsImageSrc(d) ?? []);
+		const validPaths = disciplines.flatMap((d) => getSportsImageSrc(d) ?? []);
 		paths.push(...validPaths);
 	}
 
-	return paths.find((path) => existsSync(`public/${path}`));
+	const match = paths.find((path) => existsSync(`public/${path}`));
+
+	if (match) {
+		imageMap[mapKey] = match;
+	}
+
+	return match;
 };
 
 export const Image = ({ dir, code, ...props }: ImageProps) => {
 	const srcGetter = () => {
 		if (dir === "country") {
-			return useCountryImageSrc(code) ?? "";
+			return getCountryImageSrc(code) ?? "";
 		}
 		if (dir === "games") {
-			return useGamesImageSrc(code) ?? "";
+			return getGamesImageSrc(code) ?? "";
 		}
 		if (dir === "sports") {
 			return (
-				useSportsImageSrc(
+				getSportsImageSrc(
 					code,
 					(props as Omit<SportsImageProps, "dir" | "code">).parent,
 					(props as Omit<SportsImageProps, "dir" | "code">).games,
