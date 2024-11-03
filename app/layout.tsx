@@ -17,6 +17,7 @@ import Header, { HEADER_HEIGHT } from "components/shell/Header";
 const workSans = Work_Sans({
 	subsets: ["latin"],
 	display: "swap",
+	variable: "--font-work-sans",
 });
 
 export const metadata = {
