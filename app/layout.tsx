@@ -36,21 +36,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			</head>
 			<body>
 				<MantineProvider theme={baseTheme}>
-					<AppShell
-						padding="xs"
-						// styles={(theme) => ({
-						// 	body: {
-						// 		minHeight: "100vh",
-						// 	},
-						// 	main: {
-						// 		backgroundColor:
-						// 			theme.colorScheme === "dark"
-						// 				? theme.colors.dark[8]
-						// 				: theme.colors.gray[2],
-						// 		minHeight: "95vh",
-						// 	},
-						// })}
-					>
+					<AppShell padding="xs">
 						<Header />
 						<AppShellMain>{children}</AppShellMain>
 					</AppShell>
