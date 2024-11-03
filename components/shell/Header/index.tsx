@@ -15,28 +15,24 @@ import Search from "tabler-icons-react/dist/icons/search";
 
 import ColorSchemeToggle from "components/controls/ColorSchemeToggle";
 
+import * as classes from "./Header.css";
+
 const Header = (props: AppShellHeaderProps) => {
 	return (
-		<MantineHeader
-			{...props}
-			h="3rem"
-			p="xs"
-			display="flex"
-			style={{ justifyContent: "space-between", alignItems: "center" }}
-		>
+		<MantineHeader {...props} className={classes.Header}>
 			<Group>
 				<Link passHref href="/">
 					<ActionIcon size="lg">
 						<Home width="1.25rem" height="1.25rem" />
 					</ActionIcon>
 				</Link>
-				<Link passHref href="/games">
+				<Link passHref href="/games" className={classes.HeaderLink}>
 					<Title>{"Games"}</Title>
 				</Link>
-				<Link passHref href="/countries">
+				<Link passHref href="/countries" className={classes.HeaderLink}>
 					<Title>{"Countries"}</Title>
 				</Link>
-				<Link passHref href="/sports">
+				<Link passHref href="/sports" className={classes.HeaderLink}>
 					<Title>{"Sports"}</Title>
 				</Link>
 			</Group>
@@ -52,3 +48,4 @@ const Header = (props: AppShellHeaderProps) => {
 };
 
 export default Header;
+export * from "./Header.css";

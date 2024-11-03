@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 import "@mantine/core/styles.css";
 import {
@@ -8,10 +8,11 @@ import {
 	AppShellMain,
 } from "@mantine/core";
 
+import { Work_Sans } from "next/font/google";
+
 import { baseTheme } from "styles/theme";
 
-import { Work_Sans } from "next/font/google";
-import Header from "components/layouts/Header";
+import Header, { HEADER_HEIGHT } from "components/shell/Header";
 
 const workSans = Work_Sans({
 	subsets: ["latin"],
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			</head>
 			<body>
 				<MantineProvider theme={baseTheme}>
-					<AppShell padding="xs">
+					<AppShell header={{ height: HEADER_HEIGHT }}>
 						<Header />
 						<AppShellMain>{children}</AppShellMain>
 					</AppShell>
