@@ -15,3 +15,10 @@ export const Header = style({
 export const HeaderLink = style({
 	textDecoration: "none",
 });
+
+export const ActiveHeaderLink = style({
+	borderRadius: vars.radius.sm,
+	color: vars.colors.white,
+	backgroundColor: vars.colors.primary,
+	padding: "0.25rem",
+});
