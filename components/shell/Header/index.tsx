@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
 	Group,
@@ -9,15 +10,13 @@ import {
 	ActionIcon,
 	Title,
 } from "@mantine/core";
-
 import Home from "tabler-icons-react/dist/icons/home";
-import Search from "tabler-icons-react/dist/icons/search";
 
 import ColorSchemeToggle from "components/controls/ColorSchemeToggle";
-
-import * as classes from "./Header.css";
 import { classNames } from "lib/utils/classNames";
-import { usePathname } from "next/navigation";
+
+import { Search } from "../Search";
+import * as classes from "./Header.css";
 
 const Header = (props: AppShellHeaderProps) => {
 	const path = usePathname();
@@ -63,9 +62,7 @@ const Header = (props: AppShellHeaderProps) => {
 						<Home width="1.25rem" height="1.25rem" />
 					</ActionIcon>
 				</Link>
-				<ActionIcon size="lg">
-					<Search width="1.25rem" height="1.25rem" />
-				</ActionIcon>
+				<Search />
 				<ColorSchemeToggle />
 			</Group>
 		</MantineHeader>
