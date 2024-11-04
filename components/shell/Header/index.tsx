@@ -15,7 +15,7 @@ import Home from "tabler-icons-react/dist/icons/home";
 import ColorSchemeToggle from "components/controls/ColorSchemeToggle";
 import { classNames } from "lib/utils/classNames";
 
-import { Search } from "../Search";
+import { Search } from "../../controls/Search";
 import * as classes from "./Header.css";
 
 const Header = (props: AppShellHeaderProps) => {
