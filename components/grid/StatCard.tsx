@@ -13,7 +13,7 @@ const StatCard = ({ Icon, title, text }: StatCardProps) => {
 	}
 
 	return (
-		<Paper p="sm" style={{ minWidth: "15rem" }}>
+		<Paper p="sm" maw="24rem" miw="12rem" style={{ flexGrow: 1 }}>
 			<Box style={{ display: "flex", columnGap: "0.5rem" }}>
 				<Box style={{ display: "flex", alignContent: "center" }}>
 					<Icon style={{ height: "3rem", width: "100%" }} />

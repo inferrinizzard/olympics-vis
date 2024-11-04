@@ -17,11 +17,13 @@ import * as classes from "./GamesOverview.css";
 
 interface GamesOverviewProps {
 	games: Games;
+	numCountries: number;
 	wikipediaExcerpt: string;
 }
 
 const GamesOverview_Client = ({
 	games,
+	numCountries,
 	wikipediaExcerpt,
 }: GamesOverviewProps) => {
 	return (
@@ -48,13 +50,7 @@ const GamesOverview_Client = ({
 				</Stack>
 			</Group>
 
-			<Box
-				style={{
-					display: "grid",
-					gap: "1rem",
-					gridTemplateColumns: "repeat(2, 1fr)",
-				}}
-			>
+			<Group justify="space-evenly">
 				<StatCard
 					Icon={Calendar}
 					title={"Start Date"}
@@ -70,9 +66,8 @@ const GamesOverview_Client = ({
 					title={"Total Athletes"}
 					text={games.num_athletes}
 				/>
-				<StatCard Icon={Hash} title={"Total Countries"} text={100} />
-				<StatCard Icon={BuildingSkyscraper} title={"Host"} text={games.host} />
-			</Box>
+				<StatCard Icon={Hash} title={"Total Countries"} text={numCountries} />
+			</Group>
 		</GridCell>
 	);
 };
