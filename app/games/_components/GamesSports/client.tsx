@@ -4,7 +4,7 @@ import type { GamesKey, SportKey } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 import { Image } from "components/util/Image";
-import { getGameName } from "lib/util";
+import { getGameName } from "lib/utils/getGameName";
 
 interface GamesSportsProps {
 	gamesCode: GamesKey;
