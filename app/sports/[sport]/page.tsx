@@ -3,7 +3,6 @@ import { Container, Grid, GridCol } from "@mantine/core";
 
 import { getSport } from "lib/db";
 
-// import BackButton from "components/layouts/BackButton";
 import SportsCountriesChart from "../_components/SportsCountriesChart";
 import SportsEventsChart from "../_components/SportsEventsChart";
 import SportsOverview from "../_components/SportsOverview";
@@ -28,7 +27,6 @@ const SportPage: NextPage<{ params: { sport: string } }> = async ({
 
 	return (
 		<Container fluid h="100%" p="xs">
-			{/* <BackButton /> */}
 			<Grid mt={0}>
 				<GridCol>
 					<SportsOverview sport={sport} />

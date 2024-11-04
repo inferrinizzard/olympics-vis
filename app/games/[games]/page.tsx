@@ -30,7 +30,6 @@ const GamesPage: NextPage<{ params: { games: string } }> = async ({
 
 	return (
 		<Container fluid h="100%" p="xs">
-			{/* <BackButton /> */}
 			<Grid mt={0}>
 				<GridCol span={8}>
 					<GamesOverview games={games} />

@@ -1,32 +1,35 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
 
 import { ActionIcon, Tooltip } from "@mantine/core";
-
 import ArrowBack from "tabler-icons-react/dist/icons/arrow-back";
 
-import useAccentColour from "lib/hooks/useAccentColour";
+import { vars } from "styles/theme";
 
 const BackButton = () => {
 	const router = useRouter();
-	const { primary } = useAccentColour();
-
-	const path = router.asPath;
+	const path = usePathname();
 	const parentPath = path.replace(/[/][^/]*$/, ""); // trim trailing /:slug
+
+	if (!path || path === "/") {
+		return null;
+	}
 
 	// TODO: use Link here if possible
 	return (
 		<Tooltip label={"Return to Parent Page"}>
 			<ActionIcon
-				size="xl"
+				size="lg"
 				pos="fixed"
 				style={{
 					cursor: "pointer",
-					right: "2rem",
-					bottom: "2rem",
+					right: "0.75rem",
+					bottom: "0.75rem",
 					display: "flex",
 					justifyContent: "center",
 					alignItems: "center",
-					backgroundColor: primary,
+					backgroundColor: vars.colors.primary,
 				}}
 				onClick={() => router.push(parentPath)}
 			>

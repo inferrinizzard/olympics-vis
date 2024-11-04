@@ -13,6 +13,7 @@ import { Work_Sans } from "next/font/google";
 import { baseTheme } from "styles/theme";
 
 import Header, { HEADER_HEIGHT } from "components/shell/Header";
+import BackButton from "components/controls/BackButton";
 
 const workSans = Work_Sans({
 	subsets: ["latin"],
@@ -40,7 +41,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				<MantineProvider theme={baseTheme}>
 					<AppShell header={{ height: HEADER_HEIGHT }}>
 						<Header />
-						<AppShellMain>{children}</AppShellMain>
+						<AppShellMain>
+							{children}
+							<BackButton />
+						</AppShellMain>
 					</AppShell>
 				</MantineProvider>
 			</body>

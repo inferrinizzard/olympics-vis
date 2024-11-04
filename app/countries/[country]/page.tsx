@@ -29,7 +29,6 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 
 	return (
 		<Container fluid h="100%" p="xs">
-			{/* <BackButton /> */}
 			<Grid mt={0} h="100%" style={{ borderRadius: "1rem" }}>
 				<GridCol span={4} p={"0.25rem"} h="100%">
 					<CountryOverview country={country} />
