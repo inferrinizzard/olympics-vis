@@ -1,4 +1,5 @@
-import { Box, List, Title } from "@mantine/core";
+import Link from "next/link";
+import { Box, List, Text, Title } from "@mantine/core";
 
 import { SearchResultItem } from "./SearchResultItem";
 import type { SearchResult } from "./types";
@@ -15,7 +16,12 @@ export const SearchResultList = ({ results }: SearchResultListProps) => {
 	const path = results[0].path;
 	return (
 		<Box>
-			<Title order={5}>{path}</Title>
+			<Box display="flex" style={{ justifyContent: "space-between" }}>
+				<Title order={5}>{path}</Title>
+				<Link href={`/${path}`}>
+					<Text>{"See all"}</Text>
+				</Link>
+			</Box>
 			<List>
 				{results.map((result, i) => (
 					<SearchResultItem
