@@ -1,3121 +1,3121 @@
 [
   {
-    "type": "country",
+    "path": "countries",
     "code": "AFG",
     "name": "Afghanistan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "AHO",
     "name": "Netherlands Antilles"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "AIN",
     "name": "Individual Neutral Athletes"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ALB",
     "name": "Albania"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ALG",
     "name": "Algeria"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "AND",
     "name": "Andorra"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ANG",
     "name": "Angola"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ANT",
     "name": "Antigua and Barbuda"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ANZ",
     "name": "Australasia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ARG",
     "name": "Argentina"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ARM",
     "name": "Armenia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ARU",
     "name": "Aruba"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ASA",
     "name": "American Samoa"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "AUS",
     "name": "Australia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "AUT",
     "name": "Austria"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "AZE",
     "name": "Azerbaijan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BAH",
     "name": "Bahamas"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BAN",
     "name": "Bangladesh"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BAR",
     "name": "Barbados"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BDI",
     "name": "Burundi"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BEL",
     "name": "Belgium"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BEN",
     "name": "Benin"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BER",
     "name": "Bermuda"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BGU",
     "name": "British Guiana"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BHU",
     "name": "Bhutan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BIH",
     "name": "Bosnia and Herzegovina"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BIR",
     "name": "Burma"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BIZ",
     "name": "Belize"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BLR",
     "name": "Belarus"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BOH",
     "name": "Bohemia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BOL",
     "name": "Bolivia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BOT",
     "name": "Botswana"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BRA",
     "name": "Brazil"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BRN",
     "name": "Bahrain"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BRU",
     "name": "Brunei"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BUL",
     "name": "Bulgaria"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BUR",
     "name": "Burkina Faso"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "BWI",
     "name": "British West Indies"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CAF",
     "name": "Central African Republic"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CAM",
     "name": "Cambodia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CAN",
     "name": "Canada"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CAY",
     "name": "Cayman Islands"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CEY",
     "name": "Ceylon"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CGO",
     "name": "Republic of the Congo"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CHA",
     "name": "Chad"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CHI",
     "name": "Chile"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CHN",
     "name": "China"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CIV",
     "name": "Ivory Coast"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CMR",
     "name": "Cameroon"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "COD",
     "name": "Democratic Republic of the Congo"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "COK",
     "name": "Cook Islands"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "COL",
     "name": "Colombia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "COM",
     "name": "Comoros"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "COR",
     "name": "Korea"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CPV",
     "name": "Cape Verde"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CRC",
     "name": "Costa Rica"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CRO",
     "name": "Croatia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CUB",
     "name": "Cuba"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CYP",
     "name": "Cyprus"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "CZE",
     "name": "Czechia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "DAH",
     "name": "Dahomey"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "DEN",
     "name": "Denmark"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "DJI",
     "name": "Djibouti"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "DMA",
     "name": "Dominica"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "DOM",
     "name": "Dominican Republic"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ECU",
     "name": "Ecuador"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "EGY",
     "name": "Egypt"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "EOR",
     "name": "Refugee Olympic Team"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ERI",
     "name": "Eritrea"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ESA",
     "name": "El Salvador"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ESP",
     "name": "Spain"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "EST",
     "name": "Estonia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ETH",
     "name": "Ethiopia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "EUA",
     "name": "United Team of Germany"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "EUN",
     "name": "Unified Team"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "FIJ",
     "name": "Fiji"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "FIN",
     "name": "Finland"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "FRA",
     "name": "France"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "FRG",
     "name": "West Germany"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "FRO",
     "name": "Faroe Islands"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "FSM",
     "name": "Federated States of Micronesia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GAB",
     "name": "Gabon"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GAM",
     "name": "The Gambia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GBR",
     "name": "Great Britain"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GBS",
     "name": "Guinea-Bissau"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GDR",
     "name": "East Germany"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GEO",
     "name": "Georgia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GEQ",
     "name": "Equatorial Guinea"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GER",
     "name": "Germany"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GHA",
     "name": "Ghana"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GRE",
     "name": "Greece"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GRN",
     "name": "Grenada"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GUA",
     "name": "Guatemala"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GUI",
     "name": "Guinea"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GUM",
     "name": "Guam"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "GUY",
     "name": "Guyana"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "HAI",
     "name": "Haiti"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "HBR",
     "name": "British Honduras"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "HKG",
     "name": "Hong Kong"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "HNL",
     "name": "Haudenosaunee"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "HON",
     "name": "Honduras"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "HUN",
     "name": "Hungary"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IHO",
     "name": "Dutch East Indies"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "INA",
     "name": "Indonesia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IND",
     "name": "India"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IOA",
     "name": "Independent Olympic Athletes"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IOC",
     "name": "Athletes from Kuwait"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IOP",
     "name": "Independent Olympic Participants"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IPA",
     "name": "Independent Paralympic Athletes"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IPP",
     "name": "Independent Paralympic Participants"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IRI",
     "name": "Iran"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IRL",
     "name": "Ireland"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IRQ",
     "name": "Iraq"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ISL",
     "name": "Iceland"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ISR",
     "name": "Israel"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ISV",
     "name": "Virgin Islands"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ITA",
     "name": "Italy"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "IVB",
     "name": "British Virgin Islands"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "JAM",
     "name": "Jamaica"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "JOR",
     "name": "Jordan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "JPN",
     "name": "Japan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KAZ",
     "name": "Kazakhstan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KEN",
     "name": "Kenya"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KGZ",
     "name": "Kyrgyzstan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KHM",
     "name": "Khmer Republic"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KIR",
     "name": "Kiribati"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KMT",
     "name": "Republic of China"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KOR",
     "name": "South Korea"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KOS",
     "name": "Kosovo"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KSA",
     "name": "Saudi Arabia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "KUW",
     "name": "Kuwait"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LAO",
     "name": "Laos"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LAT",
     "name": "Latvia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LBA",
     "name": "Libya"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LBN",
     "name": "Lebanon"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LBR",
     "name": "Liberia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LCA",
     "name": "Saint Lucia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LES",
     "name": "Lesotho"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LIE",
     "name": "Liechtenstein"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LTU",
     "name": "Lithuania"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "LUX",
     "name": "Luxembourg"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MAC",
     "name": "Macau"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MAD",
     "name": "Madagascar"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MAL",
     "name": "Malaya"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MAR",
     "name": "Morocco"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MAS",
     "name": "Malaysia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MAW",
     "name": "Malawi"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MDA",
     "name": "Moldova"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MDV",
     "name": "Maldives"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MEX",
     "name": "Mexico"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MGL",
     "name": "Mongolia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MHL",
     "name": "Marshall Islands"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MIX",
     "name": "Mixed-NOCs"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MKD",
     "name": "North Macedonia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MLI",
     "name": "Mali"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MLT",
     "name": "Malta"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MNE",
     "name": "Montenegro"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MON",
     "name": "Monaco"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MOZ",
     "name": "Mozambique"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MRI",
     "name": "Mauritius"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MTN",
     "name": "Mauritania"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "MYA",
     "name": "Myanmar"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NAM",
     "name": "Namibia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NBO",
     "name": "North Borneo"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NCA",
     "name": "Nicaragua"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NED",
     "name": "Netherlands"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NEP",
     "name": "Nepal"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NGR",
     "name": "Nigeria"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NIG",
     "name": "Niger"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NOR",
     "name": "Norway"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NPA",
     "name": "Neutral Paralympic Athletes"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NRH",
     "name": "Northern Rhodesia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NRU",
     "name": "Nauru"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "NZL",
     "name": "New Zealand"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "OAR",
     "name": "Olympic Athletes from Russia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "OMA",
     "name": "Oman"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PAK",
     "name": "Pakistan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PAN",
     "name": "Panama"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PAR",
     "name": "Paraguay"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PER",
     "name": "Peru"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PHI",
     "name": "Philippines"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PLE",
     "name": "Palestine"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PLW",
     "name": "Palau"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PNA",
     "name": "Paralympic Neutral Athletes"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PNG",
     "name": "Papua New Guinea"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "POL",
     "name": "Poland"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "POR",
     "name": "Portugal"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PRK",
     "name": "North Korea"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "PUR",
     "name": "Puerto Rico"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "QAT",
     "name": "Qatar"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "RAU",
     "name": "United Arab Republic"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "RHO",
     "name": "Rhodesia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ROC",
     "name": "ROC"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ROT",
     "name": "Refugee Olympic Team"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ROU",
     "name": "Romania"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "RPC",
     "name": "RPC"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "RPT",
     "name": "Refugee Paralympic Team"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "RSA",
     "name": "South Africa"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "RU1",
     "name": "Russian Empire"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "RUS",
     "name": "Russia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "RWA",
     "name": "Rwanda"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SAA",
     "name": "Saar"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SAM",
     "name": "Samoa"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SCG",
     "name": "Serbia and Montenegro"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SEN",
     "name": "Senegal"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SEY",
     "name": "Seychelles"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SGP",
     "name": "Singapore"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SKN",
     "name": "Saint Kitts and Nevis"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SLE",
     "name": "Sierra Leone"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SLO",
     "name": "Slovenia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SMR",
     "name": "San Marino"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SOL",
     "name": "Solomon Islands"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SOM",
     "name": "Somalia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SRB",
     "name": "Serbia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SRI",
     "name": "Sri Lanka"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SSD",
     "name": "South Sudan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "STP",
     "name": "São Tomé and Príncipe"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SUD",
     "name": "Sudan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SUI",
     "name": "Switzerland"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SUR",
     "name": "Suriname"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SVK",
     "name": "Slovakia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SWE",
     "name": "Sweden"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SWZ",
     "name": "Eswatini"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "SYR",
     "name": "Syria"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TAN",
     "name": "Tanzania"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TCH",
     "name": "Czechoslovakia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TGA",
     "name": "Tonga"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "THA",
     "name": "Thailand"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TJK",
     "name": "Tajikistan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TKM",
     "name": "Turkmenistan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TLS",
     "name": "East Timor"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TOG",
     "name": "Togo"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TPE",
     "name": "Chinese Taipei"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TTO",
     "name": "Trinidad and Tobago"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TUN",
     "name": "Tunisia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TUR",
     "name": "Turkey"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "TUV",
     "name": "Tuvalu"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "UAE",
     "name": "United Arab Emirates"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "UAR",
     "name": "United Arab Republic"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "UGA",
     "name": "Uganda"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "UKR",
     "name": "Ukraine"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "URS",
     "name": "Soviet Union"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "URU",
     "name": "Uruguay"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "USA",
     "name": "United States"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "UZB",
     "name": "Uzbekistan"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "VAN",
     "name": "Vanuatu"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "VEN",
     "name": "Venezuela"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "VIE",
     "name": "Vietnam"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "VIN",
     "name": "Saint Vincent and the Grenadines"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "VNM",
     "name": "South Vietnam"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "VOL",
     "name": "Upper Volta"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "WSM",
     "name": "Western Samoa"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "XXB",
     "name": "Mixed team"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "YAR",
     "name": "North Yemen"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "YEM",
     "name": "Yemen"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "YMD",
     "name": "South Yemen"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "YUG",
     "name": "Yugoslavia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ZAI",
     "name": "Zaire"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ZAM",
     "name": "Zambia"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ZIM",
     "name": "Zimbabwe"
   },
   {
-    "type": "country",
+    "path": "countries",
     "code": "ZZX",
     "name": "Mixed team"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1896_athens_olympics",
     "name": "1896 Athens Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1900_paris_olympics",
     "name": "1900 Paris Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1904_st-louis_olympics",
     "name": "1904 St. Louis Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1908_london_olympics",
     "name": "1908 London Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1912_stockholm_olympics",
     "name": "1912 St.ockholm Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1916_berlin_olympics",
     "name": "1916 Berlin Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1920_antwerp_olympics",
     "name": "1920 Antwerp Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1924_chamonix_olympics",
     "name": "1924 Chamonix Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1924_paris_olympics",
     "name": "1924 Paris Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1928_amsterdam_olympics",
     "name": "1928 Amst.erdam Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1928_st-moritz_olympics",
     "name": "1928 St. Moritz Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1932_lake-placid_olympics",
     "name": "1932 Lake Placid Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1932_los-angeles_olympics",
     "name": "1932 Los Angeles Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1936_berlin_olympics",
     "name": "1936 Berlin Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1936_garmisch=partenkirchen_olympics",
     "name": "1936 Garmisch, Partenkirchen Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1940_sapporo_olympics",
     "name": "1940 Sapporo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1940_tokyo_olympics",
     "name": "1940 Tokyo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1944_cortina-d-ampezzo_olympics",
     "name": "1944 Cortina D 'Ampezzo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1944_london_olympics",
     "name": "1944 London Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1948_london_olympics",
     "name": "1948 London Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1948_st-moritz_olympics",
     "name": "1948 St. Moritz Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1952_helsinki_olympics",
     "name": "1952 Helsinki Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1952_oslo_olympics",
     "name": "1952 Oslo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1956_cortina-dampezzo_olympics",
     "name": "1956 Cortina Dampezzo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1956_melbourne_olympics",
     "name": "1956 Melbourne Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1960_rome_olympics",
     "name": "1960 Rome Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1960_rome_paralympics",
     "name": "1960 Rome Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1960_squaw-valley_olympics",
     "name": "1960 Squaw Valley Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1964_innsbruck_olympics",
     "name": "1964 Innsbruck Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1964_tokyo_olympics",
     "name": "1964 Tokyo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1964_tokyo_paralympics",
     "name": "1964 Tokyo Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1968_grenoble_olympics",
     "name": "1968 Grenoble Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1968_mexico-city_olympics",
     "name": "1968 Mexico City Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1968_tel-aviv_paralympics",
     "name": "1968 Tel Aviv Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1972_heidelberg_paralympics",
     "name": "1972 Heidelberg Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1972_munich_olympics",
     "name": "1972 Munich Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1972_sapporo_olympics",
     "name": "1972 Sapporo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1976_innsbruck_olympics",
     "name": "1976 Innsbruck Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1976_montreal_olympics",
     "name": "1976 Montreal Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1976_ornskoldsvik_paralympics",
     "name": "1976 Ornskoldsvik Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1976_toronto_paralympics",
     "name": "1976 Toronto Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1980_arnhem_paralympics",
     "name": "1980 Arnhem Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1980_geilo_paralympics",
     "name": "1980 Geilo Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1980_lake-placid_olympics",
     "name": "1980 Lake Placid Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1980_moscow_olympics",
     "name": "1980 Moscow Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1984_innsbruck_paralympics",
     "name": "1984 Innsbruck Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1984_los-angeles_olympics",
     "name": "1984 Los Angeles Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1984_new-york+stoke-mandeville_paralympics",
     "name": "1984 New York-St.oke Mandeville Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1984_sarajevo_olympics",
     "name": "1984 Sarajevo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1988_calgary_olympics",
     "name": "1988 Calgary Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1988_innsbruck_paralympics",
     "name": "1988 Innsbruck Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1988_seoul_olympics",
     "name": "1988 Seoul Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1988_seoul_paralympics",
     "name": "1988 Seoul Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1992_albertville_olympics",
     "name": "1992 Albertville Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1992_barcelona+madrid_paralympics",
     "name": "1992 Barcelona-Madrid Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1992_barcelona_olympics",
     "name": "1992 Barcelona Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1992_tignes+albertville_paralympics",
     "name": "1992 Tignes-Albertville Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1994_lillehammer_olympics",
     "name": "1994 Lillehammer Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1994_lillehammer_paralympics",
     "name": "1994 Lillehammer Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1996_atlanta_olympics",
     "name": "1996 Atlanta Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1996_atlanta_paralympics",
     "name": "1996 Atlanta Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1998_nagano_olympics",
     "name": "1998 Nagano Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "1998_nagano_paralympics",
     "name": "1998 Nagano Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2000_sydney_olympics",
     "name": "2000 Sydney Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2000_sydney_paralympics",
     "name": "2000 Sydney Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2002_salt-lake-city_paralympics",
     "name": "2002 Salt Lake City Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2002_salt-lake_olympics",
     "name": "2002 Salt Lake Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2004_athens_olympics",
     "name": "2004 Athens Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2004_athens_paralympics",
     "name": "2004 Athens Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2006_torino_olympics",
     "name": "2006 Torino Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2006_turin_paralympics",
     "name": "2006 Turin Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2008_beijing_olympics",
     "name": "2008 Beijing Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2008_beijing_paralympics",
     "name": "2008 Beijing Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2010_singapore_youth",
     "name": "2010 Singapore Youth"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2010_vancouver_olympics",
     "name": "2010 Vancouver Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2010_vancouver_paralympics",
     "name": "2010 Vancouver Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2012_innsbruck_youth",
     "name": "2012 Innsbruck Youth"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2012_london_olympics",
     "name": "2012 London Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2012_london_paralympics",
     "name": "2012 London Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2014_nanjing_youth",
     "name": "2014 Nanjing Youth"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2014_sochi_olympics",
     "name": "2014 Sochi Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2014_sochi_paralympics",
     "name": "2014 Sochi Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2016_lillehammer_youth",
     "name": "2016 Lillehammer Youth"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2016_rio-de-janeiro_olympics",
     "name": "2016 Rio de Janeiro Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2016_rio-de-janeiro_paralympics",
     "name": "2016 Rio de Janeiro Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2018_buenos-aires_youth",
     "name": "2018 Buenos Aires Youth"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2018_pyeongchang_olympics",
     "name": "2018 Pyeongchang Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2018_pyeongchang_paralympics",
     "name": "2018 Pyeongchang Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2020_lausanne_youth",
     "name": "2020 Lausanne Youth"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2020_tokyo_olympics",
     "name": "2020 Tokyo Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2020_tokyo_paralympics",
     "name": "2020 Tokyo Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2022_beijing_olympics",
     "name": "2022 Beijing Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2022_beijing_paralympics",
     "name": "2022 Beijing Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2024_gangwon_youth",
     "name": "2024 Gangwon Youth"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2024_paris_olympics",
     "name": "2024 Paris Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2024_paris_paralympics",
     "name": "2024 Paris Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2026_dakar_youth",
     "name": "2026 Dakar Youth"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2026_milano-cortina_olympics",
     "name": "2026 Milano Cortina Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2026_milano-cortina_paralympics",
     "name": "2026 Milano Cortina Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2028_los-angeles_olympics",
     "name": "2028 Los Angeles Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2028_los-angeles_paralympics",
     "name": "2028 Los Angeles Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2030_french-alps_olympics",
     "name": "2030 French Alps Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2030_french-alps_paralympics",
     "name": "2030 French Alps Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2032_brisbane_olympics",
     "name": "2032 Brisbane Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2032_brisbane_paralympics",
     "name": "2032 Brisbane Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2034_salt-lake-city=utah_olympics",
     "name": "2034 Salt Lake City, Utah Olympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2034_salt-lake-city=utah_paralympics",
     "name": "2034 Salt Lake City, Utah Paralympics"
   },
   {
-    "dir": "games",
+    "path": "games",
     "code": "2036_tbd_olympics",
     "name": "2036 TBD Olympics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "AFB",
     "name": "American Football"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "AIK",
     "name": "Aikido"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "AIR",
     "name": "Air Sports"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ALP",
     "name": "Alpine Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "APG",
     "name": "Paragliding"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "APN",
     "name": "Alpinism"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "AQ",
     "name": "Aquatics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "AR",
     "name": "Archery"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ARC",
     "name": "Archery"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ART",
     "name": "Olympic Arts Festival"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ASK",
     "name": "Artistic Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "AT",
     "name": "Athletics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ATH",
     "name": "Athletics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "AUT",
     "name": "Automobile Sports"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BBL",
     "name": "Baseball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BD",
     "name": "Badminton"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BDG",
     "name": "Bridge"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BDM",
     "name": "Badminton"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BDY",
     "name": "Bandy"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BK",
     "name": "Basketball Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BK3",
     "name": "3x3 Basketball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BKB",
     "name": "Basketball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BKG",
     "name": "Breaking"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BLD",
     "name": "Billiards"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BMF",
     "name": "Cycling BMX Freestyle"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BMX",
     "name": "Cycling BMX Racing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BO",
     "name": "Boxing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BOB",
     "name": "Bobsleigh"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BOU",
     "name": "Boules Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BOX",
     "name": "Boxing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BS",
     "name": "IBSF Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BS5",
     "name": "Baseball5"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BSC",
     "name": "Beach Soccer"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BT",
     "name": "Biathlon"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BTH",
     "name": "Biathlon"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BWL",
     "name": "Bowls"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "BWO",
     "name": "Boogie Woogie"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CA",
     "name": "Canoe Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CCS",
     "name": "Cross-Country Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CER",
     "name": "Ceremonies"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CHL",
     "name": "Cheerleading"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CHS",
     "name": "Chess"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CK",
     "name": "Cricket"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CKT",
     "name": "Cricket"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CL",
     "name": "Sport Climbing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CLB",
     "name": "Sport Climbing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CQT",
     "name": "Croquet"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CRD",
     "name": "Cycling Road"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CSL",
     "name": "Canoe Slalom"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CSP",
     "name": "Canoe Sprint"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CTR",
     "name": "Cycling Track"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CU",
     "name": "Curling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CUR",
     "name": "Curling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "CY",
     "name": "Cycling Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "DA",
     "name": "Dance Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "DIS",
     "name": "Disco Dance"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "DIV",
     "name": "Diving"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "EDR",
     "name": "Equestrian Dressage"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "EDV",
     "name": "Equestrian Driving"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "EJP",
     "name": "Equestrian Jumping"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "END",
     "name": "Equestrian Endurance Riding"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "EQ",
     "name": "Equestrian"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "EQU",
     "name": "Equestrian"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "EVE",
     "name": "Equestrian Eventing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "EVL",
     "name": "Equestrian Vaulting"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FB",
     "name": "Football"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FBL",
     "name": "Football"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FBS",
     "name": "Futsal"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FDS",
     "name": "Flying Disc"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FE",
     "name": "Fencing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FEN",
     "name": "Fencing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FL",
     "name": "Flag Football"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FLF",
     "name": "Flag Football"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FLR",
     "name": "Floorball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FRS",
     "name": "Freestyle Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "FSK",
     "name": "Figure Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GAC",
     "name": "Acrobatic Gymnastics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GAE",
     "name": "Aerobic Gymnastics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GAR",
     "name": "Artistic Gymnastics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GEN",
     "name": "General"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GLF",
     "name": "Golf"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GO",
     "name": "Golf"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GRY",
     "name": "Rhythmic Gymnastics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GSK",
     "name": "Grass Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GTR",
     "name": "Trampoline Gymnastics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "GY",
     "name": "Gymnastics Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "HB",
     "name": "Handball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "HBB",
     "name": "Beach Handball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "HBL",
     "name": "Handball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "HO",
     "name": "Hockey"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "HO5",
     "name": "Hockey 5's"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "HOC",
     "name": "Hockey"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "HPP",
     "name": "Hip Hop"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "IAS",
     "name": "Inline Alpine Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "IDS",
     "name": "Inline Downhill Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "IH",
     "name": "Ice Hockey"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "IHO",
     "name": "Ice Hockey"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "INF",
     "name": "Inline Freestyle Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "INH",
     "name": "Inline Hockey"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "IOC",
     "name": "IOC Activities"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ISS",
     "name": "Inline Speed Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "IST",
     "name": "Icestocksport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "JES",
     "name": "Jet Sport Boating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "JJI",
     "name": "Ju-Jitsu"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "JU",
     "name": "Judo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "JUD",
     "name": "Judo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "KAB",
     "name": "Kabaddi"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "KBL",
     "name": "Korfball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "KIK",
     "name": "Kickboxing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "KT",
     "name": "Karate"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "KTE",
     "name": "Karate"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "KUR",
     "name": "Kurash"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "LAT",
     "name": "Latin Dance"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "LAX",
     "name": "Lacrosse"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "LFC",
     "name": "Life Saving"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "LG",
     "name": "Luge"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "LUG",
     "name": "Luge"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "LX",
     "name": "Lacrosse"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "MCS",
     "name": "Motorcycle Sports"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "MDL",
     "name": "Medals"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "MP",
     "name": "Modern Pentathlon"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "MPN",
     "name": "Modern Pentathlon"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "MTB",
     "name": "Cycling Mountain Bike"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "MTI",
     "name": "Muaythai"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "MTN",
     "name": "Climbing and Mountaineering"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "MTR",
     "name": "Mountain Running"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "NBL",
     "name": "Netball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "NCB",
     "name": "Nordic Combined"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "NEV",
     "name": "Nordic Events"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "OLV",
     "name": "Olympic Village"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ORI",
     "name": "Orienteering"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "OWS",
     "name": "Marathon Swimming"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-AR",
     "name": "Para Archery"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-AS",
     "name": "Para Alpine Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-AT",
     "name": "Para Athletics"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-BD",
     "name": "Para Badminton"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-BK",
     "name": "Basketball ID"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-BO",
     "name": "Boccia"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-BT",
     "name": "Para Biathlon"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-CC",
     "name": "Para Cross-Country Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-CF",
     "name": "Para Canoe"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-CL",
     "name": "Paraclimbing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-CR",
     "name": "Para Cycling Road"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-CT",
     "name": "Para Cycling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-DC",
     "name": "Dartchery"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-DS",
     "name": "Para Dance Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-EQ",
     "name": "Para Equestrian"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-FB",
     "name": "Blind Football"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-FT",
     "name": "Para Football 7-a-Side"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-GB",
     "name": "Goalball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-IH",
     "name": "Para Ice Hockey"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-JU",
     "name": "Para Judo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-LB",
     "name": "Lawn Bowls"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-PO",
     "name": "Para Powerlifting"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-RO",
     "name": "Para Rowing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-SA",
     "name": "Para Sailing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-SB",
     "name": "Para Snowboard"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-SH",
     "name": "Shooting Para Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-SN",
     "name": "Snooker"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-SS",
     "name": "Ice Sledge Speed Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-SW",
     "name": "Para Swimming"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-TK",
     "name": "Para Taekwondo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-TR",
     "name": "Para Triathlon"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-TT",
     "name": "Para Table Tennis"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-VS",
     "name": "Sitting Volleyball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-VT",
     "name": "Standing Volleyball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-WB",
     "name": "Wheelchair Basketball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-WC",
     "name": "Wheelchair Curling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-WF",
     "name": "Wheelchair Fencing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-WG",
     "name": "Para Wrestling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-WL",
     "name": "Para Weightlifting"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-WR",
     "name": "Wheelchair Rugby"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "P-WT",
     "name": "Wheelchair Tennis"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "PAR",
     "name": "Parkour"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "PBT",
     "name": "Powerboating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "PCO",
     "name": "Press Conferences"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "PEL",
     "name": "Pelota Vasca"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "POL",
     "name": "Polo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "PSI",
     "name": "Pencak Silat"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RAR",
     "name": "Acrobatic Rock'n'Roll"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RDY",
     "name": "Roller Derby"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RFS",
     "name": "Roller Freestyle"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RHO",
     "name": "Rink Hockey"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RO",
     "name": "Rowing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ROC",
     "name": "Coastal Rowing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ROI",
     "name": "Indoor Rowing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "ROW",
     "name": "Rowing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RQL",
     "name": "Racquetball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RQT",
     "name": "Rackets"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RU",
     "name": "Rugby"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RU7",
     "name": "Rugby Sevens"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "RUG",
     "name": "Rugby Union"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SA",
     "name": "Sailing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SAL",
     "name": "Sailing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SB",
     "name": "Baseball/Softball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SBD",
     "name": "Snowboard"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SBL",
     "name": "Softball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SBO",
     "name": "Sambo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SCO",
     "name": "Scootering"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SD",
     "name": "Skate Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SF",
     "name": "Surfing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SH",
     "name": "Shooting"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SHO",
     "name": "Shooting"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SI",
     "name": "Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SJP",
     "name": "Ski Jumping"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SK",
     "name": "Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SKB",
     "name": "Skateboarding"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SKC",
     "name": "Skate Cross"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SKN",
     "name": "Skeleton"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SLG",
     "name": "Sledge"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SLS",
     "name": "Salsa"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SM",
     "name": "Ski Mountaineering"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SMT",
     "name": "Ski Mountaineering"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SPK",
     "name": "Sepaktakraw"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SPS",
     "name": "Speed Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SQ",
     "name": "Squash"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SQU",
     "name": "Squash"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SRF",
     "name": "Surfing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SSK",
     "name": "Speed Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "STA",
     "name": "Stage Dance"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "STD",
     "name": "Standard Dances"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "STK",
     "name": "Short Track Speed Skating"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SUM",
     "name": "Sumo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SWA",
     "name": "Artistic Swimming"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "SWM",
     "name": "Swimming"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TE",
     "name": "Tennis"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TEN",
     "name": "Tennis"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TEQ",
     "name": "Teqball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TK",
     "name": "Taekwondo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TKW",
     "name": "Taekwondo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TMS",
     "name": "Telemark Skiing"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TOW",
     "name": "Tug of War"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TR",
     "name": "Triathlon"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TRI",
     "name": "Triathlon"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TRU",
     "name": "Training"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TST",
     "name": "Soft Tennis"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TT",
     "name": "Table Tennis"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "TTE",
     "name": "Table Tennis"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "UWA",
     "name": "Underwater Sports"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "VB",
     "name": "Volleyball Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "VBV",
     "name": "Beach Volleyball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "VVO",
     "name": "Volleyball"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WL",
     "name": "Weightlifting"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WLF",
     "name": "Weightlifting"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WPO",
     "name": "Water Polo"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WR",
     "name": "Wrestling Sport"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WRB",
     "name": "Beach Wrestling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WRE",
     "name": "Wrestling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WRF",
     "name": "Freestyle Wrestling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WRG",
     "name": "Greco-Roman Wrestling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WRK",
     "name": "Pankration"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WRP",
     "name": "Grappling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WRT",
     "name": "Traditional Wrestling"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WSK",
     "name": "Water Ski and Wakeboard"
   },
   {
-    "type": "sport",
+    "path": "sports",
     "code": "WSU",
     "name": "Wushu"
   }

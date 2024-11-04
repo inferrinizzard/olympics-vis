@@ -22,3 +22,5 @@ export type Sport = {
 	parent?: string & PrismaSport["parent"];
 	page_name?: string & PrismaSport["page_name"];
 };
+
+export type PathKey = "countries" | "games" | "sports";

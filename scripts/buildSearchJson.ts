@@ -1,6 +1,7 @@
 import { writeFile } from "node:fs";
 
 import { PrismaClient } from "@prisma/client";
+import type { PathKey } from "types/prisma";
 
 import { getGameName } from "lib/utils/getGameName";
 
@@ -20,13 +21,13 @@ const buildSearchJson = async () => {
 	});
 
 	const data = [
-		...countries.map((row) => ({ type: "country", ...row })),
+		...countries.map((row) => ({ path: "countries" as PathKey, ...row })),
 		...games.map(({ code }) => ({
-			dir: "games",
+			path: "games" as PathKey,
 			code,
 			name: getGameName(code),
 		})),
-		...sports.map((row) => ({ type: "sport", ...row })),
+		...sports.map((row) => ({ path: "sports" as PathKey, ...row })),
 	];
 
 	return writeFile(

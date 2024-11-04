@@ -6,10 +6,14 @@ import {
 	type SetStateAction,
 } from "react";
 
+import type { PathKey } from "types/prisma";
+
 import { Modal, TextInput } from "@mantine/core";
 import FuzzySearch from "fuzzy-search";
 
-import searchStrings from "./searchStrings.json";
+import searchStringEntries from "./searchStrings.json";
+import { SearchResultList } from "./SearchResultList";
+import type { SearchResult } from "./types";
 
 interface SearchModalProps {
 	isSearchOpen: boolean;
@@ -23,11 +27,26 @@ export const SearchModal = ({
 	const [searchText, setSearchText] = useState("");
 
 	const searcher = useMemo(
-		() => new FuzzySearch(searchStrings, ["code", "name"], { sort: true }),
+		() =>
+			new FuzzySearch(searchStringEntries, ["code", "name"], { sort: true }),
 		[],
 	);
 
-	const searchResults = searchText.trim() ? searcher.search(searchText) : [];
+	const searchResults = (
+		searchText.trim() ? searcher.search(searchText) : []
+	) as SearchResult[];
+	const groupedResults = searchResults.reduce(
+		(acc, result) => {
+			if (result.path in acc) {
+				acc[result.path].push(result);
+			} else {
+				acc[result.path] = [result];
+			}
+
+			return acc;
+		},
+		{} as Record<PathKey, SearchResult[]>,
+	);
 
 	useEffect(() => {
 		if (!isSearchOpen) {
@@ -42,8 +61,8 @@ export const SearchModal = ({
 			withCloseButton={false}
 		>
 			<TextInput onChange={(e) => setSearchText(e.target.value.trim())} />
-			{searchResults.map((str) => (
-				<div key={str.code}>{str.code}</div>
+			{Object.entries(groupedResults).map(([pathKey, results]) => (
+				<SearchResultList key={`search_${pathKey}`} results={results} />
 			))}
 		</Modal>
 	);
