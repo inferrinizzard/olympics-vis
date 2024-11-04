@@ -39,7 +39,7 @@ const GamesOverview_Client = ({
 					/>
 				</Box>
 				<Stack maw="75%">
-					<Title order={1}>{`${getGameName(games.code)}`}</Title>
+					<Title order={1} mt="sm">{`${getGameName(games.code)}`}</Title>
 					{games.motto ? <Title order={3}>{games.motto}</Title> : null}
 					<Box style={{ flexGrow: 1 }}>
 						<Excerpt

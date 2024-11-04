@@ -1,10 +1,20 @@
-import { Title, Table } from "@mantine/core";
+import {
+	Title,
+	Table,
+	TableTbody,
+	TableThead,
+	TableTd,
+	TableTr,
+} from "@mantine/core";
 
 import type { ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 import { Image } from "components/util/Image";
+import { HEADER_HEIGHT } from "components/shell/Header";
+
+import * as classes from "./GamesMedalsTable.css";
 
 interface GamesMedalsTableProps {
 	countryStandings: Pick<ParticipationRecords, "country" | MedalType>[];
@@ -14,39 +24,52 @@ const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
 	countryStandings,
 }) => {
 	return (
-		<GridCell h="100%" display="flex" style={{ flexDirection: "column" }}>
+		<GridCell className={classes.GridContainer}>
 			<Title order={2} p="xs">
 				{"Medals Top 10"}
 			</Title>
-			<Table p="xs" style={{ flexGrow: 1 }}>
-				<tbody>
-					<tr>
-						<td>Country</td>
-						<td>Gold</td>
-						<td>Silver</td>
-						<td>Bronze</td>
-						<td>Total</td>
-					</tr>
+			<Table
+				style={{ flexGrow: 1 }}
+				stickyHeader
+				stickyHeaderOffset={HEADER_HEIGHT}
+				highlightOnHover
+			>
+				<TableThead>
+					<TableTr>
+						<TableTd>Country</TableTd>
+						<TableTd>Gold</TableTd>
+						<TableTd>Silver</TableTd>
+						<TableTd>Bronze</TableTd>
+						<TableTd>Total</TableTd>
+					</TableTr>
+				</TableThead>
+				<TableTbody>
 					{countryStandings.map(({ country, gold, silver, bronze }) => (
-						<tr key={country}>
-							<td>
+						<TableTr key={country}>
+							<TableTd
+								display="flex"
+								style={{ alignItems: "center", gap: "0.5rem" }}
+							>
 								<Image
 									dir="country"
 									code={country}
 									alt={country}
 									width={30}
 									height={30}
-									style={{ display: "inline-block" }}
+									style={{
+										objectFit: "contain",
+										filter: "drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.2))",
+									}}
 								/>
 								<span>{country}</span>
-							</td>
-							<td>{gold}</td>
-							<td>{silver}</td>
-							<td>{bronze}</td>
-							<td>{gold + silver + bronze}</td>
-						</tr>
+							</TableTd>
+							<TableTd>{gold}</TableTd>
+							<TableTd>{silver}</TableTd>
+							<TableTd>{bronze}</TableTd>
+							<TableTd>{gold + silver + bronze}</TableTd>
+						</TableTr>
 					))}
-				</tbody>
+				</TableTbody>
 			</Table>
 		</GridCell>
 	);
