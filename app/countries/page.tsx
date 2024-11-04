@@ -4,8 +4,6 @@ import type { Country } from "@prisma/client";
 import { getAllCountries } from "lib/db";
 
 import { CardList } from "components/layouts/CardList";
-import CardLink from "components/layouts/CardLink";
-import { Image } from "components/util/Image";
 
 import TopMedalsChart from "./_components/TopMedalsChart";
 

@@ -29,8 +29,7 @@ const GamesPage: NextPage<{ params: { games: string } }> = async ({
 	}
 
 	return (
-		<Container fluid style={{ height: "100%" }}>
-			{/* <BackButton /> */}
+		<Container fluid h="100%" p="xs">
 			<Grid mt={0}>
 				<GridCol span={8}>
 					<GamesOverview games={games} />

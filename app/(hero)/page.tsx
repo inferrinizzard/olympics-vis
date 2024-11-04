@@ -15,7 +15,7 @@ const HomePage = async () => {
 	const countries = await getAllCountries();
 
 	return (
-		<Container fluid p={0} h="100%">
+		<Container fluid h="100%" p="xs">
 			<Box
 				style={{
 					position: "absolute",

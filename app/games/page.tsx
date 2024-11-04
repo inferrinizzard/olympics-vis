@@ -2,7 +2,7 @@ import { Container, Title } from "@mantine/core";
 
 import type { Games } from "@prisma/client";
 import { getAllGames } from "lib/db";
-import { getGameName } from "lib/util";
+import { getGameName } from "lib/utils/getGameName";
 
 import { CardList } from "components/layouts/CardList";
 

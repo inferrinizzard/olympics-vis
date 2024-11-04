@@ -7,7 +7,7 @@ import { Box, Title, Tooltip } from "@mantine/core";
 
 import CardLink from "components/layouts/CardLink";
 import AutoScroller from "lib/utils/Autoscroller";
-import { getGameName } from "lib/util";
+import { getGameName } from "lib/utils/getGameName";
 
 interface CardScrollerProps<T> {
 	data: T[];

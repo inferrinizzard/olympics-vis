@@ -1,15 +1,24 @@
-import React, { type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 import "@mantine/core/styles.css";
-import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import {
+	MantineProvider,
+	ColorSchemeScript,
+	AppShell,
+	AppShellMain,
+} from "@mantine/core";
+
+import { Work_Sans } from "next/font/google";
 
 import { baseTheme } from "styles/theme";
 
-import { Work_Sans } from "next/font/google";
+import Header, { HEADER_HEIGHT } from "components/shell/Header";
+import BackButton from "components/controls/BackButton";
 
 const workSans = Work_Sans({
 	subsets: ["latin"],
 	display: "swap",
+	variable: "--font-work-sans",
 });
 
 export const metadata = {
@@ -30,25 +39,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			</head>
 			<body>
 				<MantineProvider theme={baseTheme}>
-					{/* <AppShell
-						padding="md"
-						header={<Header bg={primary} />}
-						// styles={(theme) => ({
-						// 	body: {
-						// 		minHeight: "100vh",
-						// 	},
-						// 	main: {
-						// 		backgroundColor:
-						// 			theme.colorScheme === "dark"
-						// 				? theme.colors.dark[8]
-						// 				: theme.colors.gray[2],
-						// 		minHeight: "95vh",
-						// 	},
-						// })}
-					>
-					{children}
-					</AppShell> */}
-					{children}
+					<AppShell header={{ height: HEADER_HEIGHT }}>
+						<Header />
+						<AppShellMain>
+							{children}
+							<BackButton />
+						</AppShellMain>
+					</AppShell>
 				</MantineProvider>
 			</body>
 		</html>

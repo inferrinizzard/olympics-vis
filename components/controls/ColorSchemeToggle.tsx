@@ -17,9 +17,9 @@ const ColorSchemeToggle = () => {
 			onClick={() => toggleColorScheme()}
 		>
 			{colorScheme === "dark" ? (
-				<Sun width={20} height={20} />
+				<Sun width="1.25rem" height="1.25rem" />
 			) : (
-				<Moon width={20} height={20} />
+				<Moon width="1.25rem" height="1.25rem" />
 			)}
 		</ActionIcon>
 	);
