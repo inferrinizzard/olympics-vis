@@ -1,4 +1,5 @@
 "use client";
+
 import { Box, Title } from "@mantine/core";
 
 import type { ParticipationRecords } from "@prisma/client";
@@ -11,6 +12,8 @@ import nocIsoLookup from "resources/json/geo_noc_map.json" assert {
 };
 
 import GridCell from "components/grid/GridCell";
+
+import { GamesChoroplethToolip } from "./GamesChoroplethTooltip";
 
 interface GamesChoroplethProps {
 	athleteCounts: Pick<ParticipationRecords, "country" | AthleteSex>[];
@@ -36,24 +39,31 @@ const GamesChoropleth_Client = ({ athleteCounts }: GamesChoroplethProps) => {
 	return (
 		<GridCell>
 			<Title order={2} m="sm">
-				{"Choropleth"}
+				{"Athlete Participation"}
 			</Title>
-			<Box h="40vh" w="100%">
+			<Box w="100%" style={{ aspectRatio: "16 / 9" }}>
 				<ResponsiveChoropleth
-					data={countryData}
+					// Features
 					features={worldCountries.features}
-					margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-					colors="nivo"
-					domain={[0, domainMax]}
-					unknownColor="#666666"
-					label="properties.name"
-					valueFormat=".2s"
 					projectionTranslation={[0.5, 0.5]}
 					projectionRotation={[0, 0, 0]}
+					// Data
+					data={countryData}
+					domain={[0, domainMax]}
+					label="properties.name"
+					value={(datum) => datum?.total}
+					valueFormat=".0s"
+					tooltip={GamesChoroplethToolip}
+					// Style
+					margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+					colors="nivo"
+					unknownColor="#666666"
+					// Misc
 					enableGraticule={true}
 					graticuleLineColor="#dddddd"
 					borderWidth={0.5}
 					borderColor="#152538"
+					// Legend
 					legends={[
 						{
 							anchor: "bottom-left",
