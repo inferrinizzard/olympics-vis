@@ -2,7 +2,7 @@ import type { GamesProps } from "types";
 
 import { getWikipediaExcerpt } from "lib/utils/wikipedia";
 
-import GamesOverview_Client from "./client";
+import GamesOverview_Server from "./server";
 import { getNumCountriesAtGames } from "./data";
 
 const GamesOverview = async ({ games }: GamesProps) => {
@@ -13,7 +13,7 @@ const GamesOverview = async ({ games }: GamesProps) => {
 	});
 
 	return (
-		<GamesOverview_Client
+		<GamesOverview_Server
 			games={games}
 			numCountries={numCountriesAtGames}
 			wikipediaExcerpt={wikipediaExcerpt}

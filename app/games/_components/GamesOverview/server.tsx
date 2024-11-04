@@ -1,7 +1,6 @@
 import type { Games } from "@prisma/client";
 
 import { Box, Group, Stack, Title } from "@mantine/core";
-import BuildingSkyscraper from "tabler-icons-react/dist/icons/building-skyscraper";
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import CalendarEvent from "tabler-icons-react/dist/icons/calendar-event";
 import Hash from "tabler-icons-react/dist/icons/hash";
@@ -21,7 +20,7 @@ interface GamesOverviewProps {
 	wikipediaExcerpt: string;
 }
 
-const GamesOverview_Client = ({
+const GamesOverview_Server = ({
 	games,
 	numCountries,
 	wikipediaExcerpt,
@@ -72,4 +71,4 @@ const GamesOverview_Client = ({
 	);
 };
 
-export default GamesOverview_Client;
+export default GamesOverview_Server;
