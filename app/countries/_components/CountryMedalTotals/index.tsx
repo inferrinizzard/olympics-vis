@@ -1,16 +1,14 @@
 import type { CountryProps } from "types";
 
 import CountryMedalTotals_Client from "./client";
-import { getMedalTotalsForCountryBySeason } from "./data";
+import { getMedalTotalsForCountry } from "./data";
 
 const CountryMedalTotals = async ({ country }: CountryProps) => {
-	const countryMedalsBySeason = await getMedalTotalsForCountryBySeason({
+	const countryMedals = await getMedalTotalsForCountry({
 		country: country.code,
 	});
 
-	return (
-		<CountryMedalTotals_Client countryMedalsBySeason={countryMedalsBySeason} />
-	);
+	return <CountryMedalTotals_Client countryMedals={countryMedals} />;
 };
 
 export default CountryMedalTotals;
