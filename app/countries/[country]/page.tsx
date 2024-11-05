@@ -30,16 +30,16 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	return (
 		<Container fluid h="100%" p="xs">
 			<Grid mt={0} h="100%" style={{ borderRadius: "1rem" }}>
-				<GridCol span={4} p={"0.25rem"} h="100%">
+				<GridCol span={4} p="xs" h="100%">
 					<CountryOverview country={country} />
 				</GridCol>
 				<GridCol
+					display="flex"
+					p="xs"
 					span={8}
 					style={{
-						display: "flex",
 						flexDirection: "column",
-						rowGap: "1rem",
-						padding: "0.25rem 0.25rem 0.25rem 0.75rem",
+						gap: "1rem",
 					}}
 				>
 					<CountryMedalTotals country={country} />
