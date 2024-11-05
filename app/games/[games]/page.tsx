@@ -6,7 +6,6 @@ import {
 	getGames,
 	// getSportEventsForGame,
 } from "lib/db";
-import { getWikipediaExcerpt } from "lib/utils/wikipedia";
 
 import GamesChoropleth from "../_components/GamesChoropleth";
 import GamesMedalsTable from "../_components/GamesMedalsTable";
