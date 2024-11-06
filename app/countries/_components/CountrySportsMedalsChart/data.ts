@@ -1,4 +1,4 @@
-import type { CountryCodeParam } from "lib/db";
+import { cacheStrategy, type CountryCodeParam } from "lib/db";
 
 /** Get medals for sports by a country */
 export const getMedalsByCountry = async ({ country }: CountryCodeParam) =>
@@ -7,6 +7,7 @@ export const getMedalsByCountry = async ({ country }: CountryCodeParam) =>
 			by: "sport",
 			_sum: { gold: true, silver: true, bronze: true },
 			where: { country },
+			cacheStrategy,
 		})
 		.then((res) =>
 			res.map(({ sport, _sum: { gold, silver, bronze } }) => ({

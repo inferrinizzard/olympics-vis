@@ -3,17 +3,20 @@ import prisma from "./prisma";
 import type { Prisma } from "@prisma/client";
 import type { CountryKey } from "types/prisma";
 
+import { cacheStrategy } from "./cacheStrategy";
+
 export type CountryCodeParam = { country: CountryKey };
 
 /** Get country data for 1 country */
 export const getCountry = async ({ country }: CountryCodeParam) =>
 	prisma.country.findFirst({
 		where: { code: country },
+		cacheStrategy,
 	});
 
 /** Get country data for all countries */
 export const getAllCountries = async (args?: Prisma.CountryFindManyArgs) =>
-	prisma.country.findMany(args);
+	prisma.country.findMany({ ...args, cacheStrategy });
 
 // /** Get number of athletes for a country */
 // export const getNumberOfAthletesForCountry = async ({

@@ -2,21 +2,22 @@ import prisma from "./prisma";
 
 import type { Games, Prisma } from "@prisma/client";
 import type { Sport, SportKey } from "types/prisma";
+
 import type { GamesCodeParam } from "./games";
+import { cacheStrategy } from "./cacheStrategy";
 
 export type SportCodeParam = { sport: SportKey };
 
 /** Get sport key and name for 1 sport */
 export const getSport = async ({ sport }: SportCodeParam) =>
-	(await prisma.sport.findFirst({ where: { code: sport } })) as Sport;
+	(await prisma.sport.findFirst({
+		where: { code: sport },
+		cacheStrategy,
+	})) as Sport;
 
 /** Get sport key and name for all sports */
 export const getAllSports = async (args?: Prisma.SportFindManyArgs) =>
-	(await prisma.sport.findMany(args)) as Sport[];
-
-/** Get sports and corresponding season */
-export const getSportWithSeason = async () =>
-	prisma.sport.groupBy({ by: ["season", "status"] });
+	(await prisma.sport.findMany({ ...args, cacheStrategy })) as Sport[];
 
 // prisma.$queryRaw`
 // 	SELECT sport, season

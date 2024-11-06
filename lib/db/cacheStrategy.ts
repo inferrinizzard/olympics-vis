@@ -16,4 +16,6 @@ const prodCacheStrategy: PrismaCacheStrategy = {
 	},
 };
 
-export const cacheStrategy = isProd ? prodCacheStrategy : devCacheStrategy;
+export const cacheStrategy = isProd
+	? prodCacheStrategy.cacheStrategy
+	: devCacheStrategy.cacheStrategy;
