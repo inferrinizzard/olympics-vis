@@ -1,13 +1,24 @@
 import { PrismaClient } from "@prisma/client";
+import { withAccelerate } from "@prisma/extension-accelerate";
+
+const isProd = process.env.NODE_ENV === "production";
 
 declare global {
 	// allow global `var` declarations
-	var prisma: PrismaClient;
+	var prisma: PrismaClient & ReturnType<typeof createPrismaClient>;
 }
 
-// biome-ignore lint/suspicious/noRedeclare: <explanation>
-export const prisma = global.prisma || new PrismaClient({ log: ["query"] });
+const createPrismaClient = () => {
+	const client = new PrismaClient({ log: isProd ? [] : ["query"] }).$extends(
+		withAccelerate(),
+	);
 
-if (process.env.NODE_ENV !== "production") global.prisma = prisma;
+	return client;
+};
+
+// biome-ignore lint/suspicious/noRedeclare: <explanation>
+export const prisma = global.prisma || createPrismaClient();
+
+if (!isProd) global.prisma = prisma;
 
 export default prisma;

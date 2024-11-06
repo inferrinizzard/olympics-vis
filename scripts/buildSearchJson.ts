@@ -1,11 +1,9 @@
 import { writeFile } from "node:fs";
 
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "lib/db/prisma";
 import type { PathKey } from "types/prisma";
 
 import { getGameName } from "lib/utils/getGameName";
-
-const prisma = new PrismaClient();
 
 const buildSearchJson = async () => {
 	const countries = await prisma.country.findMany({

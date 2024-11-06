@@ -1,4 +1,4 @@
-import type { GamesCodeParam } from "lib/db";
+import { cacheStrategy, type GamesCodeParam } from "lib/db";
 
 /** Get top ten countries with the most medals for a games */
 export const getTopCountriesForGames = async ({
@@ -16,6 +16,7 @@ export const getTopCountriesForGames = async ({
 				{ _sum: { bronze: "desc" } },
 			],
 			where: { games },
+			cacheStrategy,
 		})
 		.then((res) =>
 			res.map(({ country, _sum: { gold, silver, bronze } }) => ({

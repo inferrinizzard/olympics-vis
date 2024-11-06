@@ -1,10 +1,11 @@
-import type { CountryCodeParam } from "lib/db";
+import { cacheStrategy, type CountryCodeParam } from "lib/db";
 
 /** Get first games that a country attended */
 export const getFirstGamesForCountry = async ({ country }: CountryCodeParam) =>
 	prisma.participationRecords.findFirst({
 		orderBy: { games_detail: { year: "asc" } },
 		where: { country },
+		cacheStrategy,
 	});
 
 /** Get all medals for country */
@@ -13,6 +14,7 @@ export const getAllMedalsForCountry = async ({ country }: CountryCodeParam) =>
 		.aggregate({
 			_sum: { gold: true, silver: true, bronze: true },
 			where: { country },
+			cacheStrategy,
 		})
 		.then(({ _sum: { gold, silver, bronze } }) => ({
 			gold: gold ?? 0,
@@ -31,6 +33,7 @@ export const getBestGamesForCountry = async ({ country }: CountryCodeParam) =>
 			],
 			where: { country },
 			take: 1,
+			cacheStrategy,
 		})
 		.then((res) => res[0]);
 
@@ -45,5 +48,6 @@ export const getBestSportForCountry = async ({ country }: CountryCodeParam) =>
 			],
 			where: { country },
 			take: 1,
+			cacheStrategy,
 		})
 		.then((res) => res[0]);
