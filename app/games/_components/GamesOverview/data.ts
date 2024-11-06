@@ -1,4 +1,4 @@
-import type { GamesCodeParam } from "lib/db";
+import { cacheStrategy, type GamesCodeParam } from "lib/db";
 
 export const getNumCountriesAtGames = ({ games }: GamesCodeParam) =>
 	prisma.participationRecords
@@ -6,5 +6,6 @@ export const getNumCountriesAtGames = ({ games }: GamesCodeParam) =>
 			select: { country: true },
 			distinct: "country",
 			where: { games },
+			cacheStrategy,
 		})
 		.then((rows) => rows.length);

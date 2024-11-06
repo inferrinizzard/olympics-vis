@@ -1,7 +1,7 @@
 import type { ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
-import type { SportCodeParam } from "lib/db";
+import { cacheStrategy, type SportCodeParam } from "lib/db";
 
 /** Get countries that have medals in a sport */
 export const getCountriesWithMedals = async ({ sport }: SportCodeParam) =>
@@ -16,6 +16,7 @@ export const getCountriesWithMedals = async ({ sport }: SportCodeParam) =>
 				{ _sum: { bronze: "desc" } },
 				{ country: "desc" },
 			],
+			cacheStrategy,
 		})
 		.then((res) =>
 			res.map(({ country, _sum: { gold, silver, bronze } }) => ({
