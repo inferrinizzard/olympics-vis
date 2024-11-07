@@ -1,8 +1,7 @@
-import { Stack, Title } from "@mantine/core";
-
 import type { Sport } from "types/prisma";
 import { getAllSports } from "lib/db";
 
+import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
 
 const SportsAll = async () => {
@@ -58,10 +57,7 @@ const SportsAll = async () => {
 	// TODO: disable interaction for categories
 
 	return (
-		<Stack p="xs" component="article" style={{ gap: "2rem" }}>
-			<Title order={1} style={{ textAlign: "center" }}>
-				{"Sports"}
-			</Title>
+		<MainPageLayout title="Sport">
 			{Object.entries(sportsLists).map(([title, list]) => (
 				<CardList
 					key={title}
@@ -69,7 +65,7 @@ const SportsAll = async () => {
 					cardData={list.map(sportsCardMapper)}
 				/>
 			))}
-		</Stack>
+		</MainPageLayout>
 	);
 };
 

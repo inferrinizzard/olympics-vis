@@ -1,8 +1,7 @@
-import { Container, Title } from "@mantine/core";
-
 import type { Country } from "@prisma/client";
 import { getAllCountries } from "lib/db";
 
+import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
 
 import TopMedalsChart from "./_components/TopMedalsChart";
@@ -37,8 +36,7 @@ const CountriesAll = async () => {
 	});
 
 	return (
-		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
-			<Title order={1}>{"Countries"}</Title>
+		<MainPageLayout title="Countries">
 			<TopMedalsChart />
 
 			<CardList title="Active" cardData={activeNOCs.map(countryCardsMapper)} />
@@ -50,7 +48,7 @@ const CountriesAll = async () => {
 				title="Historic"
 				cardData={historicNOCs.map(countryCardsMapper)}
 			/>
-		</Container>
+		</MainPageLayout>
 	);
 };
 
