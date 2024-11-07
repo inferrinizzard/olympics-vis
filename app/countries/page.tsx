@@ -3,7 +3,7 @@ import { Container, Title } from "@mantine/core";
 import type { Country } from "@prisma/client";
 import { getAllCountries } from "lib/db";
 
-import { CardList } from "components/layouts/CardList";
+import { CardList } from "components/layouts/main-page/CardList";
 
 import TopMedalsChart from "./_components/TopMedalsChart";
 

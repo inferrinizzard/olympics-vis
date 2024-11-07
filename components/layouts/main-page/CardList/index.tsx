@@ -1,6 +1,6 @@
 import { Group, Stack, Title } from "@mantine/core";
 
-import CardLink, { type CardLinkProps } from "../CardLink";
+import CardLink, { type CardLinkProps } from "../main-page/CardLink";
 
 import * as classes from "./CardList.css";
 

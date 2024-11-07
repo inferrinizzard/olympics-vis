@@ -3,7 +3,7 @@ import { Stack, Title } from "@mantine/core";
 import type { Sport } from "types/prisma";
 import { getAllSports } from "lib/db";
 
-import { CardList } from "components/layouts/CardList";
+import { CardList } from "components/layouts/main-page/CardList";
 
 const SportsAll = async () => {
 	const sports = await getAllSports();

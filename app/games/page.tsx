@@ -4,7 +4,7 @@ import type { Games } from "@prisma/client";
 import { getAllGames } from "lib/db";
 import { getGameName } from "lib/utils/getGameName";
 
-import { CardList } from "components/layouts/CardList";
+import { CardList } from "components/layouts/main-page/CardList";
 
 const GamesAll = async () => {
 	const games: Games[] = await getAllGames();

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { Box, Title, Tooltip } from "@mantine/core";
 
-import CardLink from "components/layouts/CardLink";
+import CardLink from "components/layouts/main-page/CardLink";
 import AutoScroller from "lib/utils/Autoscroller";
 import { getGameName } from "lib/utils/getGameName";
 
