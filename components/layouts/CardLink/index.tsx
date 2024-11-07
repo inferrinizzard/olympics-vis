@@ -48,7 +48,7 @@ const CardLink = ({
 				// })}
 			>
 				<CardSection
-					className="next-img-wrapper"
+					className={"next-img-wrapper"}
 					style={{
 						...imageContainerStyles,
 						position: "relative",
@@ -57,7 +57,7 @@ const CardLink = ({
 						marginTop: 0,
 					}}
 				>
-					<Image {...imageProps} fill />
+					<Image {...imageProps} fill style={{ objectFit: "contain" }} />
 				</CardSection>
 				{caption && (
 					<Title order={3} style={{ textAlign: "center" }}>

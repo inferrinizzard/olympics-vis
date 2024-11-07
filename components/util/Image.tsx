@@ -4,7 +4,7 @@ import { existsSync } from "node:fs";
 
 import NextImage, { type ImageProps as NextImageProps } from "next/image";
 
-import type { CountryKey, GamesKey, SportKey } from "types/prisma";
+import type { CountryKey, GamesKey, Sport, SportKey } from "types/prisma";
 
 import sharedFlags from "public/images/country/shared/sharedFlags.json";
 import parentDisciplineMap from "public/images/sports/parentDisciplineMap.json";
@@ -14,7 +14,7 @@ export type GamesImageProps = { dir: "games"; code: GamesKey };
 export type SportsImageProps = {
 	dir: "sports";
 	code: SportKey;
-	parent?: SportKey;
+	parent?: Sport["parent"];
 	games?: GamesKey;
 };
 

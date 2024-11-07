@@ -2,7 +2,9 @@ import type { SportProps } from "types";
 
 import { Box, Title, Tooltip } from "@mantine/core";
 
+import GridCell from "components/grid/GridCell";
 import { getSportsImageSrc, Image } from "components/util/Image";
+import { getGameName } from "lib/utils/getGameName";
 
 import { getAllGamesForSport } from "./data";
 
@@ -18,15 +20,21 @@ const SportsPictogramRow = async ({ sport }: SportProps) => {
 	).then((list) => list.flatMap((x) => x || []));
 
 	return (
-		<Box>
-			<Title order={2}>{"Icons throughout the Games"}</Title>
+		<GridCell>
+			<Title order={2} m="xs">
+				{"Icons throughout the Games"}
+			</Title>
 			<Box
 				display="flex"
 				mah="10rem"
 				style={{ overflow: "scroll", gap: "1rem" }}
 			>
 				{gamesSportsWithSpecialPictogram.map((games) => (
-					<Tooltip key={`${sport.code}~${games}`} label={`${games}`}>
+					<Tooltip
+						key={`${sport.code}~${games}`}
+						label={`${getGameName(games)}`}
+						position="bottom"
+					>
 						<Box h="10rem" w="10rem" pos="relative" style={{ flexShrink: 0 }}>
 							<Image
 								dir="sports"
@@ -39,7 +47,7 @@ const SportsPictogramRow = async ({ sport }: SportProps) => {
 					</Tooltip>
 				))}
 			</Box>
-		</Box>
+		</GridCell>
 	);
 };
 

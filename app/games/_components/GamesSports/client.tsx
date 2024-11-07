@@ -26,7 +26,7 @@ const GamesSports_Client = ({ gamesCode, sportsList }: GamesSportsProps) => {
 				}}
 			>
 				{sportsList.slice(0, 8).map((sport) => (
-					<Tooltip label={sport} key={sport}>
+					<Tooltip label={sport} key={sport} position="bottom">
 						<Box pos="relative" style={{ aspectRatio: "1 / 1" }}>
 							<Image
 								dir="sports"
