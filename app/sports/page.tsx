@@ -54,6 +54,9 @@ const SportsAll = async () => {
 			caption: sport.name,
 		};
 	};
+
+	// TODO: disable interaction for categories
+
 	return (
 		<Stack p="xs" component="article" style={{ gap: "2rem" }}>
 			<Title order={1} style={{ textAlign: "center" }}>

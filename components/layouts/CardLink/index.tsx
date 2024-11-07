@@ -48,7 +48,7 @@ const CardLink = ({
 				// })}
 			>
 				<CardSection
-					className="next-img-wrapper"
+					className={"next-img-wrapper"}
 					style={{
 						...imageContainerStyles,
 						position: "relative",

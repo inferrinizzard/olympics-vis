@@ -7,7 +7,7 @@ export const CardLinkCard = style({
 	minWidth: "10rem",
 	maxWidth: "12.5rem",
 	aspectRatio: "3 / 4",
-	// /* shadow: 'sm; *',
+	boxShadow: vars.shadows.xs,
 	padding: "1rem",
 	borderRadius: "1rem",
 	display: "flex",
