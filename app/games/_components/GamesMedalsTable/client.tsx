@@ -10,7 +10,7 @@ import {
 import type { ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
-import GridCell from "components/grid/GridCell";
+import GridCell from "components/layouts/sub-page/GridCell";
 import { Image } from "components/util/Image";
 import { HEADER_HEIGHT } from "components/shell/Header";
 

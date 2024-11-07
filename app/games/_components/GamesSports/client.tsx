@@ -2,7 +2,7 @@ import { Box, Container, Title, Tooltip } from "@mantine/core";
 
 import type { GamesKey, SportKey } from "types/prisma";
 
-import GridCell from "components/grid/GridCell";
+import GridCell from "components/layouts/sub-page/GridCell";
 import { Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
 

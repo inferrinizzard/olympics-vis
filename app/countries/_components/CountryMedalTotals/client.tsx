@@ -5,7 +5,7 @@ import { Box, Title } from "@mantine/core";
 import type { ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
-import GridCell from "components/grid/GridCell";
+import GridCell from "components/layouts/sub-page/GridCell";
 
 import type { CountryMedalTotalsRow } from "./data";
 import { getOlympicMedals, getParalympicMedals } from "./utils";

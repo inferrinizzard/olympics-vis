@@ -4,7 +4,7 @@ import { Box, Title } from "@mantine/core";
 
 import { type BarDatum, ResponsiveBar } from "@nivo/bar";
 
-import GridCell from "components/grid/GridCell";
+import GridCell from "components/layouts/sub-page/GridCell";
 
 interface CountryGamesMedalsChartProps {
 	data: BarDatum[];

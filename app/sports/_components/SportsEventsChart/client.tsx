@@ -6,7 +6,7 @@ import { ResponsiveLine } from "@nivo/line";
 import type { SportProps } from "types";
 import type { GamesKey } from "types/prisma";
 
-import GridCell from "components/grid/GridCell";
+import GridCell from "components/layouts/sub-page/GridCell";
 
 interface SportsEventsChartProps extends SportProps {
 	numEvents: Record<GamesKey, number>;

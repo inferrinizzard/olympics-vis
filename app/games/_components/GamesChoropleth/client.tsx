@@ -11,7 +11,7 @@ import nocIsoLookup from "resources/json/geo_noc_map.json" assert {
 	type: "json",
 };
 
-import GridCell from "components/grid/GridCell";
+import GridCell from "components/layouts/sub-page/GridCell";
 
 import { GamesChoroplethToolip } from "./GamesChoroplethTooltip";
 
