@@ -1,25 +1,24 @@
-import { Box, Image, Title } from "@mantine/core";
+import Image from "next/image";
+
+import { Box, Title } from "@mantine/core";
 
 import type { ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
 import GridCell from "components/grid/GridCell";
 
-import type { CountryMedalTotalsWithSeason } from "./data";
+import type { CountryMedalTotalsRow } from "./data";
+import { getOlympicMedals, getParalympicMedals } from "./utils";
 
 interface CountryMedalTotalsProps {
-	countryMedalsBySeason: CountryMedalTotalsWithSeason[];
+	countryMedals: CountryMedalTotalsRow[];
 }
 
 const CountryMedalTotals_Client = ({
-	countryMedalsBySeason,
+	countryMedals,
 }: CountryMedalTotalsProps) => {
-	const summer = countryMedalsBySeason.find((row) => row.season === "summer")!;
-	const winter = countryMedalsBySeason.find((row) => row.season === "winter")!;
-
-	const allGoldMedals = summer.gold + winter.gold;
-	const allSilverMedals = summer.silver + winter.silver;
-	const allBronzeMedals = summer.bronze + winter.bronze;
+	const olympicMedals = getOlympicMedals(countryMedals);
+	const paralympicMedals = getParalympicMedals(countryMedals);
 
 	return (
 		<GridCell>
@@ -31,16 +30,8 @@ const CountryMedalTotals_Client = ({
 					justifyContent: "space-evenly",
 				}}
 			>
-				<MedalSet title="Summer" {...summer} />
-				<MedalSet title="Winter" {...winter} />
-				<MedalSet
-					title="Total"
-					{...{
-						gold: allGoldMedals,
-						silver: allSilverMedals,
-						bronze: allBronzeMedals,
-					}}
-				/>
+				<MedalSet title="Olympic" {...olympicMedals} />
+				<MedalSet title="Paralympic" {...paralympicMedals} />
 			</Box>
 		</GridCell>
 	);
@@ -48,36 +39,46 @@ const CountryMedalTotals_Client = ({
 
 interface MedalSetProps extends Pick<ParticipationRecords, MedalType> {
 	title: string;
+	total: number;
 }
 
-const MedalSet: React.FC<MedalSetProps> = ({ title, gold, silver, bronze }) => {
-	const medalUrls = [
-		"https://upload.wikimedia.org/wikipedia/commons/1/15/Gold_medal.svg",
-		"https://upload.wikimedia.org/wikipedia/commons/0/03/Silver_medal.svg",
-		"https://upload.wikimedia.org/wikipedia/commons/5/52/Bronze_medal.svg",
-	].map((url) => [url, url.replace(/^.+[/]/, "")]);
+const MedalSet = ({ title, gold, silver, bronze, total }: MedalSetProps) => {
+	const images = [
+		`${title.toLowerCase()}Gold`,
+		`${title.toLowerCase()}Silver`,
+		`${title.toLowerCase()}Bronze`,
+		`${title.toLowerCase()}All`,
+	];
 
 	return (
 		<Box style={{ flexGrow: 1 }}>
-			<Title order={4}>{title}</Title>
+			<Title order={4} style={{ textAlign: "center" }}>
+				{title}
+			</Title>
 			<Box
 				style={{
 					display: "grid",
-					gridTemplateColumns: "[gold] 1fr [silver] 1fr [bronze] 1fr",
+					gridTemplateColumns:
+						"[gold] 1fr [silver] 1fr [bronze] 1fr [total] 1fr",
 					gridTemplateRows: "[medals] 1fr [counts] 1fr",
 				}}
 			>
-				{medalUrls.map(([url, medalType]) => (
-					<Image
-						key={`${title} ${medalType}`}
-						height="3rem"
-						width="3rem"
-						src={url}
-						alt={medalType}
-					/>
+				{images.map((image) => (
+					<Box key={`${title} ${image}`} pos="relative">
+						<Image
+							src={`/images/medals/${image}.svg`}
+							alt={image}
+							fill
+							style={{ aspectRatio: "1 / 1", objectFit: "contain" }}
+						/>
+					</Box>
 				))}
-				{[gold, silver, bronze].map((medal, i) => (
-					<Title order={5} key={`${title} ${medalUrls[i][1]}`}>
+				{[gold, silver, bronze, total].map((medal, i) => (
+					<Title
+						order={5}
+						key={`${title} ${images[i]}`}
+						style={{ textAlign: "center" }}
+					>
 						{medal}
 					</Title>
 				))}

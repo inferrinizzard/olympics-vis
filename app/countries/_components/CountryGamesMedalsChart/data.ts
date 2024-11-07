@@ -9,6 +9,7 @@ export const getMedalTotalsPerGamesForCountry = async ({
 			by: "games",
 			_sum: { gold: true, silver: true, bronze: true },
 			where: { country },
+			orderBy: { games: "asc" },
 			cacheStrategy,
 		})
 		.then((res) =>
