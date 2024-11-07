@@ -1,4 +1,4 @@
-import { Container, Title } from "@mantine/core";
+import { Stack, Title } from "@mantine/core";
 
 import type { Sport } from "types/prisma";
 import { getAllSports } from "lib/db";
@@ -55,16 +55,18 @@ const SportsAll = async () => {
 		};
 	};
 	return (
-		<Container display="flex" style={{ flexDirection: "column", gap: "2rem" }}>
-			<Title order={1}>{"Sports"}</Title>
+		<Stack p="xs" component="article" style={{ gap: "2rem" }}>
+			<Title order={1} style={{ textAlign: "center" }}>
+				{"Sports"}
+			</Title>
 			{Object.entries(sportsLists).map(([title, list]) => (
 				<CardList
 					key={title}
-					title={title}
+					title={title.at(0)?.toUpperCase() + title.slice(1)}
 					cardData={list.map(sportsCardMapper)}
 				/>
 			))}
-		</Container>
+		</Stack>
 	);
 };
 

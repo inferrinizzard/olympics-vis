@@ -1,4 +1,4 @@
-import { Box, Container, Title } from "@mantine/core";
+import { Group, Stack, Title } from "@mantine/core";
 
 import CardLink, { type CardLinkProps } from "../CardLink";
 
@@ -14,16 +14,16 @@ export const CardList = <CardProps extends CardLinkProps>({
 	cardData,
 }: CardListProps<CardProps>) => {
 	return (
-		<Container component="section" w="100%">
+		<Stack component="section">
 			<Title order={2}>{title}</Title>
-			<Box className={classes.CardListGrid}>
+			<Group className={classes.CardListGrid}>
 				{cardData.map((cardProps) => (
 					<CardLink
 						key={`${title}_${cardProps.imageProps.code}`}
 						{...cardProps}
 					/>
 				))}
-			</Box>
-		</Container>
+			</Group>
+		</Stack>
 	);
 };
