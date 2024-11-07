@@ -26,7 +26,11 @@ const SportsPictogramRow = async ({ sport }: SportProps) => {
 				style={{ overflow: "scroll", gap: "1rem" }}
 			>
 				{gamesSportsWithSpecialPictogram.map((games) => (
-					<Tooltip key={`${sport.code}~${games}`} label={`${games}`}>
+					<Tooltip
+						key={`${sport.code}~${games}`}
+						label={`${getGameName(games)}`}
+						position="bottom"
+					>
 						<Box h="10rem" w="10rem" pos="relative" style={{ flexShrink: 0 }}>
 							<Image
 								dir="sports"
