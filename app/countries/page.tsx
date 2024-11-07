@@ -37,7 +37,7 @@ const CountriesAll = async () => {
 
 	return (
 		<MainPageLayout title="Countries">
-			<TopMedalsChart />
+			{/* <TopMedalsChart /> */}
 
 			<CardList title="Active" cardData={activeNOCs.map(countryCardsMapper)} />
 			<CardList

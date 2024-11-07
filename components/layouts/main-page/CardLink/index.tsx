@@ -64,7 +64,11 @@ const CardLink = ({
 						{caption}
 					</Title>
 				)}
-				{secondary && <Title order={5}>{secondary}</Title>}
+				{secondary && (
+					<Title order={5} style={{ textAlign: "center" }}>
+						{secondary}
+					</Title>
+				)}
 			</Card>
 		</Link>
 	);
