@@ -8,7 +8,7 @@ import Run from "tabler-icons-react/dist/icons/run";
 
 import GridCell from "components/grid/GridCell";
 import StatCard from "components/grid/StatCard";
-import Excerpt from "components/layouts/Excerpt";
+import Excerpt from "components/content/Excerpt";
 import { Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
 
