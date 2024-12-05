@@ -2,6 +2,8 @@ import { style } from "@vanilla-extract/css";
 
 export const CardListGrid = style({
 	display: "grid",
-	gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+	gridTemplateColumns: "repeat(auto-fit, minmax(12rem, 1fr))",
 	gap: "1rem",
+	justifyItems: "center",
+	alignItems: "stretch",
 });

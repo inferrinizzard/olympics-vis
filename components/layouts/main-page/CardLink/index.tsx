@@ -29,24 +29,8 @@ const CardLink = ({
 	imageProps,
 }: CardLinkProps) => {
 	return (
-		<Link
-			passHref
-			href={href}
-			style={{ flexGrow: 1, flexBasis: "10rem", textDecoration: "none" }}
-		>
-			<Card
-				className={classes.CardLinkCard}
-				withBorder
-				// style={(theme) => ({
-				// 	// backgroundColor: hovered
-				// 	// 	? hoverColour
-				// 	// 		? theme.colors[hoverColour][1]
-				// 	// 		: "white"
-				// 	// 	: undefined,
-				// 	// transform: hovered ? "scale(1.05)" : undefined,
-				// 	// zIndex: hovered ? 1 : undefined,
-				// })}
-			>
+		<Link passHref href={href} className={classes.CardLinkLink}>
+			<Card className={classes.CardLinkCard} withBorder>
 				<CardSection
 					className={"next-img-wrapper"}
 					style={{
