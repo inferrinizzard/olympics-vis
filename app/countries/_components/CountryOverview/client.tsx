@@ -1,7 +1,6 @@
 import { Box, Group, Title } from "@mantine/core";
 
-import type { Country } from "@prisma/client";
-import type { GamesKey, SportKey } from "types/prisma";
+import type { Country, GamesKey, SportKey } from "types/prisma";
 
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Medal from "tabler-icons-react/dist/icons/medal";

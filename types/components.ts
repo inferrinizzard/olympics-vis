@@ -1,5 +1,4 @@
-import type { Country, Games } from "@prisma/client";
-import type { Sport } from "types/prisma";
+import type { Country, Games, Sport } from "types/prisma";
 
 export type CountryProps = { country: Country };
 export type GamesProps = { games: Games };

@@ -1,4 +1,4 @@
-import type { Country } from "@prisma/client";
+import type { Country } from "types/prisma";
 import { getAllCountries } from "lib/db";
 
 import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
@@ -7,10 +7,10 @@ import { CardList } from "components/layouts/main-page/CardList";
 import TopMedalsChart from "./_components/TopMedalsChart";
 
 const CountriesAll = async () => {
-	const countries: Country[] = await getAllCountries();
+	const countries = (await getAllCountries()) as Country[];
 
 	const activeNOCs: Country[] = countries.filter(
-		({ status }) => status === "active",
+		({ status }) => status === "current",
 	);
 	const specialNOCs: Country[] = countries.filter(
 		({ status }) => status === "special",
