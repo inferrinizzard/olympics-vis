@@ -24,15 +24,14 @@ const CountriesAll = async () => {
 			dir: "country" as const,
 			code: country.code,
 			alt: `Flag for ${country.code}`,
+			style: {
+				filter: "drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.1))",
+			},
 		},
 		href: `/countries/${country.code}`,
 		caption: country.code,
 		secondary: country.name,
 		aspectRatio: "3 / 2",
-		imageContainerStyles: {
-			boxShadow:
-				"1px 1px 8px 1px rgba(0, 0, 0, 0.05), -1px -1px 8px 1px rgba(0, 0, 0, 0.05)",
-		},
 	});
 
 	return (

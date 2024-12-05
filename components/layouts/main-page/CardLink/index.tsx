@@ -15,8 +15,7 @@ export interface CardLinkProps {
 	hoverColour?: string;
 
 	aspectRatio?: CSSProperties["aspectRatio"];
-	imageContainerStyles?: CSSProperties;
-	imageProps: ImageProps;
+	imageProps: ImageProps & { style?: CSSProperties };
 }
 
 const CardLink = ({
@@ -25,7 +24,6 @@ const CardLink = ({
 	secondary,
 	hoverColour,
 	aspectRatio = "1 / 1",
-	imageContainerStyles,
 	imageProps,
 }: CardLinkProps) => {
 	return (
@@ -34,14 +32,17 @@ const CardLink = ({
 				<CardSection
 					className={"next-img-wrapper"}
 					style={{
-						...imageContainerStyles,
 						position: "relative",
 						width: "100%",
 						aspectRatio,
 						marginTop: 0,
 					}}
 				>
-					<Image {...imageProps} fill style={{ objectFit: "contain" }} />
+					<Image
+						{...imageProps}
+						fill
+						style={{ ...imageProps.style, objectFit: "contain" }}
+					/>
 				</CardSection>
 
 				{(caption || secondary) && (
