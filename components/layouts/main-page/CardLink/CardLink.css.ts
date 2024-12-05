@@ -4,6 +4,7 @@ import { vars } from "styles/theme";
 
 export const CardLinkCard = style({
 	height: "100%",
+	width: "-webkit-fill-available",
 	minWidth: "10rem",
 	maxWidth: "13.5rem",
 	// aspectRatio: "3 / 4",
@@ -11,8 +12,7 @@ export const CardLinkCard = style({
 	padding: "1rem",
 	borderRadius: "1rem",
 	display: "flex",
-	gap: "0.5rem",
-	// justifyContent: "space-between",
+	gap: "1rem",
 	alignItems: "center",
 	cursor: "pointer",
 

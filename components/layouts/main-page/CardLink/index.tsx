@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 
 import Link from "next/link";
 
-import { Card, CardSection, Title } from "@mantine/core";
+import { Card, CardSection, Stack, Title } from "@mantine/core";
 
 import { Image, type ImageProps } from "components/util/Image";
 
@@ -43,15 +43,20 @@ const CardLink = ({
 				>
 					<Image {...imageProps} fill style={{ objectFit: "contain" }} />
 				</CardSection>
-				{caption && (
-					<Title order={3} style={{ textAlign: "center" }}>
-						{caption}
-					</Title>
-				)}
-				{secondary && (
-					<Title order={5} style={{ textAlign: "center" }}>
-						{secondary}
-					</Title>
+
+				{(caption || secondary) && (
+					<Stack flex="1" justify="center" gap="xs">
+						{caption && (
+							<Title order={3} style={{ textAlign: "center" }}>
+								{caption}
+							</Title>
+						)}
+						{secondary && (
+							<Title order={5} style={{ textAlign: "center" }}>
+								{secondary}
+							</Title>
+						)}
+					</Stack>
 				)}
 			</Card>
 		</Link>
