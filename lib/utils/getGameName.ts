@@ -2,6 +2,7 @@ export const getGameName = (gamesId: string) => {
 	const slugs = gamesId.split("_").map(
 		(slug) =>
 			slug
+				.replace(/youth/i, "Youth Olympics")
 				.replaceAll(/(^[a-z]|\W[a-z])/g, (matchedChar) =>
 					matchedChar.toUpperCase(),
 				)

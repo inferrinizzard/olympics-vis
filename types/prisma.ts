@@ -14,6 +14,13 @@ export type MedalType = keyof ParticipationRecords &
 export type AthleteSex = keyof ParticipationRecords & ("men" | "women");
 export type GamesSeason = "summer" | "winter";
 
+export type Country = {
+	code: string & CountryKey;
+	name: string & PrismaCountry["name"];
+	status: ("current" | "historic" | "special") & PrismaCountry["status"];
+	page_name: PrismaCountry["page_name"];
+};
+
 export type Games = {
 	code: string & GamesKey;
 	year: string & PrismaGames["year"];

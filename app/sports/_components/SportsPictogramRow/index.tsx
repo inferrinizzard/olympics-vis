@@ -2,7 +2,7 @@ import type { SportProps } from "types";
 
 import { Box, Title, Tooltip } from "@mantine/core";
 
-import GridCell from "components/grid/GridCell";
+import GridCell from "components/layouts/sub-page/GridCell";
 import { getSportsImageSrc, Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
 

@@ -3,7 +3,7 @@
 import { Box, Title } from "@mantine/core";
 import { ResponsiveBar } from "@nivo/bar";
 
-import GridCell from "components/grid/GridCell";
+import GridCell from "components/layouts/sub-page/GridCell";
 
 import type { CountriesWithMedals } from "./data";
 
