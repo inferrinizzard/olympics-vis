@@ -7,6 +7,7 @@ import { Card, CardSection, Stack, Title } from "@mantine/core";
 import { Image, type ImageProps } from "components/util/Image";
 
 import * as classes from "./CardLink.css";
+import { classNames } from "lib/utils/classNames";
 
 export interface CardLinkProps {
 	href: string;
@@ -30,13 +31,11 @@ const CardLink = ({
 		<Link passHref href={href} className={classes.CardLinkLink}>
 			<Card className={classes.CardLinkCard} withBorder>
 				<CardSection
-					className={"next-img-wrapper"}
-					style={{
-						position: "relative",
-						width: "100%",
-						aspectRatio,
-						marginTop: 0,
-					}}
+					className={classNames(
+						"next-img-wrapper",
+						classes.CardLinkImageWrapper,
+					)}
+					style={{ aspectRatio }}
 				>
 					<Image
 						{...imageProps}
