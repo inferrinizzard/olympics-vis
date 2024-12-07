@@ -1,7 +1,10 @@
+import { useState } from "react";
+
 import Link from "next/link";
 
 import { Group, ActionIcon, Title } from "@mantine/core";
 import Menu from "tabler-icons-react/dist/icons/menu-2";
+import Close from "tabler-icons-react/dist/icons/x";
 
 import { vars } from "styles/theme";
 
@@ -14,6 +17,8 @@ import * as classes from "./Header.css";
 export const MobileHeader = ({
 	activeHeaderLinkClassFn,
 }: SharedHeaderProps) => {
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
 		<>
 			<Group>
@@ -27,50 +32,43 @@ export const MobileHeader = ({
 					size="lg"
 					variant="filled"
 					bg={vars.colors.primary}
-					onClick={() => {}}
+					onClick={() => setIsOpen(!isOpen)}
 				>
-					<Menu />
+					{isOpen ? <Close /> : <Menu />}
 				</ActionIcon>
 			</Group>
 
-			<Group
-				style={{
-					borderTop: `solid 1px ${vars.colors.primary}`,
-					backgroundColor: vars.colors.body,
-					position: "absolute",
-					top: "100%",
-					insetInline: 0,
-					padding: vars.spacing.xs,
-				}}
-			>
-				<Group>
-					<Search />
-					<ColorSchemeToggle />
+			{isOpen && (
+				<Group className={classes.MobileHeaderDropdown}>
+					<Group>
+						<Search />
+						<ColorSchemeToggle />
+					</Group>
+					<Group className={classes.MobileHeaderDropdownLinkContainer}>
+						<Link
+							passHref
+							href="/games"
+							className={activeHeaderLinkClassFn("games")}
+						>
+							<Title order={3}>{"Games"}</Title>
+						</Link>
+						<Link
+							passHref
+							href="/countries"
+							className={activeHeaderLinkClassFn("countries")}
+						>
+							<Title order={3}>{"Countries"}</Title>
+						</Link>
+						<Link
+							passHref
+							href="/sports"
+							className={activeHeaderLinkClassFn("sports")}
+						>
+							<Title order={3}>{"Sports"}</Title>
+						</Link>
+					</Group>
 				</Group>
-				<Group style={{ width: "100%", justifyContent: "space-evenly" }}>
-					<Link
-						passHref
-						href="/games"
-						className={activeHeaderLinkClassFn("games")}
-					>
-						<Title order={3}>{"Games"}</Title>
-					</Link>
-					<Link
-						passHref
-						href="/countries"
-						className={activeHeaderLinkClassFn("countries")}
-					>
-						<Title order={3}>{"Countries"}</Title>
-					</Link>
-					<Link
-						passHref
-						href="/sports"
-						className={activeHeaderLinkClassFn("sports")}
-					>
-						<Title order={3}>{"Sports"}</Title>
-					</Link>
-				</Group>
-			</Group>
+			)}
 		</>
 	);
 };

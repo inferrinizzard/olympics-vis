@@ -22,3 +22,17 @@ export const ActiveHeaderLink = style({
 	backgroundColor: vars.colors.primary,
 	padding: "0.25rem",
 });
+
+export const MobileHeaderDropdown = style({
+	borderTop: `solid 1px ${vars.colors.primary}`,
+	backgroundColor: vars.colors.body,
+	position: "absolute",
+	top: "100%",
+	insetInline: 0,
+	padding: vars.spacing.xs,
+});
+
+export const MobileHeaderDropdownLinkContainer = style({
+	width: "100%",
+	justifyContent: "space-evenly",
+});
