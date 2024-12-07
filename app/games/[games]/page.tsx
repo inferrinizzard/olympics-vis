@@ -12,6 +12,8 @@ import GamesMedalsTable from "../_components/GamesMedalsTable";
 import GamesOverview from "../_components/GamesOverview";
 import GamesSports from "../_components/GamesSports";
 
+import * as classes from "./games.page.css";
+
 export async function generateStaticParams() {
 	const games = await getAllGames({ select: { code: true } });
 
@@ -30,16 +32,16 @@ const GamesPage: NextPage<{ params: { games: string } }> = async ({
 	return (
 		<Container fluid h="100%" p="xs">
 			<Grid mt={0}>
-				<GridCol span={8}>
+				<GridCol span={8} className={classes.GamesPageGridCol}>
 					<GamesOverview games={games} />
 				</GridCol>
-				<GridCol span={4}>
+				<GridCol span={4} className={classes.GamesPageGridCol}>
 					<GamesMedalsTable games={games} />
 				</GridCol>
-				<GridCol span={4}>
+				<GridCol span={4} className={classes.GamesPageGridCol}>
 					<GamesSports games={games} />
 				</GridCol>
-				<GridCol span={8}>
+				<GridCol span={8} className={classes.GamesPageGridCol}>
 					<GamesChoropleth games={games} />
 				</GridCol>
 			</Grid>
