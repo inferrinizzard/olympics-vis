@@ -12,6 +12,8 @@ import Excerpt from "components/content/Excerpt";
 import { Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
 
+import * as classes from "./SportsOverview.css";
+
 interface SportsOverviewProps {
 	sport: Sport;
 	wikipediaExcerpt: string;
@@ -27,7 +29,7 @@ const SportsOverview_Client = ({
 }: SportsOverviewProps) => {
 	return (
 		<GridCell bg="red">
-			<Box style={{ display: "flex" }}>
+			<Box className={classes.SportsOverviewContainer}>
 				<Box
 					maw="15rem"
 					miw="fit-content"
@@ -35,14 +37,7 @@ const SportsOverview_Client = ({
 					style={{ flexDirection: "column", gap: "1rem" }}
 				>
 					<Title order={2}>{`${sport.name} (${sport.code})`}</Title>
-					<Box
-						h="100%"
-						w="100%"
-						maw="10rem"
-						mah="10rem"
-						pos="relative"
-						style={{ alignSelf: "center" }}
-					>
+					<Box className={classes.SportsOverviewImageContainer}>
 						<Image
 							dir="sports"
 							code={sport.code}
