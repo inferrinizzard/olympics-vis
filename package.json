@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev -p 8000",
+		"postinstall": "prisma generate",
 		"prebuild": "tsx ./scripts/buildSearchJson.ts",
 		"build": "next build",
 		"analyze": "ANALYZE=true yarn build",
