@@ -1,4 +1,4 @@
-import { ActionIcon, Group, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, useMantineColorScheme } from "@mantine/core";
 import Sun from "tabler-icons-react/dist/icons/sun";
 import Moon from "tabler-icons-react/dist/icons/moon";
 
