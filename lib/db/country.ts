@@ -1,7 +1,7 @@
 import prisma from "./prisma";
 
 import type { Prisma } from "@prisma/client";
-import type { CountryKey } from "types/prisma";
+import type { Country, CountryKey } from "types/prisma";
 
 import { cacheStrategy } from "./cacheStrategy";
 
@@ -9,14 +9,14 @@ export type CountryCodeParam = { country: CountryKey };
 
 /** Get country data for 1 country */
 export const getCountry = async ({ country }: CountryCodeParam) =>
-	prisma.country.findFirst({
+	(await prisma.country.findFirst({
 		where: { code: country },
 		cacheStrategy,
-	});
+	})) as Country | null;
 
 /** Get country data for all countries */
 export const getAllCountries = async (args?: Prisma.CountryFindManyArgs) =>
-	prisma.country.findMany({ ...args, cacheStrategy });
+	(await prisma.country.findMany({ ...args, cacheStrategy })) as Country[];
 
 // /** Get number of athletes for a country */
 // export const getNumberOfAthletesForCountry = async ({

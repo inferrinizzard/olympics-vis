@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { Box, List, Text, Title } from "@mantine/core";
 
 import { SearchResultItem } from "./SearchResultItem";

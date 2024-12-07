@@ -8,6 +8,8 @@ import CountryMedalTotals from "../_components/CountryMedalTotals";
 import CountryOverview from "../_components/CountryOverview";
 import CountrySportsMedalsChart from "../_components/CountrySportsMedalsChart";
 
+import * as classes from "../../common.css";
+
 export async function generateStaticParams() {
 	const countries = await getAllCountries({ select: { code: true } });
 
@@ -30,17 +32,15 @@ const CountryPage: NextPage<{ params: { country: string } }> = async ({
 	return (
 		<Container fluid h="100%" p="xs">
 			<Grid mt={0} h="100%" style={{ borderRadius: "1rem" }}>
-				<GridCol span={4} p="xs" h="100%">
+				<GridCol span={4} p="xs" h="100%" className={classes.GridCol}>
 					<CountryOverview country={country} />
 				</GridCol>
 				<GridCol
 					display="flex"
 					p="xs"
 					span={8}
-					style={{
-						flexDirection: "column",
-						gap: "1rem",
-					}}
+					style={{ flexDirection: "column", gap: "1rem" }}
+					className={classes.GridCol}
 				>
 					<CountryMedalTotals country={country} />
 					<CountrySportsMedalsChart country={country} />

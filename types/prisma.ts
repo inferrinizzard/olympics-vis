@@ -23,7 +23,7 @@ export type Country = {
 
 export type Games = {
 	code: string & GamesKey;
-	year: string & PrismaGames["year"];
+	year: number & PrismaGames["year"];
 	host: string & PrismaGames["host"];
 	season: GamesSeason & PrismaGames["season"];
 	edition: ("olympics" | "paralympics" | "youth") & PrismaGames["edition"];

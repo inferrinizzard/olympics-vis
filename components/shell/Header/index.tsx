@@ -1,70 +1,72 @@
 "use client";
 
-import Link from "next/link";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import {
-	Group,
 	AppShellHeader as MantineHeader,
 	type AppShellHeaderProps,
-	ActionIcon,
-	Title,
+	useMantineTheme,
 } from "@mantine/core";
-import Home from "tabler-icons-react/dist/icons/home";
 
-import ColorSchemeToggle from "components/controls/ColorSchemeToggle";
 import { classNames } from "lib/utils/classNames";
 
-import { Search } from "../../controls/Search";
+import { MainHeader } from "./mainHeader";
+import { MobileHeader } from "./mobileHeader";
 import * as classes from "./Header.css";
 
 const Header = (props: AppShellHeaderProps) => {
+	// Util Hooks
 	const path = usePathname();
+	const theme = useMantineTheme();
 
-	const activeHeaderLinkClassFn = (name: string) =>
-		classNames(classes.HeaderLink, {
-			[classes.ActiveHeaderLink]: path.includes(name),
-		});
+	// Local State and Refs
+	const [shouldDisplayMobile, setShouldDisplayMobile] = useState(
+		window.matchMedia(`screen and (max-width: ${theme.breakpoints.sm})`)
+			.matches,
+	);
+
+	// Side Effect Hooks
+	useEffect(() => {
+		const mediaChangeHandler = (e: MediaQueryListEvent) => {
+			if (e.matches !== shouldDisplayMobile) {
+				setShouldDisplayMobile(e.matches);
+			}
+		};
+
+		const windowMediaQuery = window.matchMedia(
+			`screen and (max-width: ${theme.breakpoints.sm})`,
+		);
+
+		windowMediaQuery.addEventListener("change", mediaChangeHandler);
+
+		return () =>
+			windowMediaQuery.removeEventListener("change", mediaChangeHandler);
+	}, [theme.breakpoints.sm, shouldDisplayMobile]);
+
+	// Event Handlers
+	const activeHeaderLinkClassFn = useCallback(
+		(name: string) =>
+			classNames(classes.HeaderLink, {
+				[classes.ActiveHeaderLink]: path.includes(name),
+			}),
+		[path],
+	);
+
+	// Render Functions
+	const mainHeader = useMemo(
+		() => <MainHeader activeHeaderLinkClassFn={activeHeaderLinkClassFn} />,
+		[activeHeaderLinkClassFn],
+	);
+
+	const mobileHeader = useMemo(
+		() => <MobileHeader activeHeaderLinkClassFn={activeHeaderLinkClassFn} />,
+		[activeHeaderLinkClassFn],
+	);
 
 	return (
 		<MantineHeader {...props} className={classes.Header}>
-			<Group>
-				<Link passHref href="/" className={classes.HeaderLink}>
-					<Title order={3}>{"Olympics Vis"}</Title>
-				</Link>
-				<Title order={3}>{" — "}</Title>
-				<Link
-					passHref
-					href="/games"
-					className={activeHeaderLinkClassFn("games")}
-				>
-					<Title order={3}>{"Games"}</Title>
-				</Link>
-				<Link
-					passHref
-					href="/countries"
-					className={activeHeaderLinkClassFn("countries")}
-				>
-					<Title order={3}>{"Countries"}</Title>
-				</Link>
-				<Link
-					passHref
-					href="/sports"
-					className={activeHeaderLinkClassFn("sports")}
-				>
-					<Title order={3}>{"Sports"}</Title>
-				</Link>
-			</Group>
-
-			<Group>
-				<Link passHref href="/">
-					<ActionIcon size="lg">
-						<Home width="1.25rem" height="1.25rem" />
-					</ActionIcon>
-				</Link>
-				<Search />
-				<ColorSchemeToggle />
-			</Group>
+			{shouldDisplayMobile ? mobileHeader : mainHeader}
 		</MantineHeader>
 	);
 };
