@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 import { Group, ActionIcon, Title } from "@mantine/core";
@@ -17,7 +18,14 @@ import * as classes from "./Header.css";
 export const MobileHeader = ({
 	activeHeaderLinkClassFn,
 }: SharedHeaderProps) => {
+	const path = usePathname();
+
 	const [isOpen, setIsOpen] = useState(false);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useLayoutEffect(() => {
+		setIsOpen(false);
+	}, [path]);
 
 	return (
 		<>

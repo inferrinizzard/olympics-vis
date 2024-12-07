@@ -50,7 +50,7 @@ const Header = (props: AppShellHeaderProps) => {
 			classNames(classes.HeaderLink, {
 				[classes.ActiveHeaderLink]: path.includes(name),
 			}),
-		[path.includes],
+		[path],
 	);
 
 	// Render Functions
