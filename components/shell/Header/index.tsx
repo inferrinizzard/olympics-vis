@@ -22,8 +22,9 @@ const Header = (props: AppShellHeaderProps) => {
 
 	// Local State and Refs
 	const [shouldDisplayMobile, setShouldDisplayMobile] = useState(
-		window.matchMedia(`screen and (max-width: ${theme.breakpoints.sm})`)
-			.matches,
+		typeof window !== "undefined" &&
+			window.matchMedia(`screen and (max-width: ${theme.breakpoints.sm})`)
+				.matches,
 	);
 
 	// Side Effect Hooks

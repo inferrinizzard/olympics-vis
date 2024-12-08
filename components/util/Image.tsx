@@ -73,7 +73,7 @@ export const getGamesImageSrc = async (code: GamesKey) => {
 
 export const getSportsImageSrc = async (
 	code: SportKey,
-	parent?: SportKey,
+	parent?: Sport["parent"],
 	games?: GamesKey,
 ): Promise<string | undefined> => {
 	const mapKey = `sport:${[code, games].join("+")}`;

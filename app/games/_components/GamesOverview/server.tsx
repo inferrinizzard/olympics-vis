@@ -1,4 +1,4 @@
-import type { Games } from "@prisma/client";
+import type { Games } from "types/prisma";
 
 import { Box, Group, Stack, Title } from "@mantine/core";
 import Calendar from "tabler-icons-react/dist/icons/calendar";

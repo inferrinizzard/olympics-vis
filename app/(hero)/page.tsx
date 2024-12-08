@@ -1,6 +1,6 @@
 import { Box, Container, Title } from "@mantine/core";
 
-import type { Games, Sport, Country } from "@prisma/client";
+import type { Games, Sport, Country } from "types/prisma";
 import { getAllGames, getAllSports, getAllCountries } from "lib/db";
 
 import CardScroller from "./_components/CardScroller";

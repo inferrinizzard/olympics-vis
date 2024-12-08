@@ -6,6 +6,7 @@
 		"dev": "next dev -p 8000",
 		"postinstall": "prisma generate",
 		"prebuild": "tsx ./scripts/buildSearchJson.ts",
+		"typecheck": "tsc --noEmit",
 		"build": "next build",
 		"analyze": "ANALYZE=true yarn build",
 		"start": "next start",
