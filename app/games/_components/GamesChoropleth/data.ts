@@ -1,3 +1,4 @@
+import prisma from "lib/db/prisma";
 import { cacheStrategy, type GamesCodeParam } from "lib/db";
 
 /** Get number of athletes from each country for a games */

@@ -1,5 +1,6 @@
 import type { CountryKey, GamesKey } from "types/prisma";
 
+import prisma from "lib/db/prisma";
 import { cacheStrategy, type SportCodeParam } from "lib/db";
 
 export const getBestCountryForSport = async ({ sport }: SportCodeParam) =>
@@ -16,7 +17,7 @@ export const getBestCountryForSport = async ({ sport }: SportCodeParam) =>
 			take: 1,
 			cacheStrategy,
 		})
-		.then((res) => res[0].country as CountryKey);
+		.then((res) => res[0]?.country as CountryKey);
 
 export const getFirstGamesForSport = async ({ sport }: SportCodeParam) =>
 	prisma.participationRecords
@@ -27,4 +28,4 @@ export const getFirstGamesForSport = async ({ sport }: SportCodeParam) =>
 			take: 1,
 			cacheStrategy,
 		})
-		.then((res) => res[0].games as GamesKey);
+		.then((res) => res[0]?.games as GamesKey);

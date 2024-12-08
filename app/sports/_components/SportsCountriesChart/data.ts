@@ -1,6 +1,7 @@
 import type { ParticipationRecords } from "@prisma/client";
 import type { MedalType } from "types/prisma";
 
+import prisma from "lib/db/prisma";
 import { cacheStrategy, type SportCodeParam } from "lib/db";
 
 /** Get countries that have medals in a sport */

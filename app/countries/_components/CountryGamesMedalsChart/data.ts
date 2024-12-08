@@ -1,3 +1,4 @@
+import prisma from "lib/db/prisma";
 import { cacheStrategy, type CountryCodeParam } from "lib/db";
 
 /** Get medals won at each games for a country */

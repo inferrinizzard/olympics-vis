@@ -4,7 +4,7 @@ import { Box, Paper, Text, Title } from "@mantine/core";
 export interface StatCardProps {
 	Icon: React.ComponentType<{ style: CSSProperties }>;
 	title: string;
-	text: string | number | null;
+	text: string | number | null | undefined;
 }
 
 const StatCard = ({ Icon, title, text }: StatCardProps) => {

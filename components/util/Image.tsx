@@ -73,7 +73,7 @@ export const getGamesImageSrc = async (code: GamesKey) => {
 
 export const getSportsImageSrc = async (
 	code: SportKey,
-	parent?: SportKey,
+	parent?: Sport["parent"],
 	games?: GamesKey,
 ): Promise<string | undefined> => {
 	const mapKey = `sport:${[code, games].join("+")}`;
@@ -130,11 +130,13 @@ export const Image = async ({ dir, code, ...props }: ImageProps) => {
 			return (await getGamesImageSrc(code)) ?? "";
 		}
 		if (dir === "sports") {
-			return await (getSportsImageSrc(
-				code,
-				(props as Omit<SportsImageProps, "dir" | "code">).parent,
-				(props as Omit<SportsImageProps, "dir" | "code">).games,
-			) ?? "");
+			return (
+				(await getSportsImageSrc(
+					code,
+					(props as Omit<SportsImageProps, "dir" | "code">).parent,
+					(props as Omit<SportsImageProps, "dir" | "code">).games,
+				)) ?? ""
+			);
 		}
 		return "";
 	};

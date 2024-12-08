@@ -4,7 +4,9 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev -p 8000",
+		"postinstall": "prisma generate",
 		"prebuild": "tsx ./scripts/buildSearchJson.ts",
+		"typecheck": "tsc --noEmit",
 		"build": "next build",
 		"analyze": "ANALYZE=true yarn build",
 		"start": "next start",
@@ -48,6 +50,7 @@
 		"postcss-preset-mantine": "1.17.0",
 		"postcss-simple-vars": "^7.0.1",
 		"prisma": "^5.18.0",
+		"tsx": "^4.19.2",
 		"typescript": "^5.5.4"
 	}
 }

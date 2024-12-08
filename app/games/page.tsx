@@ -1,4 +1,5 @@
-import type { Games } from "@prisma/client";
+import type { Games } from "types/prisma";
+
 import { getAllGames } from "lib/db";
 import { getGameName } from "lib/utils/getGameName";
 
@@ -6,7 +7,7 @@ import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
 
 const GamesAll = async () => {
-	const games: Games[] = await getAllGames();
+	const games = await getAllGames();
 
 	const sortedGames = games.sort((a, b) => (a.year < b.year ? 1 : -1));
 

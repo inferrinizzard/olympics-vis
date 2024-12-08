@@ -1,4 +1,8 @@
 export const getGameName = (gamesId: string) => {
+	if (!gamesId) {
+		return "";
+	}
+
 	const slugs = gamesId.split("_").map(
 		(slug) =>
 			slug

@@ -1,5 +1,7 @@
 import type { ParticipationRecords } from "@prisma/client";
 
+import prisma from "lib/db/prisma";
+
 /** Get countries with most medals from past 10 games */
 export const getMedalsLeadersFromLastTenGames = async (
 	{ num }: { num?: number } = { num: 10 },
