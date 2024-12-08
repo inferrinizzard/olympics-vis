@@ -41,8 +41,9 @@ const SportsOverview_Client = ({
 						<Image
 							dir="sports"
 							code={sport.code}
-							fill
 							alt={`${sport.code} sport icon`}
+							parent={sport.parent}
+							fill
 							style={{ width: "100%", aspectRatio: "1 / 1" }}
 						/>
 					</Box>

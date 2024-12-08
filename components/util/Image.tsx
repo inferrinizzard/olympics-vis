@@ -130,11 +130,14 @@ export const Image = async ({ dir, code, ...props }: ImageProps) => {
 			return (await getGamesImageSrc(code)) ?? "";
 		}
 		if (dir === "sports") {
-			return await (getSportsImageSrc(
+			const res = await (getSportsImageSrc(
 				code,
 				(props as Omit<SportsImageProps, "dir" | "code">).parent,
 				(props as Omit<SportsImageProps, "dir" | "code">).games,
 			) ?? "");
+
+			console.log("SPORTS", { dir, code, props }, { res });
+			return res;
 		}
 		return "";
 	};
