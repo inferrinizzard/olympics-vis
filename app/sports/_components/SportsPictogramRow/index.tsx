@@ -1,3 +1,4 @@
+"use server";
 import type { SportProps } from "types";
 
 import { Box, Title, Tooltip } from "@mantine/core";

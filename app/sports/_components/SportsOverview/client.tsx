@@ -60,7 +60,7 @@ const SportsOverview_Client = ({
 						title={"First Games"}
 						text={getGameName(firstGames)}
 					/>
-					<StatCard Icon={Hash} title={"Number of Events"} text={100} />
+					<StatCard Icon={Hash} title={"Number of Events"} text={"0"} />
 				</Box>
 			</Box>
 		</GridCell>
