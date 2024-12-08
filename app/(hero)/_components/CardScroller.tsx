@@ -12,7 +12,6 @@ import { getGameName } from "lib/utils/getGameName";
 interface CardScrollerProps<T> {
 	data: T[];
 	route: string;
-	idKey: keyof T;
 	tooltipKey: string;
 	direction: 1 | -1;
 	color: string;
@@ -21,7 +20,6 @@ interface CardScrollerProps<T> {
 const CardScroller = <T extends Record<string, string | number | null>>({
 	data,
 	route,
-	idKey,
 	tooltipKey,
 	direction,
 	color,
@@ -70,21 +68,22 @@ const CardScroller = <T extends Record<string, string | number | null>>({
 						const datum = data[(start + i) % data.length];
 						return (
 							<Tooltip
-								key={
-									idKey === "games"
-										? getGameName(datum[idKey] as string)
-										: datum[idKey]
-								}
+								key={datum.code}
 								label={datum[tooltipKey]}
 								position="bottom"
 							>
 								<Box m="0.25rem" w="13rem" h="13rem">
 									<CardLink
-										href={`/${route}/${datum[idKey]}`}
-										img={`/images/${route}/${idKey === "games" ? `${datum[idKey]}/emblem.jpg` : `${datum[idKey]}.svg`}`}
-										alt={datum[idKey] as string}
+										href={`/${route}/${datum.code}`}
+										imageProps={{
+											dir:
+												route === "countries"
+													? "country"
+													: (route as "games" | "sports"),
+											code: (datum.code ?? "").toString(),
+											alt: datum.code as string,
+										}}
 										hoverColour={color}
-										nextImageProps={{ priority: true }}
 									/>
 								</Box>
 							</Tooltip>
