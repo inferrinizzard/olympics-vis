@@ -64,6 +64,8 @@ export const getGamesImageSrc = async (code: GamesKey) => {
 		.map((ext) => `/images/games/${code}/emblem.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
 
+	console.log("GAMES", { mapKey, match }, { imageMap });
+
 	if (match) {
 		imageMap[mapKey] = match;
 	}
@@ -137,7 +139,6 @@ export const Image = async ({ dir, code, ...props }: ImageProps) => {
 					(props as Omit<SportsImageProps, "dir" | "code">).games,
 				)) ?? "";
 
-			console.log("SPORTS", { dir, code, props }, { res });
 			return res;
 		}
 		return "";
