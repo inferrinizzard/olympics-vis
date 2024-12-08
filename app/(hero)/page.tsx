@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Box, Container, Title } from "@mantine/core";
 
 import type { Games, Sport, Country } from "types/prisma";
@@ -27,12 +29,23 @@ const HomePage = async () => {
 					backgroundImage:
 						'url("https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg")',
 					backgroundSize: "contain",
+					pointerEvents: "none",
 				}}
 			/>
 			<section>
 				<Title order={1}>{"Olympics Vis"}</Title>
 			</section>
-			<CardScroller<Games>
+			<Title order={2}>{"Temp"}</Title>
+			<Link passHref href="/games">
+				<Title order={3}>{"Games"}</Title>
+			</Link>
+			<Link passHref href="/countries">
+				<Title order={3}>{"Countries"}</Title>
+			</Link>
+			<Link passHref href="/sports">
+				<Title order={3}>{"Sports"}</Title>
+			</Link>
+			{/* <CardScroller<Games>
 				data={games}
 				route="games"
 				tooltipKey={"games"}
@@ -52,7 +65,7 @@ const HomePage = async () => {
 				tooltipKey={"name"}
 				direction={1}
 				color="blue"
-			/>
+			/> */}
 		</Container>
 	);
 };
