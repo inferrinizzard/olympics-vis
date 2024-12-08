@@ -9,8 +9,6 @@ import type { CountryKey, GamesKey, Sport, SportKey } from "types/prisma";
 import sharedFlags from "public/images/country/shared/sharedFlags.json";
 import parentDisciplineMap from "public/images/sports/parentDisciplineMap.json";
 
-const isProd = process.env.NODE_ENV === "production";
-
 export type CountryImageProps = { dir: "country"; code: CountryKey };
 export type GamesImageProps = { dir: "games"; code: GamesKey };
 export type SportsImageProps = {
@@ -46,7 +44,7 @@ export const getCountryImageSrc = async (code: CountryKey) => {
 
 	const match = ["svg", "avif", "png"]
 		.map((ext) => `/images/country/${code}.${ext}`)
-		.find((path) => existsSync(isProd ? path : `public/${path}`));
+		.find((path) => path && existsSync(`public/${path}`));
 
 	if (match) {
 		imageMap[mapKey] = match;
@@ -64,7 +62,7 @@ export const getGamesImageSrc = async (code: GamesKey) => {
 
 	const match = ["svg", "avif", "png", "jpg"]
 		.map((ext) => `/images/games/${code}/emblem.${ext}`)
-		.find((path) => existsSync(isProd ? path : `public/${path}`));
+		.find((path) => existsSync(`public/${path}`));
 
 	console.log("GAMES", { mapKey, match }, { imageMap });
 
@@ -116,9 +114,7 @@ export const getSportsImageSrc = async (
 		paths.push(...validPaths);
 	}
 
-	const match = paths.find(
-		(path) => path && existsSync(isProd ? path : `public/${path}`),
-	);
+	const match = paths.find((path) => existsSync(`public/${path}`));
 
 	if (match) {
 		imageMap[mapKey] = match;
@@ -147,6 +143,8 @@ export const Image = async ({ dir, code, ...props }: ImageProps) => {
 		}
 		return "";
 	};
+
+	console.log("TEST", { imageMap });
 
 	const src =
 		(await srcGetter()) ||
