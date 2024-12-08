@@ -41,8 +41,9 @@ const SportsOverview_Client = ({
 						<Image
 							dir="sports"
 							code={sport.code}
-							fill
 							alt={`${sport.code} sport icon`}
+							parent={sport.parent}
+							fill
 							style={{ width: "100%", aspectRatio: "1 / 1" }}
 						/>
 					</Box>
@@ -59,7 +60,7 @@ const SportsOverview_Client = ({
 						title={"First Games"}
 						text={getGameName(firstGames)}
 					/>
-					<StatCard Icon={Hash} title={"Number of Events"} text={100} />
+					<StatCard Icon={Hash} title={"Number of Events"} text={"0"} />
 				</Box>
 			</Box>
 		</GridCell>

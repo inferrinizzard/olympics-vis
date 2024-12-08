@@ -1,3 +1,4 @@
+"use server";
 import type { SportProps } from "types";
 
 import { Box, Title, Tooltip } from "@mantine/core";
@@ -26,8 +27,8 @@ const SportsPictogramRow = async ({ sport }: SportProps) => {
 			</Title>
 			<Box
 				display="flex"
-				mah="10rem"
-				style={{ overflow: "scroll", gap: "1rem" }}
+				// mah="10rem"
+				style={{ overflowX: "scroll", gap: "1rem" }}
 			>
 				{gamesSportsWithSpecialPictogram.map((games) => (
 					<Tooltip
