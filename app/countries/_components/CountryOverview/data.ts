@@ -1,3 +1,4 @@
+import prisma from "lib/db/prisma";
 import { cacheStrategy, type CountryCodeParam } from "lib/db";
 
 /** Get first games that a country attended */

@@ -1,5 +1,6 @@
 import type { GamesKey } from "types/prisma";
 
+import prisma from "lib/db/prisma";
 import { cacheStrategy, type SportCodeParam } from "lib/db";
 
 export const getAllGamesForSport = async ({ sport }: SportCodeParam) =>

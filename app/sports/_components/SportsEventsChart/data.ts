@@ -1,3 +1,4 @@
+// import prisma from "lib/db/prisma";
 import type { SportCodeParam } from "lib/db";
 
 // TODO-EVENTS: needs new data

@@ -1,3 +1,4 @@
+import prisma from "lib/db/prisma";
 import { cacheStrategy, type GamesCodeParam } from "lib/db";
 
 export const getNumCountriesAtGames = ({ games }: GamesCodeParam) =>

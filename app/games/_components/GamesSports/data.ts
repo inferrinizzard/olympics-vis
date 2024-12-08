@@ -1,5 +1,6 @@
 import type { SportKey } from "types/prisma";
 
+import prisma from "lib/db/prisma";
 import { cacheStrategy, type GamesCodeParam } from "lib/db";
 
 /** Get sports that were held at a games */

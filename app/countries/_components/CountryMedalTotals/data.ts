@@ -1,6 +1,7 @@
 import type { ParticipationRecords } from "@prisma/client";
 import type { Games, MedalType } from "types/prisma";
 
+import prisma from "lib/db/prisma";
 import type { CountryCodeParam } from "lib/db";
 
 /** Get number of each medal for a country */
