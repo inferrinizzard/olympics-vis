@@ -59,7 +59,7 @@ const buildImageMap = async () => {
 		const gamesForSport = await getAllGamesForSport({ sport: code });
 
 		for (const game of gamesForSport) {
-			const gamesMapKey = buildImageMapKey("sports", code, [game]);
+			const gamesMapKey = buildImageMapKey("sports", code, game);
 
 			const gamesSrc = getSportsImageSrc(code, parent, game);
 

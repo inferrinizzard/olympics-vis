@@ -8,8 +8,8 @@ import parentDisciplineMap from "public/images/sports/parentDisciplineMap.json";
 export const buildImageMapKey = (
 	dir: string,
 	code: string,
-	extra: (string | undefined)[] = [],
-) => `${dir}:${[code, ...extra.map((x) => x)].join("+")}`;
+	...extra: (string | undefined)[]
+) => `${dir}:${[code, ...extra.filter((x) => x)].join("+")}`;
 
 // TODO: add final fallbacks and remove png
 export const getCountryImageSrc = (code: CountryKey) => {

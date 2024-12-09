@@ -15,7 +15,7 @@ const SportsPictogramRow = async ({ sport }: SportProps) => {
 	const gamesForSport = await getAllGamesForSport({ sport: sport.code });
 
 	const gamesSportsWithSpecialPictogram = gamesForSport.filter((game) => {
-		const mapKey = buildImageMapKey("sports", sport.code, [game]);
+		const mapKey = buildImageMapKey("sports", sport.code, game);
 
 		return mapKey in imageMap;
 	});

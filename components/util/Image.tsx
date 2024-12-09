@@ -12,7 +12,6 @@ export type GamesImageProps = { dir: "games"; code: GamesKey };
 export type SportsImageProps = {
 	dir: "sports";
 	code: SportKey;
-	parent?: Sport["parent"];
 	games?: GamesKey;
 };
 
@@ -26,9 +25,11 @@ export type ImageProps = (
 	FallbackImageProps;
 
 export const Image = async ({ dir, code, ...props }: ImageProps) => {
-	const mapKey = buildImageMapKey(dir, code, [
+	const mapKey = buildImageMapKey(
+		dir,
+		code,
 		"games" in props ? props.games : undefined,
-	]);
+	);
 
 	const src = imageMap[mapKey as keyof typeof imageMap] ?? "";
 
