@@ -29,7 +29,7 @@ const buildSearchJson = async () => {
 	];
 
 	return writeFile(
-		"./components/shell/Search/searchStrings.json",
+		"./components/controls/Search/searchStrings.json",
 		JSON.stringify(data, undefined, 2),
 		() => {},
 	);

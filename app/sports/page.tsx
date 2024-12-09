@@ -47,7 +47,6 @@ const SportsAll = async () => {
 				dir: "sports" as const,
 				code: sport.code,
 				alt: `Icon for ${sport.code}`,
-				parent: sport.parent,
 			},
 			href: `/sports/${sport.code}`,
 			caption: sport.name,

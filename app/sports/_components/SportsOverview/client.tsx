@@ -42,7 +42,6 @@ const SportsOverview_Client = ({
 							dir="sports"
 							code={sport.code}
 							alt={`${sport.code} sport icon`}
-							parent={sport.parent}
 							fill
 							style={{ width: "100%", aspectRatio: "1 / 1" }}
 						/>
