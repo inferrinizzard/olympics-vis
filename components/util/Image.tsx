@@ -31,7 +31,10 @@ export const Image = async ({ dir, code, ...props }: ImageProps) => {
 		"games" in props ? props.games : undefined,
 	);
 
-	const src = imageMap[mapKey as keyof typeof imageMap] ?? "";
+	const src =
+		imageMap[mapKey as keyof typeof imageMap] ??
+		imageMap[buildImageMapKey(dir, code) as keyof typeof imageMap] ??
+		"";
 
 	return <NextImage {...props} src={src} unoptimized={src.endsWith(".svg")} />;
 };
