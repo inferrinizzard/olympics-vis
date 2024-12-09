@@ -23,10 +23,10 @@ const CountryOverview = async ({ country }: CountryProps) => {
 	).reduce((sum, n) => sum + n);
 
 	const bestGames = (await getBestGamesForCountry({ country: country.code }))
-		.games;
+		?.games;
 
 	const bestSport = (await getBestSportForCountry({ country: country.code }))
-		.sport;
+		?.sport;
 
 	return (
 		<CountryOverview_Client

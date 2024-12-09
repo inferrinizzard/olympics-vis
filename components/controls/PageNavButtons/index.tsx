@@ -1,65 +1,89 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-import { ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon, Group, Tooltip } from "@mantine/core";
 import ChevronLeft from "tabler-icons-react/dist/icons/chevron-left";
 import ChevronRight from "tabler-icons-react/dist/icons/chevron-right";
 
 import { vars } from "styles/theme";
 
-const PageNavButtons = () => {
-	const path = usePathname();
-	const parentPath = path.split("/").slice(0, -1).join("/").replace(/^[/]/, "");
+export interface PageNavButtonsProps {
+	list: string[];
+	pageLabel: string;
+}
 
-	if (!path || path === "/") {
+const PageNavButtons = ({ list, pageLabel }: PageNavButtonsProps) => {
+	const path = usePathname();
+	const pageSlug = path.split("/").at(-1);
+
+	const index = useMemo(() => {
+		return list.findIndex((code) => code === pageSlug);
+	}, [list, pageSlug]);
+
+	const prevPath = useMemo(
+		() => pageSlug && path.replace(pageSlug, list[index - 1]),
+		[pageSlug, path, list, index],
+	);
+	const nextPath = useMemo(
+		() => pageSlug && path.replace(pageSlug, list[index + 1]),
+		[pageSlug, path, list, index],
+	);
+
+	if (index < 0) {
 		return null;
 	}
 
 	return (
-		<>
-			<Link href={`/${parentPath}`}>
-				<Tooltip label={"Prev Page"}>
-					<ActionIcon
-						size="lg"
-						pos="fixed"
-						style={{
-							zIndex: 1,
-							cursor: "pointer",
-							insetInlineStart: vars.spacing.sm,
-							bottom: vars.spacing.sm,
-							display: "flex",
-							justifyContent: "center",
-							alignItems: "center",
-							backgroundColor: vars.colors.primary,
-						}}
-					>
-						<ChevronLeft style={{ cursor: "pointer" }} />
-					</ActionIcon>
-				</Tooltip>
-			</Link>
-			<Link href={`/${parentPath}`}>
-				<Tooltip label={"Next Page"}>
-					<ActionIcon
-						size="lg"
-						pos="fixed"
-						style={{
-							zIndex: 1,
-							cursor: "pointer",
-							insetInlineStart: `calc(${vars.spacing.sm} + 2rem + ${vars.spacing.sm})`,
-							bottom: vars.spacing.sm,
-							display: "flex",
-							justifyContent: "center",
-							alignItems: "center",
-							backgroundColor: vars.colors.primary,
-						}}
-					>
-						<ChevronRight style={{ cursor: "pointer" }} />
-					</ActionIcon>
-				</Tooltip>
-			</Link>
-		</>
+		<Group
+			pos="fixed"
+			gap={vars.spacing.sm}
+			style={{
+				zIndex: 1,
+				insetInlineStart: vars.spacing.sm,
+				bottom: vars.spacing.sm,
+			}}
+		>
+			{list[index - 1] && prevPath && (
+				<Link href={prevPath}>
+					<Tooltip label={`Prev ${pageLabel}`}>
+						<ActionIcon
+							size="lg"
+							style={{
+								cursor: "pointer",
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+								backgroundColor: vars.colors.primary,
+							}}
+						>
+							<ChevronLeft style={{ cursor: "pointer" }} />
+						</ActionIcon>
+					</Tooltip>
+				</Link>
+			)}
+			{list[index + 1] && nextPath && (
+				<Link href={nextPath}>
+					<Tooltip label={`Next ${pageLabel}`}>
+						<ActionIcon
+							size="lg"
+							style={{
+								cursor: "pointer",
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+								backgroundColor: vars.colors.primary,
+							}}
+						>
+							<ChevronRight style={{ cursor: "pointer" }} />
+						</ActionIcon>
+					</Tooltip>
+				</Link>
+			)}
+		</Group>
 	);
 };
 

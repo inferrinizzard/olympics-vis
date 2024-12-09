@@ -7,7 +7,7 @@ import { CardList } from "components/layouts/main-page/CardList";
 import TopMedalsChart from "./_components/TopMedalsChart";
 
 const CountriesAll = async () => {
-	const countries = (await getAllCountries()) as Country[];
+	const countries = await getAllCountries();
 
 	const activeNOCs: Country[] = countries.filter(
 		({ status }) => status === "current",
