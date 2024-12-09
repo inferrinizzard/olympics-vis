@@ -56,7 +56,7 @@ const SportsAll = async () => {
 	// TODO: disable interaction for categories
 
 	return (
-		<MainPageLayout title="Sport">
+		<MainPageLayout title="Sports">
 			{Object.entries(sportsLists).map(([title, list]) => (
 				<CardList
 					key={title}

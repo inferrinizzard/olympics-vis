@@ -4,7 +4,7 @@ import { vars } from "styles/theme";
 
 export const MainPageContainer = style({
 	padding: vars.spacing.xs,
-	gap: "2rem",
+	gap: `calc(${vars.spacing.xl} * 2)`,
 });
 
 export const MainPageTitle = style({
