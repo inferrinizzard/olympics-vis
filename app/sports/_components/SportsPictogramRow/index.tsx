@@ -4,21 +4,21 @@ import type { SportProps } from "types";
 import { Box, Title, Tooltip } from "@mantine/core";
 
 import GridCell from "components/layouts/sub-page/GridCell";
-import { getSportsImageSrc, Image } from "components/util/Image";
+import { Image } from "components/util/Image";
+import imageMap from "components/util/imageMap.json";
 import { getGameName } from "lib/utils/getGameName";
+import { buildImageMapKey } from "lib/utils/getImageSrc";
 
 import { getAllGamesForSport } from "./data";
 
 const SportsPictogramRow = async ({ sport }: SportProps) => {
 	const gamesForSport = await getAllGamesForSport({ sport: sport.code });
 
-	const basePictogramUrl = await getSportsImageSrc(sport.code);
-	const gamesSportsWithSpecialPictogram = await Promise.all(
-		gamesForSport.flatMap(async (games) => {
-			const src = await getSportsImageSrc(sport.code, undefined, games);
-			return src && src !== basePictogramUrl ? games : undefined;
-		}),
-	).then((list) => list.flatMap((x) => x || []));
+	const gamesSportsWithSpecialPictogram = gamesForSport.filter((game) => {
+		const mapKey = buildImageMapKey("sports", sport.code, [game]);
+
+		return mapKey in imageMap;
+	});
 
 	return (
 		<GridCell>

@@ -59,13 +59,15 @@ const buildImageMap = async () => {
 		const gamesForSport = await getAllGamesForSport({ sport: code });
 
 		for (const game of gamesForSport) {
-			const gamesMapKey = buildImageMapKey("sports", code);
+			const gamesMapKey = buildImageMapKey("sports", code, [game]);
 
 			const gamesSrc = getSportsImageSrc(code, parent, game);
 
-			imageMap[gamesMapKey] =
-				gamesSrc ??
-				(code.startsWith("P-") ? paralympicFallback : olympicFallback);
+			if (gamesSrc !== src) {
+				imageMap[gamesMapKey] =
+					gamesSrc ??
+					(code.startsWith("P-") ? paralympicFallback : olympicFallback);
+			}
 		}
 	}
 
