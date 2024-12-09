@@ -5,7 +5,7 @@ import NextImage, { type ImageProps as NextImageProps } from "next/image";
 import type { CountryKey, GamesKey, Sport, SportKey } from "types/prisma";
 
 import imageMap from "./imageMap.json";
-import { buildImageMapKey } from "./getImageSrc";
+import { buildImageMapKey } from "../../lib/utils/getImageSrc";
 
 export type CountryImageProps = { dir: "country"; code: CountryKey };
 export type GamesImageProps = { dir: "games"; code: GamesKey };
@@ -29,10 +29,8 @@ export const Image = async ({ dir, code, ...props }: ImageProps) => {
 	const mapKey = buildImageMapKey(dir, code, [
 		"games" in props ? props.games : undefined,
 	]);
-	const src = imageMap[mapKey];
 
-	//  "/images/country/shared/Paralympic_flag.svg"
-	//  "/images/country/shared/Olympic_flag.svg");
+	const src = imageMap[mapKey as keyof typeof imageMap] ?? "";
 
 	return <NextImage {...props} src={src} unoptimized={src.endsWith(".svg")} />;
 };

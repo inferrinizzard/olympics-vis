@@ -8,7 +8,7 @@ import {
 	getCountryImageSrc,
 	getGamesImageSrc,
 	getSportsImageSrc,
-} from "components/util/getImageSrc";
+} from "lib/utils/getImageSrc";
 
 const imageMap: Record<string, string> = {};
 const olympicFallback = "/images/country/shared/Olympic_flag.svg";
