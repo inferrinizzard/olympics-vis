@@ -25,8 +25,8 @@ const BackButton = () => {
 					style={{
 						zIndex: 1,
 						cursor: "pointer",
-						right: "0.75rem",
-						bottom: "0.75rem",
+						insetInlineEnd: vars.spacing.sm,
+						bottom: vars.spacing.sm,
 						display: "flex",
 						justifyContent: "center",
 						alignItems: "center",

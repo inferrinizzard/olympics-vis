@@ -14,6 +14,7 @@ import { baseTheme } from "styles/theme";
 
 import Header, { HEADER_HEIGHT } from "components/shell/Header";
 import BackButton from "components/controls/BackButton";
+import PageNavButtons from "components/controls/PageNavButtons";
 
 const workSans = Work_Sans({
 	subsets: ["latin"],
@@ -41,9 +42,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				<MantineProvider theme={baseTheme}>
 					<AppShell header={{ height: HEADER_HEIGHT }}>
 						<Header />
-						<AppShellMain>
+						<AppShellMain style={{ marginBottom: "3rem" }}>
 							{children}
 							<BackButton />
+							<PageNavButtons />
 						</AppShellMain>
 					</AppShell>
 				</MantineProvider>
