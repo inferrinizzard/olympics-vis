@@ -46,9 +46,9 @@ const CountryOverview_Client = ({
 				<Image
 					dir="country"
 					code={country.code}
+					alt={`NOC Flag for ${country.code}`}
 					fill
 					style={{ objectFit: "contain" }}
-					alt={`NOC Flag for ${country.code}`}
 				/>
 			</Box>
 			<Box m="0.5rem">

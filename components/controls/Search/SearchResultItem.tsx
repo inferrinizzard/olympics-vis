@@ -22,8 +22,8 @@ export const SearchResultItem = ({
 				icon={
 					// <Image
 					// 	dir={(path === "countries" ? "country" : path) as "games"}
-					// 	alt={code}
 					// 	code={code}
+					// 	alt={code}
 					// />
 					"-"
 				}

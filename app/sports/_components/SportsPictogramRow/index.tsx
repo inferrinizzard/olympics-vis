@@ -20,6 +20,10 @@ const SportsPictogramRow = async ({ sport }: SportProps) => {
 		return mapKey in imageMap;
 	});
 
+	if (!gamesSportsWithSpecialPictogram.length) {
+		return null;
+	}
+
 	return (
 		<GridCell>
 			<Title order={2} m="xs">
@@ -39,9 +43,9 @@ const SportsPictogramRow = async ({ sport }: SportProps) => {
 						<Box h="10rem" w="10rem" pos="relative" style={{ flexShrink: 0 }}>
 							<Image
 								dir="sports"
-								alt={`${sport.code} pictogram at ${games}`}
 								code={sport.code}
 								games={games}
+								alt={`${sport.code} pictogram at ${games}`}
 								fill
 							/>
 						</Box>
