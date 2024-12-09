@@ -7,8 +7,9 @@ import PageNavButtons from "components/controls/PageNavButtons";
 import { countriesTheme } from "./_theme";
 
 export default async function CountriesLayout({ children }: PropsWithChildren) {
-	const countries = await getAllCountries();
-	console.count("layout");
+	const countries = await getAllCountries({
+		orderBy: [{ status: "asc" }, { code: "asc" }],
+	});
 
 	return (
 		<MantineProvider theme={countriesTheme}>
