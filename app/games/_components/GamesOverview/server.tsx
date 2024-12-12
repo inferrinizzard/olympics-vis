@@ -45,7 +45,6 @@ const GamesOverview_Server = ({
 					</Box>
 				</Stack>
 			</Group>
-
 			<Group justify="space-evenly">
 				<StatCard
 					Icon={Calendar}

@@ -1,5 +1,7 @@
 import { Spoiler, Text } from "@mantine/core";
 
+import Link from "next/link";
+
 import { getWikipediaExcerpt } from "lib/utils/wikipedia";
 
 interface WikipediaExcerptProps {
@@ -15,7 +17,12 @@ const WikipediaExcerpt = async ({
 		return "[No Wikipedia Excerpt available]";
 	}
 
-	const excerptText = await getWikipediaExcerpt(pageName);
+	const rawExcerptText = await getWikipediaExcerpt(pageName);
+
+	const excerptText =
+		rawExcerptText.length <= 1000
+			? rawExcerptText
+			: `${rawExcerptText.slice(0, 1000)}…`;
 
 	return (
 		<Spoiler
@@ -23,7 +30,17 @@ const WikipediaExcerpt = async ({
 			showLabel="Keep Reading"
 			hideLabel="Hide"
 		>
-			<Text style={{ color: "white" }}>{excerptText}</Text>
+			<Text style={{ color: "white" }}>
+				{excerptText}
+				{"["}
+				<Link
+					href={`https://en.wikipedia.org/wiki/${pageName}`}
+					style={{ color: "white" }}
+				>
+					{"Wikipedia"}
+				</Link>
+				{"]"}
+			</Text>
 		</Spoiler>
 	);
 };
