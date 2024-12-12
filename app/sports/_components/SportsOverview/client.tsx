@@ -8,7 +8,7 @@ import MapPin from "tabler-icons-react/dist/icons/map-pin";
 
 import GridCell from "components/layouts/sub-page/GridCell";
 import StatCard from "components/content/StatCard";
-import Excerpt from "components/content/Excerpt";
+import WikipediaExcerpt from "components/content/WikipediaExcerpt";
 import { Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
 
@@ -16,16 +16,16 @@ import * as classes from "./SportsOverview.css";
 
 interface SportsOverviewProps {
 	sport: Sport;
-	wikipediaExcerpt: string;
 	bestCountry: CountryKey;
 	firstGames: GamesKey;
+	pageName: string;
 }
 
 const SportsOverview_Client = ({
 	sport,
-	wikipediaExcerpt,
 	bestCountry,
 	firstGames,
+	pageName,
 }: SportsOverviewProps) => {
 	return (
 		<GridCell bg="red">
@@ -48,7 +48,7 @@ const SportsOverview_Client = ({
 					</Box>
 				</Box>
 				<Box p="1rem" style={{ flexGrow: 1 }}>
-					<Excerpt text={wikipediaExcerpt} />
+					<WikipediaExcerpt pageName={pageName} />
 				</Box>
 				<Box
 					style={{ display: "flex", rowGap: "1rem", flexDirection: "column" }}

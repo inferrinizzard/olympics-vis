@@ -1,7 +1,5 @@
 import type { CountryProps } from "types";
 
-import { getWikipediaExcerpt } from "lib/utils/wikipedia";
-
 import CountryOverview_Client from "./client";
 import {
 	getAllMedalsForCountry,
@@ -13,8 +11,6 @@ import {
 const CountryOverview = async ({ country }: CountryProps) => {
 	const firstGames =
 		(await getFirstGamesForCountry({ country: country.code }))?.games ?? "";
-
-	const wikipediaExcerpt = await getWikipediaExcerpt(country.page_name);
 
 	const totalMedals = Object.values(
 		await getAllMedalsForCountry({
@@ -32,7 +28,7 @@ const CountryOverview = async ({ country }: CountryProps) => {
 		<CountryOverview_Client
 			country={country}
 			overviewData={{ firstGames, totalMedals, bestGames, bestSport }}
-			wikipediaExcerpt={wikipediaExcerpt}
+			pageName={country.page_name}
 		/>
 	);
 };

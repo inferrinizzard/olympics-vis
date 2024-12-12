@@ -9,7 +9,7 @@ import Trophy from "tabler-icons-react/dist/icons/trophy";
 
 import GridCell from "components/layouts/sub-page/GridCell";
 import StatCard from "components/content/StatCard";
-import Excerpt from "components/content/Excerpt";
+import WikipediaExcerpt from "components/content/WikipediaExcerpt";
 import { Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
 
@@ -24,15 +24,15 @@ interface CountryOverviewData {
 }
 
 interface CountryOverviewProps {
-	wikipediaExcerpt: string;
 	country: Country;
 	overviewData: CountryOverviewData;
+	pageName: string;
 }
 
 const CountryOverview_Client = ({
-	wikipediaExcerpt,
 	country,
 	overviewData: { firstGames, totalMedals, hostedGames, bestGames, bestSport },
+	pageName,
 }: CountryOverviewProps) => {
 	return (
 		<GridCell className={classes.GridContainer}>
@@ -52,7 +52,7 @@ const CountryOverview_Client = ({
 				/>
 			</Box>
 			<Box m="0.5rem">
-				<Excerpt text={wikipediaExcerpt} />
+				<WikipediaExcerpt pageName={pageName} />
 			</Box>
 			<Group className={classes.StatCardContainer}>
 				<StatCard

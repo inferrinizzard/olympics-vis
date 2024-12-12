@@ -8,7 +8,7 @@ import Run from "tabler-icons-react/dist/icons/run";
 
 import GridCell from "components/layouts/sub-page/GridCell";
 import StatCard from "components/content/StatCard";
-import Excerpt from "components/content/Excerpt";
+import WikipediaExcerpt from "components/content/WikipediaExcerpt";
 import { Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
 
@@ -17,13 +17,13 @@ import * as classes from "./GamesOverview.css";
 interface GamesOverviewProps {
 	games: Games;
 	numCountries: number;
-	wikipediaExcerpt: string;
+	pageName: string;
 }
 
 const GamesOverview_Server = ({
 	games,
 	numCountries,
-	wikipediaExcerpt,
+	pageName,
 }: GamesOverviewProps) => {
 	return (
 		<GridCell className={classes.GridContainer}>
@@ -41,10 +41,7 @@ const GamesOverview_Server = ({
 					<Title order={1} mt="sm">{`${getGameName(games.code)}`}</Title>
 					{games.motto ? <Title order={3}>{games.motto}</Title> : null}
 					<Box style={{ flexGrow: 1 }}>
-						<Excerpt
-							height={200}
-							text={`${wikipediaExcerpt.slice(0, 1000)}... [Wikipedia]`}
-						/>
+						<WikipediaExcerpt pageName={pageName} height={200} />
 					</Box>
 				</Stack>
 			</Group>
