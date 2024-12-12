@@ -1,3 +1,5 @@
+"use server";
+
 import type { Games } from "types/prisma";
 
 import { Box, Group, Stack, Title } from "@mantine/core";

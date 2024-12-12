@@ -1,6 +1,6 @@
 import type { SportProps } from "types";
 
-import SportsOverview_Client from "./client";
+import SportsOverview_Server from "./server";
 import { getBestCountryForSport, getFirstGamesForSport } from "./data";
 
 const SportsOverview = async ({ sport }: SportProps) => {
@@ -9,7 +9,7 @@ const SportsOverview = async ({ sport }: SportProps) => {
 	// const numEvents;
 
 	return (
-		<SportsOverview_Client
+		<SportsOverview_Server
 			sport={sport}
 			bestCountry={bestCountry}
 			firstGames={firstGames}

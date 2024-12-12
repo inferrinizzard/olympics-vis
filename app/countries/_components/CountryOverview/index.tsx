@@ -1,6 +1,6 @@
 import type { CountryProps } from "types";
 
-import CountryOverview_Client from "./client";
+import CountryOverview_Server from "./server";
 import {
 	getAllMedalsForCountry,
 	getBestGamesForCountry,
@@ -25,7 +25,7 @@ const CountryOverview = async ({ country }: CountryProps) => {
 		?.sport;
 
 	return (
-		<CountryOverview_Client
+		<CountryOverview_Server
 			country={country}
 			overviewData={{ firstGames, totalMedals, bestGames, bestSport }}
 			pageName={country.page_name}

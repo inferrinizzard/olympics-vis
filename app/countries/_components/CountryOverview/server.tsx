@@ -1,3 +1,5 @@
+"use server";
+
 import { Box, Group, Title } from "@mantine/core";
 
 import type { Country, GamesKey, SportKey } from "types/prisma";
@@ -29,7 +31,7 @@ interface CountryOverviewProps {
 	pageName: string;
 }
 
-const CountryOverview_Client = ({
+const CountryOverview_Server = ({
 	country,
 	overviewData: { firstGames, totalMedals, hostedGames, bestGames, bestSport },
 	pageName,
@@ -77,4 +79,4 @@ const CountryOverview_Client = ({
 	);
 };
 
-export default CountryOverview_Client;
+export default CountryOverview_Server;
