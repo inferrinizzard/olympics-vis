@@ -21,7 +21,7 @@ const WikipediaExcerpt = async ({
 
 	const excerptText =
 		rawExcerptText.length <= 1000
-			? rawExcerptText
+			? `${rawExcerptText} `
 			: `${rawExcerptText.slice(0, 1000)}…`;
 
 	return (
