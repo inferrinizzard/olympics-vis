@@ -40,8 +40,16 @@ const GamesOverview_Server = ({
 					/>
 				</Box>
 				<Stack maw="75%">
-					<Title order={1} mt="sm">{`${getGameName(games.code)}`}</Title>
-					{games.motto ? <Title order={3}>{games.motto}</Title> : null}
+					<Title
+						order={1}
+						mt="sm"
+						style={{ color: "white" }}
+					>{`${getGameName(games.code)}`}</Title>
+					{games.motto ? (
+						<Title order={3} style={{ color: "white" }}>
+							{games.motto}
+						</Title>
+					) : null}
 					<Box style={{ flexGrow: 1 }}>
 						<WikipediaExcerpt pageName={pageName} height={200} />
 					</Box>

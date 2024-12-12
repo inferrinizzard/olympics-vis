@@ -42,7 +42,7 @@ const CountryOverview_Server = ({
 				order={1}
 				mt="xs"
 				mb="xs"
-				style={{ textAlign: "center" }}
+				style={{ color: "white", textAlign: "center" }}
 			>{`${country.name} (${country.code})`}</Title>
 			<Box h="10rem" w="100%" pos="relative">
 				<Image

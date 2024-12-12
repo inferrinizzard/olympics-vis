@@ -6,7 +6,7 @@ export const GridContainer = style({
 	display: "flex",
 	flexDirection: "column",
 	gap: "1rem",
-	backgroundColor: vars.colors.blue[1],
+	backgroundColor: vars.colors.green[1],
 });
 
 export const StatCardContainer = style({

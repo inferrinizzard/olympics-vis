@@ -38,7 +38,10 @@ const SportsOverview_Server = ({
 					display="flex"
 					style={{ flexDirection: "column", gap: "1rem" }}
 				>
-					<Title order={2}>{`${sport.name} (${sport.code})`}</Title>
+					<Title
+						order={2}
+						style={{ color: "white" }}
+					>{`${sport.name} (${sport.code})`}</Title>
 					<Box className={classes.SportsOverviewImageContainer}>
 						<Image
 							dir="sports"
