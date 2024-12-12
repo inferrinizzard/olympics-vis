@@ -1,8 +1,9 @@
-import { Spoiler, Text } from "@mantine/core";
+import { Group, Spoiler, Text } from "@mantine/core";
 
 import Link from "next/link";
 
 import { getWikipediaExcerpt } from "lib/utils/wikipedia";
+import { ChevronDown, ChevronUp } from "tabler-icons-react";
 
 interface WikipediaExcerptProps {
 	pageName: string;
@@ -27,8 +28,17 @@ const WikipediaExcerpt = async ({
 	return (
 		<Spoiler
 			maxHeight={height ?? 250}
-			showLabel="Keep Reading"
-			hideLabel="Hide"
+			showLabel={
+				<Group gap="xs" style={{ color: "white", fontWeight: 500 }}>
+					{"Keep Reading"} <ChevronDown />
+				</Group>
+			}
+			hideLabel={
+				<Group gap="xs" style={{ color: "white", fontWeight: 500 }}>
+					{"Hide"}
+					<ChevronUp />
+				</Group>
+			}
 		>
 			<Text style={{ color: "white" }}>
 				{excerptText}
