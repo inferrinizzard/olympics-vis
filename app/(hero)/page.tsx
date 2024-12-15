@@ -1,20 +1,27 @@
 import Link from "next/link";
 
-import { Box, Container, Title } from "@mantine/core";
+import { Box, Container, Group, Stack, Title } from "@mantine/core";
 
 import type { Games, Sport, Country } from "types/prisma";
 import { getAllGames, getAllSports, getAllCountries } from "lib/db";
 
 import CardScroller from "./_components/CardScroller";
+import { ArrowRight } from "tabler-icons-react";
+import { MersenneTwister } from "lib/utils/mersenneTwister";
 
 const HomePage = async () => {
-	const games = await getAllGames({
-		orderBy: [{ year: "desc" }, { season: "asc" }],
-	});
-
+	const games = await getAllGames();
+	const countries = await getAllCountries();
 	const sports = await getAllSports();
 
-	const countries = await getAllCountries();
+	const unixMs = +Date.now();
+	const unixDays = Math.floor(unixMs / (24 * 60 * 60 * 1000));
+	// @ts-ignore
+	const mt = new MersenneTwister(unixDays);
+
+	const randomGames = games[Math.floor(mt.random() * games.length)];
+	const randomCountry = countries[Math.floor(mt.random() * countries.length)];
+	const randomSport = sports[Math.floor(mt.random() * sports.length)];
 
 	return (
 		<Container fluid h="100%" p="xs">
@@ -26,19 +33,31 @@ const HomePage = async () => {
 					left: 0,
 					top: 0,
 					opacity: "10%",
-					backgroundImage:
-						'url("https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg")',
+					backgroundImage: 'url("/images/country/shared/Olympic_flag.svg")',
 					backgroundSize: "contain",
 					pointerEvents: "none",
 				}}
 			/>
-			<section>
+			<Box component="section">
 				<Title order={1}>{"Olympics Vis"}</Title>
-			</section>
-			<Title order={2}>{"Temp"}</Title>
-			<Link passHref href="/games">
-				<Title order={3}>{"Games"}</Title>
-			</Link>
+			</Box>
+			<Stack>
+				{unixDays}
+				{randomGames.code}
+				{randomCountry.code}
+				{randomSport.code}
+			</Stack>
+
+			<Stack>
+				<Title order={2}>{"Featured Games"}</Title>
+
+				<Link passHref href="/games">
+					<Group>
+						<Title order={3}>{"See All"}</Title>
+						<ArrowRight />
+					</Group>
+				</Link>
+			</Stack>
 			<Link passHref href="/countries">
 				<Title order={3}>{"Countries"}</Title>
 			</Link>
