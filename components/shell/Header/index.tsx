@@ -1,46 +1,27 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { usePathname } from "next/navigation";
 
 import {
 	AppShellHeader as MantineHeader,
 	type AppShellHeaderProps,
 } from "@mantine/core";
-import { vars } from "styles/theme";
 
 import { ClientOnly } from "components/util/ClientOnly";
+import { useBreakpoint } from "lib/hooks/useBreakpoint";
 import { classNames } from "lib/utils/classNames";
 
 import { MainHeader } from "./mainHeader";
 import { MobileHeader } from "./mobileHeader";
-import * as classes from "./Header.css";
 import { PlaceholderHeader } from "./placeholderHeader";
+
+import * as classes from "./Header.css";
 
 const Header = (props: AppShellHeaderProps) => {
 	// Util Hooks
 	const path = usePathname();
-
-	// Local State and Refs
-	const [shouldDisplayMobile, setShouldDisplayMobile] = useState(
-		typeof window !== "undefined" &&
-			window.matchMedia(vars.smallerThan("sm")).matches,
-	);
-
-	// Side Effect Hooks
-	useEffect(() => {
-		const mediaChangeHandler = (e: MediaQueryListEvent) => {
-			if (e.matches !== shouldDisplayMobile) {
-				setShouldDisplayMobile(e.matches);
-			}
-		};
-
-		const windowMediaQuery = window.matchMedia(vars.smallerThan("sm"));
-		windowMediaQuery.addEventListener("change", mediaChangeHandler);
-
-		return () =>
-			windowMediaQuery.removeEventListener("change", mediaChangeHandler);
-	}, [shouldDisplayMobile]);
+	const isSmallerThanSm = useBreakpoint("sm");
 
 	// Event Handlers
 	const activeHeaderLinkClassFn = useCallback(
@@ -65,7 +46,7 @@ const Header = (props: AppShellHeaderProps) => {
 	return (
 		<MantineHeader {...props} className={classes.Header}>
 			<ClientOnly placeholder={<PlaceholderHeader />}>
-				{shouldDisplayMobile ? mobileHeader : mainHeader}
+				{isSmallerThanSm ? mobileHeader : mainHeader}
 			</ClientOnly>
 		</MantineHeader>
 	);
