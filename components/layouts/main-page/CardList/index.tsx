@@ -14,7 +14,7 @@ export const CardList = <CardProps extends CardLinkProps>({
 	cardData,
 }: CardListProps<CardProps>) => {
 	return (
-		<Stack id={title} component="section">
+		<Stack id={title} component="section" mt="xl">
 			<Title order={2}>{title}</Title>
 			<Group className={classes.CardListGrid}>
 				{cardData.map((cardProps) => (
