@@ -1,15 +1,14 @@
 import type { Games } from "types/prisma";
 
-import { getAllGames } from "lib/db";
 import { getGameName } from "lib/utils/getGameName";
 
 import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
 
-const GamesAll = async () => {
-	const games = await getAllGames();
+import { getGamesForPage } from "./_data";
 
-	const sortedGames = games.sort((a, b) => (a.year < b.year ? 1 : -1));
+const GamesAll = async () => {
+	const games = await getGamesForPage();
 
 	const gamesCardMapper = ({ code: games }: Games) => ({
 		imageProps: {
@@ -23,7 +22,7 @@ const GamesAll = async () => {
 
 	return (
 		<MainPageLayout title="Games">
-			<CardList title="All" cardData={sortedGames.map(gamesCardMapper)} />
+			<CardList title="All" cardData={games.map(gamesCardMapper)} />
 		</MainPageLayout>
 	);
 };

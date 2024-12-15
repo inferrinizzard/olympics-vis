@@ -1,15 +1,13 @@
 import type { PropsWithChildren } from "react";
 import { MantineProvider } from "@mantine/core";
 
-import { getAllGames } from "lib/db";
 import PageNavButtons from "components/controls/PageNavButtons";
 
+import { getGamesForPage } from "./_data";
 import { gamesTheme } from "./_theme";
 
 export default async function GamesLayout({ children }: PropsWithChildren) {
-	const games = await getAllGames({
-		orderBy: [{ year: "desc" }, { season: "asc" }],
-	});
+	const games = await getGamesForPage(true);
 
 	return (
 		<MantineProvider theme={gamesTheme}>
