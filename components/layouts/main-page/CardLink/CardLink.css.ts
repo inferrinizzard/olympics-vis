@@ -21,7 +21,7 @@ export const CardLinkCard = style({
 	},
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			display: "flex",
 			flexDirection: "row",
 			maxWidth: "unset",
@@ -38,7 +38,7 @@ export const CardLinkLink = style({
 	textDecoration: "none",
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			flexBasis: "6rem",
 		},
 	},
@@ -50,7 +50,7 @@ export const CardLinkImageWrapper = style({
 	marginTop: 0,
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			margin: 0,
 			width: "6rem",
 		},

@@ -4,7 +4,7 @@ import { vars } from "styles/theme";
 
 export const GridCol = style({
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			width: "100%",
 			maxWidth: "100%",
 			flexBasis: "100%",

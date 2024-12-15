@@ -10,7 +10,7 @@ export const CardListGrid = style({
 	placeItems: "stretch",
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			display: "flex",
 			gap: vars.spacing.xs,
 			flexDirection: "column",

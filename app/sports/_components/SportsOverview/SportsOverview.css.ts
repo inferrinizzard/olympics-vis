@@ -6,7 +6,7 @@ export const SportsOverviewContainer = style({
 	display: "flex",
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			flexDirection: "column",
 			alignItems: "center",
 		},
@@ -22,7 +22,7 @@ export const SportsOverviewImageContainer = style({
 	alignSelf: "center",
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			height: "10rem",
 		},
 	},
