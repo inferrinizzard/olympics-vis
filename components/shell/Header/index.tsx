@@ -6,25 +6,25 @@ import { usePathname } from "next/navigation";
 import {
 	AppShellHeader as MantineHeader,
 	type AppShellHeaderProps,
-	useMantineTheme,
 } from "@mantine/core";
+import { vars } from "styles/theme";
 
+import { ClientOnly } from "components/util/ClientOnly";
 import { classNames } from "lib/utils/classNames";
 
 import { MainHeader } from "./mainHeader";
 import { MobileHeader } from "./mobileHeader";
 import * as classes from "./Header.css";
+import { PlaceholderHeader } from "./placeholderHeader";
 
 const Header = (props: AppShellHeaderProps) => {
 	// Util Hooks
 	const path = usePathname();
-	const theme = useMantineTheme();
 
 	// Local State and Refs
 	const [shouldDisplayMobile, setShouldDisplayMobile] = useState(
 		typeof window !== "undefined" &&
-			window.matchMedia(`screen and (max-width: ${theme.breakpoints.sm})`)
-				.matches,
+			window.matchMedia(vars.smallerThan("sm")).matches,
 	);
 
 	// Side Effect Hooks
@@ -35,15 +35,12 @@ const Header = (props: AppShellHeaderProps) => {
 			}
 		};
 
-		const windowMediaQuery = window.matchMedia(
-			`screen and (max-width: ${theme.breakpoints.sm})`,
-		);
-
+		const windowMediaQuery = window.matchMedia(vars.smallerThan("sm"));
 		windowMediaQuery.addEventListener("change", mediaChangeHandler);
 
 		return () =>
 			windowMediaQuery.removeEventListener("change", mediaChangeHandler);
-	}, [theme.breakpoints.sm, shouldDisplayMobile]);
+	}, [shouldDisplayMobile]);
 
 	// Event Handlers
 	const activeHeaderLinkClassFn = useCallback(
@@ -67,7 +64,9 @@ const Header = (props: AppShellHeaderProps) => {
 
 	return (
 		<MantineHeader {...props} className={classes.Header}>
-			{shouldDisplayMobile ? mobileHeader : mainHeader}
+			<ClientOnly placeholder={<PlaceholderHeader />}>
+				{shouldDisplayMobile ? mobileHeader : mainHeader}
+			</ClientOnly>
 		</MantineHeader>
 	);
 };
