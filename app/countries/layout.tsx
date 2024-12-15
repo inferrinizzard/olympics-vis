@@ -1,15 +1,15 @@
 import type { PropsWithChildren } from "react";
 import { MantineProvider } from "@mantine/core";
 
-import { getAllCountries } from "lib/db";
 import PageNavButtons from "components/controls/PageNavButtons";
 
+import { getCountriesForPage } from "./_data";
 import { countriesTheme } from "./_theme";
 
 export default async function CountriesLayout({ children }: PropsWithChildren) {
-	const countries = await getAllCountries({
-		orderBy: [{ status: "asc" }, { code: "asc" }],
-	});
+	const { activeNOCs, specialNOCs, historicNOCs } =
+		await getCountriesForPage(true);
+	const countries = [...activeNOCs, ...specialNOCs, ...historicNOCs];
 
 	return (
 		<MantineProvider theme={countriesTheme}>
