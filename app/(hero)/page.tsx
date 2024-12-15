@@ -1,21 +1,8 @@
-import Link from "next/link";
-
 import { Box, Container, Title } from "@mantine/core";
 
-import type { Games, Sport, Country } from "types/prisma";
-import { getAllGames, getAllSports, getAllCountries } from "lib/db";
-
-import CardScroller from "./_components/CardScroller";
+import FeaturedCards from "./_components/FeaturedCards";
 
 const HomePage = async () => {
-	const games = await getAllGames({
-		orderBy: [{ year: "desc" }, { season: "asc" }],
-	});
-
-	const sports = await getAllSports();
-
-	const countries = await getAllCountries();
-
 	return (
 		<Container fluid h="100%" p="xs">
 			<Box
@@ -26,46 +13,16 @@ const HomePage = async () => {
 					left: 0,
 					top: 0,
 					opacity: "10%",
-					backgroundImage:
-						'url("https://upload.wikimedia.org/wikipedia/commons/a/a7/Olympic_flag.svg")',
+					backgroundImage: 'url("/images/country/shared/Olympic_flag.svg")',
 					backgroundSize: "contain",
 					pointerEvents: "none",
 				}}
 			/>
-			<section>
+			<Box component="section">
 				<Title order={1}>{"Olympics Vis"}</Title>
-			</section>
-			<Title order={2}>{"Temp"}</Title>
-			<Link passHref href="/games">
-				<Title order={3}>{"Games"}</Title>
-			</Link>
-			<Link passHref href="/countries">
-				<Title order={3}>{"Countries"}</Title>
-			</Link>
-			<Link passHref href="/sports">
-				<Title order={3}>{"Sports"}</Title>
-			</Link>
-			{/* <CardScroller<Games>
-				data={games}
-				route="games"
-				tooltipKey={"games"}
-				direction={1}
-				color="green"
-			/>
-			<CardScroller<Sport>
-				data={sports}
-				route="sports"
-				tooltipKey={"name"}
-				direction={-1}
-				color="red"
-			/>
-			<CardScroller<Country>
-				data={countries}
-				route="countries"
-				tooltipKey={"name"}
-				direction={1}
-				color="blue"
-			/> */}
+			</Box>
+
+			<FeaturedCards />
 		</Container>
 	);
 };
