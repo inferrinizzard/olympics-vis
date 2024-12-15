@@ -19,7 +19,7 @@ const GamesSportsModalButton = ({
 
 	return (
 		<>
-			<Button onClick={() => setIsModalOpen(true)}>
+			<Button onClick={() => setIsModalOpen(true)} size="xs" px="xs">
 				<Title order={5} component="p" style={{ textAlign: "center" }}>
 					{label}
 				</Title>

@@ -17,7 +17,8 @@ const DisplayModal = ({
 		<Modal
 			opened={isModalOpen}
 			onClose={() => setIsModalOpen(false)}
-			withCloseButton
+			withCloseButton={false}
+			size="auto"
 		>
 			{content}
 		</Modal>

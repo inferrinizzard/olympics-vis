@@ -25,7 +25,9 @@ const IconGrid = ({
 	const limit = endItem ? _limit - 1 : _limit;
 
 	return (
-		<Container className={classes.IconGrid}>
+		<Container
+			className={_limit > 0 ? classes.IconGrid : classes.LimitlessIconGrid}
+		>
 			{list.slice(0, limit).map(({ code, label }) => (
 				<Stack key={code} gap="xs" className={classes.IconGridItem}>
 					<Box className={classes.IconGridItemImageWrapper}>

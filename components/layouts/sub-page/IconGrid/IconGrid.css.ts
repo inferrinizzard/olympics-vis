@@ -16,6 +16,13 @@ export const IconGrid = style({
 	},
 });
 
+export const LimitlessIconGrid = style([
+	IconGrid,
+	{
+		gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))",
+	},
+]);
+
 export const IconGridItem = style({
 	alignItems: "center",
 	justifyContent: "center",
