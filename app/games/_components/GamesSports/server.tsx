@@ -1,12 +1,14 @@
 "use server";
 
-import { Box, Container, Stack, Title, Tooltip } from "@mantine/core";
+import { Box, Container, Stack, Title } from "@mantine/core";
 
 import type { GamesKey, SportKey } from "types/prisma";
 
 import GridCell from "components/layouts/sub-page/GridCell";
 import { Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
+
+import * as classes from "./GamesSports.css";
 
 interface GamesSportsProps {
 	gamesCode: GamesKey;
@@ -19,16 +21,9 @@ const GamesSports_Server = ({ gamesCode, sportsList }: GamesSportsProps) => {
 			<Title order={2} m="sm">
 				{"Sports"}
 			</Title>
-			<Container
-				style={{
-					display: "grid",
-					gridTemplateColumns: "repeat(3, 1fr)",
-					gridTemplateRows: "repeat(3, 1fr)",
-					gap: "1rem",
-				}}
-			>
+			<Container className={classes.SportsIconGrid}>
 				{sportsList.slice(0, 8).map((sport) => (
-					<Stack key={sport}>
+					<Stack key={sport} gap="xs" align="stretch">
 						<Box pos="relative" style={{ aspectRatio: "1 / 1" }}>
 							<Image
 								dir="sports"
@@ -38,17 +33,17 @@ const GamesSports_Server = ({ gamesCode, sportsList }: GamesSportsProps) => {
 								fill
 							/>
 						</Box>
-						<Title component="p" order={5}>
+						<Title order={5} component="p" style={{ textAlign: "center" }}>
 							{sport}
 						</Title>
 					</Stack>
 				))}
 				{sportsList.length > 8 && (
-					<Box>
-						<Title order={5} m="sm">
+					<Stack justify="center">
+						<Title order={5} component="p" style={{ textAlign: "center" }}>
 							{"See All"}
 						</Title>
-					</Box>
+					</Stack>
 				)}
 			</Container>
 		</GridCell>
