@@ -20,7 +20,8 @@ const GamesSports_Server = ({ gamesCode, sportsList }: GamesSportsProps) => {
 				{"Sports"}
 			</Title>
 			<IconGrid
-				list={sportsList}
+				list={sportsList.map((sport) => ({ code: sport }))}
+				limit={8}
 				buildImageProps={(sport: string) => ({
 					dir: "sports",
 					games: gamesCode,
