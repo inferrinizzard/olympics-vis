@@ -36,6 +36,7 @@ const GamesOverview_Server = ({
 						code={games.code}
 						alt={`Olympic emblem for ${games.code}`}
 						fill
+						sizes="10rem"
 						style={{ objectFit: "contain" }}
 					/>
 				</Box>

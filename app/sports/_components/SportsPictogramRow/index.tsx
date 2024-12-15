@@ -47,6 +47,7 @@ const SportsPictogramRow = async ({ sport }: SportProps) => {
 								games={games}
 								alt={`${sport.code} pictogram at ${games}`}
 								fill
+								sizes={"(max-width: 48em) 33vw, 10rem"}
 							/>
 						</Box>
 					</Tooltip>

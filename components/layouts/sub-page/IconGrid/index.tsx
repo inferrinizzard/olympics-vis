@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 
 import { Box, Container, Stack, Title } from "@mantine/core";
+import { vars } from "styles/theme";
 
 import { Image, type ImageProps } from "components/util/Image";
 
@@ -28,7 +29,12 @@ const IconGrid = ({
 			{list.slice(0, limit).map(({ code, label }) => (
 				<Stack key={code} gap="xs" className={classes.IconGridItem}>
 					<Box className={classes.IconGridItemImageWrapper}>
-						<Image {...buildImageProps(code)} code={code} fill />
+						<Image
+							{...buildImageProps(code)}
+							code={code}
+							fill
+							sizes={"(max-width: 48em) 33vw, 10rem"}
+						/>
 					</Box>
 					<Title order={5} component="p" style={{ textAlign: "center" }}>
 						{label ?? code}

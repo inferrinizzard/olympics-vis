@@ -50,6 +50,7 @@ const CountryOverview_Server = ({
 					code={country.code}
 					alt={`NOC Flag for ${country.code}`}
 					fill
+					sizes="10rem"
 					style={{ objectFit: "contain" }}
 				/>
 			</Box>

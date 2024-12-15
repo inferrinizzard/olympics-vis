@@ -48,6 +48,7 @@ const SportsOverview_Server = ({
 							code={sport.code}
 							alt={`${sport.code} sport icon`}
 							fill
+							sizes="10rem"
 							style={{ width: "100%", aspectRatio: "1 / 1" }}
 						/>
 					</Box>

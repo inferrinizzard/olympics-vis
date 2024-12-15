@@ -40,6 +40,9 @@ const CardLink = ({
 					<Image
 						{...imageProps}
 						fill
+						sizes={
+							"(max-width: 48em) 10rem, (max-width: 62em) 20vw, (max-width: 75em) 12vw, 20rem"
+						}
 						style={{ ...imageProps.style, objectFit: "contain" }}
 					/>
 				</CardSection>
