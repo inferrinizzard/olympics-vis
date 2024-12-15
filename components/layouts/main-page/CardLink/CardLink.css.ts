@@ -4,7 +4,7 @@ import { vars } from "styles/theme";
 
 export const CardLinkCard = style({
 	height: "100%",
-	width: "-webkit-fill-available",
+	width: ["-webkit-fill-available", "-moz-available"],
 	minWidth: "10rem",
 	maxWidth: "13.5rem",
 	// aspectRatio: "3 / 4",
@@ -21,7 +21,7 @@ export const CardLinkCard = style({
 	},
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			display: "flex",
 			flexDirection: "row",
 			maxWidth: "unset",
@@ -38,7 +38,7 @@ export const CardLinkLink = style({
 	textDecoration: "none",
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			flexBasis: "6rem",
 		},
 	},
@@ -50,7 +50,7 @@ export const CardLinkImageWrapper = style({
 	marginTop: 0,
 
 	"@media": {
-		[`screen and (max-width: ${vars.breakpoints.sm})`]: {
+		[vars.smallerThan("sm")]: {
 			margin: 0,
 			width: "6rem",
 		},

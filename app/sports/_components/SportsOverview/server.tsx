@@ -1,3 +1,5 @@
+"use server";
+
 import { Box, Title } from "@mantine/core";
 
 import type { CountryKey, GamesKey, Sport } from "types/prisma";
@@ -8,7 +10,7 @@ import MapPin from "tabler-icons-react/dist/icons/map-pin";
 
 import GridCell from "components/layouts/sub-page/GridCell";
 import StatCard from "components/content/StatCard";
-import Excerpt from "components/content/Excerpt";
+import WikipediaExcerpt from "components/content/WikipediaExcerpt";
 import { Image } from "components/util/Image";
 import { getGameName } from "lib/utils/getGameName";
 
@@ -16,16 +18,16 @@ import * as classes from "./SportsOverview.css";
 
 interface SportsOverviewProps {
 	sport: Sport;
-	wikipediaExcerpt: string;
 	bestCountry: CountryKey;
 	firstGames: GamesKey;
+	pageName: string;
 }
 
-const SportsOverview_Client = ({
+const SportsOverview_Server = ({
 	sport,
-	wikipediaExcerpt,
 	bestCountry,
 	firstGames,
+	pageName,
 }: SportsOverviewProps) => {
 	return (
 		<GridCell bg="red">
@@ -36,19 +38,23 @@ const SportsOverview_Client = ({
 					display="flex"
 					style={{ flexDirection: "column", gap: "1rem" }}
 				>
-					<Title order={2}>{`${sport.name} (${sport.code})`}</Title>
+					<Title
+						order={2}
+						style={{ color: "white" }}
+					>{`${sport.name} (${sport.code})`}</Title>
 					<Box className={classes.SportsOverviewImageContainer}>
 						<Image
 							dir="sports"
 							code={sport.code}
 							alt={`${sport.code} sport icon`}
 							fill
+							sizes="10rem"
 							style={{ width: "100%", aspectRatio: "1 / 1" }}
 						/>
 					</Box>
 				</Box>
 				<Box p="1rem" style={{ flexGrow: 1 }}>
-					<Excerpt text={wikipediaExcerpt} />
+					<WikipediaExcerpt pageName={pageName} />
 				</Box>
 				<Box
 					style={{ display: "flex", rowGap: "1rem", flexDirection: "column" }}
@@ -66,4 +72,4 @@ const SportsOverview_Client = ({
 	);
 };
 
-export default SportsOverview_Client;
+export default SportsOverview_Server;

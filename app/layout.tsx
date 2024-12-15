@@ -41,7 +41,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				<MantineProvider theme={baseTheme}>
 					<AppShell header={{ height: HEADER_HEIGHT }}>
 						<Header />
-						<AppShellMain>
+						<AppShellMain style={{ marginBottom: "3rem" }}>
 							{children}
 							<BackButton />
 						</AppShellMain>

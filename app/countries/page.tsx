@@ -1,23 +1,14 @@
 import type { Country } from "types/prisma";
-import { getAllCountries } from "lib/db";
 
 import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
+import SectionLinks from "components/layouts/main-page/SectionLinks";
 
+import { getCountriesForPage } from "./_data";
 import TopMedalsChart from "./_components/TopMedalsChart";
 
 const CountriesAll = async () => {
-	const countries = (await getAllCountries()) as Country[];
-
-	const activeNOCs: Country[] = countries.filter(
-		({ status }) => status === "current",
-	);
-	const specialNOCs: Country[] = countries.filter(
-		({ status }) => status === "special",
-	);
-	const historicNOCs: Country[] = countries.filter(
-		({ status }) => status === "historic",
-	);
+	const { activeNOCs, specialNOCs, historicNOCs } = await getCountriesForPage();
 
 	const countryCardsMapper = (country: Country) => ({
 		imageProps: {
@@ -37,6 +28,8 @@ const CountriesAll = async () => {
 	return (
 		<MainPageLayout title="Countries">
 			{/* <TopMedalsChart /> */}
+
+			<SectionLinks ids={["Active", "Special", "Historic"]} />
 
 			<CardList title="Active" cardData={activeNOCs.map(countryCardsMapper)} />
 			<CardList

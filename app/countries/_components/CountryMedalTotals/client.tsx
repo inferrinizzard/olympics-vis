@@ -69,6 +69,7 @@ const MedalSet = ({ title, gold, silver, bronze, total }: MedalSetProps) => {
 							src={`/images/medals/${image}.svg`}
 							alt={image}
 							fill
+							sizes="2rem"
 							style={{ aspectRatio: "1 / 1", objectFit: "contain" }}
 						/>
 					</Box>

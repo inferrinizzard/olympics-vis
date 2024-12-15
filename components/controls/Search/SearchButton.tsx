@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
-import { ActionIcon } from "@mantine/core";
 
-import { Search } from "tabler-icons-react";
+import { ActionIcon } from "@mantine/core";
+import Search from "tabler-icons-react/dist/icons/search";
 
 interface SearchButtonProps {
 	setIsSearchOpen: Dispatch<SetStateAction<boolean>>;
