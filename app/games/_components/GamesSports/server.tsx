@@ -6,9 +6,8 @@ import type { GamesKey, SportKey } from "types/prisma";
 
 import GridCell from "components/layouts/sub-page/GridCell";
 import IconGrid from "components/layouts/sub-page/IconGrid";
+import DisplayModalButton from "components/layouts/sub-page/DisplayModal/DisplayModalButton";
 import { getGameName } from "lib/utils/getGameName";
-
-import GamesSportsModalButton from "./GamesSportsModalButton";
 
 interface GamesSportsProps {
 	gamesCode: GamesKey;
@@ -35,8 +34,9 @@ const GamesSports_Server = ({ gamesCode, sportsList }: GamesSportsProps) => {
 				limit={9}
 				buildImageProps={buildIconImageProps}
 				endItem={
-					<GamesSportsModalButton
-						iconGrid={
+					<DisplayModalButton
+						label="See All"
+						content={
 							<IconGrid list={iconList} buildImageProps={buildIconImageProps} />
 						}
 					/>
