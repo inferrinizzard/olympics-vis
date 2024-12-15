@@ -1,4 +1,6 @@
-import { Box, Container, Title, Tooltip } from "@mantine/core";
+"use server";
+
+import { Box, Container, Stack, Title, Tooltip } from "@mantine/core";
 
 import type { GamesKey, SportKey } from "types/prisma";
 
@@ -11,7 +13,7 @@ interface GamesSportsProps {
 	sportsList: SportKey[];
 }
 
-const GamesSports_Client = ({ gamesCode, sportsList }: GamesSportsProps) => {
+const GamesSports_Server = ({ gamesCode, sportsList }: GamesSportsProps) => {
 	return (
 		<GridCell h="100%">
 			<Title order={2} m="sm">
@@ -26,7 +28,7 @@ const GamesSports_Client = ({ gamesCode, sportsList }: GamesSportsProps) => {
 				}}
 			>
 				{sportsList.slice(0, 8).map((sport) => (
-					<Tooltip label={sport} key={sport} position="bottom">
+					<Stack key={sport}>
 						<Box pos="relative" style={{ aspectRatio: "1 / 1" }}>
 							<Image
 								dir="sports"
@@ -36,16 +38,21 @@ const GamesSports_Client = ({ gamesCode, sportsList }: GamesSportsProps) => {
 								fill
 							/>
 						</Box>
-					</Tooltip>
+						<Title component="p" order={5}>
+							{sport}
+						</Title>
+					</Stack>
 				))}
-				<Box>
-					<Title order={5} m="sm">
-						{"See All"}
-					</Title>
-				</Box>
+				{sportsList.length > 8 && (
+					<Box>
+						<Title order={5} m="sm">
+							{"See All"}
+						</Title>
+					</Box>
+				)}
 			</Container>
 		</GridCell>
 	);
 };
 
-export default GamesSports_Client;
+export default GamesSports_Server;
