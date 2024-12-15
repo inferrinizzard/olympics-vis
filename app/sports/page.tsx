@@ -3,6 +3,7 @@ import { getAllSports } from "lib/db";
 
 import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
+import SectionLinks from "components/layouts/main-page/SectionLinks";
 
 const SportsAll = async () => {
 	const sports = await getAllSports();
@@ -57,6 +58,12 @@ const SportsAll = async () => {
 
 	return (
 		<MainPageLayout title="Sports">
+			<SectionLinks
+				ids={Object.keys(sportsLists).map(
+					(title) => title.at(0)?.toUpperCase() + title.slice(1),
+				)}
+			/>
+
 			{Object.entries(sportsLists).map(([title, list]) => (
 				<CardList
 					key={title}

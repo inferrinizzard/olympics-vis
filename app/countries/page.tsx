@@ -3,6 +3,7 @@ import { getAllCountries } from "lib/db";
 
 import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
+import SectionLinks from "components/layouts/main-page/SectionLinks";
 
 import TopMedalsChart from "./_components/TopMedalsChart";
 
@@ -37,6 +38,8 @@ const CountriesAll = async () => {
 	return (
 		<MainPageLayout title="Countries">
 			{/* <TopMedalsChart /> */}
+
+			<SectionLinks ids={["Active", "Special", "Historic"]} />
 
 			<CardList title="Active" cardData={activeNOCs.map(countryCardsMapper)} />
 			<CardList
