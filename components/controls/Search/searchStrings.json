@@ -1327,7 +1327,7 @@
   {
     "path": "games",
     "code": "1912_stockholm_olympics",
-    "name": "1912 St.ockholm Olympics"
+    "name": "1912 Stockholm Olympics"
   },
   {
     "path": "games",
@@ -1352,7 +1352,7 @@
   {
     "path": "games",
     "code": "1928_amsterdam_olympics",
-    "name": "1928 Amst.erdam Olympics"
+    "name": "1928 Amsterdam Olympics"
   },
   {
     "path": "games",
@@ -1542,7 +1542,7 @@
   {
     "path": "games",
     "code": "1984_new-york+stoke-mandeville_paralympics",
-    "name": "1984 New York-St.oke Mandeville Paralympics"
+    "name": "1984 New York-Stoke Mandeville Paralympics"
   },
   {
     "path": "games",
@@ -1672,7 +1672,7 @@
   {
     "path": "games",
     "code": "2010_singapore_youth",
-    "name": "2010 Singapore Youth"
+    "name": "2010 Singapore Youth Olympics"
   },
   {
     "path": "games",
@@ -1687,7 +1687,7 @@
   {
     "path": "games",
     "code": "2012_innsbruck_youth",
-    "name": "2012 Innsbruck Youth"
+    "name": "2012 Innsbruck Youth Olympics"
   },
   {
     "path": "games",
@@ -1702,7 +1702,7 @@
   {
     "path": "games",
     "code": "2014_nanjing_youth",
-    "name": "2014 Nanjing Youth"
+    "name": "2014 Nanjing Youth Olympics"
   },
   {
     "path": "games",
@@ -1717,7 +1717,7 @@
   {
     "path": "games",
     "code": "2016_lillehammer_youth",
-    "name": "2016 Lillehammer Youth"
+    "name": "2016 Lillehammer Youth Olympics"
   },
   {
     "path": "games",
@@ -1732,7 +1732,7 @@
   {
     "path": "games",
     "code": "2018_buenos-aires_youth",
-    "name": "2018 Buenos Aires Youth"
+    "name": "2018 Buenos Aires Youth Olympics"
   },
   {
     "path": "games",
@@ -1747,7 +1747,7 @@
   {
     "path": "games",
     "code": "2020_lausanne_youth",
-    "name": "2020 Lausanne Youth"
+    "name": "2020 Lausanne Youth Olympics"
   },
   {
     "path": "games",
@@ -1772,7 +1772,7 @@
   {
     "path": "games",
     "code": "2024_gangwon_youth",
-    "name": "2024 Gangwon Youth"
+    "name": "2024 Gangwon Youth Olympics"
   },
   {
     "path": "games",
@@ -1787,7 +1787,7 @@
   {
     "path": "games",
     "code": "2026_dakar_youth",
-    "name": "2026 Dakar Youth"
+    "name": "2026 Dakar Youth Olympics"
   },
   {
     "path": "games",
@@ -2456,6 +2456,11 @@
   },
   {
     "path": "sports",
+    "code": "MT",
+    "name": "Climbing and Mountaineering"
+  },
+  {
+    "path": "sports",
     "code": "MTB",
     "name": "Cycling Mountain Bike"
   },
@@ -2463,11 +2468,6 @@
     "path": "sports",
     "code": "MTI",
     "name": "Muaythai"
-  },
-  {
-    "path": "sports",
-    "code": "MTN",
-    "name": "Climbing and Mountaineering"
   },
   {
     "path": "sports",
@@ -2773,6 +2773,11 @@
     "path": "sports",
     "code": "ROI",
     "name": "Indoor Rowing"
+  },
+  {
+    "path": "sports",
+    "code": "ROL",
+    "name": "Roller Speed Skating"
   },
   {
     "path": "sports",
