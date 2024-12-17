@@ -1,5 +1,6 @@
 import { writeFile } from "node:fs";
 
+import { cacheStrategy } from "lib/db";
 import { prisma } from "lib/db/prisma";
 
 import { getAllGamesForSport } from "app/sports/_components/SportsPictogramRow/data";
@@ -17,6 +18,7 @@ const paralympicFallback = "/images/country/shared/Paralympic_flag.svg";
 const buildImageMap = async () => {
 	const countries = await prisma.country.findMany({
 		select: { code: true, name: true },
+		cacheStrategy,
 	});
 
 	for (const { code, name } of countries) {
@@ -33,6 +35,7 @@ const buildImageMap = async () => {
 
 	const games = await prisma.games.findMany({
 		select: { code: true, edition: true },
+		cacheStrategy,
 	});
 
 	for (const { code, edition } of games) {
@@ -46,6 +49,7 @@ const buildImageMap = async () => {
 
 	const sports = await prisma.sport.findMany({
 		select: { code: true, parent: true },
+		cacheStrategy,
 	});
 
 	for (const { code, parent } of sports) {

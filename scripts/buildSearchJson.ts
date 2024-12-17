@@ -1,5 +1,6 @@
 import { writeFile } from "node:fs";
 
+import { cacheStrategy } from "lib/db";
 import { prisma } from "lib/db/prisma";
 import type { PathKey } from "types/prisma";
 
@@ -8,14 +9,17 @@ import { getGameName } from "lib/utils/getGameName";
 const buildSearchJson = async () => {
 	const countries = await prisma.country.findMany({
 		select: { code: true, name: true },
+		cacheStrategy,
 	});
 
 	const games = await prisma.games.findMany({
 		select: { code: true },
+		cacheStrategy,
 	});
 
 	const sports = await prisma.sport.findMany({
 		select: { code: true, name: true },
+		cacheStrategy,
 	});
 
 	const data = [
