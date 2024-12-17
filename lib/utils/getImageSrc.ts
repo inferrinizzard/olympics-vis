@@ -11,14 +11,13 @@ export const buildImageMapKey = (
 	...extra: (string | undefined)[]
 ) => `${dir}:${[code, ...extra.filter((x) => x)].join("+")}`;
 
-// TODO: add final fallbacks and remove png
 export const getCountryImageSrc = (code: CountryKey) => {
 	if (code in sharedFlags) {
 		const sharedFlag = sharedFlags[code as keyof typeof sharedFlags];
 		return `/images/country/shared/${sharedFlag}`;
 	}
 
-	const match = ["svg", "avif", "png"]
+	const match = ["svg", "avif"]
 		.map((ext) => `/images/country/${code}.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
 
@@ -26,7 +25,7 @@ export const getCountryImageSrc = (code: CountryKey) => {
 };
 
 export const getGamesImageSrc = (code: GamesKey) => {
-	const match = ["svg", "avif", "png", "jpg"]
+	const match = ["svg", "avif"]
 		.map((ext) => `/images/games/${code}/emblem.${ext}`)
 		.find((path) => existsSync(`public/${path}`));
 
@@ -41,8 +40,7 @@ export const getSportsImageSrc = (
 	const paths = [];
 
 	if (games) {
-		// paths.push(`/images/games/${games}/sports/${code}.avif`);
-		paths.push(`/images/games/${games}/sports/${code}.png`);
+		paths.push(`/images/games/${games}/sports/${code}.avif`);
 	}
 
 	paths.push(
