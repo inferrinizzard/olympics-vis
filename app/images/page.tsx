@@ -7,6 +7,7 @@ import { buildImageMapKey } from "lib/utils/getImageSrc";
 import imageMap from "components/util/imageMap.json";
 import { Fragment } from "react";
 
+// TODO: read from image dir
 const ImagesAll = async () => {
 	const games = await getAllGames({ select: { code: true } });
 	const countries = await getAllCountries({
