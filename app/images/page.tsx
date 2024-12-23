@@ -18,7 +18,7 @@ const ImagesAll = async () => {
 	const gamesSportsList = await Promise.all(
 		games.map(async (game) => ({
 			gamesWithSport: game,
-			gameSports: await getSportsForGames({ games: game.code }),
+			gameSports: (await getSportsForGames({ games: game.code })).sort(),
 		})),
 	);
 
