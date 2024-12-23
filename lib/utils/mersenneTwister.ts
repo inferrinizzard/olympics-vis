@@ -1,3 +1,4 @@
+// @ts-nocheck
 // https://gist.github.com/banksean/300494
 
 /*
