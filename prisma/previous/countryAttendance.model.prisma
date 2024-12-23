@@ -1,0 +1,8 @@
+//#model CountryAttendance {
+//#  country String   @id //#@db.VarChar(3)
+//#  games   String[]
+
+//#  //#country_detail Country @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country_attendance_country")
+
+//#  @@map("country_attendance")
+//#}

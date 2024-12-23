@@ -1,0 +1,10 @@
+model Country {
+  code      String @id @unique @db.String(3)
+  name      String @db.String(50)
+  status    String
+  page_name String
+
+  ParticipationRecords ParticipationRecords[]
+
+  @@map("country_detail")
+}
