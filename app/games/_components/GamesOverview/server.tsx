@@ -29,33 +29,35 @@ const GamesOverview_Server = ({
 }: GamesOverviewProps) => {
 	return (
 		<GridCell className={classes.GridContainer}>
-			<Group>
-				<Box h="100%" pos="relative" style={{ flexGrow: 1 }}>
-					<Image
-						dir="games"
-						code={games.code}
-						alt={`Olympic emblem for ${games.code}`}
-						fill
-						sizes="10rem"
-						style={{ objectFit: "contain" }}
-					/>
-				</Box>
-				<Stack maw="75%">
-					<Title
-						order={1}
-						mt="sm"
-						style={{ color: "white" }}
-					>{`${getGameName(games.code)}`}</Title>
-					{games.motto ? (
-						<Title order={3} style={{ color: "white" }}>
-							{games.motto}
-						</Title>
-					) : null}
-					<Box style={{ flexGrow: 1 }}>
-						<WikipediaExcerpt pageName={pageName} height={200} />
+			<Stack>
+				<Group>
+					<Box h="100%" pos="relative" maw="10rem" style={{ flexGrow: 1 }}>
+						<Image
+							dir="games"
+							code={games.code}
+							alt={`Olympic emblem for ${games.code}`}
+							fill
+							sizes="10rem"
+							style={{ objectFit: "contain" }}
+						/>
 					</Box>
-				</Stack>
-			</Group>
+					<Stack>
+						<Title
+							order={1}
+							mt="sm"
+							style={{ color: "white" }}
+						>{`${getGameName(games.code)}`}</Title>
+						{games.motto ? (
+							<Title order={3} style={{ color: "white" }}>
+								{games.motto}
+							</Title>
+						) : null}
+					</Stack>
+				</Group>
+				<Box style={{ flexGrow: 1 }}>
+					<WikipediaExcerpt pageName={pageName} height={200} />
+				</Box>
+			</Stack>
 			<Group justify="space-evenly">
 				<StatCard
 					Icon={Calendar}
