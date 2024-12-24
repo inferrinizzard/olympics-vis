@@ -40,15 +40,11 @@ export const getSportsImageSrc = (
 	const paths = [];
 
 	if (games) {
-		paths.push(`/images/games/${games}/sports/${code}.avif`);
+		paths.push(
+			`/images/games/${games}/sports/${code}.svg`,
+			`/images/games/${games}/sports/${code}.avif`,
+		);
 	}
-
-	paths.push(
-		`/images/sports/official/${code}.svg`,
-		`/images/sports/official/${code}.avif`,
-		`/images/sports/${code}.svg`,
-		`/images/sports/${code}.avif`,
-	);
 
 	if (parent) {
 		const parentPath = getSportsImageSrc(parent, undefined, games);
@@ -56,6 +52,14 @@ export const getSportsImageSrc = (
 			paths.push(parentPath);
 		}
 	}
+
+	paths.push(
+		`/images/sports/solid/${code}.svg`,
+		`/images/sports/official/${code}.svg`,
+		`/images/sports/official/${code}.avif`,
+		`/images/sports/${code}.svg`,
+		`/images/sports/${code}.avif`,
+	);
 
 	if (code in parentDisciplineMap) {
 		const disciplines =
