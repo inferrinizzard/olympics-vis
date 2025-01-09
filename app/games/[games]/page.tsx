@@ -23,7 +23,7 @@ export async function generateStaticParams() {
 const GamesPage: NextPage<{ params: { games: string } }> = async ({
 	params: { games: gamesCode },
 }) => {
-	const games = await getGames({ games: gamesCode });
+	const games = await getGames({ games: decodeURIComponent(gamesCode) });
 
 	if (!games) {
 		return null;

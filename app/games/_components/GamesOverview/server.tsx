@@ -30,7 +30,7 @@ const GamesOverview_Server = ({
 	return (
 		<GridCell className={classes.GridContainer}>
 			<Stack>
-				<Group>
+				<Group wrap="nowrap">
 					<Box h="100%" pos="relative" maw="10rem" style={{ flexGrow: 1 }}>
 						<Image
 							dir="games"
