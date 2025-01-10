@@ -6,8 +6,13 @@ import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
 
 import { getGamesForPage } from "./_data";
+import FilterButtons from "components/layouts/main-page/FilterButtons";
 
-const GamesAll = async () => {
+interface GamesPageProps {
+	searchParams: Record<string, string | string[] | undefined>;
+}
+
+const GamesAll = async ({ searchParams }: GamesPageProps) => {
 	const games = await getGamesForPage();
 
 	const gamesCardMapper = ({ code: games }: Games) => ({
@@ -20,9 +25,23 @@ const GamesAll = async () => {
 		caption: getGameName(games),
 	});
 
+	const searchEntries = Object.entries(searchParams).map(([key, values]) =>
+		values ? [key, [values].flat()] : [],
+	);
+	const finalGames = searchEntries.length
+		? games.filter((game) =>
+				searchEntries.every(
+					([key, values]) =>
+						game[key as keyof Games] &&
+						values.includes(game[key as keyof Games] as string),
+				),
+			)
+		: games;
+
 	return (
 		<MainPageLayout title="Games">
-			<CardList title="All" cardData={games.map(gamesCardMapper)} />
+			<FilterButtons searchKey="season" options={["summer", "winter"]} />
+			<CardList cardData={finalGames.map(gamesCardMapper)} />
 		</MainPageLayout>
 	);
 };

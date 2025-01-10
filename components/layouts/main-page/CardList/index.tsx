@@ -5,7 +5,7 @@ import CardLink, { type CardLinkProps } from "../CardLink";
 import * as classes from "./CardList.css";
 
 export interface CardListProps<CardProps extends CardLinkProps> {
-	title: string;
+	title?: string;
 	cardData: CardProps[];
 }
 
@@ -15,7 +15,7 @@ export const CardList = <CardProps extends CardLinkProps>({
 }: CardListProps<CardProps>) => {
 	return (
 		<Stack id={title} component="section" mt="xl">
-			<Title order={2}>{title}</Title>
+			{title && <Title order={2}>{title}</Title>}
 			<Group className={classes.CardListGrid}>
 				{cardData.map((cardProps) => (
 					<CardLink
