@@ -1,16 +1,16 @@
 import type { Games } from "types/prisma";
+import type { PageProps } from "types/next";
 
 import { getGameName } from "lib/utils/getGameName";
 
 import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
-
-import { getGamesForPage } from "./_data";
 import FilterButtons from "components/layouts/main-page/FilterButtons";
 
-interface GamesPageProps {
-	searchParams: Record<string, string | string[] | undefined>;
-}
+import { getGamesForPage } from "./_data";
+import { filterGames } from "./_filter";
+
+interface GamesPageProps extends PageProps {}
 
 const GamesAll = async ({ searchParams }: GamesPageProps) => {
 	const games = await getGamesForPage();
@@ -25,23 +25,18 @@ const GamesAll = async ({ searchParams }: GamesPageProps) => {
 		caption: getGameName(games),
 	});
 
-	const searchEntries = Object.entries(searchParams).map(([key, values]) =>
-		values ? [key, [values].flat()] : [],
-	);
-	const finalGames = searchEntries.length
-		? games.filter((game) =>
-				searchEntries.every(
-					([key, values]) =>
-						game[key as keyof Games] &&
-						values.includes(game[key as keyof Games] as string),
-				),
-			)
-		: games;
+	const { filteredGames, filters } = filterGames(games, searchParams);
 
 	return (
 		<MainPageLayout title="Games">
-			<FilterButtons searchKey="season" options={["summer", "winter"]} />
-			<CardList cardData={finalGames.map(gamesCardMapper)} />
+			{filters.map(([filterKey, filterSet]) => (
+				<FilterButtons
+					key={filterKey}
+					searchKey={filterKey}
+					options={filterSet}
+				/>
+			))}
+			<CardList cardData={filteredGames.map(gamesCardMapper)} />
 		</MainPageLayout>
 	);
 };

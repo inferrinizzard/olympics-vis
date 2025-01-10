@@ -7,7 +7,7 @@ import { useCallback } from "react";
 
 interface FilterButtonsProps {
 	searchKey: string;
-	options: string[];
+	options: IteratorObject<string>;
 }
 
 // can be made generic in URLSearchButtons
