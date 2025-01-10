@@ -7,8 +7,8 @@ import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
 import { CardList } from "components/layouts/main-page/CardList";
 import FilterButtons from "components/layouts/main-page/FilterButtons";
 
-import { getGamesForPage } from "./_data";
-import { filterGames } from "./_filter";
+import { getGamesForPage } from "./_main/_data";
+import { filterGames } from "./_main/_filter";
 
 interface GamesPageProps extends PageProps {}
 
