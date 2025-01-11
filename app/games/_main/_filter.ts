@@ -24,12 +24,7 @@ export const filterGames = (
 		(filterKey) =>
 			[
 				filterKey,
-				games
-					.reduce(
-						(filterSet, game) => filterSet.add(game[filterKey]),
-						new Set<string>(),
-					)
-					.values(),
+				Array.from(new Set(games.map((game) => game[filterKey]))),
 			] as const,
 	);
 
