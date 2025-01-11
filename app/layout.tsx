@@ -28,6 +28,9 @@ export const metadata: Metadata = {
 		default: "Olympics Vis",
 	},
 	description: "Web Visualiser and Database of Olympic Games & Sports",
+	icons: {
+		icon: "/images/country/shared/Olympic_flag.svg",
+	},
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -35,11 +38,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
 		<html lang="en" className={workSans.className}>
 			<head>
 				<ColorSchemeScript />
-				<link rel="shortcut icon" href="/favicon.svg" />
 				<meta
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
 				/>
+				<meta name="apple-mobile-web-app-title" content="Olympics Vis" />
 			</head>
 			<body>
 				<MantineProvider theme={baseTheme}>
