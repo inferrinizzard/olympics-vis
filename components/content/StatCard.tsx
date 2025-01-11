@@ -1,18 +1,21 @@
 import type { CSSProperties } from "react";
+import Link from "next/link";
+
 import { Box, Paper, Text, Title } from "@mantine/core";
 
 export interface StatCardProps {
 	Icon: React.ComponentType<{ style: CSSProperties }>;
 	title: string;
 	text: string | number | null | undefined;
+	linkTo?: string;
 }
 
-const StatCard = ({ Icon, title, text }: StatCardProps) => {
+const StatCard = ({ Icon, title, text, linkTo }: StatCardProps) => {
 	if (!text) {
 		return null;
 	}
 
-	return (
+	const renderCard = () => (
 		<Paper p="sm" maw="24rem" miw="12rem" style={{ flexGrow: 1 }}>
 			<Box style={{ display: "flex", columnGap: "0.5rem" }}>
 				<Box style={{ display: "flex", alignContent: "center" }}>
@@ -24,6 +27,14 @@ const StatCard = ({ Icon, title, text }: StatCardProps) => {
 				</Box>
 			</Box>
 		</Paper>
+	);
+
+	return linkTo ? (
+		<Link href={linkTo} style={{ color: "black", textDecoration: "auto" }}>
+			{renderCard()}
+		</Link>
+	) : (
+		renderCard()
 	);
 };
 

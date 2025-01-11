@@ -1,14 +1,15 @@
 "use server";
 
-import { Box, Group, Title } from "@mantine/core";
+import Link from "next/link";
 
-import type { Country, GamesKey, SportKey } from "types/prisma";
+import { Box, Group, Title } from "@mantine/core";
 
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Medal from "tabler-icons-react/dist/icons/medal";
 import Run from "tabler-icons-react/dist/icons/run";
 import Trophy from "tabler-icons-react/dist/icons/trophy";
 
+import type { Country, GamesKey, SportKey } from "types/prisma";
 import GridCell from "components/layouts/sub-page/GridCell";
 import StatCard from "components/content/StatCard";
 import WikipediaExcerpt from "components/content/WikipediaExcerpt";
@@ -61,20 +62,23 @@ const CountryOverview_Server = ({
 				<StatCard
 					Icon={Calendar}
 					title={"First Games"}
-					text={firstGames ? getGameName(firstGames) : "N/a"}
+					text={getGameName(firstGames)}
+					linkTo={`/games/${firstGames}`}
 				/>
 				<StatCard Icon={Medal} title={"Total Medals"} text={`${totalMedals}`} />
 				{/* <StatCard Icon={Home} title={'Games Hosted'} text={''} /> */}
-				{bestGames && (
-					<StatCard
-						Icon={Trophy}
-						title={"Best Games"}
-						text={getGameName(bestGames)}
-					/>
-				)}
-				{bestSport && (
-					<StatCard Icon={Run} title={"Best Sport"} text={bestSport} />
-				)}
+				<StatCard
+					Icon={Trophy}
+					title={"Best Games"}
+					text={bestGames ? getGameName(bestGames) : "N/a"}
+					linkTo={bestGames ? `/games/${bestGames}` : undefined}
+				/>
+				<StatCard
+					Icon={Run}
+					title={"Best Sport"}
+					text={bestSport || "N/a"}
+					linkTo={bestSport ? `/sports/${bestSport}` : undefined}
+				/>
 			</Group>
 		</GridCell>
 	);
