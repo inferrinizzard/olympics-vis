@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import type { Metadata } from "next/types";
 
 import "@mantine/core/styles.css";
 import {
@@ -21,9 +22,15 @@ const workSans = Work_Sans({
 	variable: "--font-work-sans",
 });
 
-export const metadata = {
-	title: "Mantine Next.js template",
-	description: "I am using Mantine with Next.js!",
+export const metadata: Metadata = {
+	title: {
+		template: "%s | Olympics Vis",
+		default: "Olympics Vis",
+	},
+	description: "Web Visualiser and Database of Olympic Games & Sports",
+	icons: {
+		icon: "/images/country/shared/Olympic_flag.svg",
+	},
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -31,11 +38,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
 		<html lang="en" className={workSans.className}>
 			<head>
 				<ColorSchemeScript />
-				<link rel="shortcut icon" href="/favicon.svg" />
 				<meta
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
 				/>
+				<meta name="apple-mobile-web-app-title" content="Olympics Vis" />
 			</head>
 			<body>
 				<MantineProvider theme={baseTheme}>

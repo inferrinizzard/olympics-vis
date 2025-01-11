@@ -8,7 +8,7 @@ import type { CountryCodeParam } from "lib/db";
 export const getMedalTotalsForCountry = async ({ country }: CountryCodeParam) =>
 	prisma.$queryRaw`
 		SELECT
-			country,
+			country, -- < this whitespace makes a difference ??
 			season,
 			edition,
 			CAST(SUM(gold) AS INT2) as gold,

@@ -1,13 +1,14 @@
 "use server";
 
-import { Box, Title } from "@mantine/core";
+import Link from "next/link";
 
-import type { CountryKey, GamesKey, Sport } from "types/prisma";
+import { Box, Title } from "@mantine/core";
 
 import Calendar from "tabler-icons-react/dist/icons/calendar";
 import Hash from "tabler-icons-react/dist/icons/hash";
 import MapPin from "tabler-icons-react/dist/icons/map-pin";
 
+import type { CountryKey, GamesKey, Sport } from "types/prisma";
 import GridCell from "components/layouts/sub-page/GridCell";
 import StatCard from "components/content/StatCard";
 import WikipediaExcerpt from "components/content/WikipediaExcerpt";
@@ -59,11 +60,17 @@ const SportsOverview_Server = ({
 				<Box
 					style={{ display: "flex", rowGap: "1rem", flexDirection: "column" }}
 				>
-					<StatCard Icon={MapPin} title={"Best Country"} text={bestCountry} />
+					<StatCard
+						Icon={MapPin}
+						title={"Best Country"}
+						text={bestCountry || "N/a"}
+						linkTo={bestCountry ? `/countries/${bestCountry}` : undefined}
+					/>
 					<StatCard
 						Icon={Calendar}
 						title={"First Games"}
-						text={getGameName(firstGames)}
+						text={firstGames ? getGameName(firstGames) : "Future"}
+						linkTo={firstGames ? `/games/${firstGames}` : undefined}
 					/>
 					<StatCard Icon={Hash} title={"Number of Events"} text={"0"} />
 				</Box>

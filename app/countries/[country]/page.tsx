@@ -1,5 +1,8 @@
 import type { NextPage } from "next";
+
 import { Container, Grid, GridCol } from "@mantine/core";
+
+import type { MetadataProps } from "types/next";
 
 import { getAllCountries, getCountry } from "lib/db";
 
@@ -10,13 +13,23 @@ import CountrySportsMedalsChart from "../_components/CountrySportsMedalsChart";
 
 import * as classes from "../../common.css";
 
+type CountryParams = { country: string };
+
 export async function generateStaticParams() {
 	const countries = await getAllCountries({ select: { code: true } });
 
 	return countries.map(({ code }) => ({ params: { country: code } }));
 }
 
-const CountryPage: NextPage<{ params: { country: string } }> = async ({
+export const generateMetadata = async ({
+	params,
+}: MetadataProps<CountryParams>) => {
+	const countryCode = (await params).country;
+	const country = await getCountry({ country: countryCode.toUpperCase() });
+	return { title: country?.name };
+};
+
+const CountryPage: NextPage<{ params: CountryParams }> = async ({
 	params: { country: countryCode },
 }) => {
 	const country = await getCountry({ country: countryCode.toUpperCase() });

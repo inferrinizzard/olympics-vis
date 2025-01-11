@@ -3,7 +3,7 @@ import { MantineProvider } from "@mantine/core";
 
 import PageNavButtons from "components/controls/PageNavButtons";
 
-import { getGamesForPage } from "./_data";
+import { getGamesForPage } from "./_main/_data";
 import { gamesTheme } from "./_theme";
 
 export default async function GamesLayout({ children }: PropsWithChildren) {
