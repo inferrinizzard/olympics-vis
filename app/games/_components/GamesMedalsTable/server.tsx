@@ -20,7 +20,7 @@ interface GamesMedalsTableProps {
 	countryStandings: Pick<ParticipationRecords, "country" | MedalType>[];
 }
 
-const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
+const GamesMedalsTable_Server: React.FC<GamesMedalsTableProps> = ({
 	countryStandings,
 }) => {
 	return (
@@ -75,4 +75,4 @@ const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
 	);
 };
 
-export default GamesMedalsTable_Client;
+export default GamesMedalsTable_Server;
