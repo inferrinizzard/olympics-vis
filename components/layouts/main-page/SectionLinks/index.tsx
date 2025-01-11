@@ -1,6 +1,8 @@
-"use client";
+"use server";
 
-import { Button, ButtonGroup, Group, Title } from "@mantine/core";
+import Link from "next/link";
+
+import { Button, Group, Stack, Title, Text } from "@mantine/core";
 
 import { HEADER_HEIGHT } from "components/shell/Header";
 
@@ -10,41 +12,29 @@ export interface SectionLinksProps {
 
 const SectionLinks = ({ ids }: SectionLinksProps) => {
 	return (
-		<Group
+		<Stack
 			justify="center"
-			// pos="sticky"
+			pos="sticky"
 			top={HEADER_HEIGHT}
 			p="xs"
 			bg="white"
-			h="md"
+			style={{ zIndex: 1 }}
+			gap="xs"
 		>
-			<Title component="p" order={3}>
+			<Title component="p" order={4}>
 				{"Jump to:"}
 			</Title>
-			<ButtonGroup>
-				{ids.map((id) => (
-					<Button key={`#${id}`} color="gray" autoContrast>
-						<Title
-							component="p"
-							order={5}
-							onClick={() => {
-								const target = document.getElementById(id);
-								if (!target) {
-									return;
-								}
 
-								target.style.scrollMarginTop = HEADER_HEIGHT;
-								target.scrollIntoView({ behavior: "smooth" });
-								target.style.scrollMarginTop = "";
-							}}
-							style={{ cursor: "pointer" }}
-						>
-							{id}
-						</Title>
-					</Button>
+			<Group gap="xs">
+				{ids.map((id) => (
+					<Link key={`#${id}`} href={`#${id}`}>
+						<Button color="gray" autoContrast size="xs">
+							<Text style={{ cursor: "pointer" }}>{id}</Text>
+						</Button>
+					</Link>
 				))}
-			</ButtonGroup>
-		</Group>
+			</Group>
+		</Stack>
 	);
 };
 

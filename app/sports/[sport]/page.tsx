@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
+
 import { Container, Grid, GridCol } from "@mantine/core";
 
+import type { MetadataProps } from "types/next";
 import { getSport } from "lib/db";
 
 import SportsCountriesChart from "../_components/SportsCountriesChart";
@@ -10,13 +12,23 @@ import SportsPictogramRow from "../_components/SportsPictogramRow";
 
 import { getAllSports } from "lib/db";
 
+type SportParams = { sport: string };
+
 export async function generateStaticParams() {
 	const sports = await getAllSports({ select: { code: true } });
 
 	return sports.map(({ code }) => ({ params: { sport: code } }));
 }
 
-const SportPage: NextPage<{ params: { sport: string } }> = async ({
+export const generateMetadata = async ({
+	params,
+}: MetadataProps<SportParams>) => {
+	const sportCode = (await params).sport;
+	const sport = await getSport({ sport: sportCode });
+	return { title: sport.name };
+};
+
+const SportPage: NextPage<{ params: SportParams }> = async ({
 	params: { sport: sportCode },
 }) => {
 	const sport = await getSport({ sport: sportCode });

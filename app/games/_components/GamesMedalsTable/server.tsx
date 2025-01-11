@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import {
 	Title,
 	Table,
@@ -20,7 +22,7 @@ interface GamesMedalsTableProps {
 	countryStandings: Pick<ParticipationRecords, "country" | MedalType>[];
 }
 
-const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
+const GamesMedalsTable_Server: React.FC<GamesMedalsTableProps> = ({
 	countryStandings,
 }) => {
 	return (
@@ -50,18 +52,23 @@ const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
 								display="flex"
 								style={{ alignItems: "center", gap: "0.5rem" }}
 							>
-								<Image
-									dir="country"
-									code={country}
-									alt={country}
-									width={30}
-									height={30}
-									style={{
-										objectFit: "contain",
-										filter: "drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.2))",
-									}}
-								/>
-								<span>{country}</span>
+								<Link
+									href={`/countries/${country}`}
+									style={{ color: "black", textDecoration: "auto" }}
+								>
+									<Image
+										dir="country"
+										code={country}
+										alt={country}
+										width={30}
+										height={30}
+										style={{
+											objectFit: "contain",
+											filter: "drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.2))",
+										}}
+									/>
+									<span>{country}</span>
+								</Link>
 							</TableTd>
 							<TableTd>{gold}</TableTd>
 							<TableTd>{silver}</TableTd>
@@ -75,4 +82,4 @@ const GamesMedalsTable_Client: React.FC<GamesMedalsTableProps> = ({
 	);
 };
 
-export default GamesMedalsTable_Client;
+export default GamesMedalsTable_Server;
