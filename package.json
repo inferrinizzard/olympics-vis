@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "next dev -p 8000",
 		"postinstall": "prisma generate",
-		"prebuild": "tsx ./scripts/buildSearchJson.ts && tsx ./scripts/buildImageMap.ts",
+		"prebuild": "bash ./scripts/devOnlyImagesPage.sh && tsx ./scripts/buildSearchJson.ts && tsx ./scripts/buildImageMap.ts",
 		"typecheck": "tsc --noEmit",
 		"build": "next build",
 		"analyze": "ANALYZE=true yarn build",
