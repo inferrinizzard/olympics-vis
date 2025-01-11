@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import type { Country } from "types/prisma";
 
 import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
@@ -6,6 +8,8 @@ import SectionLinks from "components/layouts/main-page/SectionLinks";
 
 import { getCountriesForPage } from "./_data";
 import TopMedalsChart from "./_components/TopMedalsChart";
+
+export const metadata: Metadata = { title: "Countries" };
 
 const CountriesAll = async () => {
 	const { activeNOCs, specialNOCs, historicNOCs } = await getCountriesForPage();

@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import type { Games } from "types/prisma";
 import type { PageProps } from "types/next";
 
@@ -9,6 +11,10 @@ import FilterButtons from "components/layouts/main-page/FilterButtons";
 
 import { getGamesForPage } from "./_main/_data";
 import { filterGames } from "./_main/_filter";
+
+export const metadata: Metadata = {
+	title: "Games",
+};
 
 interface GamesPageProps extends PageProps {}
 

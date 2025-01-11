@@ -12,7 +12,7 @@ export const getCountry = async ({ country }: CountryCodeParam) =>
 	(await prisma.country.findFirst({
 		where: { code: country },
 		cacheStrategy,
-	})) as Country | null;
+	})) as Country;
 
 /** Get country data for all countries */
 export const getAllCountries = async (args?: Prisma.CountryFindManyArgs) =>

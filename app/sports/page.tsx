@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import type { Sport } from "types/prisma";
 
 import { MainPageLayout } from "components/layouts/main-page/MainPageLayout";
@@ -5,6 +7,8 @@ import { CardList } from "components/layouts/main-page/CardList";
 import SectionLinks from "components/layouts/main-page/SectionLinks";
 
 import { getSportsForPage } from "./_data";
+
+export const metadata: Metadata = { title: "Sports" };
 
 const SportsAll = async () => {
 	const sportsLists = await getSportsForPage();
